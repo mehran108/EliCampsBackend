@@ -112,6 +112,13 @@ namespace ELI.Domain.Services
 
         Task<string> AUSFailCase(int invoiceId, string responseCode);
 
+        #region List
+
+        #region AgentList
+        Task<int> CreateAgentAsync(AgentViewModel agent);
+        #endregion
+        #endregion
+
 
     }
 }

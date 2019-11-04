@@ -28,6 +28,7 @@ namespace ELI.API.Configurations
             services.AddScoped<IDiscountRepository, DiscountRepository>();
             services.AddScoped<ILeadsRepository, LeadRepository>();
             services.AddScoped<IReportRepository, ReportRepository>();
+            services.AddScoped<IListRepository, ListRepository>();
 
             return services;
         }

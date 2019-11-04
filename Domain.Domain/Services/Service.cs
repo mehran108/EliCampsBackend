@@ -28,6 +28,7 @@ namespace ELI.Domain.Services
         private readonly IQuestionRepository _questionRepository;
         private readonly ILeadsRepository _leadsRepository;
         private readonly IReportRepository _reportRepository;
+        private readonly IListRepository _listRepository;
 
 
         public ELIService(
@@ -43,7 +44,8 @@ namespace ELI.Domain.Services
               IDiscountRepository discountRepository,
                IQuestionRepository questionRepository,
                ILeadsRepository leadsRepository,
-               IReportRepository reportRepository
+               IReportRepository reportRepository,
+               IListRepository listRepository
 
             )
         {
@@ -60,6 +62,7 @@ namespace ELI.Domain.Services
             _questionRepository = questionRepository;
             _leadsRepository = leadsRepository;
             _reportRepository = reportRepository;
+            _listRepository = listRepository;
 
         }
         public async Task<bool> DeleteInvoiceAsync(int id, CancellationToken ct = default(CancellationToken))
@@ -110,13 +113,13 @@ namespace ELI.Domain.Services
         {
             return await _qualifierRepository.GetQualifierByShowIdAsync(showId, DeviceIdentifier, ct);
         }
-        public async Task<List<Qualifier>> GetQualifierByQIdAsync(int showId,int QId, string DeviceIdentifier, CancellationToken ct = default(CancellationToken))
+        public async Task<List<Qualifier>> GetQualifierByQIdAsync(int showId, int QId, string DeviceIdentifier, CancellationToken ct = default(CancellationToken))
         {
             return await _qualifierRepository.GetQualifierByQIdAsync(showId, QId, DeviceIdentifier, ct);
         }
-        public async Task<Qualifier> GetQuestionsByQualifierIdAsync(string role, int Id,string userId, CancellationToken ct = default(CancellationToken))
+        public async Task<Qualifier> GetQuestionsByQualifierIdAsync(string role, int Id, string userId, CancellationToken ct = default(CancellationToken))
         {
-            return await _qualifierRepository.GetQuestionsByQualifierIdAsync(role,Id,userId,0, ct);
+            return await _qualifierRepository.GetQuestionsByQualifierIdAsync(role, Id, userId, 0, ct);
         }
         public async Task<Activation> CreateActivationAsync(Activation activation, CancellationToken ct = default(CancellationToken))
         {
@@ -192,27 +195,27 @@ namespace ELI.Domain.Services
         }
         public async Task<List<Activation>> GetAllActivationAsync(CancellationToken ct = default(CancellationToken))
         {
-                return await _activationRepository.GetAllAsync(ct);
+            return await _activationRepository.GetAllAsync(ct);
         }
         public async Task<Activation> GetActivationByIdAsync(string activationKey, CancellationToken ct = default(CancellationToken))
         {
-                return await _activationRepository.GetActivationByIdAsync(activationKey, ct);
+            return await _activationRepository.GetActivationByIdAsync(activationKey, ct);
         }
         public async Task<Sduactivation> GetSDUActivationByActivationIdAsync(int activationId, CancellationToken ct = default(CancellationToken))
         {
-                return await _sduActivationRepository.GetSDUActivationByActivationIdAsync(activationId, ct);
+            return await _sduActivationRepository.GetSDUActivationByActivationIdAsync(activationId, ct);
         }
         public async Task<Device> GetDeviceByIdAsync(int deviceId, CancellationToken ct = default(CancellationToken))
         {
-              return await _deviceRepository.GetDeviceByIdAsync(deviceId, ct);
+            return await _deviceRepository.GetDeviceByIdAsync(deviceId, ct);
         }
         public async Task<Device> GetDeviceByDeviceIdentifierAsync(string deviceIdentifier, CancellationToken ct = default(CancellationToken))
         {
-              return await _deviceRepository.GetDeviceByDeviceIdentifierAsync(deviceIdentifier, ct);
+            return await _deviceRepository.GetDeviceByDeviceIdentifierAsync(deviceIdentifier, ct);
         }
         public LookupValue GetEncryptionKey(LookupValueEnum value, CancellationToken ct = default(CancellationToken))
         {
-              return _lookupTableRepository.getEncryptionKey(value);
+            return _lookupTableRepository.getEncryptionKey(value);
         }
         public bool ShowKeyDuplicationCheck(string showKey, CancellationToken ct = default(CancellationToken))
         {
@@ -240,7 +243,7 @@ namespace ELI.Domain.Services
         }
         public Task<List<Qualifier>> GetAllQualifiersExhibitorAsync(int userid, CancellationToken ct = default(CancellationToken))
         {
-            return _qualifierRepository.GetAllQualifiersExhibitorsAsync(userid,ct);
+            return _qualifierRepository.GetAllQualifiersExhibitorsAsync(userid, ct);
         }
         public async Task<Discount> GetDiscountByIdAsync(int Id, CancellationToken ct = default(CancellationToken))
         {
@@ -254,11 +257,11 @@ namespace ELI.Domain.Services
         {
             return _discountRepository.CheckDiscountCodeDuplication(discountCode, ct);
         }
-        public async Task<GetLeadsInfoViewModel> GetLeadsInfoAsync(int Id, string ShowKey, string deviceIdentifier ,string barcode, CancellationToken ct = default(CancellationToken))
+        public async Task<GetLeadsInfoViewModel> GetLeadsInfoAsync(int Id, string ShowKey, string deviceIdentifier, string barcode, CancellationToken ct = default(CancellationToken))
         {
-            return await _qualifierRepository.GetLeadsInfoAsync(Id, ShowKey, deviceIdentifier, barcode,ct);
+            return await _qualifierRepository.GetLeadsInfoAsync(Id, ShowKey, deviceIdentifier, barcode, ct);
         }
-        public async Task<GetLeadsInfoViewModel> UpdateLeadsInfoAsync(int Id, string ShowKey, string deviceIdentifier, string barcode,string scannedDatetime , GetLeadsInfoViewModel leadsVM, CancellationToken ct = default(CancellationToken))
+        public async Task<GetLeadsInfoViewModel> UpdateLeadsInfoAsync(int Id, string ShowKey, string deviceIdentifier, string barcode, string scannedDatetime, GetLeadsInfoViewModel leadsVM, CancellationToken ct = default(CancellationToken))
         {
             return await _qualifierRepository.UpdateLeadsInfoAsync(Id, ShowKey, deviceIdentifier, barcode, scannedDatetime, leadsVM, ct);
         }
@@ -348,19 +351,19 @@ namespace ELI.Domain.Services
         }
         public async Task<string> GenerateRACCodes(int showId, int userId, int Quantity, CancellationToken ct = default(CancellationToken))
         {
-            return _showRepository.GenerateKeys(showId, userId, Quantity, 8,null);
+            return _showRepository.GenerateKeys(showId, userId, Quantity, 8, null);
         }
         public async Task<Qualifier> CreateWebQualifierAsync(Qualifier qualifier, int userId, CancellationToken ct = default(CancellationToken))
         {
-            return await _qualifierRepository.CreateQualifierWebAsync(qualifier, userId ,ct);
+            return await _qualifierRepository.CreateQualifierWebAsync(qualifier, userId, ct);
         }
         public async Task<List<CreateQuestionWebViewModel>> CreateQuestionsWebAsync(List<CreateQuestionWebViewModel> questions, int usedId, CancellationToken ct = default(CancellationToken))
         {
-            return await _questionRepository.CreateQuestionWebAsync(questions,usedId, ct);
+            return await _questionRepository.CreateQuestionWebAsync(questions, usedId, ct);
         }
         public async Task<string> GenerateActivationKeys(int showId, int userId, int Quantity, CancellationToken ct = default(CancellationToken))
         {
-            return _showRepository.GenerateKeys(showId, userId, Quantity, 7,0);
+            return _showRepository.GenerateKeys(showId, userId, Quantity, 7, 0);
         }
         public async Task<Show> GetShowbyShowKey(string showKey, CancellationToken ct = default(CancellationToken))
         {
@@ -372,7 +375,7 @@ namespace ELI.Domain.Services
         }
         public async Task<List<CreateQuestionWebViewModel>> UpdateQuestionsWebAsync(List<CreateQuestionWebViewModel> questions, int qualifierId, List<int> questionDelete, int userId, CancellationToken ct = default(CancellationToken))
         {
-            return await _questionRepository.UpdateQuestionWebAsync(questions, qualifierId, questionDelete,userId, ct);
+            return await _questionRepository.UpdateQuestionWebAsync(questions, qualifierId, questionDelete, userId, ct);
         }
         public async Task<List<Activation>> GetAllRestrictedCodesAsync(CancellationToken ct = default(CancellationToken))
         {
@@ -384,9 +387,9 @@ namespace ELI.Domain.Services
         }
         public async Task<List<LeadsQualifier>> GetLeadsByLeadIdQId(int LeadId, int QualifierId, CancellationToken ct = default(CancellationToken))
         {
-            return await _leadsRepository.GetLeadsByLeadIdQId( LeadId,  QualifierId, ct);
+            return await _leadsRepository.GetLeadsByLeadIdQId(LeadId, QualifierId, ct);
         }
-    public async Task<Activation> ValidateRestrictedCodeAsync(string Code, int ShowId, CancellationToken ct = default(CancellationToken))
+        public async Task<Activation> ValidateRestrictedCodeAsync(string Code, int ShowId, CancellationToken ct = default(CancellationToken))
         {
             return await _activationRepository.ValidateRestrictedCode(Code, ShowId, ct);
         }
@@ -402,7 +405,7 @@ namespace ELI.Domain.Services
         {
             return await _showRepository.CheckShowActivationAsync(id, ct);
         }
-        public async Task<QualifierUsers> DeleteQualifierUserRelation(int qualifierId, int userid ,CancellationToken ct)
+        public async Task<QualifierUsers> DeleteQualifierUserRelation(int qualifierId, int userid, CancellationToken ct)
         {
             return await _qualifierRepository.DeleteQualifierUserRealtion(qualifierId, userid, ct);
         }
@@ -410,7 +413,7 @@ namespace ELI.Domain.Services
         {
             return await _ELIRepository.CreateShowDiscountAsync(showDiscount, ct);
         }
-        public async Task<ShowDiscount> GetShowDiscountRelationAsync(int ShowId, int DiscountId  ,CancellationToken ct = default(CancellationToken))
+        public async Task<ShowDiscount> GetShowDiscountRelationAsync(int ShowId, int DiscountId, CancellationToken ct = default(CancellationToken))
         {
             return await _showRepository.GetShowDiscountRelationAsync(ShowId, DiscountId, ct);
         }
@@ -418,7 +421,7 @@ namespace ELI.Domain.Services
         {
             return await _ELIRepository.GetShowDiscountByShowIdAsync(ShowId, ct);
         }
-        public async Task<List<ShowDiscount>>DeleteShowDiscountsRelationsAsync(int ShowId, CancellationToken ct = default(CancellationToken))
+        public async Task<List<ShowDiscount>> DeleteShowDiscountsRelationsAsync(int ShowId, CancellationToken ct = default(CancellationToken))
         {
             return await _ELIRepository.DeleteShowDiscountsRelationsAsync(ShowId, ct);
         }
@@ -431,18 +434,18 @@ namespace ELI.Domain.Services
         {
             return await _reportRepository.AccountListReportAsync(ct);
         }
-        public async Task<List<FinancialReconciliationReportViewModel>> FinancialReconciliationReportAsync(DateTime year , CancellationToken ct = default(CancellationToken))
+        public async Task<List<FinancialReconciliationReportViewModel>> FinancialReconciliationReportAsync(DateTime year, CancellationToken ct = default(CancellationToken))
         {
             return await _reportRepository.FinancialReconciliationReportAsync(year, ct);
         }
 
-        public async Task<List<CodeListReportViewModel>> CodeListReportAsync( CancellationToken ct = default(CancellationToken))
+        public async Task<List<CodeListReportViewModel>> CodeListReportAsync(CancellationToken ct = default(CancellationToken))
         {
             return await _reportRepository.CodeListReportAsync(ct);
         }
         public bool ValidateDeviceIdentifier(string deviceIdentifier)
         {
-            return  _ELIRepository.ValidateDeviceIdentifier(deviceIdentifier);
+            return _ELIRepository.ValidateDeviceIdentifier(deviceIdentifier);
         }
         public async Task<string> AUSSuccessCase(int invoiceId, string responseCode)
         {
@@ -453,6 +456,15 @@ namespace ELI.Domain.Services
             return await _ELIRepository.AUSFailCase(invoiceId, responseCode);
         }
 
+        #region List
+
+        #region AgentList
+        public async Task<int> CreateAgentAsync(AgentViewModel agent)
+        {
+            return await _listRepository.CreateAgentAsync(agent);
+        }
+        #endregion
+        #endregion
 
     }
 }

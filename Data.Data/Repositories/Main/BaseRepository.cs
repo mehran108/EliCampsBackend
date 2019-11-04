@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.Data.Repositories.Main
+namespace ELI.Data.Repositories.Main
 {
     public abstract class BaseRepository
     {

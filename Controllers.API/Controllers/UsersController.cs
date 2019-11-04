@@ -125,7 +125,7 @@ namespace ELI.API.Controllers
                 {
                     var result = new ObjectResult(await _ELIAuthService.CreateAsync(user, userVM.Password));
                     var roleEntry = await _ELIAuthService.RoleAddAsync(user.Id, userVM.RoleId);
-                    await _emailSender.SendEmail(null, user.Email, EmailTemplate.Welcome);
+                    //await _emailSender.SendEmail(null, user.Email, EmailTemplate.Welcome);
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var Encryptionkey = _ELIService.GetEncryptionKey(LookupValueEnum.EncryptionKey);
                     var key = Encoding.ASCII.GetBytes(Encryptionkey.Description.ToString());// _appSettings.Secret);

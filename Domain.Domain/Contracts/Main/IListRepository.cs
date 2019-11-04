@@ -8,6 +8,9 @@ namespace ELI.Domain.Contracts.Main
 {
     public interface IListRepository : IDisposable
     {
+        #region AgentList
         Task<int> CreateAgentAsync(AgentViewModel agent);
+        Task<AgentViewModel> GetAgentAsync(int agentID);
+        #endregion
     }
 }

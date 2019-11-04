@@ -116,6 +116,8 @@ namespace ELI.Domain.Services
 
         #region AgentList
         Task<int> CreateAgentAsync(AgentViewModel agent);
+
+        Task<AgentViewModel> GetAgentAsync(int agentID);
         #endregion
         #endregion
 

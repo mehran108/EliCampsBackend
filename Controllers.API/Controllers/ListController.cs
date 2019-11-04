@@ -30,7 +30,6 @@ namespace ELI.API.Controllers
         public async Task<IActionResult> CreateAgent([FromBody] AgentViewModel agentVM)
         {
 
-
             if (agentVM != null)
             {
                 try
@@ -51,8 +50,21 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpGet("getAgent")]
+        [Produces(typeof(AgentViewModel))]
+        public async Task<IActionResult> GetQuestionTypes(int agentID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetAgentAsync(agentID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
-        
 
 
     }

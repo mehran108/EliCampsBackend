@@ -22,6 +22,8 @@ namespace ELI.Data.Repositories.Main
         public string ConnectionString { get; }
         protected IConfiguration Configuration { get; }
 
+        protected const string ActiveColumnName = "Active";
+
         #region Private Methods
         /// <summary>
         /// GetException format exception details.

@@ -1,0 +1,8 @@
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\bin\Debug\netcoreapp2.0\Entity.Entity.deps.json
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\bin\Debug\netcoreapp2.0\Entity.Entity.dll
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\bin\Debug\netcoreapp2.0\Entity.Entity.pdb
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.csproj.CoreCompileInputs.cache
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.AssemblyInfoInputs.cache
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.AssemblyInfo.cs
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.dll
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.pdb

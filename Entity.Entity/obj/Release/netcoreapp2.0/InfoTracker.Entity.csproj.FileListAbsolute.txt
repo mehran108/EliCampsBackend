@@ -1,0 +1,9 @@
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\bin\Release\netcoreapp2.0\InfoTracker.Entity.deps.json
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\bin\Release\netcoreapp2.0\InfoTracker.Entity.dll
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\bin\Release\netcoreapp2.0\InfoTracker.Entity.pdb
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Release\netcoreapp2.0\InfoTracker.Entity.csprojAssemblyReference.cache
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Release\netcoreapp2.0\InfoTracker.Entity.csproj.CoreCompileInputs.cache
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Release\netcoreapp2.0\InfoTracker.Entity.AssemblyInfoInputs.cache
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Release\netcoreapp2.0\InfoTracker.Entity.AssemblyInfo.cs
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Release\netcoreapp2.0\InfoTracker.Entity.dll
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Release\netcoreapp2.0\InfoTracker.Entity.pdb

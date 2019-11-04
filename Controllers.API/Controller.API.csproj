@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Mapping\PlaylistViewModelConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="SendGrid" Version="9.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1">
+      <IncludeAssets></IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Supervisor\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Supervisor\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Supervisor\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data.Data\Data.Data.csproj" />
+    <ProjectReference Include="..\Domain.Domain\Domain.Domain.csproj" />
+  </ItemGroup>
+</Project>

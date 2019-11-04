@@ -1,0 +1,27 @@
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\bin\Debug\netcoreapp2.0\InfoTracker.Entity.deps.json
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\bin\Debug\netcoreapp2.0\InfoTracker.Entity.dll
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\bin\Debug\netcoreapp2.0\InfoTracker.Entity.pdb
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.csproj.CoreCompileInputs.cache
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.AssemblyInfoInputs.cache
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.AssemblyInfo.cs
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.dll
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.pdb
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.csprojAssemblyReference.cache
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Entity\bin\Debug\netcoreapp2.0\InfoTracker.Entity.deps.json
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Entity\bin\Debug\netcoreapp2.0\InfoTracker.Entity.dll
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Entity\bin\Debug\netcoreapp2.0\InfoTracker.Entity.pdb
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.csprojAssemblyReference.cache
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.csproj.CoreCompileInputs.cache
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.AssemblyInfoInputs.cache
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.AssemblyInfo.cs
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.dll
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.pdb
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\bin\Debug\netcoreapp2.0\InfoTracker.Entity.deps.json
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\bin\Debug\netcoreapp2.0\InfoTracker.Entity.dll
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\bin\Debug\netcoreapp2.0\InfoTracker.Entity.pdb
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.csprojAssemblyReference.cache
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.csproj.CoreCompileInputs.cache
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.AssemblyInfoInputs.cache
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.AssemblyInfo.cs
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.dll
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\InfoTracker.Entity.pdb

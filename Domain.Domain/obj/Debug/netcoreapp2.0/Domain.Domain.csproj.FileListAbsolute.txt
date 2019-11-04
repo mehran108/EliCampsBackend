@@ -1,0 +1,12 @@
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\bin\Debug\netcoreapp2.0\Domain.Domain.deps.json
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\bin\Debug\netcoreapp2.0\Domain.Domain.dll
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\bin\Debug\netcoreapp2.0\Domain.Domain.pdb
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\bin\Debug\netcoreapp2.0\Entity.Entity.dll
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\bin\Debug\netcoreapp2.0\Entity.Entity.pdb
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.csprojAssemblyReference.cache
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.csproj.CoreCompileInputs.cache
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.AssemblyInfoInputs.cache
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.AssemblyInfo.cs
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.csproj.CopyComplete
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.dll
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.pdb

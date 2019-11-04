@@ -1,0 +1,36 @@
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Domain.deps.json
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Domain.dll
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Domain.pdb
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Entity.dll
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Entity.pdb
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.csprojAssemblyReference.cache
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.csproj.CoreCompileInputs.cache
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.AssemblyInfoInputs.cache
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.AssemblyInfo.cs
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.csproj.CopyComplete
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.dll
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.pdb
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Domain.deps.json
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Domain.dll
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Domain.pdb
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Entity.dll
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Entity.pdb
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.csprojAssemblyReference.cache
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.csproj.CoreCompileInputs.cache
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.AssemblyInfoInputs.cache
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.AssemblyInfo.cs
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.csproj.CopyComplete
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.dll
+E:\Work\Angular\Waris\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.pdb
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Domain.deps.json
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Domain.dll
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Domain.pdb
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Entity.dll
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\bin\Debug\netcoreapp2.0\InfoTracker.Entity.pdb
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.csprojAssemblyReference.cache
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.csproj.CoreCompileInputs.cache
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.AssemblyInfoInputs.cache
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.AssemblyInfo.cs
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.csproj.CopyComplete
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.dll
+E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Domain.Domain\obj\Debug\netcoreapp2.0\InfoTracker.Domain.pdb

@@ -1,0 +1,12 @@
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Release\netcoreapp2.0\InfoTracker.Domain.deps.json
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Release\netcoreapp2.0\InfoTracker.Domain.dll
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Release\netcoreapp2.0\InfoTracker.Domain.pdb
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Release\netcoreapp2.0\InfoTracker.Entity.dll
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\bin\Release\netcoreapp2.0\InfoTracker.Entity.pdb
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Release\netcoreapp2.0\InfoTracker.Domain.csprojAssemblyReference.cache
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Release\netcoreapp2.0\InfoTracker.Domain.csproj.CoreCompileInputs.cache
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Release\netcoreapp2.0\InfoTracker.Domain.AssemblyInfoInputs.cache
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Release\netcoreapp2.0\InfoTracker.Domain.AssemblyInfo.cs
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Release\netcoreapp2.0\InfoTracker.Domain.csproj.CopyComplete
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Release\netcoreapp2.0\InfoTracker.Domain.dll
+E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.Domain\obj\Release\netcoreapp2.0\InfoTracker.Domain.pdb

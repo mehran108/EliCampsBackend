@@ -10,6 +10,7 @@ using ELI.Domain.Helpers;
 using ELI.Domain.Contracts.Main;
 using ELI.Entity.Main;
 using ELI.Domain.Common;
+using Domain.Domain.ViewModels;
 
 namespace ELI.Domain.Services
 {
@@ -467,6 +468,13 @@ namespace ELI.Domain.Services
         public async Task<AgentViewModel> GetAgentAsync(int agentID)
         {
             return await _listRepository.GetAgentAsync(agentID);
+        }
+        #endregion
+
+        #region RoomsList
+        public async Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel)
+        {
+            return await _listRepository.CreateRoomListAsync(roomsViewModel);
         }
         #endregion
         #endregion

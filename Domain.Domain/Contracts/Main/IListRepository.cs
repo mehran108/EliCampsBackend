@@ -1,4 +1,5 @@
-﻿using ELI.Domain.ViewModels;
+﻿using Domain.Domain.ViewModels;
+using ELI.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,8 @@ namespace ELI.Domain.Contracts.Main
         #region AgentList
         Task<int> CreateAgentAsync(AgentViewModel agent);
         Task<AgentViewModel> GetAgentAsync(int agentID);
+
+        Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel);
         #endregion
     }
 }

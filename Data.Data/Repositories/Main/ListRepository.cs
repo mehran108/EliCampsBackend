@@ -1,4 +1,5 @@
-﻿using ELI.Data.Repositories.Main.Extensions;
+﻿using Domain.Domain.ViewModels;
+using ELI.Data.Repositories.Main.Extensions;
 using ELI.Domain.Contracts.Main;
 using ELI.Domain.ViewModels;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +22,7 @@ namespace ELI.Data.Repositories.Main
         }
         private const string AddStoredProcedureName = "AddAgents";
         private const string GetStoredProcedureName = "GetAgent";
-
+        private const string AddRoomsStoredProcedureName = "AddRooms";
 
 
         private const string AgentIdColumnName = "AgentId";
@@ -37,6 +38,7 @@ namespace ELI.Data.Repositories.Main
 
 
         private const string AgentIdParameterName = "PAgentID";
+        private const string RoomIdParameterName = "PRoomID";
         private const string AgentAgentParameterName = "PAgentAgent";
         private const string AgentContactParameterName = "PAgentContact";
         private const string AgentPhoneParameterName = "PAgentPhone";
@@ -50,6 +52,25 @@ namespace ELI.Data.Repositories.Main
 
 
         #region AgentList
+
+        #region  RoomList
+        private const string RIdParameterName = "PID";
+        private const string RoomListRoomIdParameterName = "PRoomID";
+        private const string RoomCampusParameterName = "PCampus";
+        private const string RoomBuildingParameterName = "PBuilding";
+        private const string RoomTypeParameterName = "PRoomType";
+        private const string FloorParameterName = "PFloor";
+        private const string LdxPhoneParameterName = "PLdx";
+        private const string NotesParameterName = "PNotes";
+        private const string BookedFromParameterName = "PBookedFrom";
+        private const string BookedToParameterName = "PBookedTo";
+        private const string AvailableParameterName = "PAvailable";
+        private const string AvailableFromParameterName = "PAvailableFrom";
+        private const string AvailableToParameterName = "PAvailableTo";
+        private const string ImportedOneParameterName = "PImportedOne";
+        private const string WeeknoParameterName = "PWeekno";
+        private const string YearParameterName = "PYear";
+        #endregion
 
         public async Task<int> CreateAgentAsync(AgentViewModel agent)
         {
@@ -112,6 +133,40 @@ namespace ELI.Data.Repositories.Main
             }
 
             return agentVM;
+        }
+
+        public async Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel)
+        {
+            var agentIdParamter = base.GetParameterOut(ListRepository.RIdParameterName, SqlDbType.Int, roomsViewModel.ID);
+            var parameters = new List<DbParameter>
+            {
+                agentIdParamter,
+
+
+               
+                base.GetParameter(ListRepository.RoomListRoomIdParameterName, roomsViewModel.RoomID),
+                base.GetParameter(ListRepository.RoomCampusParameterName, roomsViewModel.CampusID),
+                base.GetParameter(ListRepository.RoomBuildingParameterName, roomsViewModel.Building),
+                base.GetParameter(ListRepository.RoomTypeParameterName, roomsViewModel.RoomType),
+                base.GetParameter(ListRepository.FloorParameterName, roomsViewModel.Floor),
+                base.GetParameter(ListRepository.LdxPhoneParameterName, roomsViewModel.Ldx),
+                base.GetParameter(ListRepository.NotesParameterName, roomsViewModel.Notes),
+                base.GetParameter(ListRepository.BookedFromParameterName, roomsViewModel.BookedFrom),
+                base.GetParameter(ListRepository.BookedToParameterName, roomsViewModel.BookedTo),
+                base.GetParameter(ListRepository.AvailableParameterName, roomsViewModel.Available),
+                base.GetParameter(ListRepository.AvailableFromParameterName, roomsViewModel.AvailableFrom),
+                base.GetParameter(ListRepository.AvailableToParameterName, roomsViewModel.AvailableTo),
+                base.GetParameter(ListRepository.ImportedOneParameterName, roomsViewModel.ImportedOne),
+                base.GetParameter(ListRepository.WeeknoParameterName, roomsViewModel.Weekno),
+                base.GetParameter(ListRepository.YearParameterName, roomsViewModel.Year)
+
+            };
+
+            await base.ExecuteNonQuery(parameters, ListRepository.AddRoomsStoredProcedureName, CommandType.StoredProcedure);
+
+            roomsViewModel.ID = Convert.ToInt32(agentIdParamter.Value);
+
+            return roomsViewModel.ID;
         }
         #endregion
 

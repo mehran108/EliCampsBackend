@@ -468,6 +468,11 @@ namespace ELI.Domain.Services
         {
             return await _listRepository.GetAgentAsync(agentID);
         }
+
+        public async Task<bool> UpdateAgentAsync(AgentViewModel agent)
+        {
+            return await _listRepository.UpdateAgentAsync(agent);
+        }
         #endregion
         #endregion
 

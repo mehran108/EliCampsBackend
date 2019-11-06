@@ -118,6 +118,8 @@ namespace ELI.Domain.Services
         Task<int> CreateAgentAsync(AgentViewModel agent);
 
         Task<AgentViewModel> GetAgentAsync(int agentID);
+
+        Task<bool> UpdateAgentAsync(AgentViewModel agent);
         #endregion
         #endregion
 

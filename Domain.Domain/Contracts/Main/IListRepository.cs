@@ -11,6 +11,7 @@ namespace ELI.Domain.Contracts.Main
         #region AgentList
         Task<int> CreateAgentAsync(AgentViewModel agent);
         Task<AgentViewModel> GetAgentAsync(int agentID);
+        Task<bool> UpdateAgentAsync(AgentViewModel agent);
         #endregion
     }
 }

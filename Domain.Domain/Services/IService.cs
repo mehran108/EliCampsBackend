@@ -7,6 +7,7 @@ using ELI.Entity.Main;
 using ELI.Domain.Helpers;
 using System;
 using Domain.Domain.ViewModels;
+using ELI.Data.Repositories.Main;
 
 namespace ELI.Domain.Services
 {
@@ -119,6 +120,10 @@ namespace ELI.Domain.Services
         Task<int> CreateAgentAsync(AgentViewModel agent);
 
         Task<AgentViewModel> GetAgentAsync(int agentID);
+
+        Task<RoomsViewModel> GetRomeList(int roomListId);
+
+        Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms);
         #endregion
 
         #region

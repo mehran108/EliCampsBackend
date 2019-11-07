@@ -22,6 +22,8 @@ namespace ELI.Data.Repositories.Main
         }
         private const string AddStoredProcedureName = "AddAgents";
         private const string GetStoredProcedureName = "GetAgent";
+        private const string GetRoomsStoredProcedureName = "GetRooms";
+        private const string GetAllRoomsStoredProcedureName = "GetAllRooms";
         private const string AddRoomsStoredProcedureName = "AddRooms";
 
 
@@ -70,6 +72,25 @@ namespace ELI.Data.Repositories.Main
         private const string ImportedOneParameterName = "PImportedOne";
         private const string WeeknoParameterName = "PWeekno";
         private const string YearParameterName = "PYear";
+
+
+
+        private const string RIdColumnName = "ID";
+        private const string RoomListRoomIdColumnName = "RoomID";
+        private const string RoomCampusColumnName = "Campus";
+        private const string RoomBuildingColumnName = "Building";
+        private const string RoomTypeColumnName = "RoomType";
+        private const string FloorColumnName = "RoomFloor";
+        private const string LdxPhoneColumnName = "Ldx";
+        private const string NotesColumnName = "Notes";
+        private const string BookedFromColumnName = "BookedFrom";
+        private const string BookedToColumnName = "BookedTo";
+        private const string AvailableColumnName = "Available";
+        private const string AvailableFromColumnName = "AvailableFrom";
+        private const string AvailableToColumnName = "AvailableTo";
+        private const string ImportedOneColumnName = "ImportedOne";
+        private const string WeeknoColumnName = "Weekno";
+        private const string YearColumnName = "Year";
         #endregion
 
         public async Task<int> CreateAgentAsync(AgentViewModel agent)
@@ -135,6 +156,106 @@ namespace ELI.Data.Repositories.Main
             return agentVM;
         }
 
+        public async Task<RoomsViewModel> GetRomeListAsync(int roomListID)
+        {
+            RoomsViewModel agentVM = null;
+            var parameters = new List<DbParameter>
+            {
+                base.GetParameter(ListRepository.RIdParameterName, roomListID)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetRoomsStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        agentVM = new RoomsViewModel
+                        {
+
+                            ID = dataReader.GetIntegerValue(ListRepository.RIdColumnName),
+                            RoomID = dataReader.GetIntegerValue(ListRepository.RoomListRoomIdColumnName),
+                            CampusID = dataReader.GetIntegerValue(ListRepository.RoomCampusColumnName),
+                            Building = dataReader.GetStringValue(ListRepository.RoomBuildingColumnName),
+                            RoomType = dataReader.GetStringValue(ListRepository.RoomTypeColumnName),
+                            Floor = dataReader.GetStringValue(ListRepository.FloorColumnName),
+                            Ldx = dataReader.GetStringValue(ListRepository.LdxPhoneColumnName),
+                            Notes = dataReader.GetStringValue(ListRepository.NotesColumnName),
+                            BookedFrom = dataReader.GetDateTimeValue(ListRepository.BookedFromColumnName),
+                            BookedTo = dataReader.GetDateTimeValue(ListRepository.BookedToColumnName),
+                            Available = dataReader.GetBooleanValue(ListRepository.AvailableColumnName),
+                            AvailableFrom = dataReader.GetDateTimeValue(ListRepository.AvailableFromColumnName),
+                            AvailableTo = dataReader.GetDateTimeValue(ListRepository.AvailableToColumnName),
+                            ImportedOne = dataReader.GetIntegerValue(ListRepository.ImportedOneColumnName),
+                            Weekno = dataReader.GetStringValue(ListRepository.WeeknoColumnName),
+                            Year = dataReader.GetIntegerValue(ListRepository.YearColumnName)
+
+                        };
+                    }
+                }
+            }
+
+            return agentVM;
+        }
+
+        public async Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms)
+        {
+            RoomsList roomsList = null;
+
+            var result = new AllResponse<RoomsList>
+            {
+                Data = new List<RoomsList>(),
+                Offset = rooms.Offset,
+                PageSize = rooms.PageSize,
+                SortColumn = rooms.SortColumn,
+                SortAscending = rooms.SortAscending
+            };
+            var totalRecordParamter = base.GetParameterOut(BaseRepository.TotalRecordParameterName, SqlDbType.Int, result.TotalRecord);
+            var parameters = new List<DbParameter>
+            {
+                totalRecordParamter,
+                base.GetParameter(BaseRepository.OffsetParameterName, rooms.Offset),
+                base.GetParameter(BaseRepository.PageSizeParameterName, rooms.PageSize),
+                base.GetParameter(BaseRepository.SortColumnParameterName, rooms.SortColumn),
+                base.GetParameter(BaseRepository.SortAscendingParameterName, rooms.SortAscending),
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetRoomsStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        roomsList = new RoomsList
+                        {
+
+                            ID = dataReader.GetIntegerValue(ListRepository.RIdColumnName),
+                            RoomID = dataReader.GetIntegerValue(ListRepository.RoomListRoomIdColumnName),
+                            CampusID = dataReader.GetIntegerValue(ListRepository.RoomCampusColumnName),
+                            Building = dataReader.GetStringValue(ListRepository.RoomBuildingColumnName),
+                            RoomType = dataReader.GetStringValue(ListRepository.RoomTypeColumnName),
+                            Floor = dataReader.GetStringValue(ListRepository.FloorColumnName),
+                            Ldx = dataReader.GetStringValue(ListRepository.LdxPhoneColumnName),
+                            Notes = dataReader.GetStringValue(ListRepository.NotesColumnName),
+                            BookedFrom = dataReader.GetDateTimeValue(ListRepository.BookedFromColumnName),
+                            BookedTo = dataReader.GetDateTimeValue(ListRepository.BookedToColumnName),
+                            Available = dataReader.GetBooleanValue(ListRepository.AvailableColumnName),
+                            AvailableFrom = dataReader.GetDateTimeValue(ListRepository.AvailableFromColumnName),
+                            AvailableTo = dataReader.GetDateTimeValue(ListRepository.AvailableToColumnName),
+                            ImportedOne = dataReader.GetIntegerValue(ListRepository.ImportedOneColumnName),
+                            Weekno = dataReader.GetStringValue(ListRepository.WeeknoColumnName),
+                            Year = dataReader.GetIntegerValue(ListRepository.YearColumnName)
+
+                        };
+                    }
+                }
+            }
+
+            return result;
+        }
+
+
+        
         public async Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel)
         {
             var agentIdParamter = base.GetParameterOut(ListRepository.RIdParameterName, SqlDbType.Int, roomsViewModel.ID);
@@ -143,7 +264,7 @@ namespace ELI.Data.Repositories.Main
                 agentIdParamter,
 
 
-               
+
                 base.GetParameter(ListRepository.RoomListRoomIdParameterName, roomsViewModel.RoomID),
                 base.GetParameter(ListRepository.RoomCampusParameterName, roomsViewModel.CampusID),
                 base.GetParameter(ListRepository.RoomBuildingParameterName, roomsViewModel.Building),

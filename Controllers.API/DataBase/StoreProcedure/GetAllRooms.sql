@@ -11,14 +11,18 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GetRooms]') AND type in (N'P', N'PC'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GetAllRooms]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[GetRooms] AS' 
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[GetAllRooms] AS' 
 END
 GO
-Alter PROCEDURE [dbo].[GetRooms] 
+Alter PROCEDURE [dbo].[GetAllRooms] 
 	-- Add the parameters for the stored procedure here
-	@PID INT
+	@POffset int, 
+    @PPageSize int,
+    @PSortColumn varchar(60),
+    @PSortAscending bit,
+    @PTotalRecord int
 AS
 BEGIN
 	
@@ -40,6 +44,6 @@ BEGIN
 	  ,[clmRoom_ImportedOne] As ImportedOne
 	  ,[clmRoom_Weekno] As Weekno
 	  ,[clmRoom_Year] As Year
-	 from tblRoomsList where clmRoom_ID = @PID;
+	 from tblRoomsList;
 END
 GO

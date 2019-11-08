@@ -174,7 +174,7 @@ namespace ELI.Data.Repositories.Main
                         {
 
                             ID = dataReader.GetIntegerValue(ListRepository.RIdColumnName),
-                            RoomID = dataReader.GetIntegerValue(ListRepository.RoomListRoomIdColumnName),
+                            RoomID = dataReader.GetStringValue(ListRepository.RoomListRoomIdColumnName),
                             CampusID = dataReader.GetIntegerValue(ListRepository.RoomCampusColumnName),
                             Building = dataReader.GetStringValue(ListRepository.RoomBuildingColumnName),
                             RoomType = dataReader.GetStringValue(ListRepository.RoomTypeColumnName),
@@ -210,43 +210,53 @@ namespace ELI.Data.Repositories.Main
                 SortColumn = rooms.SortColumn,
                 SortAscending = rooms.SortAscending
             };
-            var totalRecordParamter = base.GetParameterOut(BaseRepository.TotalRecordParameterName, SqlDbType.Int, result.TotalRecord);
+          
             var parameters = new List<DbParameter>
             {
-                totalRecordParamter,
+               
                 base.GetParameter(BaseRepository.OffsetParameterName, rooms.Offset),
                 base.GetParameter(BaseRepository.PageSizeParameterName, rooms.PageSize),
                 base.GetParameter(BaseRepository.SortColumnParameterName, rooms.SortColumn),
                 base.GetParameter(BaseRepository.SortAscendingParameterName, rooms.SortAscending),
             };
 
-            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetRoomsStoredProcedureName, CommandType.StoredProcedure))
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllRoomsStoredProcedureName, CommandType.StoredProcedure))
             {
                 if (dataReader != null && dataReader.HasRows)
                 {
                     if (dataReader.Read())
                     {
-                        roomsList = new RoomsList
+                        while (dataReader.Read())
                         {
+                            roomsList = new RoomsList
+                            {
 
-                            ID = dataReader.GetIntegerValue(ListRepository.RIdColumnName),
-                            RoomID = dataReader.GetIntegerValue(ListRepository.RoomListRoomIdColumnName),
-                            CampusID = dataReader.GetIntegerValue(ListRepository.RoomCampusColumnName),
-                            Building = dataReader.GetStringValue(ListRepository.RoomBuildingColumnName),
-                            RoomType = dataReader.GetStringValue(ListRepository.RoomTypeColumnName),
-                            Floor = dataReader.GetStringValue(ListRepository.FloorColumnName),
-                            Ldx = dataReader.GetStringValue(ListRepository.LdxPhoneColumnName),
-                            Notes = dataReader.GetStringValue(ListRepository.NotesColumnName),
-                            BookedFrom = dataReader.GetDateTimeValue(ListRepository.BookedFromColumnName),
-                            BookedTo = dataReader.GetDateTimeValue(ListRepository.BookedToColumnName),
-                            Available = dataReader.GetBooleanValue(ListRepository.AvailableColumnName),
-                            AvailableFrom = dataReader.GetDateTimeValue(ListRepository.AvailableFromColumnName),
-                            AvailableTo = dataReader.GetDateTimeValue(ListRepository.AvailableToColumnName),
-                            ImportedOne = dataReader.GetIntegerValue(ListRepository.ImportedOneColumnName),
-                            Weekno = dataReader.GetStringValue(ListRepository.WeeknoColumnName),
-                            Year = dataReader.GetIntegerValue(ListRepository.YearColumnName)
+                                ID = dataReader.GetIntegerValue(ListRepository.RIdColumnName),
+                                RoomID = dataReader.GetStringValue(ListRepository.RoomListRoomIdColumnName),
+                                CampusID = dataReader.GetIntegerValue(ListRepository.RoomCampusColumnName),
+                                Building = dataReader.GetStringValue(ListRepository.RoomBuildingColumnName),
+                                RoomType = dataReader.GetStringValue(ListRepository.RoomTypeColumnName),
+                                Floor = dataReader.GetStringValue(ListRepository.FloorColumnName),
+                                Ldx = dataReader.GetStringValue(ListRepository.LdxPhoneColumnName),
+                                Notes = dataReader.GetStringValue(ListRepository.NotesColumnName),
+                                BookedFrom = dataReader.GetDateTimeValue(ListRepository.BookedFromColumnName),
+                                BookedTo = dataReader.GetDateTimeValue(ListRepository.BookedToColumnName),
+                                Available = dataReader.GetBooleanValue(ListRepository.AvailableColumnName),
+                                AvailableFrom = dataReader.GetDateTimeValue(ListRepository.AvailableFromColumnName),
+                                AvailableTo = dataReader.GetDateTimeValue(ListRepository.AvailableToColumnName),
+                                ImportedOne = dataReader.GetIntegerValue(ListRepository.ImportedOneColumnName),
+                                Weekno = dataReader.GetStringValue(ListRepository.WeeknoColumnName),
+                                Year = dataReader.GetIntegerValue(ListRepository.YearColumnName)
 
-                        };
+                            };
+                            result.Data.Add(roomsList);
+                        }
+
+                        if (!dataReader.IsClosed)
+                        {
+                            dataReader.Close();
+                        }
+
                     }
                 }
             }

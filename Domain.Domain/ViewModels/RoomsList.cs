@@ -7,7 +7,7 @@ namespace Domain.Domain.ViewModels
     public class RoomsList
     {
         public int ID { get; set; }
-        public int RoomID { get; set; }
+        public string RoomID { get; set; }
         public int CampusID { get; set; }
         public string Building { get; set; }
         public string RoomType { get; set; }

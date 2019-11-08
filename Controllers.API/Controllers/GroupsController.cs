@@ -52,9 +52,9 @@ namespace ELI.API.Controllers
             }
         }
 
-        [HttpGet("getRoomList")]
+        [HttpGet("getRoomById")]
         [Produces(typeof(RoomsViewModel))]
-        public async Task<IActionResult> GetRoomList(int roomID)
+        public async Task<IActionResult> getRoomById(int roomID)
         {
             try
             {

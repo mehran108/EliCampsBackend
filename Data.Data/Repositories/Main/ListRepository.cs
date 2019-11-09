@@ -21,6 +21,7 @@ namespace ELI.Data.Repositories.Main
         }
         private const string AddStoredProcedureName = "AddAgents";
         private const string GetStoredProcedureName = "GetAgent";
+        private const string UpdateAgentStoredProcedureName = "UpdateAgent";
 
 
 
@@ -112,6 +113,29 @@ namespace ELI.Data.Repositories.Main
             }
 
             return agentVM;
+        }
+
+        public async Task<bool> UpdateAgentAsync(AgentViewModel agent)
+        {
+            var parameters = new List<DbParameter>
+            {
+                base.GetParameter(ListRepository.AgentIdColumnName, agent.ID),
+                base.GetParameter(ListRepository.AgentAgentParameterName, agent.Agent),
+                base.GetParameter(ListRepository.AgentContactParameterName, agent.Contact),
+                base.GetParameter(ListRepository.AgentPhoneParameterName, agent.Phone),
+                base.GetParameter(ListRepository.AgentEmailParameterName, agent.Email),
+                base.GetParameter(ListRepository.AgentWebParameterName, agent.Web),
+                base.GetParameter(ListRepository.AgentAddressParameterName, agent.Address),
+                base.GetParameter(ListRepository.AgentCountryParameterName, agent.Country),
+                base.GetParameter(ListRepository.AgentNotesParameterName, agent.Notes),
+                base.GetParameter(ListRepository.AgentOtherParameterName, agent.Other),
+                base.GetParameter(BaseRepository.AgentIdParameterName, agent.Active),
+
+            };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateAgentStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
         }
         #endregion
 

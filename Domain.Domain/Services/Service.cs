@@ -10,6 +10,8 @@ using ELI.Domain.Helpers;
 using ELI.Domain.Contracts.Main;
 using ELI.Entity.Main;
 using ELI.Domain.Common;
+using Domain.Domain.ViewModels;
+using ELI.Data.Repositories.Main;
 
 namespace ELI.Domain.Services
 {
@@ -464,6 +466,9 @@ namespace ELI.Domain.Services
             return await _listRepository.CreateAgentAsync(agent);
         }
 
+        
+
+
         public async Task<AgentViewModel> GetAgentAsync(int agentID)
         {
             return await _listRepository.GetAgentAsync(agentID);
@@ -472,6 +477,35 @@ namespace ELI.Domain.Services
         public async Task<bool> UpdateAgentAsync(AgentViewModel agent)
         {
             return await _listRepository.UpdateAgentAsync(agent);
+        }
+
+        public async Task<RoomsViewModel> GetRomeList(int roomListID)
+        {
+            return await _listRepository.GetRomeListAsync(roomListID);
+        }
+
+        public async Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms)
+        {
+            return await _listRepository.GetAllRomeList(rooms);
+        }
+
+        
+
+        #endregion
+
+        #region RoomsList
+        public async Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel)
+        {
+            return await _listRepository.CreateRoomListAsync(roomsViewModel);
+        }
+        #endregion
+
+
+        #region Trips
+        //Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel);
+        public async Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel)
+        {
+            return await _listRepository.CreateTirpsAsync(tripsViewModel);
         }
         #endregion
         #endregion

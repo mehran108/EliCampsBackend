@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Domain.ViewModels;
 using ELI.Domain.Helpers;
 using ELI.Domain.Services;
 using ELI.Domain.ViewModels;
@@ -77,6 +78,30 @@ namespace ELI.API.Controllers
             {
                 new ExceptionHandlingService(ex, null, null).LogException();
                 return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPost("CreateTrips")]
+        public async Task<IActionResult> CreateTrips([FromBody] TripsViewModel tripsViewModel)
+        {
+
+            if (tripsViewModel != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.CreateTirpsAsync(tripsViewModel));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Agent model cannot be empty" });
             }
         }
 

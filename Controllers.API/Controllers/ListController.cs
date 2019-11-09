@@ -53,11 +53,26 @@ namespace ELI.API.Controllers
 
         [HttpGet("getAgent")]
         [Produces(typeof(AgentViewModel))]
-        public async Task<IActionResult> GetQuestionTypes(int agentID)
+        public async Task<IActionResult> GetAgent(int agentID)
         {
             try
             {
                 return new ObjectResult(await _ELIService.GetAgentAsync(agentID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("updateAgent")]
+        [Produces(typeof(AgentViewModel))]
+        public async Task<IActionResult> UpdateAgent([FromBody] AgentViewModel agentVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateAgentAsync(agentVM));
             }
             catch (Exception ex)
             {
@@ -89,6 +104,7 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = "Agent model cannot be empty" });
             }
         }
+
 
 
 

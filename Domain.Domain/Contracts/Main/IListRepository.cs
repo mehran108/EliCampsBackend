@@ -22,6 +22,7 @@ namespace ELI.Domain.Contracts.Main
 
         #region RoomsList
         Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel);
+        Task<bool> UpdateAgentAsync(AgentViewModel agent);
         #endregion
     }
 }

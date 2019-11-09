@@ -121,6 +121,8 @@ namespace ELI.Domain.Services
 
         Task<AgentViewModel> GetAgentAsync(int agentID);
 
+        Task<bool> UpdateAgentAsync(AgentViewModel agent);
+
         Task<RoomsViewModel> GetRomeList(int roomListId);
 
         Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms);

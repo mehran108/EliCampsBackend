@@ -474,6 +474,11 @@ namespace ELI.Domain.Services
             return await _listRepository.GetAgentAsync(agentID);
         }
 
+        public async Task<bool> UpdateAgentAsync(AgentViewModel agent)
+        {
+            return await _listRepository.UpdateAgentAsync(agent);
+        }
+
         public async Task<RoomsViewModel> GetRomeList(int roomListID)
         {
             return await _listRepository.GetRomeListAsync(roomListID);

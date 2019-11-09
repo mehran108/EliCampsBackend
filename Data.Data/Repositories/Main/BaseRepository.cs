@@ -23,6 +23,16 @@ namespace ELI.Data.Repositories.Main
         protected IConfiguration Configuration { get; }
 
         protected const string ActiveColumnName = "Active";
+        protected const string TotalRecordParameterName = "PTotalRecord";
+        protected const string SortColumnParameterName = "PSortColumn";
+        protected const string SortAscendingParameterName = "PSortAscending";
+        protected const string FilterColumnIdParameterName = "PFilterColumnId";
+        protected const string ActiveParameterName = "PActive";
+        protected const string ActiveForCustomerParameterName = "PActiveForCustomer";
+        protected const string NotificationCodeParamaterName = "PNotificationCode";
+        protected const string OffsetParameterName = "POffset";
+        protected const string PageSizeParameterName = "PPageSize";
+       
 
         #region Private Methods
         /// <summary>

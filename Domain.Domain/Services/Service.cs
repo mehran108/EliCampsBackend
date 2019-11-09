@@ -466,6 +466,9 @@ namespace ELI.Domain.Services
             return await _listRepository.CreateAgentAsync(agent);
         }
 
+        
+
+
         public async Task<AgentViewModel> GetAgentAsync(int agentID)
         {
             return await _listRepository.GetAgentAsync(agentID);
@@ -489,6 +492,15 @@ namespace ELI.Domain.Services
         public async Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel)
         {
             return await _listRepository.CreateRoomListAsync(roomsViewModel);
+        }
+        #endregion
+
+
+        #region Trips
+        //Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel);
+        public async Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel)
+        {
+            return await _listRepository.CreateTirpsAsync(tripsViewModel);
         }
         #endregion
         #endregion

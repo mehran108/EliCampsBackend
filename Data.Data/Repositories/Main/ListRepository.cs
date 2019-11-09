@@ -25,7 +25,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetRoomsStoredProcedureName = "GetRooms";
         private const string GetAllRoomsStoredProcedureName = "GetAllRooms";
         private const string AddRoomsStoredProcedureName = "AddRooms";
-
+        private const string AddTripsStoredProcedureName = "AddTrips";
 
         private const string AgentIdColumnName = "AgentId";
         private const string AgentAgentColumnName = "AgentAgent";
@@ -52,6 +52,14 @@ namespace ELI.Data.Repositories.Main
         private const string AgentOtherParameterName = "PAgentOther";
 
 
+
+        private const string TripIdParameterName = "PID";
+        private const string TripYearParameterName = "PYear";
+        private const string TripNameParameterName = "PTrip";
+        private const string TripCampsParameterName = "PCamps";
+        private const string TripsDateParameterName = "PTripsDate";
+        private const string TripsNotesParameterName = "PTripsNotes";
+        private const string TripLDxParameterName = "PLdx";
 
         #region AgentList
 
@@ -92,6 +100,8 @@ namespace ELI.Data.Repositories.Main
         private const string WeeknoColumnName = "Weekno";
         private const string YearColumnName = "Year";
         #endregion
+
+
 
         public async Task<int> CreateAgentAsync(AgentViewModel agent)
         {
@@ -298,6 +308,35 @@ namespace ELI.Data.Repositories.Main
             roomsViewModel.ID = Convert.ToInt32(agentIdParamter.Value);
 
             return roomsViewModel.ID;
+        }
+        #endregion
+
+        #region Trips
+
+
+        public async Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel)
+        {
+            var agentIdParamter = base.GetParameterOut(ListRepository.RIdParameterName, SqlDbType.Int, tripsViewModel.ID);
+            var parameters = new List<DbParameter>
+            {
+                agentIdParamter,
+
+
+
+                base.GetParameter(ListRepository.TripYearParameterName, tripsViewModel.Year),
+                base.GetParameter(ListRepository.TripNameParameterName, tripsViewModel.Trips),
+                base.GetParameter(ListRepository.TripCampsParameterName, tripsViewModel.Camps),
+                base.GetParameter(ListRepository.TripsDateParameterName, tripsViewModel.TripsDate),
+                base.GetParameter(ListRepository.TripsNotesParameterName, tripsViewModel.Notes),
+                base.GetParameter(ListRepository.TripLDxParameterName, tripsViewModel.Idx)
+
+            };
+
+            await base.ExecuteNonQuery(parameters, ListRepository.AddTripsStoredProcedureName, CommandType.StoredProcedure);
+
+            tripsViewModel.ID = Convert.ToInt32(agentIdParamter.Value);
+
+            return tripsViewModel.ID;
         }
         #endregion
 

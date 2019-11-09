@@ -126,9 +126,14 @@ namespace ELI.Domain.Services
         Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms);
         #endregion
 
-        #region
+        #region Room List
         Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel);
 
+        #endregion
+
+        #region Trips
+
+        Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel);
         #endregion
         #endregion
 

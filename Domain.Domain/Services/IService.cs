@@ -136,6 +136,25 @@ namespace ELI.Domain.Services
         #region Trips
 
         Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="agentID"></param>
+        /// <returns></returns>
+        Task<TripsViewModel> GetTirpsAsync(int tripID);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rooms"></param>
+        /// <returns></returns>
+        Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> rooms);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="agent"></param>
+        /// <returns></returns>
+
+        Task<bool> UpdateTripsAsync(TripsViewModel trips);
         #endregion
         #endregion
 

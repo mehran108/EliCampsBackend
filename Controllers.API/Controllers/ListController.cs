@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Domain.ViewModels;
+using ELI.Data.Repositories.Main;
 using ELI.Domain.Helpers;
 using ELI.Domain.Services;
 using ELI.Domain.ViewModels;
@@ -101,7 +102,52 @@ namespace ELI.API.Controllers
             }
             else
             {
-                return BadRequest(new { message = "Agent model cannot be empty" });
+                return BadRequest(new { message = "Trip model cannot be empty" });
+            }
+        }
+
+        [HttpGet("getTrip")]
+        [Produces(typeof(TripsViewModel))]
+        public async Task<IActionResult> GetTrips(int tripId)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetTirpsAsync(tripId));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("getAllTrimList")]
+        [Produces(typeof(List<TripsViewModel>))]
+        public async Task<IActionResult> GetAllRoomList()
+        {
+            try
+            {
+                AllRequest<TripsViewModel> tripslist = new AllRequest<TripsViewModel>();
+                return new ObjectResult(await _ELIService.GetAllTripsList(tripslist));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+        [HttpGet("updateTrips")]
+        [Produces(typeof(TripsViewModel))]
+        public async Task<IActionResult> UpdateAgent([FromBody] TripsViewModel tripsViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateAgentAsync(agentVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
             }
         }
 

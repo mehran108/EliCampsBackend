@@ -22,8 +22,10 @@ namespace ELI.Data.Repositories.Main
         }
         private const string AddStoredProcedureName = "AddAgents";
         private const string GetStoredProcedureName = "GetAgent";
+        private const string GetTripStoredProcedureName = "GetTripsById";
         private const string GetRoomsStoredProcedureName = "GetRooms";
         private const string GetAllRoomsStoredProcedureName = "GetAllRooms";
+        private const string GetAllTripsStoredProcedureName = "GetAllTrips";
         private const string AddRoomsStoredProcedureName = "AddRooms";
         private const string AddTripsStoredProcedureName = "AddTrips";
 
@@ -53,6 +55,7 @@ namespace ELI.Data.Repositories.Main
 
 
 
+        #region Trips
         private const string TripIdParameterName = "PID";
         private const string TripYearParameterName = "PYear";
         private const string TripNameParameterName = "PTrip";
@@ -61,7 +64,15 @@ namespace ELI.Data.Repositories.Main
         private const string TripsNotesParameterName = "PTripsNotes";
         private const string TripLDxParameterName = "PLdx";
 
-        #region AgentList
+
+        private const string TripIdColumnName = "Trips_ID";
+        private const string TripYearColumnName = "TripYear";
+        private const string TripNameColumnName = "TripName";
+        private const string TripCampsColumnName = "Camps";
+        private const string TripsDateColumnName = "TripDate";
+        private const string TripsNotesColumnName = "TripNotes";
+        private const string TripLDxColumnName = "TripLdx";
+        #endregion
 
         #region  RoomList
         private const string RIdParameterName = "PID";
@@ -100,6 +111,12 @@ namespace ELI.Data.Repositories.Main
         private const string WeeknoColumnName = "Weekno";
         private const string YearColumnName = "Year";
         #endregion
+
+        #region AgentList
+
+
+
+
 
 
 
@@ -164,6 +181,11 @@ namespace ELI.Data.Repositories.Main
             }
 
             return agentVM;
+        }
+
+        public Task<bool> UpdateAgentAsync(AgentViewModel agent)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<RoomsViewModel> GetRomeListAsync(int roomListID)
@@ -338,6 +360,100 @@ namespace ELI.Data.Repositories.Main
 
             return tripsViewModel.ID;
         }
+
+        public async Task<TripsViewModel> GetTripAsync(int tripID)
+        {
+            TripsViewModel agentVM = null;
+            var parameters = new List<DbParameter>
+            {
+                base.GetParameter(ListRepository.TripIdParameterName, tripID)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetTripStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        agentVM = new TripsViewModel
+                        {
+
+                            ID = dataReader.GetIntegerValue(ListRepository.TripIdColumnName),
+                            Idx = dataReader.GetStringValue(ListRepository.TripLDxColumnName),
+                            Trips = dataReader.GetStringValue(ListRepository.TripNameColumnName),
+                            TripsDate = dataReader.GetDateTimeValue(ListRepository.TripsDateColumnName),
+                            Camps = dataReader.GetStringValue(ListRepository.TripCampsColumnName),
+                            Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName)
+                        };
+                    }
+                }
+            }
+
+            return agentVM;
+        }
+
+        public async Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> trips)
+        {
+            TripsViewModel tripsViewModel = null;
+
+            var result = new AllResponse<TripsViewModel>
+            {
+                Data = new List<TripsViewModel>(),
+                Offset = trips.Offset,
+                PageSize = trips.PageSize,
+                SortColumn = trips.SortColumn,
+                SortAscending = trips.SortAscending
+            };
+
+            var parameters = new List<DbParameter>
+            {
+
+                base.GetParameter(BaseRepository.OffsetParameterName, trips.Offset),
+                base.GetParameter(BaseRepository.PageSizeParameterName, trips.PageSize),
+                base.GetParameter(BaseRepository.SortColumnParameterName, trips.SortColumn),
+                base.GetParameter(BaseRepository.SortAscendingParameterName, trips.SortAscending),
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllTripsStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        while (dataReader.Read())
+                        {
+                            tripsViewModel = new TripsViewModel
+                            {
+
+                                ID = dataReader.GetIntegerValue(ListRepository.TripIdColumnName),
+                                Idx = dataReader.GetStringValue(ListRepository.TripLDxColumnName),
+                                Trips = dataReader.GetStringValue(ListRepository.TripNameColumnName),
+                                TripsDate = dataReader.GetDateTimeValue(ListRepository.TripsDateColumnName),
+                                Camps = dataReader.GetStringValue(ListRepository.TripCampsColumnName),
+                                Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName)
+
+                            };
+                            result.Data.Add(tripsViewModel);
+                        }
+
+                        if (!dataReader.IsClosed)
+                        {
+                            dataReader.Close();
+                        }
+
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public Task<bool> UpdateTirpsAsync(TripsViewModel tripsViewModel)
+        {
+            return null;
+        }
+
+
         #endregion
 
     }

@@ -67,7 +67,7 @@ namespace ELI.API.Controllers
             }
         }
 
-        [HttpGet("updateAgent")]
+        [HttpPut("updateAgent")]
         [Produces(typeof(AgentViewModel))]
         public async Task<IActionResult> UpdateAgent([FromBody] AgentViewModel agentVM)
         {
@@ -151,8 +151,20 @@ namespace ELI.API.Controllers
             }
         }
 
-
-
+        [HttpGet("getListTypeByLookupTable")]
+        [Produces(typeof(List<LookupValueViewModel>))]
+        public async Task<IActionResult> GetListBaseonLookupTable(string lookupTable)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetListBaseonLookupTable(lookupTable));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
     }
 }

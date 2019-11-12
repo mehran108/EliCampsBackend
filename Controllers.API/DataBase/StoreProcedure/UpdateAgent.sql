@@ -16,8 +16,9 @@ BEGIN
 EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[UpdateAgent] AS' 
 END
 GO
-Alter PROCEDURE [dbo].[AddAgents] 
+Alter PROCEDURE [dbo].[UpdateAgent] 
 	-- Add the parameters for the stored procedure here
+	@PAgentID INt,
 	@PAgentAgent nvarchar(255),
 	@PAgentContact nvarchar(255),
 	@PAgentPhone nvarchar(255),
@@ -27,7 +28,6 @@ Alter PROCEDURE [dbo].[AddAgents]
 	@PAgentCountry nvarchar(255),
 	@PAgentOther nvarchar(255),
 	@PAgentNotes text,
-	@PAgentID INT,
 	@PActive bit
 AS
 BEGIN

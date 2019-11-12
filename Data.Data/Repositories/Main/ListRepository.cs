@@ -29,6 +29,7 @@ namespace ELI.Data.Repositories.Main
         private const string AddRoomsStoredProcedureName = "AddRooms";
         private const string AddTripsStoredProcedureName = "AddTrips";
         private const string UpdateAgentStoredProcedureName = "UpdateAgent";
+        private const string GetLookupValueListStoredProcedureName = "GetLookupValueList";
 
         private const string UpdateTripsStoredProcedureName = "UpdateTrips";
 
@@ -42,6 +43,11 @@ namespace ELI.Data.Repositories.Main
         private const string AgentCountryColumnName = "AgentCountry";
         private const string AgentNotesColumnName = "AgentNotes";
         private const string AgentOtherColumnName = "AgentOther";
+
+        private const string LookupTableParameterName = "PLookupTable";
+
+        private const string ValueColumnName = "Value";
+        private const string NameColumnName = "Name";
 
 
         private const string AgentIdParameterName = "PAgentID";
@@ -115,81 +121,93 @@ namespace ELI.Data.Repositories.Main
         private const string YearColumnName = "Year";
         #endregion
 
-        #region AgentList
 
-
-
-
-
-
-
-        public async Task<int> CreateAgentAsync(AgentViewModel agent)
-        {
-            var agentIdParamter = base.GetParameterOut(ListRepository.AgentIdParameterName, SqlDbType.Int, agent.ID);
-            var parameters = new List<DbParameter>
+            public async Task<int> CreateAgentAsync(AgentViewModel agent)
             {
-                agentIdParamter,
-
-
-                base.GetParameter(ListRepository.AgentAgentParameterName, agent.Agent),
-                base.GetParameter(ListRepository.AgentContactParameterName, agent.Contact),
-                base.GetParameter(ListRepository.AgentPhoneParameterName, agent.Phone),
-                base.GetParameter(ListRepository.AgentEmailParameterName, agent.Email),
-                base.GetParameter(ListRepository.AgentWebParameterName, agent.Web),
-                base.GetParameter(ListRepository.AgentAddressParameterName, agent.Address),
-                base.GetParameter(ListRepository.AgentCountryParameterName, agent.Country),
-                base.GetParameter(ListRepository.AgentNotesParameterName, agent.Notes),
-                base.GetParameter(ListRepository.AgentOtherParameterName, agent.Other),
-
-            };
-
-            await base.ExecuteNonQuery(parameters, ListRepository.AddStoredProcedureName, CommandType.StoredProcedure);
-
-            agent.ID = Convert.ToInt32(agentIdParamter.Value);
-
-            return agent.ID;
-        }
-
-        public async Task<AgentViewModel> GetAgentAsync(int agentID)
-        {
-            AgentViewModel agentVM = null;
-            var parameters = new List<DbParameter>
-            {
-                base.GetParameter(ListRepository.AgentIdParameterName, agentID)
-            };
-
-            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetStoredProcedureName, CommandType.StoredProcedure))
-            {
-                if (dataReader != null && dataReader.HasRows)
+                var agentIdParamter = base.GetParameterOut(ListRepository.AgentIdParameterName, SqlDbType.Int, agent.ID);
+                var parameters = new List<DbParameter>
                 {
-                    if (dataReader.Read())
-                    {
-                        agentVM = new AgentViewModel
-                        {
+                    agentIdParamter,
 
-                            ID = dataReader.GetIntegerValue(ListRepository.AgentIdColumnName),
-                            Agent = dataReader.GetStringValue(ListRepository.AgentAgentColumnName),
-                            Contact = dataReader.GetStringValue(ListRepository.AgentContactColumnName),
-                            Phone = dataReader.GetStringValue(ListRepository.AgentPhoneColumnName),
-                            Email = dataReader.GetStringValue(ListRepository.AgentEmailColumnName),
-                            Web = dataReader.GetStringValue(ListRepository.AgentWebColumnName),
-                            Address = dataReader.GetStringValue(ListRepository.AgentAddressColumnName),
-                            Country = dataReader.GetStringValue(ListRepository.AgentCountryColumnName),
-                            Notes = dataReader.GetStringValue(ListRepository.AgentNotesColumnName),
-                            Other = dataReader.GetStringValue(ListRepository.AgentOtherColumnName),
-                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
-                        };
-                    }
-                }
+
+                    base.GetParameter(ListRepository.AgentAgentParameterName, agent.Agent),
+                    base.GetParameter(ListRepository.AgentContactParameterName, agent.Contact),
+                    base.GetParameter(ListRepository.AgentPhoneParameterName, agent.Phone),
+                    base.GetParameter(ListRepository.AgentEmailParameterName, agent.Email),
+                    base.GetParameter(ListRepository.AgentWebParameterName, agent.Web),
+                    base.GetParameter(ListRepository.AgentAddressParameterName, agent.Address),
+                    base.GetParameter(ListRepository.AgentCountryParameterName, agent.Country),
+                    base.GetParameter(ListRepository.AgentNotesParameterName, agent.Notes),
+                    base.GetParameter(ListRepository.AgentOtherParameterName, agent.Other),
+
+                };
+
+                await base.ExecuteNonQuery(parameters, ListRepository.AddStoredProcedureName, CommandType.StoredProcedure);
+
+                agent.ID = Convert.ToInt32(agentIdParamter.Value);
+
+                return agent.ID;
             }
 
-            return agentVM;
-        }
+            public async Task<AgentViewModel> GetAgentAsync(int agentID)
+            {
+                AgentViewModel agentVM = null;
+                var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.AgentIdParameterName, agentID)
+                };
 
-        public Task<bool> UpdateAgentAsync(AgentViewModel agent)
-        {
-            throw new NotImplementedException();
-        }
+                using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetStoredProcedureName, CommandType.StoredProcedure))
+                {
+                    if (dataReader != null && dataReader.HasRows)
+                    {
+                        if (dataReader.Read())
+                        {
+                            agentVM = new AgentViewModel
+                            {
+
+                                ID = dataReader.GetIntegerValue(ListRepository.AgentIdColumnName),
+                                Agent = dataReader.GetStringValue(ListRepository.AgentAgentColumnName),
+                                Contact = dataReader.GetStringValue(ListRepository.AgentContactColumnName),
+                                Phone = dataReader.GetStringValue(ListRepository.AgentPhoneColumnName),
+                                Email = dataReader.GetStringValue(ListRepository.AgentEmailColumnName),
+                                Web = dataReader.GetStringValue(ListRepository.AgentWebColumnName),
+                                Address = dataReader.GetStringValue(ListRepository.AgentAddressColumnName),
+                                Country = dataReader.GetStringValue(ListRepository.AgentCountryColumnName),
+                                Notes = dataReader.GetStringValue(ListRepository.AgentNotesColumnName),
+                                Other = dataReader.GetStringValue(ListRepository.AgentOtherColumnName),
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                            };
+                        }
+                    }
+                }
+
+                return agentVM;
+            }
+            public async Task<bool> UpdateAgentAsync(AgentViewModel agent)
+            {
+                var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.AgentIdParameterName, agent.ID),
+                    base.GetParameter(ListRepository.AgentAgentParameterName, agent.Agent),
+                    base.GetParameter(ListRepository.AgentContactParameterName, agent.Contact),
+                    base.GetParameter(ListRepository.AgentPhoneParameterName, agent.Phone),
+                    base.GetParameter(ListRepository.AgentEmailParameterName, agent.Email),
+                    base.GetParameter(ListRepository.AgentWebParameterName, agent.Web),
+                    base.GetParameter(ListRepository.AgentAddressParameterName, agent.Address),
+                    base.GetParameter(ListRepository.AgentCountryParameterName, agent.Country),
+                    base.GetParameter(ListRepository.AgentNotesParameterName, agent.Notes),
+                    base.GetParameter(ListRepository.AgentOtherParameterName, agent.Other),
+                    base.GetParameter(BaseRepository.ActiveColumnName, agent.Active),
+
+                };
+
+                var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateAgentStoredProcedureName, CommandType.StoredProcedure);
+
+                return returnValue > 0;
+            }
+
+        #endregion
 
         public async Task<RoomsViewModel> GetRomeListAsync(int roomListID)
         {
@@ -245,10 +263,10 @@ namespace ELI.Data.Repositories.Main
                 SortColumn = rooms.SortColumn,
                 SortAscending = rooms.SortAscending
             };
-          
+
             var parameters = new List<DbParameter>
             {
-               
+
                 base.GetParameter(BaseRepository.OffsetParameterName, rooms.Offset),
                 base.GetParameter(BaseRepository.PageSizeParameterName, rooms.PageSize),
                 base.GetParameter(BaseRepository.SortColumnParameterName, rooms.SortColumn),
@@ -300,7 +318,7 @@ namespace ELI.Data.Repositories.Main
         }
 
 
-        
+
         public async Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel)
         {
             var agentIdParamter = base.GetParameterOut(ListRepository.RIdParameterName, SqlDbType.Int, roomsViewModel.ID);
@@ -334,8 +352,6 @@ namespace ELI.Data.Repositories.Main
 
             return roomsViewModel.ID;
         }
-        #endregion
-
         #region Trips
 
 
@@ -391,9 +407,56 @@ namespace ELI.Data.Repositories.Main
                     }
                 }
             }
-
             return agentVM;
         }
+
+
+
+        #endregion
+
+        public async Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable)
+        {
+            LookupValueViewModel lookupValue = null;
+            List<LookupValueViewModel> list = new List<LookupValueViewModel>();
+            
+
+
+            var parameters = new List<DbParameter>
+            {
+
+                base.GetParameter(ListRepository.LookupTableParameterName, lookupTable)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetLookupValueListStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        while (dataReader.Read())
+                        {
+                            lookupValue = new LookupValueViewModel
+                            {
+
+                                Value = dataReader.GetIntegerValue(ListRepository.ValueColumnName),
+                                Name = dataReader.GetStringValue(ListRepository.NameColumnName)
+
+                            };
+                            list.Add(lookupValue);
+                        }
+
+                        if (!dataReader.IsClosed)
+                        {
+                            dataReader.Close();
+                        }
+
+                    }
+                }
+            }
+
+            return list;
+        }
+
 
         public async Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> trips)
         {
@@ -453,7 +516,7 @@ namespace ELI.Data.Repositories.Main
 
         public async Task<int> UpdateTirpsAsync(TripsViewModel tripsViewModel)
         {
-            
+
             var parameters = new List<DbParameter>
             {
                 base.GetParameter(ListRepository.TripIdParameterName, tripsViewModel.ID),
@@ -469,9 +532,5 @@ namespace ELI.Data.Repositories.Main
 
             return await base.ExecuteNonQuery(parameters, ListRepository.UpdateTripsStoredProcedureName, CommandType.StoredProcedure);
         }
-
-
-        #endregion
-
     }
 }

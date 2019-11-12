@@ -13,12 +13,7 @@ namespace ELI.Domain.Contracts.Main
         #region AgentList
         Task<int> CreateAgentAsync(AgentViewModel agent);
         Task<AgentViewModel> GetAgentAsync(int agentID);
-
         Task<bool> UpdateAgentAsync(AgentViewModel agent);
-
-        #endregion
-
-        #region RoomsList
         Task<RoomsViewModel> GetRomeListAsync(int roomListId);
         Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms);
         Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel);
@@ -31,5 +26,7 @@ namespace ELI.Domain.Contracts.Main
         Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> rooms);
         Task<int> UpdateTirpsAsync(TripsViewModel tripsViewModel);
         #endregion
+
+        Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable);
     }
 }

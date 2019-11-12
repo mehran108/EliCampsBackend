@@ -139,6 +139,13 @@ namespace ELI.Domain.Services
         #endregion
         #endregion
 
+        #region group
+        Task<int> AddGroupAsync(GroupViewModel group);
+        Task<GroupViewModel> GetGroupAsync(int groupID);
+        Task<bool> UpdateGroupAsync(GroupViewModel group);
+        Task<AllResponse<GroupViewModel>> GetAllGroupList(AllRequest<GroupViewModel> groups);
+        #endregion
+
 
     }
 }

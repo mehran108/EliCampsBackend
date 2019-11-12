@@ -22,8 +22,7 @@ namespace ELI.Data.Repositories.Main
         public string ConnectionString { get; }
         protected IConfiguration Configuration { get; }
 
-
-        protected const string AgentIdParameterName = "PActive";
+        
 
         protected const string ActiveColumnName = "Active";
         protected const string TotalRecordParameterName = "PTotalRecord";
@@ -157,7 +156,8 @@ namespace ELI.Data.Repositories.Main
                 {
                     var cmd = this.GetCommand(connection, commandText, commandType, parameters);
 
-                    returnValue = await cmd.ExecuteNonQueryAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                    returnValue = 1;
                 }
             }
             catch (Exception ex)

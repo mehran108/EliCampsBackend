@@ -31,6 +31,7 @@ namespace ELI.Domain.Services
         private readonly ILeadsRepository _leadsRepository;
         private readonly IReportRepository _reportRepository;
         private readonly IListRepository _listRepository;
+        private readonly IGroupRepository _groupRepository;
 
 
         public ELIService(
@@ -47,7 +48,8 @@ namespace ELI.Domain.Services
                IQuestionRepository questionRepository,
                ILeadsRepository leadsRepository,
                IReportRepository reportRepository,
-               IListRepository listRepository
+               IListRepository listRepository,
+               IGroupRepository groupRepository
 
             )
         {
@@ -65,6 +67,7 @@ namespace ELI.Domain.Services
             _leadsRepository = leadsRepository;
             _reportRepository = reportRepository;
             _listRepository = listRepository;
+            _groupRepository = groupRepository;
 
         }
         public async Task<bool> DeleteInvoiceAsync(int id, CancellationToken ct = default(CancellationToken))
@@ -508,6 +511,27 @@ namespace ELI.Domain.Services
             return await _listRepository.CreateTirpsAsync(tripsViewModel);
         }
         #endregion
+        #endregion
+
+        #region groups
+        public async Task<int> AddGroupAsync(GroupViewModel group)
+        {
+            return await _groupRepository.AddGroupAsync(group);
+        }
+
+        public async Task<GroupViewModel> GetGroupAsync(int groupID)
+        {
+            return await _groupRepository.GetGroupAsync(groupID);
+        }
+        public async Task<bool> UpdateGroupAsync(GroupViewModel group)
+        {
+            return await _groupRepository.UpdateGroupAsync(group);
+        }
+
+        public async Task<AllResponse<GroupViewModel>> GetAllGroupList(AllRequest<GroupViewModel> groups)
+        {
+            return await _groupRepository.GetAllGroupList(groups);
+        }
         #endregion
 
     }

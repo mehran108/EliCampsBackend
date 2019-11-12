@@ -16,7 +16,7 @@ namespace ELI.Domain.ViewModels
         public string Country { get; set; }
         public string Notes { get; set; }
         public string Other { get; set; }
-        public  bool Active { get; set; }
+        public bool Active { get; set; }
 
     }
 }

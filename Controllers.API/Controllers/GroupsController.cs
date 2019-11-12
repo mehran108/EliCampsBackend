@@ -89,6 +89,76 @@ namespace ELI.API.Controllers
         }
 
 
+        [HttpPost("addGroup")]
+        public async Task<IActionResult> AddGroupAsync([FromBody] GroupViewModel groupVM)
+        {
+
+            if (groupVM != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.AddGroupAsync(groupVM));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "group model cannot be empty" });
+            }
+        }
+
+        [HttpGet("getGroup")]
+        [Produces(typeof(GroupViewModel))]
+        public async Task<IActionResult> GetGroupAsync(int groupID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetGroupAsync(groupID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+        
+
+        [HttpGet("getAllGroups")]
+        [Produces(typeof(List<GroupViewModel>))]
+        public async Task<IActionResult> GetAllGroups()
+        {
+            try
+            {
+                AllRequest<GroupViewModel> grouplist = new AllRequest<GroupViewModel>();
+                return new ObjectResult(await _ELIService.GetAllGroupList(grouplist));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("updateGroup")]
+        [Produces(typeof(GroupViewModel))]
+        public async Task<IActionResult> UpdateGroupAsync([FromBody] GroupViewModel groupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateGroupAsync(groupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
     }
 }

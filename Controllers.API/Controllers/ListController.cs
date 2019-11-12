@@ -66,7 +66,7 @@ namespace ELI.API.Controllers
             }
         }
 
-        [HttpGet("updateAgent")]
+        [HttpPut("updateAgent")]
         [Produces(typeof(AgentViewModel))]
         public async Task<IActionResult> UpdateAgent([FromBody] AgentViewModel agentVM)
         {
@@ -105,8 +105,6 @@ namespace ELI.API.Controllers
             }
         }
 
-
-
-
+        
     }
 }

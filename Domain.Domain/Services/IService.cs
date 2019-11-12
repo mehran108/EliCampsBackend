@@ -154,7 +154,7 @@ namespace ELI.Domain.Services
         /// <param name="agent"></param>
         /// <returns></returns>
 
-        Task<bool> UpdateTripsAsync(TripsViewModel trips);
+        Task<int> UpdateTripsAsync(TripsViewModel trips);
         #endregion
         #endregion
 

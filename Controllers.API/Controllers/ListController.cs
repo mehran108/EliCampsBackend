@@ -136,13 +136,13 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
-        [HttpGet("updateTrips")]
+        [HttpPut("updateTrips")]
         [Produces(typeof(TripsViewModel))]
         public async Task<IActionResult> UpdateAgent([FromBody] TripsViewModel tripsViewModel)
         {
             try
             {
-                return new ObjectResult(await _ELIService.UpdateAgentAsync(agentVM));
+                return new ObjectResult(await _ELIService.UpdateTripsAsync(tripsViewModel));
             }
             catch (Exception ex)
             {

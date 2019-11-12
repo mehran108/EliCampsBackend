@@ -29,7 +29,7 @@ namespace ELI.Domain.Contracts.Main
         Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel);
         Task<TripsViewModel> GetTripAsync(int tripID);
         Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> rooms);
-        Task<bool> UpdateTirpsAsync(TripsViewModel tripsViewModel);
+        Task<int> UpdateTirpsAsync(TripsViewModel tripsViewModel);
         #endregion
     }
 }

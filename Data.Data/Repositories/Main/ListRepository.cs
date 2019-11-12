@@ -29,6 +29,8 @@ namespace ELI.Data.Repositories.Main
         private const string AddRoomsStoredProcedureName = "AddRooms";
         private const string AddTripsStoredProcedureName = "AddTrips";
 
+        private const string UpdateTripsStoredProcedureName = "UpdateTrips";
+
         private const string AgentIdColumnName = "AgentId";
         private const string AgentAgentColumnName = "AgentAgent";
         private const string AgentContactColumnName = "AgentContact";
@@ -448,9 +450,23 @@ namespace ELI.Data.Repositories.Main
             return result;
         }
 
-        public Task<bool> UpdateTirpsAsync(TripsViewModel tripsViewModel)
+        public async Task<int> UpdateTirpsAsync(TripsViewModel tripsViewModel)
         {
-            return null;
+            
+            var parameters = new List<DbParameter>
+            {
+                base.GetParameter(ListRepository.TripIdParameterName, tripsViewModel.ID),
+                base.GetParameter(ListRepository.TripYearParameterName, tripsViewModel.Year),
+                base.GetParameter(ListRepository.TripNameParameterName, tripsViewModel.Trips),
+                base.GetParameter(ListRepository.TripCampsParameterName, tripsViewModel.Camps),
+                base.GetParameter(ListRepository.TripsDateParameterName, tripsViewModel.TripsDate),
+                base.GetParameter(ListRepository.TripsNotesParameterName, tripsViewModel.Notes),
+                base.GetParameter(ListRepository.TripLDxParameterName, tripsViewModel.Idx)
+
+            };
+            //TODO: Add other parameters.
+
+            return await base.ExecuteNonQuery(parameters, ListRepository.UpdateTripsStoredProcedureName, CommandType.StoredProcedure);
         }
 
 

@@ -518,9 +518,9 @@ namespace ELI.Domain.Services
             return await _listRepository.GetAllTripsList(rooms);
         }
 
-        public async Task<bool> UpdateTripsAsync(AgentViewModel agent)
+        public async Task<int> UpdateTripsAsync(TripsViewModel trips)
         {
-            return await _listRepository.UpdateAgentAsync(agent);
+            return await _listRepository.UpdateTirpsAsync(trips);
         }
         #endregion
         #endregion

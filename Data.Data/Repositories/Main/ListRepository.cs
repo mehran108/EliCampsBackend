@@ -27,6 +27,7 @@ namespace ELI.Data.Repositories.Main
         private const string AddRoomsStoredProcedureName = "AddRooms";
         private const string AddTripsStoredProcedureName = "AddTrips";
         private const string UpdateAgentStoredProcedureName = "UpdateAgent";
+        private const string GetLookupValueListStoredProcedureName = "GetLookupValueList";
 
         private const string AgentIdColumnName = "AgentId";
         private const string AgentAgentColumnName = "AgentAgent";
@@ -38,6 +39,11 @@ namespace ELI.Data.Repositories.Main
         private const string AgentCountryColumnName = "AgentCountry";
         private const string AgentNotesColumnName = "AgentNotes";
         private const string AgentOtherColumnName = "AgentOther";
+
+        private const string LookupTableParameterName = "PLookupTable";
+
+        private const string ValueColumnName = "Value";
+        private const string NameColumnName = "Name";
 
 
         private const string AgentIdParameterName = "PAgentID";
@@ -360,8 +366,53 @@ namespace ELI.Data.Repositories.Main
             return tripsViewModel.ID;
         }
 
-        
+
+
         #endregion
+
+        public async Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable)
+        {
+            LookupValueViewModel lookupValue = null;
+            List<LookupValueViewModel> list = new List<LookupValueViewModel>();
+            
+
+
+            var parameters = new List<DbParameter>
+            {
+
+                base.GetParameter(ListRepository.LookupTableParameterName, lookupTable)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetLookupValueListStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        while (dataReader.Read())
+                        {
+                            lookupValue = new LookupValueViewModel
+                            {
+
+                                Value = dataReader.GetIntegerValue(ListRepository.ValueColumnName),
+                                Name = dataReader.GetStringValue(ListRepository.NameColumnName)
+
+                            };
+                            list.Add(lookupValue);
+                        }
+
+                        if (!dataReader.IsClosed)
+                        {
+                            dataReader.Close();
+                        }
+
+                    }
+                }
+            }
+
+            return list;
+        }
+
 
     }
 }

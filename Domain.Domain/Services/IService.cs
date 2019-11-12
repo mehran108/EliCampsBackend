@@ -146,6 +146,8 @@ namespace ELI.Domain.Services
         Task<AllResponse<GroupViewModel>> GetAllGroupList(AllRequest<GroupViewModel> groups);
         #endregion
 
+        Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable);
+
 
     }
 }

@@ -534,5 +534,10 @@ namespace ELI.Domain.Services
         }
         #endregion
 
+        public async Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable)
+        {
+            return await _listRepository.GetListBaseonLookupTable(lookupTable);
+        }
+
     }
 }

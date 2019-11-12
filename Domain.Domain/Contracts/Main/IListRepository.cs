@@ -24,5 +24,7 @@ namespace ELI.Domain.Contracts.Main
         #region RoomsList
         Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel);
         #endregion
+
+        Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable);
     }
 }

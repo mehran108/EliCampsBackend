@@ -28,6 +28,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetAllTripsStoredProcedureName = "GetAllTrips";
         private const string AddRoomsStoredProcedureName = "AddRooms";
         private const string AddTripsStoredProcedureName = "AddTrips";
+        private const string UpdateAgentStoredProcedureName = "UpdateAgent";
 
         private const string UpdateTripsStoredProcedureName = "UpdateTrips";
 

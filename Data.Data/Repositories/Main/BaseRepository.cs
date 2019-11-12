@@ -22,6 +22,9 @@ namespace ELI.Data.Repositories.Main
         public string ConnectionString { get; }
         protected IConfiguration Configuration { get; }
 
+
+        protected const string AgentIdParameterName = "PActive";
+
         protected const string ActiveColumnName = "Active";
         protected const string TotalRecordParameterName = "PTotalRecord";
         protected const string SortColumnParameterName = "PSortColumn";

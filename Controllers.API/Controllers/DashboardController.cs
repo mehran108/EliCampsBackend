@@ -24,14 +24,14 @@ namespace ELI.API.Controllers
         private readonly IELIAuthService _ELIAuthService;
         string AuthConString;
         string ConString;
-        public DashboardController(IELIService ELISupervisor, IELIAuthService ELIAuthService)
+        public DashboardController(IELIService ELISupervisor, IELIAuthService ELIAuthService, IConfiguration configuration)
         {
             var builder = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
             .AddJsonFile($"appsettings.json", true)
             .AddEnvironmentVariables();
             var config = builder.Build();
-            ConString = config.GetConnectionString("ELIDb");
+            ConString = configuration.GetConnectionString("ELIDb");
             AuthConString = config.GetConnectionString("ELIAuthDb");
             _ELIService = ELISupervisor;
             _ELIAuthService = ELIAuthService;
@@ -52,6 +52,7 @@ namespace ELI.API.Controllers
         }
         [HttpGet("getusers")]
         [Produces(typeof(List<UserViewModel>))]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUsers(string role, CancellationToken ct = default(CancellationToken))
         {
             if (role != "")

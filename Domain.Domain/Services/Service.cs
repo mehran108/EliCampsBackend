@@ -510,6 +510,21 @@ namespace ELI.Domain.Services
         {
             return await _listRepository.CreateTirpsAsync(tripsViewModel);
         }
+
+        public async Task<TripsViewModel> GetTirpsAsync(int agentID)
+        {
+            return await _listRepository.GetTripAsync(agentID);
+        }
+
+        public async Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> rooms)
+        {
+            return await _listRepository.GetAllTripsList(rooms);
+        }
+
+        public async Task<bool> UpdateTripsAsync(TripsViewModel trips)
+        {
+            return await _listRepository.UpdateTirpsAsync(trips);
+        }
         #endregion
         #endregion
 
@@ -533,6 +548,55 @@ namespace ELI.Domain.Services
             return await _groupRepository.GetAllGroupList(groups);
         }
         #endregion
+
+        #region HomeStay
+        public async Task<int> CreateHomeStayAsync(HomeStayViewModel homeStayViewModel)
+        {
+            return await _listRepository.CreateHomeStayAsync(homeStayViewModel);
+        }
+
+        public async Task<HomeStayViewModel> GetHomeStayAsync(int homeStayId)
+        {
+            return await _listRepository.GetHomeStayAsync(homeStayId);
+        }
+        public async Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(AllRequest<HomeStayViewModel> HomeStay)
+        {
+            return await _listRepository.GetAllHomeStay(HomeStay);
+        }
+
+        public async Task<bool> UpdateHomeStayAsync(HomeStayViewModel homeStayViewModel)
+        {
+            return await _listRepository.UpdateHomeStayAsync(homeStayViewModel);
+        }
+
+        #endregion
+
+
+        #region Addins
+        //Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel);
+        public async Task<int> CreateAddinsAsync(AddinsViewModel addinsViewModel)
+        {
+            return await _listRepository.CreateAddinsAsync(addinsViewModel);
+        }
+
+        public async Task<AddinsViewModel> GetAddins(int addinsId)
+        {
+            return await _listRepository.GetAddins(addinsId);
+        }
+
+        public async Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AllRequest<AddinsViewModel> addinsList)
+        {
+            return await _listRepository.GetAllAddinsList(addinsList);
+        }
+
+
+        public async Task<bool> UpdateAddinsAsync(AddinsViewModel addinsViewModel)
+        {
+            return await _listRepository.UpdateAddinsAsync(addinsViewModel);
+        }
+
+        #endregion
+
 
         public async Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable)
         {

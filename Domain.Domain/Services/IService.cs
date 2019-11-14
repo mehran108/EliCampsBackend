@@ -136,6 +136,25 @@ namespace ELI.Domain.Services
         #region Trips
 
         Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="agentID"></param>
+        /// <returns></returns>
+        Task<TripsViewModel> GetTirpsAsync(int tripID);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rooms"></param>
+        /// <returns></returns>
+        Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> rooms);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="agent"></param>
+        /// <returns></returns>
+
+        Task<bool> UpdateTripsAsync(TripsViewModel trips);
         #endregion
         #endregion
 
@@ -147,6 +166,39 @@ namespace ELI.Domain.Services
         #endregion
 
         Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="homeStayViewModel"></param>
+        /// <returns></returns>
+       #region HomeStay
+        Task<int> CreateHomeStayAsync(HomeStayViewModel homeStayViewModel);
+
+        Task<HomeStayViewModel> GetHomeStayAsync(int homeStayId);
+
+        Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(AllRequest<HomeStayViewModel> homeStay);
+
+        Task<bool> UpdateHomeStayAsync(HomeStayViewModel homeStayView);
+        #endregion
+
+        #region Addins
+        Task<int> CreateAddinsAsync(AddinsViewModel addinsViewModel);
+
+        Task<AddinsViewModel> GetAddins(int addinsId);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rooms"></param>
+        /// <returns></returns>
+        Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AllRequest<AddinsViewModel> AddinsList);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="homeStayView"></param>
+        /// <returns></returns>
+
+        Task<bool> UpdateAddinsAsync(AddinsViewModel addinsViewModel);
+        #endregion
 
 
     }

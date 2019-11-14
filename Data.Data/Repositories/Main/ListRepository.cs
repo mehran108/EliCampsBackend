@@ -26,62 +26,22 @@ namespace ELI.Data.Repositories.Main
         private const string GetRoomsStoredProcedureName = "GetRooms";
         private const string GetAllRoomsStoredProcedureName = "GetAllRooms";
         private const string GetAllTripsStoredProcedureName = "GetAllTrips";
+        private const string GetAllHomeStayStoredProcedureName = "GetAllHomeStay";
+        private const string GetHomeStayStoredProcedureName = "GetHomeStayById";
+        private const string GetAddinsTripStoredProcedureName = "GetAddinsById";
+
+        private const string GetAllAddinsTripStoredProcedureName = "GetAllAddins";
+
         private const string AddRoomsStoredProcedureName = "AddRooms";
         private const string AddTripsStoredProcedureName = "AddTrips";
+        private const string AddAddinsStoredProcedureName = "AddAddins";
+        private const string AddHomeStayStoredProcedureName = "AddHomeStay";
         private const string UpdateAgentStoredProcedureName = "UpdateAgent";
         private const string GetLookupValueListStoredProcedureName = "GetLookupValueList";
 
         private const string UpdateTripsStoredProcedureName = "UpdateTrips";
-
-        private const string AgentIdColumnName = "AgentId";
-        private const string AgentAgentColumnName = "AgentAgent";
-        private const string AgentContactColumnName = "AgentContact";
-        private const string AgentPhoneColumnName = "AgentPhone";
-        private const string AgentEmailColumnName = "AgentEmail";
-        private const string AgentWebColumnName = "AgentWeb";
-        private const string AgentAddressColumnName = "AgentAddress";
-        private const string AgentCountryColumnName = "AgentCountry";
-        private const string AgentNotesColumnName = "AgentNotes";
-        private const string AgentOtherColumnName = "AgentOther";
-
-        private const string LookupTableParameterName = "PLookupTable";
-
-        private const string ValueColumnName = "Value";
-        private const string NameColumnName = "Name";
-
-
-        private const string AgentIdParameterName = "PAgentID";
-        private const string RoomIdParameterName = "PRoomID";
-        private const string AgentAgentParameterName = "PAgentAgent";
-        private const string AgentContactParameterName = "PAgentContact";
-        private const string AgentPhoneParameterName = "PAgentPhone";
-        private const string AgentEmailParameterName = "PAgentEmail";
-        private const string AgentWebParameterName = "PAgentWeb";
-        private const string AgentAddressParameterName = "PAgentAddress";
-        private const string AgentCountryParameterName = "PAgentCountry";
-        private const string AgentNotesParameterName = "PAgentNotes";
-        private const string AgentOtherParameterName = "PAgentOther";
-
-
-
-        #region Trips
-        private const string TripIdParameterName = "PID";
-        private const string TripYearParameterName = "PYear";
-        private const string TripNameParameterName = "PTrip";
-        private const string TripCampsParameterName = "PCamps";
-        private const string TripsDateParameterName = "PTripsDate";
-        private const string TripsNotesParameterName = "PTripsNotes";
-        private const string TripLDxParameterName = "PLdx";
-
-
-        private const string TripIdColumnName = "Trips_ID";
-        private const string TripYearColumnName = "TripYear";
-        private const string TripNameColumnName = "TripName";
-        private const string TripCampsColumnName = "Camps";
-        private const string TripsDateColumnName = "TripDate";
-        private const string TripsNotesColumnName = "TripNotes";
-        private const string TripLDxColumnName = "TripLdx";
-        #endregion
+        private const string UpdateHomeStayStoredProcedureName = "UpdateHomeStay";
+        private const string UpdateAddinsStayStoredProcedureName = "UpdateAddins";
 
         #region  RoomList
         private const string RIdParameterName = "PID";
@@ -119,95 +79,7 @@ namespace ELI.Data.Repositories.Main
         private const string ImportedOneColumnName = "ImportedOne";
         private const string WeeknoColumnName = "Weekno";
         private const string YearColumnName = "Year";
-        #endregion
 
-
-            public async Task<int> CreateAgentAsync(AgentViewModel agent)
-            {
-                var agentIdParamter = base.GetParameterOut(ListRepository.AgentIdParameterName, SqlDbType.Int, agent.ID);
-                var parameters = new List<DbParameter>
-                {
-                    agentIdParamter,
-
-
-                    base.GetParameter(ListRepository.AgentAgentParameterName, agent.Agent),
-                    base.GetParameter(ListRepository.AgentContactParameterName, agent.Contact),
-                    base.GetParameter(ListRepository.AgentPhoneParameterName, agent.Phone),
-                    base.GetParameter(ListRepository.AgentEmailParameterName, agent.Email),
-                    base.GetParameter(ListRepository.AgentWebParameterName, agent.Web),
-                    base.GetParameter(ListRepository.AgentAddressParameterName, agent.Address),
-                    base.GetParameter(ListRepository.AgentCountryParameterName, agent.Country),
-                    base.GetParameter(ListRepository.AgentNotesParameterName, agent.Notes),
-                    base.GetParameter(ListRepository.AgentOtherParameterName, agent.Other),
-
-                };
-
-                await base.ExecuteNonQuery(parameters, ListRepository.AddStoredProcedureName, CommandType.StoredProcedure);
-
-                agent.ID = Convert.ToInt32(agentIdParamter.Value);
-
-                return agent.ID;
-            }
-
-            public async Task<AgentViewModel> GetAgentAsync(int agentID)
-            {
-                AgentViewModel agentVM = null;
-                var parameters = new List<DbParameter>
-                {
-                    base.GetParameter(ListRepository.AgentIdParameterName, agentID)
-                };
-
-                using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetStoredProcedureName, CommandType.StoredProcedure))
-                {
-                    if (dataReader != null && dataReader.HasRows)
-                    {
-                        if (dataReader.Read())
-                        {
-                            agentVM = new AgentViewModel
-                            {
-
-                                ID = dataReader.GetIntegerValue(ListRepository.AgentIdColumnName),
-                                Agent = dataReader.GetStringValue(ListRepository.AgentAgentColumnName),
-                                Contact = dataReader.GetStringValue(ListRepository.AgentContactColumnName),
-                                Phone = dataReader.GetStringValue(ListRepository.AgentPhoneColumnName),
-                                Email = dataReader.GetStringValue(ListRepository.AgentEmailColumnName),
-                                Web = dataReader.GetStringValue(ListRepository.AgentWebColumnName),
-                                Address = dataReader.GetStringValue(ListRepository.AgentAddressColumnName),
-                                Country = dataReader.GetStringValue(ListRepository.AgentCountryColumnName),
-                                Notes = dataReader.GetStringValue(ListRepository.AgentNotesColumnName),
-                                Other = dataReader.GetStringValue(ListRepository.AgentOtherColumnName),
-                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
-                            };
-                        }
-                    }
-                }
-
-                return agentVM;
-            }
-            public async Task<bool> UpdateAgentAsync(AgentViewModel agent)
-            {
-                var parameters = new List<DbParameter>
-                {
-                    base.GetParameter(ListRepository.AgentIdParameterName, agent.ID),
-                    base.GetParameter(ListRepository.AgentAgentParameterName, agent.Agent),
-                    base.GetParameter(ListRepository.AgentContactParameterName, agent.Contact),
-                    base.GetParameter(ListRepository.AgentPhoneParameterName, agent.Phone),
-                    base.GetParameter(ListRepository.AgentEmailParameterName, agent.Email),
-                    base.GetParameter(ListRepository.AgentWebParameterName, agent.Web),
-                    base.GetParameter(ListRepository.AgentAddressParameterName, agent.Address),
-                    base.GetParameter(ListRepository.AgentCountryParameterName, agent.Country),
-                    base.GetParameter(ListRepository.AgentNotesParameterName, agent.Notes),
-                    base.GetParameter(ListRepository.AgentOtherParameterName, agent.Other),
-                    base.GetParameter(BaseRepository.ActiveColumnName, agent.Active),
-
-                };
-
-                var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateAgentStoredProcedureName, CommandType.StoredProcedure);
-
-                return returnValue > 0;
-            }
-
-        #endregion
 
         public async Task<RoomsViewModel> GetRomeListAsync(int roomListID)
         {
@@ -316,9 +188,6 @@ namespace ELI.Data.Repositories.Main
 
             return result;
         }
-
-
-
         public async Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel)
         {
             var agentIdParamter = base.GetParameterOut(ListRepository.RIdParameterName, SqlDbType.Int, roomsViewModel.ID);
@@ -352,9 +221,142 @@ namespace ELI.Data.Repositories.Main
 
             return roomsViewModel.ID;
         }
+        #endregion
+
+        #region Agent
+        private const string AgentIdColumnName = "AgentId";
+        private const string AgentAgentColumnName = "AgentAgent";
+        private const string AgentContactColumnName = "AgentContact";
+        private const string AgentPhoneColumnName = "AgentPhone";
+        private const string AgentEmailColumnName = "AgentEmail";
+        private const string AgentWebColumnName = "AgentWeb";
+        private const string AgentAddressColumnName = "AgentAddress";
+        private const string AgentCountryColumnName = "AgentCountry";
+        private const string AgentNotesColumnName = "AgentNotes";
+        private const string AgentOtherColumnName = "AgentOther";
+
+        private const string LookupTableParameterName = "PLookupTable";
+
+        private const string ValueColumnName = "Value";
+        private const string NameColumnName = "Name";
+
+
+        private const string AgentIdParameterName = "PAgentID";
+        private const string RoomIdParameterName = "PRoomID";
+        private const string AgentAgentParameterName = "PAgentAgent";
+        private const string AgentContactParameterName = "PAgentContact";
+        private const string AgentPhoneParameterName = "PAgentPhone";
+        private const string AgentEmailParameterName = "PAgentEmail";
+        private const string AgentWebParameterName = "PAgentWeb";
+        private const string AgentAddressParameterName = "PAgentAddress";
+        private const string AgentCountryParameterName = "PAgentCountry";
+        private const string AgentNotesParameterName = "PAgentNotes";
+        private const string AgentOtherParameterName = "PAgentOther";
+        public async Task<int> CreateAgentAsync(AgentViewModel agent)
+        {
+            var agentIdParamter = base.GetParameterOut(ListRepository.AgentIdParameterName, SqlDbType.Int, agent.ID);
+            var parameters = new List<DbParameter>
+                {
+                    agentIdParamter,
+
+
+                    base.GetParameter(ListRepository.AgentAgentParameterName, agent.Agent),
+                    base.GetParameter(ListRepository.AgentContactParameterName, agent.Contact),
+                    base.GetParameter(ListRepository.AgentPhoneParameterName, agent.Phone),
+                    base.GetParameter(ListRepository.AgentEmailParameterName, agent.Email),
+                    base.GetParameter(ListRepository.AgentWebParameterName, agent.Web),
+                    base.GetParameter(ListRepository.AgentAddressParameterName, agent.Address),
+                    base.GetParameter(ListRepository.AgentCountryParameterName, agent.Country),
+                    base.GetParameter(ListRepository.AgentNotesParameterName, agent.Notes),
+                    base.GetParameter(ListRepository.AgentOtherParameterName, agent.Other),
+
+                };
+
+            await base.ExecuteNonQuery(parameters, ListRepository.AddStoredProcedureName, CommandType.StoredProcedure);
+
+            agent.ID = Convert.ToInt32(agentIdParamter.Value);
+
+            return agent.ID;
+        }
+
+        public async Task<AgentViewModel> GetAgentAsync(int agentID)
+        {
+            AgentViewModel agentVM = null;
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.AgentIdParameterName, agentID)
+                };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        agentVM = new AgentViewModel
+                        {
+
+                            ID = dataReader.GetIntegerValue(ListRepository.AgentIdColumnName),
+                            Agent = dataReader.GetStringValue(ListRepository.AgentAgentColumnName),
+                            Contact = dataReader.GetStringValue(ListRepository.AgentContactColumnName),
+                            Phone = dataReader.GetStringValue(ListRepository.AgentPhoneColumnName),
+                            Email = dataReader.GetStringValue(ListRepository.AgentEmailColumnName),
+                            Web = dataReader.GetStringValue(ListRepository.AgentWebColumnName),
+                            Address = dataReader.GetStringValue(ListRepository.AgentAddressColumnName),
+                            Country = dataReader.GetStringValue(ListRepository.AgentCountryColumnName),
+                            Notes = dataReader.GetStringValue(ListRepository.AgentNotesColumnName),
+                            Other = dataReader.GetStringValue(ListRepository.AgentOtherColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                        };
+                    }
+                }
+            }
+
+            return agentVM;
+        }
+        public async Task<bool> UpdateAgentAsync(AgentViewModel agent)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.AgentIdParameterName, agent.ID),
+                    base.GetParameter(ListRepository.AgentAgentParameterName, agent.Agent),
+                    base.GetParameter(ListRepository.AgentContactParameterName, agent.Contact),
+                    base.GetParameter(ListRepository.AgentPhoneParameterName, agent.Phone),
+                    base.GetParameter(ListRepository.AgentEmailParameterName, agent.Email),
+                    base.GetParameter(ListRepository.AgentWebParameterName, agent.Web),
+                    base.GetParameter(ListRepository.AgentAddressParameterName, agent.Address),
+                    base.GetParameter(ListRepository.AgentCountryParameterName, agent.Country),
+                    base.GetParameter(ListRepository.AgentNotesParameterName, agent.Notes),
+                    base.GetParameter(ListRepository.AgentOtherParameterName, agent.Other),
+                    base.GetParameter(BaseRepository.ActiveColumnName, agent.Active),
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateAgentStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+        #endregion
+
+
         #region Trips
 
+        private const string TripIdParameterName = "PID";
+        private const string TripYearParameterName = "PYear";
+        private const string TripNameParameterName = "PTrip";
+        private const string TripCampsParameterName = "PCamps";
+        private const string TripsDateParameterName = "PTripsDate";
+        private const string TripsNotesParameterName = "PTripsNotes";
+        private const string TripLDxParameterName = "PLdx";
 
+
+        private const string TripIdColumnName = "Trips_ID";
+        private const string TripYearColumnName = "TripYear";
+        private const string TripNameColumnName = "TripName";
+        private const string TripCampsColumnName = "Camps";
+        private const string TripsDateColumnName = "TripDate";
+        private const string TripsNotesColumnName = "TripNotes";
+        private const string TripLDxColumnName = "TripLdx";
         public async Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel)
         {
             var agentIdParamter = base.GetParameterOut(ListRepository.RIdParameterName, SqlDbType.Int, tripsViewModel.ID);
@@ -409,54 +411,6 @@ namespace ELI.Data.Repositories.Main
             }
             return agentVM;
         }
-
-
-
-        #endregion
-
-        public async Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable)
-        {
-            LookupValueViewModel lookupValue = null;
-            List<LookupValueViewModel> list = new List<LookupValueViewModel>();
-            
-
-
-            var parameters = new List<DbParameter>
-            {
-
-                base.GetParameter(ListRepository.LookupTableParameterName, lookupTable)
-            };
-
-            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetLookupValueListStoredProcedureName, CommandType.StoredProcedure))
-            {
-                if (dataReader != null && dataReader.HasRows)
-                {
-                    if (dataReader.Read())
-                    {
-                        while (dataReader.Read())
-                        {
-                            lookupValue = new LookupValueViewModel
-                            {
-
-                                Value = dataReader.GetIntegerValue(ListRepository.ValueColumnName),
-                                Name = dataReader.GetStringValue(ListRepository.NameColumnName)
-
-                            };
-                            list.Add(lookupValue);
-                        }
-
-                        if (!dataReader.IsClosed)
-                        {
-                            dataReader.Close();
-                        }
-
-                    }
-                }
-            }
-
-            return list;
-        }
-
 
         public async Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> trips)
         {
@@ -514,7 +468,7 @@ namespace ELI.Data.Repositories.Main
             return result;
         }
 
-        public async Task<int> UpdateTirpsAsync(TripsViewModel tripsViewModel)
+        public async Task<bool> UpdateTirpsAsync(TripsViewModel tripsViewModel)
         {
 
             var parameters = new List<DbParameter>
@@ -530,7 +484,402 @@ namespace ELI.Data.Repositories.Main
             };
             //TODO: Add other parameters.
 
-            return await base.ExecuteNonQuery(parameters, ListRepository.UpdateTripsStoredProcedureName, CommandType.StoredProcedure);
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateTripsStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
         }
+
+        #endregion
+
+        #region Home Stay
+
+        private const string HomeIDParameterName = "PHomeID";
+        private const string HomeRefrenaceParameterName = "PHomeRefrenance";
+        private const string HomeNameParameterName = "PHomeName";
+        private const string HomeCellNumberParameterName = "PHomeCellNumber";
+        private const string HomeEmailParameterName = "PHomeEmail";
+        private const string HomeAddressParameterName = "PHomeAddress";
+        private const string HomeRegionParameterName = "PHomeRegion";
+        private const string HomeIntersectionParameterName = "PHomeIntersection";
+        private const string HomeDistanceParameterName = "PHomeDistance";
+        private const string HomeMealsParameterName = "PHomeMeals";
+        private const string HomePreferParameterName = "PHomePrefer";
+        private const string HomeRoomsParameterName = "PHomeRooms";
+        private const string HomeAgreementParameterName = "PHomeAggrement";
+        private const string HomePoliceCheckParameterName = "PHomePoliceCheck";
+
+
+        private const string HomeIDColumnName = "HomeID";
+        private const string HomeRefrenaceColumnName = "HomeRefrenance";
+        private const string HomeNameColumnName = "HomeName";
+        private const string HomeCellNumberColumnName = "HomeCellNumber";
+        private const string HomeEmailColumnName = "HomeEmail";
+        private const string HomeAddressColumnName = "HomeAddress";
+        private const string HomeRegionColumnName = "HomeRegion";
+        private const string HomeIntersectionColumnName = "HomeIntersection";
+        private const string HomeDistanceColumnName = "HomeDistance";
+        private const string HomeMealsColumnName = "HomeMeals";
+        private const string HomePreferColumnName = "HomePrefer";
+        private const string HomeRoomsColumnName = "HomeRooms";
+        private const string HomeAgreementColumnName = "HomeAggrement";
+        private const string HomePoliceCheckColumnName = "HomePoliceCheck";
+        public async Task<int> CreateHomeStayAsync(HomeStayViewModel homeStayViewModel)
+        {
+            var homeIDParameterName = base.GetParameterOut(ListRepository.HomeIDParameterName, SqlDbType.Int, homeStayViewModel.HomeId);
+            var parameters = new List<DbParameter>
+            {
+                homeIDParameterName,
+
+
+
+                base.GetParameter(ListRepository.HomeRefrenaceParameterName, homeStayViewModel.Reference),
+                base.GetParameter(ListRepository.HomeNameParameterName, homeStayViewModel.Name),
+                base.GetParameter(ListRepository.HomeCellNumberParameterName, homeStayViewModel.CellNumber),
+                base.GetParameter(ListRepository.HomeEmailParameterName, homeStayViewModel.Email),
+                base.GetParameter(ListRepository.HomeAddressParameterName, homeStayViewModel.Address),
+                base.GetParameter(ListRepository.HomeRegionParameterName, homeStayViewModel.Region),
+                base.GetParameter(ListRepository.HomeIntersectionParameterName, homeStayViewModel.Intersection),
+                base.GetParameter(ListRepository.HomeDistanceParameterName, homeStayViewModel.Distance),
+                base.GetParameter(ListRepository.HomeMealsParameterName, homeStayViewModel.Meals),
+                base.GetParameter(ListRepository.HomePreferParameterName, homeStayViewModel.Prefer),
+                base.GetParameter(ListRepository.HomeRoomsParameterName, homeStayViewModel.Rooms),
+                base.GetParameter(ListRepository.HomeAgreementParameterName, homeStayViewModel.Aggrements),
+                base.GetParameter(ListRepository.HomePoliceCheckParameterName, homeStayViewModel.PoliceCheck)
+
+            };
+
+            await base.ExecuteNonQuery(parameters, ListRepository.AddHomeStayStoredProcedureName, CommandType.StoredProcedure);
+
+            homeStayViewModel.HomeId = Convert.ToInt32(homeIDParameterName.Value);
+
+            return homeStayViewModel.HomeId;
+        }
+
+
+        public async Task<HomeStayViewModel> GetHomeStayAsync(int homeStayId)
+        {
+            HomeStayViewModel homeStayVM = null;
+            var parameters = new List<DbParameter>
+            {
+                base.GetParameter(ListRepository.HomeIDParameterName, homeStayId)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetTripStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        homeStayVM = new HomeStayViewModel
+                        {
+
+                            HomeId = dataReader.GetIntegerValue(ListRepository.HomeIDColumnName),
+                            Reference = dataReader.GetStringValue(ListRepository.HomeRefrenaceColumnName),
+                            Name = dataReader.GetStringValue(ListRepository.HomeNameColumnName),
+                            CellNumber = dataReader.GetStringValue(ListRepository.HomeCellNumberColumnName),
+                            Email = dataReader.GetStringValue(ListRepository.HomeEmailColumnName),
+                            Address = dataReader.GetStringValue(ListRepository.HomeAddressColumnName),
+                            Rooms = dataReader.GetStringValue(ListRepository.HomeRoomsColumnName),
+                            Region = dataReader.GetStringValue(ListRepository.HomeRegionColumnName),
+                            Intersection = dataReader.GetStringValue(ListRepository.HomeIntersectionColumnName),
+                            Distance = dataReader.GetStringValue(ListRepository.HomeDistanceColumnName),
+                            Meals = dataReader.GetStringValue(ListRepository.HomeMealsColumnName),
+                            Prefer = dataReader.GetStringValue(ListRepository.HomePreferColumnName),
+                            Aggrements = dataReader.GetStringValue(ListRepository.HomeAgreementColumnName),
+                            PoliceCheck = dataReader.GetStringValue(ListRepository.HomePoliceCheckColumnName),
+
+                        };
+                    }
+                }
+            }
+            return homeStayVM;
+        }
+
+        public async Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(AllRequest<HomeStayViewModel> homeStay)
+        {
+            HomeStayViewModel homeStayViewModel = null;
+
+            var result = new AllResponse<HomeStayViewModel>
+            {
+                Data = new List<HomeStayViewModel>(),
+                Offset = homeStay.Offset,
+                PageSize = homeStay.PageSize,
+                SortColumn = homeStay.SortColumn,
+                SortAscending = homeStay.SortAscending
+            };
+
+            var parameters = new List<DbParameter>
+            {
+
+                base.GetParameter(BaseRepository.OffsetParameterName, homeStay.Offset),
+                base.GetParameter(BaseRepository.PageSizeParameterName, homeStay.PageSize),
+                base.GetParameter(BaseRepository.SortColumnParameterName, homeStay.SortColumn),
+                base.GetParameter(BaseRepository.SortAscendingParameterName, homeStay.SortAscending),
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllHomeStayStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        while (dataReader.Read())
+                        {
+                            homeStayViewModel = new HomeStayViewModel
+                            {
+
+                                HomeId = dataReader.GetIntegerValue(ListRepository.HomeIDColumnName),
+                                Reference = dataReader.GetStringValue(ListRepository.HomeRefrenaceColumnName),
+                                Name = dataReader.GetStringValue(ListRepository.HomeNameColumnName),
+                                CellNumber = dataReader.GetStringValue(ListRepository.HomeCellNumberColumnName),
+                                Email = dataReader.GetStringValue(ListRepository.HomeEmailColumnName),
+                                Address = dataReader.GetStringValue(ListRepository.HomeAddressColumnName),
+                                Rooms = dataReader.GetStringValue(ListRepository.HomeRoomsColumnName),
+                                Region = dataReader.GetStringValue(ListRepository.HomeRegionColumnName),
+                                Intersection = dataReader.GetStringValue(ListRepository.HomeIntersectionColumnName),
+                                Distance = dataReader.GetStringValue(ListRepository.HomeDistanceColumnName),
+                                Meals = dataReader.GetStringValue(ListRepository.HomeMealsColumnName),
+                                Prefer = dataReader.GetStringValue(ListRepository.HomePreferColumnName),
+                                Aggrements = dataReader.GetStringValue(ListRepository.HomeAgreementColumnName),
+                                PoliceCheck = dataReader.GetStringValue(ListRepository.HomePoliceCheckColumnName),
+
+
+                            };
+                            result.Data.Add(homeStayViewModel);
+                        }
+
+                        if (!dataReader.IsClosed)
+                        {
+                            dataReader.Close();
+                        }
+
+                    }
+                }
+            }
+
+            return result;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="agent"></param>
+        /// <returns></returns>
+        public async Task<bool> UpdateHomeStayAsync(HomeStayViewModel homeStayViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                        base.GetParameter(ListRepository.HomeIDParameterName, homeStayViewModel.HomeId),
+                        base.GetParameter(ListRepository.HomeRefrenaceParameterName, homeStayViewModel.Reference),
+                        base.GetParameter(ListRepository.HomeNameParameterName, homeStayViewModel.Name),
+                        base.GetParameter(ListRepository.HomeCellNumberParameterName, homeStayViewModel.CellNumber),
+                        base.GetParameter(ListRepository.HomeEmailParameterName, homeStayViewModel.Email),
+                        base.GetParameter(ListRepository.HomeAddressParameterName, homeStayViewModel.Address),
+                        base.GetParameter(ListRepository.HomeRegionParameterName, homeStayViewModel.Region),
+                        base.GetParameter(ListRepository.HomeIntersectionParameterName, homeStayViewModel.Intersection),
+                        base.GetParameter(ListRepository.HomeDistanceParameterName, homeStayViewModel.Distance),
+                        base.GetParameter(ListRepository.HomeMealsParameterName, homeStayViewModel.Meals),
+                        base.GetParameter(ListRepository.HomePreferParameterName, homeStayViewModel.Prefer),
+                        base.GetParameter(ListRepository.HomeRoomsParameterName, homeStayViewModel.Rooms),
+                        base.GetParameter(ListRepository.HomeAgreementParameterName, homeStayViewModel.Aggrements),
+                        base.GetParameter(ListRepository.HomePoliceCheckParameterName, homeStayViewModel.PoliceCheck)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateHomeStayStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+
+
+        #endregion
+
+        #region Addins
+
+        private const string AddinsIdParameterName = "PID";
+        private const string AddinsParameterName = "PAddins";
+        private const string AddinsTypeParameterName = "PAddinsType";
+        private const string AddinsCampsParameterName = "PAddinsCamps";
+        private const string AddinsCostParameterName = "PAddinsCost";
+
+        private const string AddinsIdColumnName = "ID";
+        private const string AddinsColumnName = "Addins";
+        private const string AddinsTypeColumnName = "AddinsType";
+        private const string AddinsCampsColumnName = "AddinsCamps";
+        private const string AddinsCostColumnName = "AddinsCost";
+
+
+        public async Task<int> CreateAddinsAsync(AddinsViewModel addinsViewModel)
+        {
+            var addinsIdParamter = base.GetParameterOut(ListRepository.AddinsIdParameterName, SqlDbType.Int, addinsViewModel.ID);
+            var parameters = new List<DbParameter>
+            {
+                addinsIdParamter,
+
+
+
+                base.GetParameter(ListRepository.AddinsParameterName, addinsViewModel.Addins),
+                base.GetParameter(ListRepository.AddinsTypeParameterName, addinsViewModel.AddinsType),
+                base.GetParameter(ListRepository.AddinsCampsParameterName, addinsViewModel.Camps),
+                base.GetParameter(ListRepository.AddinsCostParameterName, addinsViewModel.Cost)
+
+            };
+
+            await base.ExecuteNonQuery(parameters, ListRepository.AddAddinsStoredProcedureName, CommandType.StoredProcedure);
+
+            addinsViewModel.ID = Convert.ToInt32(addinsIdParamter.Value);
+
+            return addinsViewModel.ID;
+        }
+
+        public async Task<AddinsViewModel> GetAddins(int tripID)
+        {
+            AddinsViewModel addinsViewModel = null;
+            var parameters = new List<DbParameter>
+            {
+                base.GetParameter(ListRepository.TripIdParameterName, tripID)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAddinsTripStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        addinsViewModel = new AddinsViewModel
+                        {
+
+                            ID = dataReader.GetIntegerValue(ListRepository.AddinsIdColumnName),
+                            Addins = dataReader.GetStringValue(ListRepository.AddinsColumnName),
+                            AddinsType = dataReader.GetStringValue(ListRepository.AddinsTypeColumnName),
+                            Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName)
+                            //Cost = dataReader.GetDecimalValueNullable(ListRepository.AddinsCostColumnName)
+                        };
+                    }
+                }
+            }
+            return addinsViewModel;
+        }
+
+
+        public async Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AllRequest<AddinsViewModel> addins)
+        {
+            AddinsViewModel addinsViewModel = null;
+
+            var result = new AllResponse<AddinsViewModel>
+            {
+                Data = new List<AddinsViewModel>(),
+                Offset = addins.Offset,
+                PageSize = addins.PageSize,
+                SortColumn = addins.SortColumn,
+                SortAscending = addins.SortAscending
+            };
+
+            var parameters = new List<DbParameter>
+            {
+
+                base.GetParameter(BaseRepository.OffsetParameterName, addins.Offset),
+                base.GetParameter(BaseRepository.PageSizeParameterName, addins.PageSize),
+                base.GetParameter(BaseRepository.SortColumnParameterName, addins.SortColumn),
+                base.GetParameter(BaseRepository.SortAscendingParameterName, addins.SortAscending),
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllAddinsTripStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        while (dataReader.Read())
+                        {
+                            addinsViewModel = new AddinsViewModel
+                            {
+
+                                ID = dataReader.GetIntegerValue(ListRepository.AddinsIdColumnName),
+                                Addins = dataReader.GetStringValue(ListRepository.AddinsColumnName),
+                                AddinsType = dataReader.GetStringValue(ListRepository.AddinsTypeColumnName),
+                                Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName)
+
+
+                            };
+                            result.Data.Add(addinsViewModel);
+                        }
+
+                        if (!dataReader.IsClosed)
+                        {
+                            dataReader.Close();
+                        }
+
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public async Task<bool> UpdateAddinsAsync(AddinsViewModel addinsViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                        base.GetParameter(ListRepository.AddinsIdParameterName, addinsViewModel.ID),
+                        base.GetParameter(ListRepository.AddinsParameterName, addinsViewModel.Addins),
+                        base.GetParameter(ListRepository.AddinsTypeParameterName, addinsViewModel.AddinsType),
+                        base.GetParameter(ListRepository.AddinsCostParameterName, addinsViewModel.Cost)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateAddinsStayStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        #endregion
+
+
+        public async Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable)
+        {
+            LookupValueViewModel lookupValue = null;
+            List<LookupValueViewModel> list = new List<LookupValueViewModel>();
+
+
+
+            var parameters = new List<DbParameter>
+            {
+
+                base.GetParameter(ListRepository.LookupTableParameterName, lookupTable)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetLookupValueListStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        while (dataReader.Read())
+                        {
+                            lookupValue = new LookupValueViewModel
+                            {
+
+                                Value = dataReader.GetIntegerValue(ListRepository.ValueColumnName),
+                                Name = dataReader.GetStringValue(ListRepository.NameColumnName)
+
+                            };
+                            list.Add(lookupValue);
+                        }
+
+                        if (!dataReader.IsClosed)
+                        {
+                            dataReader.Close();
+                        }
+
+                    }
+                }
+            }
+
+            return list;
+        }
+
+
+
     }
 }

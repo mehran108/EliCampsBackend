@@ -166,5 +166,153 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpPost("CreateHomeStay")]
+     
+        public async Task<IActionResult> CreateHomeStay([FromBody] HomeStayViewModel homeStayViewModel)
+        {
+
+            if (homeStayViewModel != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.CreateHomeStayAsync(homeStayViewModel));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Trip model cannot be empty" });
+            }
+        }
+
+
+        [HttpGet("getHomeStay")]
+        [Produces(typeof(HomeStayViewModel))]
+        public async Task<IActionResult> GetHomeStay(int homeStayId)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetTirpsAsync(homeStayId));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("getAllHomeStay")]
+        [Produces(typeof(List<HomeStayViewModel>))]
+        public async Task<IActionResult> GetAllHomeStay()
+        {
+            try
+            {
+                AllRequest<HomeStayViewModel> homeStay = new AllRequest<HomeStayViewModel>();
+                return new ObjectResult(await _ELIService.GetAllHomeStay(homeStay));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("updateHomeStay")]
+        [Produces(typeof(HomeStayViewModel))]
+        public async Task<IActionResult> UpdateHomeStay([FromBody] HomeStayViewModel homeStayVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateHomeStayAsync(homeStayVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPost("CreateAddins")]
+        public async Task<IActionResult> CreateAddins([FromBody] AddinsViewModel addinsViewModel)
+        {
+
+            if (addinsViewModel != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.CreateAddinsAsync(addinsViewModel));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Addins model cannot be empty" });
+            }
+        }
+
+        [HttpGet("GetAddins")]
+        [Produces(typeof(AddinsViewModel))]
+        public async Task<IActionResult> GetAddins(int addinsId)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetAddins(addinsId));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("getAllAddins")]
+        [Produces(typeof(List<AddinsViewModel>))]
+        public async Task<IActionResult> getAllAddins()
+        {
+            try
+            {
+                AllRequest<AddinsViewModel> addinslist = new AllRequest<AddinsViewModel>();
+                return new ObjectResult(await _ELIService.GetAllAddinsList(addinslist));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("updateAddins")]
+        [Produces(typeof(AddinsViewModel))]
+        public async Task<IActionResult> UpdateAddins([FromBody] AddinsViewModel addinsViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateAddinsAsync(addinsViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+
+
+
+
+
     }
 }

@@ -160,5 +160,22 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpPut("activateGroup")]
+        [Produces(typeof(GroupViewModel))]
+        public async Task<IActionResult> ActivateGroupAsync([FromBody] GroupViewModel groupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateGroup(groupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+
     }
 }

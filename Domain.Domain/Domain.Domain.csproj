@@ -15,4 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Entity.Entity\Entity.Entity.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RequestModel\" />
+  </ItemGroup>
 </Project>

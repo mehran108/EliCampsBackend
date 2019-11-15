@@ -34,7 +34,8 @@ Alter PROCEDURE [dbo].[UpdateGroup]
 	@PDepartureTerminal nvarchar(255),
 	@PDepartureFlightNumber nvarchar(255),
 	@PDestinationTo nvarchar(255),
-	@PFlightDepartureTime nvarchar(50)
+	@PFlightDepartureTime nvarchar(50),
+	@PActive bit
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -57,7 +58,8 @@ BEGIN
 				clmGroups_DepartureTerminal = @PDepartureTerminal,
 				clmGroups_DepartureFlightNumber = @PDepartureFlightNumber,
 				clmGroups_DestinationTo = @PDestinationTo,
-				clmGroups_FlightDepartureTime = @PFlightDepartureTime
+				clmGroups_FlightDepartureTime = @PFlightDepartureTime,
+				clmGroups_Active = @PActive
 		where clmGroups_ID = @PGroupID;
 END
 GO

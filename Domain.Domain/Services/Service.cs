@@ -547,6 +547,11 @@ namespace ELI.Domain.Services
         {
             return await _groupRepository.GetAllGroupList(groups);
         }
+
+        public async Task<bool> ActivateGroup(GroupViewModel group)
+        {
+            return await _groupRepository.ActivateGroup(group);
+        }
         #endregion
 
         #region HomeStay

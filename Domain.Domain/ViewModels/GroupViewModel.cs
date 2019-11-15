@@ -23,6 +23,11 @@ namespace ELI.Domain.ViewModels
         public string DepartureFlightNumber { get; set; }
         public string DestinationTo { get; set; }
         public string FlightDepartureTime { get; set; }
+        public DateTime ProgrameStartDate { get; set; }
+        public DateTime ProgrameEndDate { get; set; }
+        public int Campus { get; set; }
+        public int Format { get; set; }
+        public string MealPlan { get; set; }
         public bool Active { get; set; }
     }
 }

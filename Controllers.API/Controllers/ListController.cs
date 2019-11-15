@@ -198,7 +198,7 @@ namespace ELI.API.Controllers
         {
             try
             {
-                return new ObjectResult(await _ELIService.GetTirpsAsync(homeStayId));
+                return new ObjectResult(await _ELIService.GetHomeStayAsync(homeStayId));
             }
             catch (Exception ex)
             {

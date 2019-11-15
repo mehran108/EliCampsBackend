@@ -21,7 +21,8 @@ Alter PROCEDURE [dbo].[UpdateAddins]
 	@PAddins nvarchar(255),
 	@PAddinsType nvarchar(50),
 	@PAddinsCamps nvarchar(255),
-	@PID INT
+	@PID INT,
+	@PActive bit
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -31,7 +32,9 @@ BEGIN
     update  [dbo].[tblAddins]
 	set clmAddins_Addin = @PAddins,
 	clmAddins_Camps = @PAddinsCamps,
-	clmAddins_Type = @PAddinsType
+	clmAddins_Type = @PAddinsType,
+	clmAddins_ModifiedDate = GETDATE(),
+	clmAddins_IsActive = @PActive
 	where clmAddins_ID = @PID;
 
 END

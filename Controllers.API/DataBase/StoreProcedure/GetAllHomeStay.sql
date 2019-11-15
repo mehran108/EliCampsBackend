@@ -28,18 +28,18 @@ BEGIN
 
    Select [clmHome_ID] As HomeID
       ,[clmHome_Reference] As HomeRefrenance
-      ,[clmHome_Name] As PHomeName 
-      ,[clmHome_CellNumber] As  HomeEmail
-      ,[clmHome_Email] As TripDate
+      ,[clmHome_Name] As HomeName 
+      ,[clmHome_CellNumber] As  HomeCellNumber
+      ,[clmHome_Email] As HomeEmail
       ,[clmHome_Address] As HomeAddress
       ,[clmHome_Region] As HomeRegion
-
+	   ,[clmHome_Meals] As HomeMeals
 	  ,[clmHome_Intersection] As HomeIntersection
       ,[clmHome_Distance] As HomeDistance
       ,[clmHome_Prefer] As  HomePrefer
       ,[clmHome_Rooms] As HomeRooms
       ,[clmHome_Agreement] As HomeAggrement
       ,[clmHome_PoliceCheck] As HomePoliceCheck
-	 from tblHomestay
+	 from tblHomestay;
 END
 GO

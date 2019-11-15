@@ -137,6 +137,8 @@ namespace ELI.Domain.Services
 
         Task<bool> UpdateRoomListAsync(RoomsViewModel roomsViewModel);
 
+        Task<bool> ActivateRoom(RoomsViewModel roomsViewModel);
+
         #endregion
 
         #region Trips

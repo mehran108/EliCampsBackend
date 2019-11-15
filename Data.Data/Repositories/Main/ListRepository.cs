@@ -29,7 +29,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetAllHomeStayStoredProcedureName = "GetAllHomeStay";
         private const string GetHomeStayStoredProcedureName = "GetHomeStayById";
         private const string GetAddinsTripStoredProcedureName = "GetAddinsById";
-
+        private const string ActivateRoomStoredProcedureName = "ActivateRoom";
         private const string GetAllAddinsTripStoredProcedureName = "GetAllAddins";
 
         private const string AddRoomsStoredProcedureName = "AddRooms";
@@ -251,6 +251,18 @@ namespace ELI.Data.Repositories.Main
             //TODO: Add other parameters.
 
             var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateRoomtblTripsStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+        public async Task<bool> ActivateRoom(RoomsViewModel roomsViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.RIdParameterName, roomsViewModel.ID),
+                    base.GetParameter(BaseRepository.ActiveParameterName, roomsViewModel.Active)
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.ActivateRoomStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
         }
@@ -918,7 +930,14 @@ namespace ELI.Data.Repositories.Main
             return list;
         }
 
+        public Task<AllResponse<AgentViewModel>> GetAllAgent(AllRequest<AgentViewModel> agent)
+        {
+            throw new NotImplementedException();
+        }
 
-
+        public Task<bool> ActivateAgentAsync(AgentViewModel agent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

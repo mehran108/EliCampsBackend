@@ -82,6 +82,8 @@ namespace ELI.API.Controllers
             }
         }
 
+
+
         [HttpPost("createRoom")]
         public async Task<IActionResult> CreateRoom([FromBody] RoomsViewModel agentVM)
         {
@@ -128,6 +130,21 @@ namespace ELI.API.Controllers
             try
             {
                 return new ObjectResult(await _ELIService.UpdateRoomListAsync(roomsViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("activateGroup")]
+        [Produces(typeof(RoomsViewModel))]
+        public async Task<IActionResult> ActivateGroupAsync([FromBody] RoomsViewModel roomsViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateGroup(groupVM));
             }
             catch (Exception ex)
             {

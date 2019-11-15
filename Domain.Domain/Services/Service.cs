@@ -515,6 +515,10 @@ namespace ELI.Domain.Services
         {
             return await _listRepository.UpdateRoomListAsync(roomsViewModel);
         }
+        public async Task<bool> ActivateRoom(RoomsViewModel roomsViewModel)
+        {
+            return await _listRepository.ActivateRoom(roomsViewModel);
+        }
         #endregion
 
 

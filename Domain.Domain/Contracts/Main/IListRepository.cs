@@ -22,6 +22,8 @@ namespace ELI.Domain.Contracts.Main
         Task<RoomsViewModel> GetRomeListAsync(int roomListId);
         Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms);
         Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel);
+
+        Task<bool> ActivateRoom(RoomsViewModel roomsViewModel);
         #endregion
         #region TripList
         Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel);

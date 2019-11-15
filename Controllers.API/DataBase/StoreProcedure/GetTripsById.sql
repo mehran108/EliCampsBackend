@@ -23,7 +23,7 @@ AS
 BEGIN
 	
 
-    Select [clmTrips_ID] As Id
+    Select [clmTrips_ID] As Trips_ID
       ,[clmTrips_Year] As TripYear
       ,[clmTrips_Trip] As TripName
       ,[clmTrips_Camps] As  Camps

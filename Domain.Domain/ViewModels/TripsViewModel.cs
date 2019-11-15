@@ -12,6 +12,7 @@ namespace Domain.Domain.ViewModels
         public string Camps{ get; set; }
         public DateTime TripsDate { get; set; }
         public string Notes { get; set; }
-        public string Idx { get; set; }
+        public string ldx { get; set; }
+        public bool Active { get; set; }
     }
 }

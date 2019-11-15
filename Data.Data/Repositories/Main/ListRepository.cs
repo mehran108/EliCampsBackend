@@ -853,8 +853,7 @@ namespace ELI.Data.Repositories.Main
             {
                 if (dataReader != null && dataReader.HasRows)
                 {
-                    if (dataReader.Read())
-                    {
+                    
                         while (dataReader.Read())
                         {
                             lookupValue = new LookupValueViewModel
@@ -872,7 +871,6 @@ namespace ELI.Data.Repositories.Main
                             dataReader.Close();
                         }
 
-                    }
                 }
             }
 

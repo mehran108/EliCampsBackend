@@ -175,7 +175,20 @@ namespace ELI.API.Controllers
             }
         }
 
-
+        [HttpPut("updateGroupPayment")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> GroupPaymentAsync([FromBody] GroupViewModel groupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GroupPayment(groupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
     }
 }

@@ -43,3 +43,109 @@ INSERT INTO [dbo].[LookupValue]
      VALUES
            ('Net', 'Net', (Select top 1 id from LookupTable  where name = 'InvoiceType'))
 END
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Day Program' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'Format'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Day Program', 'Day Program', (Select top 1 id from LookupTable  where name = 'Format'))
+END
+
+
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Homestay' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'Format'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Homestay', 'Homestay', (Select top 1 id from LookupTable  where name = 'Format'))
+END
+
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Live-in Program' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'Format'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Live-in Program', 'Live-in Program', (Select top 1 id from LookupTable  where name = 'Format'))
+END
+
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'School Program' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'Format'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('School Program', 'School Program', (Select top 1 id from LookupTable  where name = 'Format'))
+END
+
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Full Board' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'MealPlan'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Full Board', 'Full Board', (Select top 1 id from LookupTable  where name = 'MealPlan'))
+END
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Half Board' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'MealPlan'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Half Board', 'Half Board', (Select top 1 id from LookupTable  where name = 'MealPlan'))
+END
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Breakfast Only' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'MealPlan'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Breakfast Only', 'Breakfast Only', (Select top 1 id from LookupTable  where name = 'MealPlan'))
+END
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'No Meals' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'MealPlan'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('No Meals', 'No Meals', (Select top 1 id from LookupTable  where name = 'MealPlan'))
+END
+
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Lunch Only' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'MealPlan'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Lunch Only', 'Lunch Only', (Select top 1 id from LookupTable  where name = 'MealPlan'))
+END
+

@@ -28,6 +28,8 @@ namespace ELI.Domain.ViewModels
         public int Campus { get; set; }
         public int Format { get; set; }
         public string MealPlan { get; set; }
+        public List<int> ProgrameAddins { get; set; }
+        public string AddinsID { get; set; }
         public bool Active { get; set; }
     }
 }

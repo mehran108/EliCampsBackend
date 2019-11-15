@@ -543,6 +543,12 @@ namespace ELI.Domain.Services
             return await _groupRepository.UpdateGroupAsync(group);
         }
 
+        public async Task<bool> GroupPayment(GroupViewModel group)
+        {
+            group.AddinsID = string.Join(",", group.ProgrameAddins.ToArray());
+            return await _groupRepository.GroupPayment(group);
+        }
+
         public async Task<AllResponse<GroupViewModel>> GetAllGroupList(AllRequest<GroupViewModel> groups)
         {
             return await _groupRepository.GetAllGroupList(groups);

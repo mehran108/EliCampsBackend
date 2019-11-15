@@ -25,6 +25,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetAllStoredProcedureName = "GetAllGroup";
         private const string UpdateStoredProcedureName = "UpdateGroup";
         private const string ActivateStoredProcedureName = "ActivateGroup";
+        private const string UpdateGroupPaymentStoredProcedureName = "UpdateGroupPayment";
 
 
         private const string GroupIdParameterName = "PGroupID";
@@ -44,6 +45,12 @@ namespace ELI.Data.Repositories.Main
         private const string DepartureFlightNumberParameterName = "PDepartureFlightNumber";
         private const string DestinationToParameterName = "PDestinationTo";
         private const string FlightDepartureTimeParameterName = "PFlightDepartureTime";
+        private const string ProgrameStartDateParameterName = "PProgrameStartDate";
+        private const string ProgrameEndDateParameterName = "PProgrameEndDate";
+        private const string CampusParameterName = "PCampus";
+        private const string FormatParameterName = "PFormat";
+        private const string MealPlanParameterName = "PMealPlan";
+        private const string AddinsIDParameterName = "PAddinsID";
 
 
         private const string GroupIdColumnName = "GroupID";
@@ -197,8 +204,7 @@ namespace ELI.Data.Repositories.Main
             {
                 if (dataReader != null && dataReader.HasRows)
                 {
-                    if (dataReader.Read())
-                    {
+                    
                         while (dataReader.Read())
                         {
                             groupVM = new GroupViewModel
@@ -230,7 +236,6 @@ namespace ELI.Data.Repositories.Main
                             dataReader.Close();
                         }
 
-                    }
                 }
             }
 
@@ -246,6 +251,26 @@ namespace ELI.Data.Repositories.Main
                 };
 
             var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.ActivateStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<bool> GroupPayment(GroupViewModel group)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(GroupRepository.GroupIdParameterName, group.ID),
+                    base.GetParameter(GroupRepository.ProgrameStartDateParameterName, group.ProgrameStartDate),
+                    base.GetParameter(GroupRepository.ProgrameEndDateParameterName, group.ProgrameEndDate),
+                    base.GetParameter(GroupRepository.CampusParameterName, group.Campus),
+                    base.GetParameter(GroupRepository.FormatParameterName, group.Format),
+                    base.GetParameter(GroupRepository.MealPlanParameterName, group.MealPlan),
+                    base.GetParameter(GroupRepository.AddinsIDParameterName, group.AddinsID),
+                    base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber)
+
+                };
+
+        var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.UpdateGroupPaymentStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
         }

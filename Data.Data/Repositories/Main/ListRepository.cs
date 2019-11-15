@@ -22,6 +22,7 @@ namespace ELI.Data.Repositories.Main
         }
         private const string AddStoredProcedureName = "AddAgents";
         private const string GetStoredProcedureName = "GetAgent";
+        private const string GetAllAgentProcedureName = "GetAllAgent";
         private const string GetTripStoredProcedureName = "GetTripsById";
         private const string GetRoomsStoredProcedureName = "GetRooms";
         private const string GetAllRoomsStoredProcedureName = "GetAllRooms";
@@ -37,6 +38,7 @@ namespace ELI.Data.Repositories.Main
         private const string AddAddinsStoredProcedureName = "AddAddins";
         private const string AddHomeStayStoredProcedureName = "AddHomeStay";
         private const string UpdateAgentStoredProcedureName = "UpdateAgent";
+        private const string ActivateAgentStoredProcedureName = "ActivateAgent";
         private const string GetLookupValueListStoredProcedureName = "GetLookupValueList";
 
         private const string UpdateTripsStoredProcedureName = "UpdateTrips";
@@ -380,6 +382,78 @@ namespace ELI.Data.Repositories.Main
             var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateAgentStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
+        }
+
+        public async Task<bool> ActivateAgentAsync(AgentViewModel agent)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.AgentIdParameterName, agent.ID),
+                    base.GetParameter(BaseRepository.ActiveColumnName, agent.Active)
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.ActivateAgentStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<AllResponse<AgentViewModel>> GetAllAgent(AllRequest<AgentViewModel> agent)
+        {
+            AgentViewModel agentVM = null;
+
+            var result = new AllResponse<AgentViewModel>
+            {
+                Data = new List<AgentViewModel>(),
+                Offset = agent.Offset,
+                PageSize = agent.PageSize,
+                SortColumn = agent.SortColumn,
+                SortAscending = agent.SortAscending
+            };
+
+            var parameters = new List<DbParameter>
+            {
+
+                base.GetParameter(BaseRepository.OffsetParameterName, agent.Offset),
+                base.GetParameter(BaseRepository.PageSizeParameterName, agent.PageSize),
+                base.GetParameter(BaseRepository.SortColumnParameterName, agent.SortColumn),
+                base.GetParameter(BaseRepository.SortAscendingParameterName, agent.SortAscending)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllAgentProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    
+                        while (dataReader.Read())
+                        {
+                        agentVM = new AgentViewModel
+                        {
+
+                            ID = dataReader.GetIntegerValue(ListRepository.AgentIdColumnName),
+                            Agent = dataReader.GetStringValue(ListRepository.AgentAgentColumnName),
+                            Contact = dataReader.GetStringValue(ListRepository.AgentContactColumnName),
+                            Phone = dataReader.GetStringValue(ListRepository.AgentPhoneColumnName),
+                            Email = dataReader.GetStringValue(ListRepository.AgentEmailColumnName),
+                            Web = dataReader.GetStringValue(ListRepository.AgentWebColumnName),
+                            Address = dataReader.GetStringValue(ListRepository.AgentAddressColumnName),
+                            Country = dataReader.GetStringValue(ListRepository.AgentCountryColumnName),
+                            Notes = dataReader.GetStringValue(ListRepository.AgentNotesColumnName),
+                            Other = dataReader.GetStringValue(ListRepository.AgentOtherColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                        };
+                        result.Data.Add(agentVM);
+                        }
+
+                        if (!dataReader.IsClosed)
+                        {
+                            dataReader.Close();
+                        }
+
+                    
+                }
+            }
+
+            return result;
         }
 
 

@@ -1004,14 +1004,6 @@ namespace ELI.Data.Repositories.Main
             return list;
         }
 
-        public Task<AllResponse<AgentViewModel>> GetAllAgent(AllRequest<AgentViewModel> agent)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> ActivateAgentAsync(AgentViewModel agent)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

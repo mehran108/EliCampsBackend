@@ -11,12 +11,12 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UpdateGroupPayment]') AND type in (N'P', N'PC'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GroupPrograme]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[UpdateGroupPayment] AS' 
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[GroupPrograme] AS' 
 END
 GO
-Alter PROCEDURE [dbo].[UpdateGroupPayment] 
+Alter PROCEDURE [dbo].[GroupPrograme] 
 	-- Add the parameters for the stored procedure here
 	@PGroupID INT ,
 	@PProgrameStartDate date,

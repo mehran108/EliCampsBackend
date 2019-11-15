@@ -25,6 +25,7 @@ Alter PROCEDURE [dbo].[AddGroup]
 	@PAgentID INT,
 	@PAgencyRef nvarchar(50),
 	@PCountry nvarchar(50),
+	@PInvoiceType nvarchar(50),
 	@PArrivalDate date,
 	@PTerminal nvarchar(255),
 	@PFlightNumber nvarchar(255),
@@ -45,10 +46,10 @@ BEGIN
 				(clmGroups_Year,  clmGroups_Camps,  clmGroups_RefNumber, clmGroups_AgentID, clmGroups_AgencyRef, clmGroups_Country,clmGroups_ArrivalDate,
 				clmGroups_Terminal, clmGroups_FlightNumber,clmGroups_DestinationFrom,clmGroups_ArrivalTime,clmGroups_DepartureDate,
 				clmGroups_DepartureTerminal,clmGroups_DepartureFlightNumber,clmGroups_DestinationTo,
-				clmGroups_FlightDepartureTime)
+				clmGroups_FlightDepartureTime,clmGroups_InvType)
 		Values	(@PYear, @PCamps, @PRefNumber, @PAgentID, @PAgencyRef, @PCountry, @PArrivalDate, 
 		@PTerminal, @PFlightNumber,@PDestinationFrom,@PArrivalTime,@PDepartureDate,
-		@PDepartureTerminal,@PDepartureFlightNumber,@PDestinationTo, @PFlightDepartureTime);
+		@PDepartureTerminal,@PDepartureFlightNumber,@PDestinationTo, @PFlightDepartureTime,@PInvoiceType);
 
 		SET @PGroupID = SCOPE_IDENTITY();
 END

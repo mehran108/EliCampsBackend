@@ -25,6 +25,7 @@ Alter PROCEDURE [dbo].[UpdateGroup]
 	@PAgentID INT,
 	@PAgencyRef nvarchar(50),
 	@PCountry nvarchar(50),
+	@PInvoiceType nvarchar(50),
 	@PArrivalDate date,
 	@PTerminal nvarchar(255),
 	@PFlightNumber nvarchar(255),
@@ -59,7 +60,8 @@ BEGIN
 				clmGroups_DepartureFlightNumber = @PDepartureFlightNumber,
 				clmGroups_DestinationTo = @PDestinationTo,
 				clmGroups_FlightDepartureTime = @PFlightDepartureTime,
-				clmGroups_Active = @PActive
+				clmGroups_Active = @PActive,
+				clmGroups_InvType = @PInvoiceType
 		where clmGroups_ID = @PGroupID;
 END
 GO

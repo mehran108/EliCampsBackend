@@ -31,6 +31,7 @@ BEGIN
 				clmGroups_AgentID As AgentID,
 				clmGroups_AgencyRef As  AgencyRef, 
 				clmGroups_Country As Country,
+				clmGroups_InvType As InvoiceType,
 				clmGroups_ArrivalDate AS ArrivalDate,
 				clmGroups_Terminal As Terminal,
 				clmGroups_FlightNumber As FlightNumber,
@@ -40,8 +41,27 @@ BEGIN
 				clmGroups_DepartureTerminal As DepartureTerminal,
 				clmGroups_DepartureFlightNumber As DepartureFlightNumber,
 				clmGroups_DestinationTo As DestinationTo,
-				clmGroups_FlightDepartureTime As FlightDepartureTime
+				clmGroups_FlightDepartureTime As FlightDepartureTime,
+				clmGroups_ProgrameStartDate As ProgrameStartDate,
+				clmGroups_ProgrameEndDate As ProgrameEndDate,
+				clmGroups_Campus As Campus,
+				clmGroups_Format As Format,
+				clmGroups_MealPlan As MealPlan,
+				clmGroups_NumberOfNights As NumberOfNights,
+				clmGroups_TotalGrossPrice As TotalGrossPrice,
+				clmGroups_Paid As Paid,
+				clmGroups_Commision As Commision,
+				clmGroups_NetPrice As NetPrice,
+				clmGroups_Balance As Balance,
+				clmGroups_NumOfStudents As NumOfStudents,
+				clmGroups_NumOfGrpLeaders As NumOfGrpLeaders,
+				clmGroups_PerStudent As PerStudent,
+				clmGroups_PerGrpLeader As PerGrpLeader,
+				clmGroups_Active As Active
 		from [dbo].[tblGroups] 
 		where clmGroups_ID = @PGroupID;
+
+		Select clmAdvsGrpCam_AddinsID As AddinsID from 
+		[dbo].[tblAddinsVsGropCam];
 END
 GO

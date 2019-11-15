@@ -27,68 +27,6 @@ namespace ELI.API.Controllers
             _appEnvironment = appEnvironment;
         }
 
-
-        [HttpPost("createRoom")]   
-        public async Task<IActionResult> CreateRoom([FromBody] RoomsViewModel agentVM)
-        {
-
-            if (agentVM != null)
-            {
-                try
-                {
-                    var showResult = new ObjectResult(await _ELIService.CreateRoomListAsync(agentVM));
-                    return showResult;
-
-                }
-                catch (AppException ex)
-                {
-                    new ExceptionHandlingService(ex, null, null).LogException();
-                    return BadRequest(new { message = ex.Message });
-                }
-            }
-            else
-            {
-                return BadRequest(new { message = "Agent model cannot be empty" });
-            }
-        }
-
-        [HttpGet("getRoomById")]
-        [Produces(typeof(RoomsViewModel))]
-        public async Task<IActionResult> getRoomById(int roomID)
-        {
-            try
-            {
-                return new ObjectResult(await _ELIService.GetRomeList(roomID));
-            }
-            catch (Exception ex)
-            {
-                new ExceptionHandlingService(ex, null, null).LogException();
-                return BadRequest(new { message = ex.Message });
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="roomID"></param>
-        /// <returns></returns>
-
-        [HttpGet("getAllRoomList")]
-        [Produces(typeof(List<RoomsViewModel>))]
-        public async Task<IActionResult> GetAllRoomList()
-        {
-            try
-            {
-                AllRequest<RoomsList> roomlist  = new  AllRequest<RoomsList>();
-                return new ObjectResult(await _ELIService.GetAllRomeList(roomlist));
-            }
-            catch (Exception ex)
-            {
-                new ExceptionHandlingService(ex, null, null).LogException();
-                return BadRequest(new { message = ex.Message });
-            }
-        }
-
-
         [HttpPost("addGroup")]
         public async Task<IActionResult> AddGroupAsync([FromBody] GroupViewModel groupVM)
         {
@@ -175,7 +113,7 @@ namespace ELI.API.Controllers
             }
         }
 
-        [HttpPut("updateGroupPayment")]
+        [HttpPut("groupPayment")]
         [Produces(typeof(bool))]
         public async Task<IActionResult> GroupPaymentAsync([FromBody] GroupViewModel groupVM)
         {
@@ -189,6 +127,108 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        [HttpPut("updateGroupPrograme")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> GroupPrograme([FromBody] GroupViewModel groupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GroupPrograme(groupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpPost("addPaymentGroup")]
+        public async Task<IActionResult> AddPaymentGroupAsync([FromBody] PaymentsGroupsViewModel paymentGroupVM)
+        {
+
+            if (paymentGroupVM != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.AddPaymentGroupAsync(paymentGroupVM));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "payment group cannot be empty" });
+            }
+        }
+
+        [HttpGet("getPaymentGroup")]
+        [Produces(typeof(PaymentsGroupsViewModel))]
+        public async Task<IActionResult> GetPaymentGroupAsync(int paymentGroupID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetPaymentGroupAsync(paymentGroupID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpGet("getAllPaymentGroupByGroupId")]
+        [Produces(typeof(List<PaymentsGroupsViewModel>))]
+        public async Task<IActionResult> GetAllPaymentGroupByGroupIdAsync(int groupID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetAllPaymentGroupByGroupIdAsync(groupID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("updatePaymentGroup")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> UpdatePaymentGroupAsync([FromBody] PaymentsGroupsViewModel paymentGroupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdatePaymentGroupAsync(paymentGroupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("activatePaymentGroup")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> ActivatePaymentGroupAsync([FromBody] PaymentsGroupsViewModel paymentGroupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivatePaymentGroupAsync(paymentGroupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
 
     }
 }

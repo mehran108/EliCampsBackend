@@ -82,6 +82,38 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpPut("activateAgent")]
+        [Produces(typeof(AgentViewModel))]
+        public async Task<IActionResult> ActivateAgentAsync([FromBody] AgentViewModel agentVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateAgentAsync(agentVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("getAllAgents")]
+        [Produces(typeof(List<AgentViewModel>))]
+        public async Task<IActionResult> GetAllAgent()
+        {
+            try
+            {
+                AllRequest<AgentViewModel> agentlist = new AllRequest<AgentViewModel>();
+                return new ObjectResult(await _ELIService.GetAllAgent(agentlist));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
         [HttpPost("CreateTrips")]
         public async Task<IActionResult> CreateTrips([FromBody] TripsViewModel tripsViewModel)
         {
@@ -307,6 +339,67 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        [HttpPost("createRoom")]
+        public async Task<IActionResult> CreateRoom([FromBody] RoomsViewModel agentVM)
+        {
+
+            if (agentVM != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.CreateRoomListAsync(agentVM));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Agent model cannot be empty" });
+            }
+        }
+
+        [HttpGet("getRoomById")]
+        [Produces(typeof(RoomsViewModel))]
+        public async Task<IActionResult> getRoomById(int roomID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetRomeList(roomID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="roomID"></param>
+        /// <returns></returns>
+
+        [HttpGet("getAllRoomList")]
+        [Produces(typeof(List<RoomsViewModel>))]
+        public async Task<IActionResult> GetAllRoomList()
+        {
+            try
+            {
+                AllRequest<RoomsList> roomlist = new AllRequest<RoomsList>();
+                return new ObjectResult(await _ELIService.GetAllRomeList(roomlist));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
 
 
 

@@ -1,5 +1,3 @@
-USE [DB_A4427D_elicamps]
-GO
 
 /****** Object:  Table [dbo].[tblCamps]    Script Date: 11/15/2019 2:55:38 AM ******/
 SET ANSI_NULLS ON

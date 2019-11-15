@@ -163,6 +163,7 @@ namespace ELI.Domain.Services
         Task<GroupViewModel> GetGroupAsync(int groupID);
         Task<bool> UpdateGroupAsync(GroupViewModel group);
         Task<AllResponse<GroupViewModel>> GetAllGroupList(AllRequest<GroupViewModel> groups);
+        Task<bool> ActivateGroup(GroupViewModel group);
         #endregion
 
         Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable);

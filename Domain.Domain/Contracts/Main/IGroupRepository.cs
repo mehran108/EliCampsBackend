@@ -13,5 +13,6 @@ namespace ELI.Domain.Contracts.Main
         Task<GroupViewModel> GetGroupAsync(int groupID);
         Task<bool> UpdateGroupAsync(GroupViewModel group);
         Task<AllResponse<GroupViewModel>> GetAllGroupList(AllRequest<GroupViewModel> groups);
+        Task<bool> ActivateGroup(GroupViewModel group);
     }
 }

@@ -24,6 +24,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetStoredProcedureName = "GetGroup";
         private const string GetAllStoredProcedureName = "GetAllGroup";
         private const string UpdateStoredProcedureName = "UpdateGroup";
+        private const string ActivateStoredProcedureName = "ActivateGroup";
 
 
         private const string GroupIdParameterName = "PGroupID";
@@ -117,7 +118,9 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(GroupRepository.DepartureTerminalParameterName, group.DepartureTerminal),
                     base.GetParameter(GroupRepository.DepartureFlightNumberParameterName, group.DepartureFlightNumber),
                     base.GetParameter(GroupRepository.DestinationToParameterName, group.DestinationTo),
-                    base.GetParameter(GroupRepository.FlightDepartureTimeParameterName, group.FlightDepartureTime)
+                    base.GetParameter(GroupRepository.FlightDepartureTimeParameterName, group.FlightDepartureTime),
+                    base.GetParameter(BaseRepository.ActiveParameterName, group.Active)
+
 
                 };
 
@@ -232,6 +235,19 @@ namespace ELI.Data.Repositories.Main
             }
 
             return result;
+        }
+
+        public async Task<bool> ActivateGroup(GroupViewModel group)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(GroupRepository.GroupIdParameterName, group.ID),
+                    base.GetParameter(BaseRepository.ActiveParameterName, group.Active)
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.ActivateStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
         }
     }
 }

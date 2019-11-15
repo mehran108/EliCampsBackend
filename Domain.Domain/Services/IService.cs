@@ -163,6 +163,10 @@ namespace ELI.Domain.Services
         /// <returns></returns>
 
         Task<bool> UpdateTripsAsync(TripsViewModel trips);
+
+
+
+        Task<bool> ActivateTripsAsync(TripsViewModel trips);
         #endregion
         #endregion
 
@@ -200,6 +204,8 @@ namespace ELI.Domain.Services
         Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(AllRequest<HomeStayViewModel> homeStay);
 
         Task<bool> UpdateHomeStayAsync(HomeStayViewModel homeStayView);
+
+        Task<bool> ActivateHomeStayAsync(HomeStayViewModel homeStayView);
         #endregion
 
         #region Addins
@@ -219,6 +225,9 @@ namespace ELI.Domain.Services
         /// <returns></returns>
 
         Task<bool> UpdateAddinsAsync(AddinsViewModel addinsViewModel);
+
+
+        Task<bool> ActivateAddinsAsync(AddinsViewModel trips);
         #endregion
 
 

@@ -543,6 +543,11 @@ namespace ELI.Domain.Services
         {
             return await _listRepository.UpdateTirpsAsync(trips);
         }
+
+        public async Task<bool> ActivateTripsAsync(TripsViewModel trips)
+        {
+            return await _listRepository.ActivateTripsAsync(trips);
+        }
         #endregion
         #endregion
 
@@ -626,6 +631,11 @@ namespace ELI.Domain.Services
             return await _listRepository.UpdateHomeStayAsync(homeStayViewModel);
         }
 
+        public async Task<bool> ActivateHomeStayAsync(HomeStayViewModel homeStayViewModel)
+        {
+            return await _listRepository.ActivateHomeStayAsync(homeStayViewModel);
+        }
+
         #endregion
 
 
@@ -652,6 +662,10 @@ namespace ELI.Domain.Services
             return await _listRepository.UpdateAddinsAsync(addinsViewModel);
         }
 
+        public async Task<bool> ActivateAddinsAsync(AddinsViewModel addinsViewModel)
+        {
+            return await _listRepository.ActivateAddinsAsync(addinsViewModel);
+        }
         #endregion
 
 

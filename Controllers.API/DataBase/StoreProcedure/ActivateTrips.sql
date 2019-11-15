@@ -11,12 +11,12 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ActivateGroup]') AND type in (N'P', N'PC'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ActivateTrips]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[ActivateGroup] AS' 
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[ActivateTrips] AS' 
 END
 GO
-Alter PROCEDURE [dbo].[ActivateRoom] 
+Alter PROCEDURE [dbo].[ActivateTrips] 
 	-- Add the parameters for the stored procedure here
 	@PID INT ,
 	@PActive bit
@@ -24,8 +24,8 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-    update [dbo].[tblRoomsList]
-				set clmRoom_IsActive = @PActive
-		where clmRoom_ID = @PID;
+    update [dbo].[tblTrips]
+				set clmTrips_IsActive = @PActive
+		where clmTrips_ID = @PID;
 END
 GO

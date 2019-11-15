@@ -31,6 +31,9 @@ namespace ELI.Data.Repositories.Main
         private const string GetHomeStayStoredProcedureName = "GetHomeStayById";
         private const string GetAddinsTripStoredProcedureName = "GetAddinsById";
         private const string ActivateRoomStoredProcedureName = "ActivateRoom";
+        private const string ActivateTripsStoredProcedureName = "ActivateTrips";
+        private const string ActivateHomeStayStoredProcedureName = "ActivateHomeStay";
+        private const string ActivateAddinsStoredProcedureName = "ActivateAddins";
         private const string GetAllAddinsTripStoredProcedureName = "GetAllAddins";
 
         private const string AddRoomsStoredProcedureName = "AddRooms";
@@ -611,6 +614,18 @@ namespace ELI.Data.Repositories.Main
             return returnValue > 0;
         }
 
+        public async Task<bool> ActivateTripsAsync(TripsViewModel tripsViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.RIdParameterName, tripsViewModel.ID),
+                    base.GetParameter(BaseRepository.ActiveParameterName, tripsViewModel.Active)
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.ActivateTripsStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
 
 
         #endregion
@@ -815,7 +830,18 @@ namespace ELI.Data.Repositories.Main
             return returnValue > 0;
         }
 
+        public async Task<bool> ActivateHomeStayAsync(HomeStayViewModel homeStayViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.RIdParameterName, homeStayViewModel.HomeId),
+                    base.GetParameter(BaseRepository.ActiveParameterName, homeStayViewModel.Active)
+                };
 
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.ActivateHomeStayStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
 
         #endregion
 
@@ -956,6 +982,20 @@ namespace ELI.Data.Repositories.Main
                 };
 
             var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateAddinsStayStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+
+        public async Task<bool> ActivateAddinsAsync(AddinsViewModel addinsViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.RIdParameterName, addinsViewModel.ID),
+                    base.GetParameter(BaseRepository.ActiveParameterName, addinsViewModel.Active)
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.ActivateAddinsStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
         }

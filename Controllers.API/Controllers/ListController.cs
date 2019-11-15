@@ -121,9 +121,9 @@ namespace ELI.API.Controllers
             }
         }
 
-        [HttpGet("getAllTrimList")]
+        [HttpGet("getAllTrips")]
         [Produces(typeof(List<TripsViewModel>))]
-        public async Task<IActionResult> GetAllRoomList()
+        public async Task<IActionResult> GettAllTrips()
         {
             try
             {
@@ -198,7 +198,7 @@ namespace ELI.API.Controllers
         {
             try
             {
-                return new ObjectResult(await _ELIService.GetTirpsAsync(homeStayId));
+                return new ObjectResult(await _ELIService.GetHomeStayAsync(homeStayId));
             }
             catch (Exception ex)
             {

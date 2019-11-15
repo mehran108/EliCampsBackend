@@ -11,12 +11,12 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UpdateAgent]') AND type in (N'P', N'PC'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UpdateHomeStay]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[UpdateAgent] AS' 
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[UpdateHomeStay] AS' 
 END
 GO
-Alter PROCEDURE [dbo].[UpdateAgent] 
+Alter PROCEDURE [dbo].UpdateHomeStay 
 	-- Add the parameters for the stored procedure here
 	@PHomeRefrenance nvarchar(255),
 	@PHomeName nvarchar(50),
@@ -31,7 +31,8 @@ Alter PROCEDURE [dbo].[UpdateAgent]
 	@PHomeRooms nvarchar(50),
 	@PHomeAggrement nvarchar(50),
 	@PHomePoliceCheck nvarchar(50),
-	@PHomeID INT
+	@PHomeID INT,
+	@PActive bit
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -50,9 +51,11 @@ BEGIN
 	clmHome_Meals = @PHomeMeals,
 	clmHome_Prefer = @PHomePrefer,
 	clmHome_Rooms = @PHomeRooms,
-
 	clmHome_Agreement = @PHomeAggrement,
-	clmHome_PoliceCheck = @PHomePoliceCheck
+	clmHome_PoliceCheck = @PHomePoliceCheck,
+	clmHome_ModifiedDate = GETDATE(),
+	clmHome_IsActive = @PActive
+
 	where clmHome_ID = @PHomeID;
 
 END

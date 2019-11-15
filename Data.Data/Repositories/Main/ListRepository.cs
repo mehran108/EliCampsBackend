@@ -371,7 +371,7 @@ namespace ELI.Data.Repositories.Main
                 base.GetParameter(ListRepository.TripCampsParameterName, tripsViewModel.Camps),
                 base.GetParameter(ListRepository.TripsDateParameterName, tripsViewModel.TripsDate),
                 base.GetParameter(ListRepository.TripsNotesParameterName, tripsViewModel.Notes),
-                base.GetParameter(ListRepository.TripLDxParameterName, tripsViewModel.Idx)
+                base.GetParameter(ListRepository.TripLDxParameterName, tripsViewModel.ldx)
 
             };
 
@@ -400,7 +400,7 @@ namespace ELI.Data.Repositories.Main
                         {
 
                             ID = dataReader.GetIntegerValue(ListRepository.TripIdColumnName),
-                            Idx = dataReader.GetStringValue(ListRepository.TripLDxColumnName),
+                            ldx = dataReader.GetStringValue(ListRepository.TripLDxColumnName),
                             Trips = dataReader.GetStringValue(ListRepository.TripNameColumnName),
                             TripsDate = dataReader.GetDateTimeValue(ListRepository.TripsDateColumnName),
                             Camps = dataReader.GetStringValue(ListRepository.TripCampsColumnName),
@@ -446,7 +446,7 @@ namespace ELI.Data.Repositories.Main
                             {
 
                                 ID = dataReader.GetIntegerValue(ListRepository.TripIdColumnName),
-                                Idx = dataReader.GetStringValue(ListRepository.TripLDxColumnName),
+                                ldx = dataReader.GetStringValue(ListRepository.TripLDxColumnName),
                                 Trips = dataReader.GetStringValue(ListRepository.TripNameColumnName),
                                 TripsDate = dataReader.GetDateTimeValue(ListRepository.TripsDateColumnName),
                                 Camps = dataReader.GetStringValue(ListRepository.TripCampsColumnName),
@@ -479,7 +479,8 @@ namespace ELI.Data.Repositories.Main
                 base.GetParameter(ListRepository.TripCampsParameterName, tripsViewModel.Camps),
                 base.GetParameter(ListRepository.TripsDateParameterName, tripsViewModel.TripsDate),
                 base.GetParameter(ListRepository.TripsNotesParameterName, tripsViewModel.Notes),
-                base.GetParameter(ListRepository.TripLDxParameterName, tripsViewModel.Idx)
+                base.GetParameter(ListRepository.TripLDxParameterName, tripsViewModel.ldx),
+                 base.GetParameter(ListRepository.ActiveParameterName, tripsViewModel.Active)
 
             };
             //TODO: Add other parameters.
@@ -564,7 +565,7 @@ namespace ELI.Data.Repositories.Main
                 base.GetParameter(ListRepository.HomeIDParameterName, homeStayId)
             };
 
-            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetTripStoredProcedureName, CommandType.StoredProcedure))
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetHomeStayStoredProcedureName, CommandType.StoredProcedure))
             {
                 if (dataReader != null && dataReader.HasRows)
                 {
@@ -621,8 +622,7 @@ namespace ELI.Data.Repositories.Main
             {
                 if (dataReader != null && dataReader.HasRows)
                 {
-                    if (dataReader.Read())
-                    {
+                   
                         while (dataReader.Read())
                         {
                             homeStayViewModel = new HomeStayViewModel
@@ -653,7 +653,7 @@ namespace ELI.Data.Repositories.Main
                             dataReader.Close();
                         }
 
-                    }
+                  
                 }
             }
 
@@ -681,7 +681,9 @@ namespace ELI.Data.Repositories.Main
                         base.GetParameter(ListRepository.HomePreferParameterName, homeStayViewModel.Prefer),
                         base.GetParameter(ListRepository.HomeRoomsParameterName, homeStayViewModel.Rooms),
                         base.GetParameter(ListRepository.HomeAgreementParameterName, homeStayViewModel.Aggrements),
-                        base.GetParameter(ListRepository.HomePoliceCheckParameterName, homeStayViewModel.PoliceCheck)
+                        base.GetParameter(ListRepository.HomePoliceCheckParameterName, homeStayViewModel.PoliceCheck),
+                        base.GetParameter(BaseRepository.ActiveParameterName, homeStayViewModel.Active)
+
 
                 };
 
@@ -823,8 +825,10 @@ namespace ELI.Data.Repositories.Main
                 {
                         base.GetParameter(ListRepository.AddinsIdParameterName, addinsViewModel.ID),
                         base.GetParameter(ListRepository.AddinsParameterName, addinsViewModel.Addins),
+                        base.GetParameter(ListRepository.AddinsCampsParameterName, addinsViewModel.Camps),
                         base.GetParameter(ListRepository.AddinsTypeParameterName, addinsViewModel.AddinsType),
-                        base.GetParameter(ListRepository.AddinsCostParameterName, addinsViewModel.Cost)
+                      //  base.GetParameter(ListRepository.AddinsCostParameterName, addinsViewModel.Cost),
+                        base.GetParameter(BaseRepository.ActiveParameterName, addinsViewModel.Active)
 
                 };
 

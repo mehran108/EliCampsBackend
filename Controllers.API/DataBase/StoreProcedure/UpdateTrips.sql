@@ -21,10 +21,11 @@ Alter PROCEDURE [dbo].[UpdateTrips]
 	@PID INT,
 	@PYear INT,
 	@PTrip nvarchar(255),
-	@PCamps INT,
+	@PCamps  nvarchar(255),
 	@PTripsDate Datetime,
 	@PTripsNotes nvarchar(255),
-	@PLdx nvarchar(350)
+	@PLdx nvarchar(350),
+	@PActive bit
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -32,14 +33,16 @@ BEGIN
 	SET NOCOUNT ON;
 
     update  [dbo].[tblTrips]
-	set clmTrips_ID = @PID,
+	set 
 	clmTrips_Year = @PYear,
 	clmTrips_Trip = @PTrip,
 	clmTrips_Camps = @PCamps,
 	clmTrips_Date = @PTripsDate,
 	clmTrips_Notes = @PTripsNotes,
-	clmTrips_IDX = @PLdx
-	where clmAgents_ID = @PAgentID;
+	clmTrips_IDX = @PLdx,
+	clmTrips_ModifiedDate = GETDATE(),
+	clmTrips_IsActive = @PActive
+	where clmTrips_ID = @PID;
 
 END
 GO

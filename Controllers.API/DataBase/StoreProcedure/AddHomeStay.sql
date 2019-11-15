@@ -41,8 +41,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     Insert Into [dbo].[tblHomestay]
-				(clmHome_Reference,  clmHome_Name, clmHome_CellNumber, clmHome_Email, clmHome_Address,clmHome_Region,clmHome_Intersection,clmHome_Distance,clmHome_Meals,clmHome_Prefer,clmHome_Rooms,clmHome_Agreement,clmHome_PoliceCheck)
-		Values	(@PHomeRefrenance,   @PHomeName,   @PHomeCellNumber,   @PHomeEmail,   @PHomeAddress,  @PHomeRegion,  @PHomeIntersection,  @PHomeDistance, @PHomeMeals,  @PHomePrefer,@PHomeRooms,@PHomeAggrement ,@PHomePoliceCheck);
+				(clmHome_Reference,  clmHome_Name, clmHome_CellNumber, clmHome_Email, clmHome_Address,clmHome_Region,clmHome_Intersection,clmHome_Distance,clmHome_Meals,clmHome_Prefer,clmHome_Rooms,clmHome_Agreement,clmHome_PoliceCheck, clmHome_CreateDate)
+		Values	(@PHomeRefrenance,   @PHomeName,   @PHomeCellNumber,   @PHomeEmail,   @PHomeAddress,  @PHomeRegion,  @PHomeIntersection,  @PHomeDistance, @PHomeMeals,  @PHomePrefer,@PHomeRooms,@PHomeAggrement ,@PHomePoliceCheck,GETDATE());
 
 		SET @PHomeID = SCOPE_IDENTITY();
 END

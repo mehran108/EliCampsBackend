@@ -11,5 +11,6 @@ namespace Domain.Domain.ViewModels
         public string Camps { get; set; }
         public decimal? Cost { get; set; }
         public string AddinsType { get; set; }
+        public bool Active { get; set; }
     }
 }

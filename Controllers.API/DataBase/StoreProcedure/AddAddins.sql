@@ -32,8 +32,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     Insert Into [dbo].[tblAddins]
-				(clmAddins_Addin,  clmAddins_Camps, clmAddins_Cost, clmAddins_Type)
-		Values	(@PAddins,        @PAddinsCamps,       @PAddinsCost,       @PAddinsType);
+				(clmAddins_Addin,  clmAddins_Camps, clmAddins_Cost, clmAddins_Type,clmAddins_CreateDate)
+		Values	(@PAddins,        @PAddinsCamps,       @PAddinsCost,       @PAddinsType, GETDATE());
 
 		SET @PID = SCOPE_IDENTITY();
 END

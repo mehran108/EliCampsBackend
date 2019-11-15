@@ -1,0 +1,22 @@
+USE [DB_A4427D_elicamps]
+GO
+
+/****** Object:  Table [dbo].[tblCamps]    Script Date: 11/15/2019 2:55:38 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblCamps](
+	[clmCamps_ID] [int] IDENTITY(1,1) NOT NULL,
+	[clmCamps_Camp] [nvarchar](255) NOT NULL,
+ CONSTRAINT [PK_tblCamps] PRIMARY KEY CLUSTERED 
+(
+	[clmCamps_Camp] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+

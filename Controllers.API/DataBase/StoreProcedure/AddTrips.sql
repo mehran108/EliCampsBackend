@@ -34,8 +34,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     Insert Into [dbo].[tblTrips]
-				(clmTrips_Year,  clmTrips_Trip, clmTrips_Camps, clmTrips_Date, clmTrips_Notes,clmTrips_IDX)
-		Values	(@PYear,        @PTrip,       @PCamps,       @PTripsDate,       @PNotes,      @PLdx      );
+				(clmTrips_Year,  clmTrips_Trip, clmTrips_Camps, clmTrips_Date, clmTrips_Notes,clmTrips_IDX, clmTrips_CreateDate)
+		Values	(@PYear,        @PTrip,       @PCamps,       @PTripsDate,       @PNotes,      @PLdx ,     GETDATE());
 
 		SET @PID = SCOPE_IDENTITY();
 END

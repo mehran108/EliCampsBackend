@@ -13,7 +13,7 @@ namespace ELI.Data.Repositories.Main.Extensions
         /// </summary>
         /// <param name="sourceValue"></param>
         /// <returns></returns>
-        public static uint GetUnsignedIntegerValue(this object sourceValue)
+        public static int GetUnsignedIntegerValue(this object sourceValue)
         {
             var value = sourceValue.GetUnsignedIntegerValueNullable();
 
@@ -22,7 +22,7 @@ namespace ELI.Data.Repositories.Main.Extensions
                 return value.Value;
             }
 
-            return default(uint);
+            return default(int);
         }
 
         /// <summary>
@@ -64,19 +64,19 @@ namespace ELI.Data.Repositories.Main.Extensions
         /// </summary>
         /// <param name="sourceValue"></param>
         /// <returns></returns>
-        public static uint? GetUnsignedIntegerValueNullable(this object sourceValue)
+        public static int? GetUnsignedIntegerValueNullable(this object sourceValue)
         {
-            uint? value = null;
+            int? value = null;
 
             if (sourceValue != null)
             {
-                if (sourceValue is uint)
+                if (sourceValue is int)
                 {
-                    value = (uint)sourceValue;
+                    value = (int)sourceValue;
                 }
                 else if (!string.IsNullOrWhiteSpace(sourceValue.ToString()))
                 {
-                    value = Convert.ToUInt32(sourceValue);
+                    value = Convert.ToInt32(sourceValue);
                 }
             }
 

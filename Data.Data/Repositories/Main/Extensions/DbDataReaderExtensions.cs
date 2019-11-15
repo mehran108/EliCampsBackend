@@ -37,7 +37,7 @@ namespace ELI.Data.Repositories.Main.Extensions
         /// <param name="dataReader"></param>
         /// <param name="columnName"></param>
         /// <returns></returns>
-        public static uint GetUnsignedIntegerValue(this DbDataReader dataReader, string columnName)
+        public static int GetUnsignedIntegerValue(this DbDataReader dataReader, string columnName)
         {
             var objVal = dataReader.GetValue(columnName);
 
@@ -52,7 +52,7 @@ namespace ELI.Data.Repositories.Main.Extensions
         /// <param name="dataReader"></param>
         /// <param name="columnName"></param>
         /// <returns></returns>
-        public static uint? GetUnsignedIntegerValueNullable(this DbDataReader dataReader, string columnName)
+        public static int? GetUnsignedIntegerValueNullable(this DbDataReader dataReader, string columnName)
         {
             var objVal = dataReader.GetValue(columnName);
 
@@ -67,7 +67,7 @@ namespace ELI.Data.Repositories.Main.Extensions
         /// <param name="dataReader"></param>
         /// <param name="columnName"></param>
         /// <returns></returns>
-        public static uint GetUnsignedShortValue(this DbDataReader dataReader, string columnName)
+        public static int GetUnsignedShortValue(this DbDataReader dataReader, string columnName)
         {
             var objVal = dataReader.GetValue(columnName);
 

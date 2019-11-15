@@ -40,6 +40,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetLookupValueListStoredProcedureName = "GetLookupValueList";
 
         private const string UpdateTripsStoredProcedureName = "UpdateTrips";
+        private const string UpdateRoomtblTripsStoredProcedureName = "UpdateRoomtbl";
         private const string UpdateHomeStayStoredProcedureName = "UpdateHomeStay";
         private const string UpdateAddinsStayStoredProcedureName = "UpdateAddins";
 
@@ -196,7 +197,7 @@ namespace ELI.Data.Repositories.Main
                 agentIdParamter,
 
 
-
+               
                 base.GetParameter(ListRepository.RoomListRoomIdParameterName, roomsViewModel.RoomID),
                 base.GetParameter(ListRepository.RoomCampusParameterName, roomsViewModel.CampusID),
                 base.GetParameter(ListRepository.RoomBuildingParameterName, roomsViewModel.Building),
@@ -217,9 +218,41 @@ namespace ELI.Data.Repositories.Main
 
             await base.ExecuteNonQuery(parameters, ListRepository.AddRoomsStoredProcedureName, CommandType.StoredProcedure);
 
-            roomsViewModel.ID = Convert.ToInt32(agentIdParamter.Value);
+         //   roomsViewModel.ID = Convert.ToInt32(agentIdParamter.Value);
 
             return roomsViewModel.ID;
+        }
+
+
+        public async Task<bool> UpdateRoomListAsync(RoomsViewModel roomsViewModel)
+        {
+
+            var parameters = new List<DbParameter>
+            {
+                base.GetParameter(ListRepository.RIdParameterName, roomsViewModel.ID),
+                base.GetParameter(ListRepository.RoomListRoomIdParameterName, roomsViewModel.RoomID),
+                base.GetParameter(ListRepository.RoomCampusParameterName, roomsViewModel.CampusID),
+                base.GetParameter(ListRepository.RoomBuildingParameterName, roomsViewModel.Building),
+                base.GetParameter(ListRepository.RoomTypeParameterName, roomsViewModel.RoomType),
+                base.GetParameter(ListRepository.FloorParameterName, roomsViewModel.Floor),
+                base.GetParameter(ListRepository.LdxPhoneParameterName, roomsViewModel.Ldx),
+                base.GetParameter(ListRepository.NotesParameterName, roomsViewModel.Notes),
+                base.GetParameter(ListRepository.BookedFromParameterName, roomsViewModel.BookedFrom),
+                base.GetParameter(ListRepository.BookedToParameterName, roomsViewModel.BookedTo),
+                base.GetParameter(ListRepository.AvailableParameterName, roomsViewModel.Available),
+                base.GetParameter(ListRepository.AvailableFromParameterName, roomsViewModel.AvailableFrom),
+                base.GetParameter(ListRepository.AvailableToParameterName, roomsViewModel.AvailableTo),
+                base.GetParameter(ListRepository.ImportedOneParameterName, roomsViewModel.ImportedOne),
+                base.GetParameter(ListRepository.WeeknoParameterName, roomsViewModel.Weekno),
+                base.GetParameter(ListRepository.YearParameterName, roomsViewModel.Year),
+                base.GetParameter(ListRepository.ActiveParameterName, roomsViewModel.Active)
+
+            };
+            //TODO: Add other parameters.
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateRoomtblTripsStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
         }
         #endregion
 
@@ -336,6 +369,8 @@ namespace ELI.Data.Repositories.Main
 
             return returnValue > 0;
         }
+
+
         #endregion
 
 
@@ -489,6 +524,8 @@ namespace ELI.Data.Repositories.Main
 
             return returnValue > 0;
         }
+
+
 
         #endregion
 

@@ -21,8 +21,7 @@ Alter PROCEDURE [dbo].[GetAllRooms]
 	@POffset int, 
     @PPageSize int,
     @PSortColumn varchar(60),
-    @PSortAscending bit,
-    @PTotalRecord int
+    @PSortAscending bit
 AS
 BEGIN
 	

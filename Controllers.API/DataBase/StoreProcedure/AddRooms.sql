@@ -19,7 +19,7 @@ GO
 Alter PROCEDURE [dbo].[AddRooms] 
 	-- Add the parameters for the stored procedure here
 	
-	@PRoomID INT,
+	@PRoomID nvarchar(255),
 	@PCampus INT,
 	@PRoomType nvarchar(255),
 	@PBuilding nvarchar(255),
@@ -32,6 +32,7 @@ Alter PROCEDURE [dbo].[AddRooms]
 	@PAvailableFrom Datetime,
 	@PAvailableTo Datetime,
 	@PImportedOne INT,
+	@PWeekno nvarchar(50),
 	@PYear INT,
 	@PID INT = NULL OUTPUT
 AS
@@ -41,8 +42,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     Insert Into [dbo].[tblRoomsList]
-				(clmRoom_RoomID,  clmRoom_Campus,  clmRoom_RoomType, clmRoom_Building, clmRoom_Floor, clmRoom_Idx,clmRoom_Notes,clmRoom_BookedFrom,clmRoom_BookedTo, clmRoom_Available,clmRoom_AvailableFrom,clmRoom_AvailableTo,clmRoom_ImportedOne,clmRoom_Weekno,clmRoom_Year)
-		Values	(@PRoomID,        @PCampus,        @PRoomType,       @PBuilding,       @PFloor,       @PLdx,      @PNotes,      @PBookedFrom,      @PBookedTo,       @PAvailable       , @PAvailableFrom    , @PAvailableTo,     @PImportedOne,      @PImportedOne, @PYear);
+				(clmRoom_RoomID,  clmRoom_Campus,  clmRoom_RoomType, clmRoom_Building, clmRoom_Floor, clmRoom_Idx,clmRoom_Notes,clmRoom_BookedFrom,clmRoom_BookedTo, clmRoom_Available,clmRoom_AvailableFrom,clmRoom_AvailableTo,clmRoom_ImportedOne,clmRoom_Weekno,clmRoom_Year,clmRoom_CreateDate)
+		Values	(@PRoomID,        @PCampus,        @PRoomType,       @PBuilding,       @PFloor,       @PLdx,      @PNotes,      @PBookedFrom,      @PBookedTo,       @PAvailable       , @PAvailableFrom    , @PAvailableTo,     @PImportedOne,      @PWeekno, @PYear,GETDATE());
 
 		SET @PID = SCOPE_IDENTITY();
 END

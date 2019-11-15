@@ -501,6 +501,11 @@ namespace ELI.Domain.Services
         {
             return await _listRepository.CreateRoomListAsync(roomsViewModel);
         }
+
+        public async Task<bool> UpdateRoomListAsync(RoomsViewModel roomsViewModel)
+        {
+            return await _listRepository.UpdateRoomListAsync(roomsViewModel);
+        }
         #endregion
 
 
@@ -608,5 +613,6 @@ namespace ELI.Domain.Services
             return await _listRepository.GetListBaseonLookupTable(lookupTable);
         }
 
+        
     }
 }

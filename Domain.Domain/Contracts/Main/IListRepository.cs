@@ -47,6 +47,8 @@ namespace ELI.Domain.Contracts.Main
         Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AllRequest<AddinsViewModel> AddinsList);
 
         Task<bool> UpdateAddinsAsync(AddinsViewModel addinsViewModel);
+
+        Task<bool> UpdateRoomListAsync(RoomsViewModel roomsViewModel);
         #endregion
     }
 }

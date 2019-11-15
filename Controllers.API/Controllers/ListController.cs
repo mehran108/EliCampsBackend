@@ -82,6 +82,81 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpPost("createRoom")]
+        public async Task<IActionResult> CreateRoom([FromBody] RoomsViewModel agentVM)
+        {
+
+            if (agentVM != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.CreateRoomListAsync(agentVM));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Agent model cannot be empty" });
+            }
+        }
+
+        [HttpGet("getRoomById")]
+        [Produces(typeof(RoomsViewModel))]
+        public async Task<IActionResult> getRoomById(int roomID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetRomeList(roomID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("updateRoom")]
+        [Produces(typeof(RoomsViewModel))]
+        public async Task<IActionResult> UpdateRoom([FromBody] RoomsViewModel roomsViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateRoomListAsync(roomsViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="roomID"></param>
+        /// <returns></returns>
+
+        [HttpGet("getAllRoomList")]
+        [Produces(typeof(List<RoomsViewModel>))]
+        public async Task<IActionResult> GetAllRoomList()
+        {
+            try
+            {
+                AllRequest<RoomsList> roomlist = new AllRequest<RoomsList>();
+                return new ObjectResult(await _ELIService.GetAllRomeList(roomlist));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         [HttpPost("CreateTrips")]
         public async Task<IActionResult> CreateTrips([FromBody] TripsViewModel tripsViewModel)
         {

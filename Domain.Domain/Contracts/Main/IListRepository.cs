@@ -30,6 +30,12 @@ namespace ELI.Domain.Contracts.Main
         Task<TripsViewModel> GetTripAsync(int tripID);
         Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> rooms);
         Task<bool> UpdateTirpsAsync(TripsViewModel tripsViewModel);
+        /// <summary>
+        /// Trips
+        /// </summary>
+        /// <param name="trips"></param>
+        /// <returns></returns>
+        Task<bool> ActivateTripsAsync(TripsViewModel trips);
         #endregion
 
         Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable);
@@ -42,6 +48,10 @@ namespace ELI.Domain.Contracts.Main
         Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(AllRequest<HomeStayViewModel> homeStay);
 
         Task<bool> UpdateHomeStayAsync(HomeStayViewModel homeStayView);
+
+        Task<bool> ActivateHomeStayAsync(HomeStayViewModel homeStayView);
+
+
         #endregion
 
         #region Addins
@@ -54,6 +64,8 @@ namespace ELI.Domain.Contracts.Main
         Task<bool> UpdateAddinsAsync(AddinsViewModel addinsViewModel);
 
         Task<bool> UpdateRoomListAsync(RoomsViewModel roomsViewModel);
+
+        Task<bool> ActivateAddinsAsync(AddinsViewModel trips);
         #endregion
     }
 }

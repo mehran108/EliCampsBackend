@@ -242,6 +242,21 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        [HttpPut("activateTrips")]
+        [Produces(typeof(TripsViewModel))]
+        public async Task<IActionResult> ActivateTripsAsync([FromBody] TripsViewModel tripsViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateTripsAsync(tripsViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
 
         [HttpGet("getListTypeByLookupTable")]
         [Produces(typeof(List<LookupValueViewModel>))]
@@ -330,6 +345,21 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpPut("activateHomeStay")]
+        [Produces(typeof(HomeStayViewModel))]
+        public async Task<IActionResult> ActivateHomeStayAsync([FromBody] HomeStayViewModel homeStayViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateHomeStayAsync(homeStayViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         [HttpPost("CreateAddins")]
         public async Task<IActionResult> CreateAddins([FromBody] AddinsViewModel addinsViewModel)
         {
@@ -400,10 +430,23 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpPut("activateHomeStay")]
+        [Produces(typeof(AddinsViewModel))]
+        public async Task<IActionResult> ActivateAddinsAsync([FromBody] AddinsViewModel addinsViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateAddinsAsync(addinsViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
-       
 
-        
+
 
 
 

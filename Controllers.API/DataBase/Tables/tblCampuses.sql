@@ -12,6 +12,10 @@ BEGIN CREATE TABLE  [dbo].[tblCampuses](
 	[clmCampuses_CompleteName] [nvarchar](max) NULL,
 	[clmCampuses_Onelineaddress] [nvarchar](max) NULL,
 	[clmAgents_IsActive] [bit] default 1,
+	[clmGroups_CreateDate] [DATETIME] NULL,
+	[clmGroups_CreatedBy] [int] NULL,
+	[clmGroups_ModifiedDate] [DATETIME] NULL,
+	[clmGroups_ModifiedBy] [int] NULL
 	
  CONSTRAINT [PK_tblCampuses] PRIMARY KEY CLUSTERED 
 (

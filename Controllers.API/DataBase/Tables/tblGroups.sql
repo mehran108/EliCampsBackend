@@ -40,7 +40,11 @@ CREATE TABLE [dbo].[tblGroups](
 	[clmGroups_PerGrpLeader] [money] NULL,
 	[clmGroups_InvType] [nvarchar](50) NULL,
 	[clmGroups_InvoiceDate] [date] NULL,
-	[clmGroups_Active] [bit] NOT NULL
+	[clmGroups_Active] [bit] NOT NULL,
+	[clmGroups_CreateDate] [DATETIME] NULL,
+	[clmGroups_CreatedBy] [int] NULL,
+	[clmGroups_ModifiedDate] [DATETIME] NULL,
+	[clmGroups_ModifiedBy] [int] NULL
  CONSTRAINT [PK_tblGroups] PRIMARY KEY CLUSTERED 
 (
 	[clmGroups_ID] ASC

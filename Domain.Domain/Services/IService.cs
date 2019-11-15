@@ -123,12 +123,16 @@ namespace ELI.Domain.Services
 
         Task<bool> UpdateAgentAsync(AgentViewModel agent);
 
-        Task<RoomsViewModel> GetRomeList(int roomListId);
+        Task<bool> ActivateAgentAsync(AgentViewModel agent);
+        Task<AllResponse<AgentViewModel>> GetAllAgent(AllRequest<AgentViewModel> agent);
 
-        Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms);
         #endregion
 
         #region Room List
+
+        Task<RoomsViewModel> GetRomeList(int roomListId);
+
+        Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms);
         Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel);
 
         Task<bool> UpdateRoomListAsync(RoomsViewModel roomsViewModel);
@@ -166,6 +170,18 @@ namespace ELI.Domain.Services
         Task<bool> UpdateGroupAsync(GroupViewModel group);
         Task<AllResponse<GroupViewModel>> GetAllGroupList(AllRequest<GroupViewModel> groups);
         Task<bool> ActivateGroup(GroupViewModel group);
+        Task<bool> GroupPayment(GroupViewModel group);
+        Task<bool> GroupPrograme(GroupViewModel group);
+        #region PaymentsGroups
+        #region PaymentsGroups
+        Task<int> AddPaymentGroupAsync(PaymentsGroupsViewModel paymentGroup);
+        Task<bool> UpdatePaymentGroupAsync(PaymentsGroupsViewModel paymentGroup);
+        Task<PaymentsGroupsViewModel> GetPaymentGroupAsync(int paymentGroupID);
+        Task<List<PaymentsGroupsViewModel>> GetAllPaymentGroupByGroupIdAsync(int groupID);
+        Task<bool> ActivatePaymentGroupAsync(PaymentsGroupsViewModel paymentGroup);
+
+        #endregion
+        #endregion
         #endregion
 
         Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable);

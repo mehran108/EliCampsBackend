@@ -27,7 +27,6 @@ namespace ELI.API.Controllers
             _appEnvironment = appEnvironment;
         }
 
-       
         [HttpPost("addGroup")]
         public async Task<IActionResult> AddGroupAsync([FromBody] GroupViewModel groupVM)
         {
@@ -114,6 +113,121 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpPut("groupPayment")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> GroupPaymentAsync([FromBody] GroupViewModel groupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GroupPayment(groupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("updateGroupPrograme")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> GroupPrograme([FromBody] GroupViewModel groupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GroupPrograme(groupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpPost("addPaymentGroup")]
+        public async Task<IActionResult> AddPaymentGroupAsync([FromBody] PaymentsGroupsViewModel paymentGroupVM)
+        {
+
+            if (paymentGroupVM != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.AddPaymentGroupAsync(paymentGroupVM));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "payment group cannot be empty" });
+            }
+        }
+
+        [HttpGet("getPaymentGroup")]
+        [Produces(typeof(PaymentsGroupsViewModel))]
+        public async Task<IActionResult> GetPaymentGroupAsync(int paymentGroupID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetPaymentGroupAsync(paymentGroupID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpGet("getAllPaymentGroupByGroupId")]
+        [Produces(typeof(List<PaymentsGroupsViewModel>))]
+        public async Task<IActionResult> GetAllPaymentGroupByGroupIdAsync(int groupID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetAllPaymentGroupByGroupIdAsync(groupID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("updatePaymentGroup")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> UpdatePaymentGroupAsync([FromBody] PaymentsGroupsViewModel paymentGroupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdatePaymentGroupAsync(paymentGroupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("activatePaymentGroup")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> ActivatePaymentGroupAsync([FromBody] PaymentsGroupsViewModel paymentGroupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivatePaymentGroupAsync(paymentGroupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
 
     }

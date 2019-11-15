@@ -471,7 +471,6 @@ namespace ELI.Domain.Services
 
         
 
-
         public async Task<AgentViewModel> GetAgentAsync(int agentID)
         {
             return await _listRepository.GetAgentAsync(agentID);
@@ -480,6 +479,16 @@ namespace ELI.Domain.Services
         public async Task<bool> UpdateAgentAsync(AgentViewModel agent)
         {
             return await _listRepository.UpdateAgentAsync(agent);
+        }
+
+        public async Task<bool> ActivateAgentAsync(AgentViewModel agent)
+        {
+            return await _listRepository.ActivateAgentAsync(agent);
+        }
+
+        public async Task<AllResponse<AgentViewModel>> GetAllAgent(AllRequest<AgentViewModel> agent)
+        {
+            return await _listRepository.GetAllAgent(agent);
         }
 
         public async Task<RoomsViewModel> GetRomeList(int roomListID)
@@ -548,6 +557,17 @@ namespace ELI.Domain.Services
             return await _groupRepository.UpdateGroupAsync(group);
         }
 
+        public async Task<bool> GroupPrograme(GroupViewModel group)
+        {
+            group.AddinsID = string.Join(",", group.ProgrameAddins.ToArray());
+            return await _groupRepository.GroupPrograme(group);
+        }
+
+        public async Task<bool> GroupPayment(GroupViewModel group)
+        {
+            return await _groupRepository.GroupPayment(group);
+        }
+
         public async Task<AllResponse<GroupViewModel>> GetAllGroupList(AllRequest<GroupViewModel> groups)
         {
             return await _groupRepository.GetAllGroupList(groups);
@@ -557,6 +577,29 @@ namespace ELI.Domain.Services
         {
             return await _groupRepository.ActivateGroup(group);
         }
+
+        #region PaymentsGroups
+        public async Task<int> AddPaymentGroupAsync(PaymentsGroupsViewModel paymentGroup)
+        {
+            return await _groupRepository.AddPaymentGroupAsync(paymentGroup);
+        }
+        public async Task<bool> UpdatePaymentGroupAsync(PaymentsGroupsViewModel paymentGroup)
+        {
+            return await _groupRepository.UpdatePaymentGroupAsync(paymentGroup);
+        }
+        public async Task<PaymentsGroupsViewModel> GetPaymentGroupAsync(int paymentGroupID)
+        {
+            return await _groupRepository.GetPaymentGroupAsync(paymentGroupID);
+        }
+        public async Task<List<PaymentsGroupsViewModel>> GetAllPaymentGroupByGroupIdAsync(int groupID)
+        {
+            return await _groupRepository.GetAllPaymentGroupByGroupIdAsync(groupID);
+        }
+        public async Task<bool> ActivatePaymentGroupAsync(PaymentsGroupsViewModel paymentGroup)
+        {
+            return await _groupRepository.ActivatePaymentGroupAsync(paymentGroup);
+        }
+        #endregion
         #endregion
 
         #region HomeStay

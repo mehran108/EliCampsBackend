@@ -51,6 +51,5 @@
   <ItemGroup>
     <Folder Include="DataBase\BootstrapScripts\" />
     <Folder Include="DataBase\Tables\" />
-    <Folder Include="DataBase\StoreProcedure\" />
   </ItemGroup>
 </Project>

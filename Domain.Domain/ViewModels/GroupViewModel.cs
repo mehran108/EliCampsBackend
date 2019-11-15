@@ -13,6 +13,7 @@ namespace ELI.Domain.ViewModels
         public int AgentID { get; set; }
         public string AgencyRef { get; set; }
         public string Country { get; set; }
+        public string InvoiceType { get; set; }
         public DateTime ArrivalDate { get; set; }
         public string Terminal { get; set; }
         public string FlightNumber { get; set; }
@@ -23,11 +24,25 @@ namespace ELI.Domain.ViewModels
         public string DepartureFlightNumber { get; set; }
         public string DestinationTo { get; set; }
         public string FlightDepartureTime { get; set; }
-        public DateTime ProgrameStartDate { get; set; }
-        public DateTime ProgrameEndDate { get; set; }
-        public int Campus { get; set; }
-        public int Format { get; set; }
+        public DateTime? ProgrameStartDate { get; set; }
+        public DateTime? ProgrameEndDate { get; set; }
+        public int? Campus { get; set; }
+        public int? Format { get; set; }
         public string MealPlan { get; set; }
+        public List<int> ProgrameAddins { get; set; }
+        public string AddinsID { get; set; }
+        public int NumberOfNights { get; set; }
+        public decimal TotalGrossPrice { get; set; }
+        public decimal Paid { get; set; }
+        public decimal Commision { get; set; }
+        public decimal NetPrice { get; set; }
+        public decimal Balance { get; set; }
+        public int NumOfStudents { get; set; }
+        public int NumOfGrpLeaders { get; set; }
+        public decimal PerStudent { get; set; }
+        public decimal PerGrpLeader { get; set; }
+
+
         public bool Active { get; set; }
     }
 }

@@ -178,6 +178,7 @@ namespace ELI.Domain.Services
         Task<bool> ActivateGroup(GroupViewModel group);
         Task<bool> GroupPayment(GroupViewModel group);
         Task<bool> GroupPrograme(GroupViewModel group);
+        Task<bool> GroupTrips(GroupViewModel group);
         #region PaymentsGroups
         #region PaymentsGroups
         Task<int> AddPaymentGroupAsync(PaymentsGroupsViewModel paymentGroup);
@@ -228,6 +229,19 @@ namespace ELI.Domain.Services
 
 
         Task<bool> ActivateAddinsAsync(AddinsViewModel trips);
+        #endregion
+
+
+        #region Campus
+        Task<int> CreateCampusAsync(CampuseViewModel campusViewModel);
+
+        Task<CampuseViewModel> GetCampus(int campusId);
+
+        Task<AllResponse<CampuseViewModel>> GetAllCampus(AllRequest<CampuseViewModel> campusList);
+
+        Task<bool> UpdateCampusAsync(CampuseViewModel campusViewModel);
+
+        Task<bool> ActivateCampusAsync(CampuseViewModel campusViewModel);
         #endregion
 
 

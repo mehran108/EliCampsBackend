@@ -49,6 +49,12 @@ namespace ELI.Data.Repositories.Main
         private const string UpdateHomeStayStoredProcedureName = "UpdateHomeStay";
         private const string UpdateAddinsStayStoredProcedureName = "UpdateAddins";
 
+        private const string AddCampusStoredProcedureName = "AddCampus";
+        private const string UpdateCampusStoredProcedureName = "UpdateCampus";
+        private const string GetCampusStoredProcedureName = "GetCampus";
+        private const string GetAllCampusStoredProcedureName = "GetAllCampus";
+        private const string ActivateCampusStoredProcedureName = "ActivateCampus";
+
         #region  RoomList
         private const string RIdParameterName = "PID";
         private const string RoomListRoomIdParameterName = "PRoomID";
@@ -119,7 +125,8 @@ namespace ELI.Data.Repositories.Main
                             AvailableTo = dataReader.GetDateTimeValue(ListRepository.AvailableToColumnName),
                             ImportedOne = dataReader.GetIntegerValue(ListRepository.ImportedOneColumnName),
                             Weekno = dataReader.GetStringValue(ListRepository.WeeknoColumnName),
-                            Year = dataReader.GetIntegerValue(ListRepository.YearColumnName)
+                            Year = dataReader.GetIntegerValue(ListRepository.YearColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
                         };
                     }
@@ -177,7 +184,8 @@ namespace ELI.Data.Repositories.Main
                                 AvailableTo = dataReader.GetDateTimeValue(ListRepository.AvailableToColumnName),
                                 ImportedOne = dataReader.GetIntegerValue(ListRepository.ImportedOneColumnName),
                                 Weekno = dataReader.GetStringValue(ListRepository.WeeknoColumnName),
-                                Year = dataReader.GetIntegerValue(ListRepository.YearColumnName)
+                                Year = dataReader.GetIntegerValue(ListRepository.YearColumnName),
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
                             };
                             result.Data.Add(roomsList);
@@ -528,7 +536,8 @@ namespace ELI.Data.Repositories.Main
                             Trips = dataReader.GetStringValue(ListRepository.TripNameColumnName),
                             TripsDate = dataReader.GetDateTimeValue(ListRepository.TripsDateColumnName),
                             Camps = dataReader.GetStringValue(ListRepository.TripCampsColumnName),
-                            Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName)
+                            Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
                         };
                     }
                 }
@@ -574,7 +583,8 @@ namespace ELI.Data.Repositories.Main
                                 Trips = dataReader.GetStringValue(ListRepository.TripNameColumnName),
                                 TripsDate = dataReader.GetDateTimeValue(ListRepository.TripsDateColumnName),
                                 Camps = dataReader.GetStringValue(ListRepository.TripCampsColumnName),
-                                Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName)
+                                Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName),
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
                             };
                             result.Data.Add(tripsViewModel);
@@ -726,6 +736,7 @@ namespace ELI.Data.Repositories.Main
                             Prefer = dataReader.GetStringValue(ListRepository.HomePreferColumnName),
                             Aggrements = dataReader.GetStringValue(ListRepository.HomeAgreementColumnName),
                             PoliceCheck = dataReader.GetStringValue(ListRepository.HomePoliceCheckColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
                         };
                     }
@@ -780,6 +791,7 @@ namespace ELI.Data.Repositories.Main
                                 Prefer = dataReader.GetStringValue(ListRepository.HomePreferColumnName),
                                 Aggrements = dataReader.GetStringValue(ListRepository.HomeAgreementColumnName),
                                 PoliceCheck = dataReader.GetStringValue(ListRepository.HomePoliceCheckColumnName),
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
 
                             };
@@ -903,7 +915,8 @@ namespace ELI.Data.Repositories.Main
                             ID = dataReader.GetIntegerValue(ListRepository.AddinsIdColumnName),
                             Addins = dataReader.GetStringValue(ListRepository.AddinsColumnName),
                             AddinsType = dataReader.GetStringValue(ListRepository.AddinsTypeColumnName),
-                            Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName)
+                            Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
                             //Cost = dataReader.GetDecimalValueNullable(ListRepository.AddinsCostColumnName)
                         };
                     }
@@ -949,7 +962,8 @@ namespace ELI.Data.Repositories.Main
                                 ID = dataReader.GetIntegerValue(ListRepository.AddinsIdColumnName),
                                 Addins = dataReader.GetStringValue(ListRepository.AddinsColumnName),
                                 AddinsType = dataReader.GetStringValue(ListRepository.AddinsTypeColumnName),
-                                Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName)
+                                Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName),
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
 
                             };
@@ -1044,6 +1058,167 @@ namespace ELI.Data.Repositories.Main
             return list;
         }
 
+        #region Campus
+
+
+        private const string CampusIDParameterName = "PCampusID";
+        private const string CampusParameterName = "PCampus";
+        private const string CampusCampsParameterName = "PCampusCamps";
+        private const string CampusAddressOnReportsParameterName = "PCampusAddressOnReports";
+        private const string CampusCompleteNameParameterName = "PCampusCompleteName";
+        private const string CampusOnelineaddressParameterName = "PCampusOnelineaddress";
+
+
+        private const string CampusIDColumnName = "CampusID";
+        private const string CampusColumnName = "Campus";
+        private const string CampusCampsColumnName = "CampusCamps";
+        private const string CampusAddressOnReportsColumnName = "CampusAddressOnReports";
+        private const string CampusCompleteNameColumnName = "CampusCompleteName";
+        private const string CampusOnelineaddressColumnName = "CampusOnelineaddress";
+
+
+        public async Task<int> CreateCampusAsync(CampuseViewModel campusViewModel)
+        {
+            var campusIdParamter = base.GetParameterOut(ListRepository.CampusIDParameterName, SqlDbType.Int, campusViewModel.ID);
+            var parameters = new List<DbParameter>
+                {
+                    campusIdParamter,
+
+
+                    base.GetParameter(ListRepository.CampusParameterName, campusViewModel.Campus),
+                    base.GetParameter(ListRepository.CampusCampsParameterName, campusViewModel.Camps),
+                    base.GetParameter(ListRepository.CampusAddressOnReportsParameterName, campusViewModel.AddressOnReports),
+                    base.GetParameter(ListRepository.CampusCompleteNameParameterName, campusViewModel.CompleteName),
+                    base.GetParameter(ListRepository.CampusOnelineaddressParameterName, campusViewModel.Onelineaddress)
+
+                };
+
+            await base.ExecuteNonQuery(parameters, ListRepository.AddCampusStoredProcedureName, CommandType.StoredProcedure);
+
+            campusViewModel.ID = Convert.ToInt32(campusIdParamter.Value);
+
+            return campusViewModel.ID;
+        }
         
+        public async Task<bool> UpdateCampusAsync(CampuseViewModel campusViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.CampusIDParameterName, campusViewModel.ID),
+                    base.GetParameter(ListRepository.CampusParameterName, campusViewModel.Campus),
+                    base.GetParameter(ListRepository.CampusCampsParameterName, campusViewModel.Camps),
+                    base.GetParameter(ListRepository.CampusAddressOnReportsParameterName, campusViewModel.AddressOnReports),
+                    base.GetParameter(ListRepository.CampusCompleteNameParameterName, campusViewModel.CompleteName),
+                    base.GetParameter(ListRepository.CampusOnelineaddressParameterName, campusViewModel.Onelineaddress),
+                    base.GetParameter(BaseRepository.ActiveColumnName, campusViewModel.Active)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateCampusStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<bool> ActivateCampusAsync(CampuseViewModel campusViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.CampusIDParameterName, campusViewModel.ID),
+                    base.GetParameter(BaseRepository.ActiveColumnName, campusViewModel.Active)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.ActivateCampusStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<CampuseViewModel> GetCampus(int campusId)
+        {
+            CampuseViewModel campusVM = null;
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.CampusIDParameterName, campusId)
+                };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetCampusStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        campusVM = new CampuseViewModel
+                        {
+                            ID = dataReader.GetIntegerValue(ListRepository.AgentIdColumnName),
+                            Campus = dataReader.GetStringValue(ListRepository.CampusColumnName),
+                            Camps = dataReader.GetStringValue(ListRepository.CampusCampsColumnName),
+                            AddressOnReports = dataReader.GetStringValue(ListRepository.CampusAddressOnReportsColumnName),
+                            CompleteName = dataReader.GetStringValue(ListRepository.CampusCompleteNameColumnName),
+                            Onelineaddress = dataReader.GetStringValue(ListRepository.CampusOnelineaddressColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                        };
+                    }
+                }
+            }
+            return campusVM;
+        }
+
+        public async Task<AllResponse<CampuseViewModel>> GetAllCampus(AllRequest<CampuseViewModel> campusList)
+        {
+            CampuseViewModel campusVM = null;
+
+            var result = new AllResponse<CampuseViewModel>
+            {
+                Data = new List<CampuseViewModel>(),
+                Offset = campusList.Offset,
+                PageSize = campusList.PageSize,
+                SortColumn = campusList.SortColumn,
+                SortAscending = campusList.SortAscending
+            };
+
+            var parameters = new List<DbParameter>
+            {
+
+                base.GetParameter(BaseRepository.OffsetParameterName, campusList.Offset),
+                base.GetParameter(BaseRepository.PageSizeParameterName, campusList.PageSize),
+                base.GetParameter(BaseRepository.SortColumnParameterName, campusList.SortColumn),
+                base.GetParameter(BaseRepository.SortAscendingParameterName, campusList.SortAscending)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllCampusStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+
+                    while (dataReader.Read())
+                    {
+                         campusVM = new CampuseViewModel
+                            {
+                                ID = dataReader.GetIntegerValue(ListRepository.AgentIdColumnName),
+                                Campus = dataReader.GetStringValue(ListRepository.CampusColumnName),
+                                Camps = dataReader.GetStringValue(ListRepository.CampusCampsColumnName),
+                                AddressOnReports = dataReader.GetStringValue(ListRepository.CampusAddressOnReportsColumnName),
+                                CompleteName = dataReader.GetStringValue(ListRepository.CampusCompleteNameColumnName),
+                                Onelineaddress = dataReader.GetStringValue(ListRepository.CampusOnelineaddressColumnName),
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                            };
+                        result.Data.Add(campusVM);
+                    }
+
+                    if (!dataReader.IsClosed)
+                    {
+                        dataReader.Close();
+                    }
+
+
+                }
+            }
+
+            return result;
+        }
+
+        #endregion
+
+
     }
 }

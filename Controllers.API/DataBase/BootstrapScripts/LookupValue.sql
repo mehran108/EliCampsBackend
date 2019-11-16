@@ -149,3 +149,28 @@ INSERT INTO [dbo].[LookupValue]
            ('Lunch Only', 'Lunch Only', (Select top 1 id from LookupTable  where name = 'MealPlan'))
 END
 
+
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Additional services' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'AddinType'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Additional services', 'Additional services', (Select top 1 id from LookupTable  where name = 'AddinType'))
+END
+
+
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Included services' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'AddinType'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Included services', 'Included services', (Select top 1 id from LookupTable  where name = 'AddinType'))
+END

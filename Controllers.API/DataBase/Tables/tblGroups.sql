@@ -95,3 +95,26 @@ ALTER TABLE [dbo].[tblGroups] ADD  CONSTRAINT [DF_tblGroups_clmGroups_Active]  D
 
 END 
 GO
+
+
+--  Adding column in tblGroups
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblGroups]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'clmGroups_ApplyToAllStudent'
+   AND Object_ID = Object_ID(N'[dbo].[tblGroups]')
+   )
+ BEGIN
+     ALTER TABLE tblGroups
+	 ADD [clmGroups_ApplyToAllStudent] [bit] NOT NULL default 0
+ END
+
+END

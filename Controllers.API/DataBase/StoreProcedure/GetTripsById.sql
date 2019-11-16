@@ -29,7 +29,8 @@ BEGIN
       ,[clmTrips_Camps] As  Camps
       ,[clmTrips_Date] As TripDate
       ,[clmTrips_Notes] As TripNotes
-      ,[clmTrips_IDX] As TripLdx
+      ,[clmTrips_IDX] As TripLdx,
+	  [clmTrips_IsActive] As Active
 	 from tblTrips where clmTrips_ID = @PID;
 END
 GO

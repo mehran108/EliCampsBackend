@@ -82,13 +82,13 @@ namespace ELI.API.Controllers
             }
         } 
 
-[HttpGet("getAllAgent")]
-        [Produces(typeof(List<AgentViewMode>))]
+        [HttpGet("getAllAgent")]
+        [Produces(typeof(List<AgentViewModel>))]
         public async Task<IActionResult> GetAllAgent()
         {
             try
             {
-                AllRequest<AgentViewMode> agentList = new AllRequest<AgentViewMode>();
+                AllRequest<AgentViewModel> agentList = new AllRequest<AgentViewModel>();
                 return new ObjectResult(await _ELIService.GetAllAgent(agentList));
             }
             catch (Exception ex)
@@ -98,6 +98,20 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpPut("activateAgent")]
+        [Produces(typeof(AgentViewModel))]
+        public async Task<IActionResult> ActivateAgentAsync([FromBody] AgentViewModel agentVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateAgentAsync(agentVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
 
         [HttpPost("createRoom")]

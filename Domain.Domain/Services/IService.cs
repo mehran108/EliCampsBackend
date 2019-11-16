@@ -232,5 +232,18 @@ namespace ELI.Domain.Services
         #endregion
 
 
+        #region Campus
+        Task<int> CreateCampusAsync(CampuseViewModel campusViewModel);
+
+        Task<CampuseViewModel> GetCampus(int campusId);
+
+        Task<AllResponse<CampuseViewModel>> GetAllCampus(AllRequest<CampuseViewModel> campusList);
+
+        Task<bool> UpdateCampusAsync(CampuseViewModel campusViewModel);
+
+        Task<bool> ActivateCampusAsync(CampuseViewModel campusViewModel);
+        #endregion
+
+
     }
 }

@@ -681,6 +681,34 @@ namespace ELI.Domain.Services
             return await _listRepository.GetListBaseonLookupTable(lookupTable);
         }
 
+        #region Campus
+
+        public async Task<int> CreateCampusAsync(CampuseViewModel campusViewModel)
+        {
+            return await _listRepository.CreateCampusAsync(campusViewModel);
+        }
+
+        public async Task<CampuseViewModel> GetCampus(int campusId)
+        {
+            return await _listRepository.GetCampus(campusId);
+        }
+
+        public async Task<AllResponse<CampuseViewModel>> GetAllCampus(AllRequest<CampuseViewModel> campusList)
+        {
+            return await _listRepository.GetAllCampus(campusList);
+        }
+
+        public async Task<bool> UpdateCampusAsync(CampuseViewModel campusViewModel)
+        {
+            return await _listRepository.UpdateCampusAsync(campusViewModel);
+        }
+
+        public async Task<bool> ActivateCampusAsync(CampuseViewModel campusViewModel)
+        {
+            return await _listRepository.ActivateCampusAsync(campusViewModel);
+        }
         
+        #endregion
+
     }
 }

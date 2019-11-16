@@ -478,6 +478,93 @@ namespace ELI.API.Controllers
 
 
 
+        [HttpPost("createCampus")]
+        public async Task<IActionResult> CreateCampusAsync([FromBody] CampuseViewModel campusViewModel)
+        {
+
+            if (campusViewModel != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.CreateCampusAsync(campusViewModel));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Campus model cannot be empty" });
+            }
+        }
+
+
+        [HttpGet("Getcampus")]
+        [Produces(typeof(CampuseViewModel))]
+        public async Task<IActionResult> GetCampus(int campusId)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetCampus(campusId));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpPut("updateCampus")]
+        [Produces(typeof(CampuseViewModel))]
+        public async Task<IActionResult> UpdateCampusAsync([FromBody] CampuseViewModel campusViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateCampusAsync(campusViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpGet("getAllCampus")]
+        [Produces(typeof(List<CampuseViewModel>))]
+        public async Task<IActionResult> GetAllCampus()
+        {
+            try
+            {
+                AllRequest<CampuseViewModel> campusList = new AllRequest<CampuseViewModel>();
+                return new ObjectResult(await _ELIService.GetAllCampus(campusList));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("activateCampus")]
+        [Produces(typeof(CampuseViewModel))]
+        public async Task<IActionResult> ActivateCampusAsync([FromBody] CampuseViewModel campusViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateCampusAsync(campusViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
 
 

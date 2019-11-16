@@ -125,7 +125,8 @@ namespace ELI.Data.Repositories.Main
                             AvailableTo = dataReader.GetDateTimeValue(ListRepository.AvailableToColumnName),
                             ImportedOne = dataReader.GetIntegerValue(ListRepository.ImportedOneColumnName),
                             Weekno = dataReader.GetStringValue(ListRepository.WeeknoColumnName),
-                            Year = dataReader.GetIntegerValue(ListRepository.YearColumnName)
+                            Year = dataReader.GetIntegerValue(ListRepository.YearColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
                         };
                     }
@@ -183,7 +184,8 @@ namespace ELI.Data.Repositories.Main
                                 AvailableTo = dataReader.GetDateTimeValue(ListRepository.AvailableToColumnName),
                                 ImportedOne = dataReader.GetIntegerValue(ListRepository.ImportedOneColumnName),
                                 Weekno = dataReader.GetStringValue(ListRepository.WeeknoColumnName),
-                                Year = dataReader.GetIntegerValue(ListRepository.YearColumnName)
+                                Year = dataReader.GetIntegerValue(ListRepository.YearColumnName),
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
                             };
                             result.Data.Add(roomsList);
@@ -534,7 +536,8 @@ namespace ELI.Data.Repositories.Main
                             Trips = dataReader.GetStringValue(ListRepository.TripNameColumnName),
                             TripsDate = dataReader.GetDateTimeValue(ListRepository.TripsDateColumnName),
                             Camps = dataReader.GetStringValue(ListRepository.TripCampsColumnName),
-                            Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName)
+                            Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
                         };
                     }
                 }
@@ -580,7 +583,8 @@ namespace ELI.Data.Repositories.Main
                                 Trips = dataReader.GetStringValue(ListRepository.TripNameColumnName),
                                 TripsDate = dataReader.GetDateTimeValue(ListRepository.TripsDateColumnName),
                                 Camps = dataReader.GetStringValue(ListRepository.TripCampsColumnName),
-                                Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName)
+                                Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName),
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
                             };
                             result.Data.Add(tripsViewModel);
@@ -732,6 +736,7 @@ namespace ELI.Data.Repositories.Main
                             Prefer = dataReader.GetStringValue(ListRepository.HomePreferColumnName),
                             Aggrements = dataReader.GetStringValue(ListRepository.HomeAgreementColumnName),
                             PoliceCheck = dataReader.GetStringValue(ListRepository.HomePoliceCheckColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
                         };
                     }
@@ -786,6 +791,7 @@ namespace ELI.Data.Repositories.Main
                                 Prefer = dataReader.GetStringValue(ListRepository.HomePreferColumnName),
                                 Aggrements = dataReader.GetStringValue(ListRepository.HomeAgreementColumnName),
                                 PoliceCheck = dataReader.GetStringValue(ListRepository.HomePoliceCheckColumnName),
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
 
                             };

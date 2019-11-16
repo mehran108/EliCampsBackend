@@ -11,6 +11,7 @@ namespace ELI.Domain.ViewModels
         public string Camps { get; set; }
         public string RefNumber { get; set; }
         public int AgentID { get; set; }
+        public string AgentName { get; set; }
         public string AgencyRef { get; set; }
         public string Country { get; set; }
         public string InvoiceType { get; set; }
@@ -27,7 +28,9 @@ namespace ELI.Domain.ViewModels
         public DateTime? ProgrameStartDate { get; set; }
         public DateTime? ProgrameEndDate { get; set; }
         public int? Campus { get; set; }
+        public string CampusName { get; set; }
         public int? Format { get; set; }
+        public string FormatName { get; set; }
         public string MealPlan { get; set; }
         public List<int> ProgrameAddins { get; set; }
         public string AddinsID { get; set; }

@@ -126,6 +126,10 @@ namespace ELI.Data.Repositories.Main
         private const string PaymentGroupAmountColumnName = "PaymentGroupAmount";
         private const string PaymentGroupRemarksColumnName = "PaymentGroupRemarks";
 
+        private const string AgentNameColumnName = "AgentName";
+        private const string CampusNameColumnName = "CampusName";
+        private const string FormatNameRemarksColumnName = "FormatName";
+
 
         public async Task<int> AddGroupAsync(GroupViewModel group)
         {
@@ -345,8 +349,11 @@ namespace ELI.Data.Repositories.Main
                                 PerStudent = dataReader.GetDecimalValue(GroupRepository.PerStudentColumnName),
                                 PerGrpLeader = dataReader.GetDecimalValue(GroupRepository.PerGrpLeaderColumnName),
                                 Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
-                                ApplyToAllStudent = dataReader.GetBooleanValue(GroupRepository.ApplyToAllStudentColumnName)
-                                
+                                ApplyToAllStudent = dataReader.GetBooleanValue(GroupRepository.ApplyToAllStudentColumnName),
+                                AgentName = dataReader.GetStringValue(GroupRepository.AgentNameColumnName),
+                                CampusName = dataReader.GetStringValue(GroupRepository.CampusNameColumnName),
+                                FormatName = dataReader.GetStringValue(GroupRepository.FormatNameRemarksColumnName),
+
                             };
                             result.Data.Add(groupVM);
                         }
@@ -355,8 +362,7 @@ namespace ELI.Data.Repositories.Main
                         {
                             dataReader.Close();
                         }
-
-                }
+    }
             }
 
             return result;

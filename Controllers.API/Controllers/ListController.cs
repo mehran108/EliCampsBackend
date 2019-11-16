@@ -84,7 +84,7 @@ namespace ELI.API.Controllers
 
 [HttpGet("getAllAgent")]
         [Produces(typeof(List<AgentViewMode>))]
-        public async Task<IActionResult> GetAllRoomList()
+        public async Task<IActionResult> GetAllAgent()
         {
             try
             {

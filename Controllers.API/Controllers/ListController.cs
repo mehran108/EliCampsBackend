@@ -80,6 +80,22 @@ namespace ELI.API.Controllers
                 new ExceptionHandlingService(ex, null, null).LogException();
                 return BadRequest(new { message = ex.Message });
             }
+        } 
+
+[HttpGet("getAllAgent")]
+        [Produces(typeof(List<AgentViewMode>))]
+        public async Task<IActionResult> GetAllRoomList()
+        {
+            try
+            {
+                AllRequest<AgentViewMode> agentList = new AllRequest<AgentViewMode>();
+                return new ObjectResult(await _ELIService.GetAllAgent(agentList));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
 

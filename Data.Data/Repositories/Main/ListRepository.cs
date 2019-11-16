@@ -903,7 +903,8 @@ namespace ELI.Data.Repositories.Main
                             ID = dataReader.GetIntegerValue(ListRepository.AddinsIdColumnName),
                             Addins = dataReader.GetStringValue(ListRepository.AddinsColumnName),
                             AddinsType = dataReader.GetStringValue(ListRepository.AddinsTypeColumnName),
-                            Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName)
+                            Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
                             //Cost = dataReader.GetDecimalValueNullable(ListRepository.AddinsCostColumnName)
                         };
                     }
@@ -949,7 +950,8 @@ namespace ELI.Data.Repositories.Main
                                 ID = dataReader.GetIntegerValue(ListRepository.AddinsIdColumnName),
                                 Addins = dataReader.GetStringValue(ListRepository.AddinsColumnName),
                                 AddinsType = dataReader.GetStringValue(ListRepository.AddinsTypeColumnName),
-                                Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName)
+                                Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName),
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
 
                             };

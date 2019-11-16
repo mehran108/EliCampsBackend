@@ -56,7 +56,8 @@ BEGIN
 				clmGroups_NumOfGrpLeaders As NumOfGrpLeaders,
 				clmGroups_PerStudent As PerStudent,
 				clmGroups_PerGrpLeader As PerGrpLeader,
-				clmGroups_Active As Active
+				clmGroups_Active As Active,
+				clmGroups_ApplyToAllStudent AS ApplyToAllStudent
 		from [dbo].[tblGroups] ;
 END
 GO

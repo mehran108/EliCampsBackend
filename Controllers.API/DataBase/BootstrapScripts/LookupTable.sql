@@ -34,3 +34,14 @@ INSERT INTO [dbo].[LookupTable]
      VALUES
            ('MealPlan','MealPlan')
 END
+
+
+
+IF NOT EXISTS (SELECT id FROM [LookupTable] WHERE Name = 'AddinType')
+BEGIN
+INSERT INTO [dbo].[LookupTable]
+           ([Name]
+           ,[Description])
+     VALUES
+           ('AddinType','AddinType')
+END

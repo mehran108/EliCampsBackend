@@ -31,6 +31,8 @@ namespace ELI.Domain.ViewModels
         public string MealPlan { get; set; }
         public List<int> ProgrameAddins { get; set; }
         public string AddinsID { get; set; }
+        public List<int> GroupTrips { get; set; }
+        public string GroupTripsID { get; set; }
         public int NumberOfNights { get; set; }
         public decimal TotalGrossPrice { get; set; }
         public decimal Paid { get; set; }
@@ -42,6 +44,7 @@ namespace ELI.Domain.ViewModels
         public decimal PerStudent { get; set; }
         public decimal PerGrpLeader { get; set; }
 
+        public bool ApplyToAllStudent { get; set; }
 
         public bool Active { get; set; }
     }

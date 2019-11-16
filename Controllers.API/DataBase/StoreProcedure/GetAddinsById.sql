@@ -26,7 +26,8 @@ BEGIN
     Select [clmAddins_ID] As ID
       ,[clmAddins_Addin] As Addins
       ,[clmAddins_Camps] As AddinsCamps
-      ,[clmAddins_Type] As AddinsType
+      ,[clmAddins_Type] As AddinsType,
+	  clmAddins_IsActive AS Active
 	 from tblAddins where clmAddins_ID = @PID;
 END
 GO

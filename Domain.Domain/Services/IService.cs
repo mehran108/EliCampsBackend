@@ -178,6 +178,7 @@ namespace ELI.Domain.Services
         Task<bool> ActivateGroup(GroupViewModel group);
         Task<bool> GroupPayment(GroupViewModel group);
         Task<bool> GroupPrograme(GroupViewModel group);
+        Task<bool> GroupTrips(GroupViewModel group);
         #region PaymentsGroups
         #region PaymentsGroups
         Task<int> AddPaymentGroupAsync(PaymentsGroupsViewModel paymentGroup);

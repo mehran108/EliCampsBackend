@@ -35,7 +35,8 @@ Alter PROCEDURE [dbo].[AddGroup]
 	@PDepartureTerminal nvarchar(255),
 	@PDepartureFlightNumber nvarchar(255),
 	@PDestinationTo nvarchar(255),
-	@PFlightDepartureTime nvarchar(50)
+	@PFlightDepartureTime nvarchar(50),
+	@PApplyToAllStudent bit
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -46,10 +47,11 @@ BEGIN
 				(clmGroups_Year,  clmGroups_Camps,  clmGroups_RefNumber, clmGroups_AgentID, clmGroups_AgencyRef, clmGroups_Country,clmGroups_ArrivalDate,
 				clmGroups_Terminal, clmGroups_FlightNumber,clmGroups_DestinationFrom,clmGroups_ArrivalTime,clmGroups_DepartureDate,
 				clmGroups_DepartureTerminal,clmGroups_DepartureFlightNumber,clmGroups_DestinationTo,
-				clmGroups_FlightDepartureTime,clmGroups_InvType)
+				clmGroups_FlightDepartureTime,clmGroups_InvType,clmGroups_CreateDate,clmGroups_Active,clmGroups_ApplyToAllStudent)
 		Values	(@PYear, @PCamps, @PRefNumber, @PAgentID, @PAgencyRef, @PCountry, @PArrivalDate, 
 		@PTerminal, @PFlightNumber,@PDestinationFrom,@PArrivalTime,@PDepartureDate,
-		@PDepartureTerminal,@PDepartureFlightNumber,@PDestinationTo, @PFlightDepartureTime,@PInvoiceType);
+		@PDepartureTerminal,@PDepartureFlightNumber,@PDestinationTo, @PFlightDepartureTime,@PInvoiceType,
+		GETDATE(),1,@PApplyToAllStudent);
 
 		SET @PGroupID = SCOPE_IDENTITY();
 END

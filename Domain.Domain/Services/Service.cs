@@ -572,6 +572,13 @@ namespace ELI.Domain.Services
             return await _groupRepository.GroupPrograme(group);
         }
 
+        public async Task<bool> GroupTrips(GroupViewModel group)
+        {
+            group.GroupTripsID = string.Join(",", group.GroupTrips.ToArray());
+            return await _groupRepository.GroupTrips(group);
+        }
+
+
         public async Task<bool> GroupPayment(GroupViewModel group)
         {
             return await _groupRepository.GroupPayment(group);

@@ -461,7 +461,7 @@ namespace ELI.API.Controllers
             }
         }
 
-        [HttpPut("activateHomeStay")]
+        [HttpPut("activateAddins")]
         [Produces(typeof(AddinsViewModel))]
         public async Task<IActionResult> ActivateAddinsAsync([FromBody] AddinsViewModel addinsViewModel)
         {

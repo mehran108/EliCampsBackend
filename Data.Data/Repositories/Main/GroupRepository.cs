@@ -136,7 +136,7 @@ namespace ELI.Data.Repositories.Main
                     
                     base.GetParameter(GroupRepository.YearParameterName, group.Year),
                     base.GetParameter(GroupRepository.CampsParameterName, group.Camps),
-                    base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber),
+                    //base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber),
                     base.GetParameter(GroupRepository.AgentIDParameterName, group.AgentID),
                     base.GetParameter(GroupRepository.AgencyRefParameterName, group.AgencyRef),
                     base.GetParameter(GroupRepository.CountryParameterName, group.Country),
@@ -169,7 +169,7 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(GroupRepository.GroupIdParameterName, group.ID),
                     base.GetParameter(GroupRepository.YearParameterName, group.Year),
                     base.GetParameter(GroupRepository.CampsParameterName, group.Camps),
-                    base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber),
+                    
                     base.GetParameter(GroupRepository.AgentIDParameterName, group.AgentID),
                     base.GetParameter(GroupRepository.AgencyRefParameterName, group.AgencyRef),
                     base.GetParameter(GroupRepository.CountryParameterName, group.Country),

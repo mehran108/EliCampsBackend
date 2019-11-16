@@ -21,7 +21,7 @@ Alter PROCEDURE [dbo].[AddGroup]
 	@PGroupID INT = NULL OUTPUT,
 	@PYear INT,
 	@PCamps nvarchar(255),
-	@PRefNumber nvarchar(255),
+	--@PRefNumber nvarchar(255),
 	@PAgentID INT,
 	@PAgencyRef nvarchar(50),
 	@PCountry nvarchar(50),
@@ -43,16 +43,23 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
+	Declare @RefNumberCount INT
+
+	set @RefNumberCount = ((Select top 1 clmYear_GroupRef from [tblYears] where  clmYear_Year = @PYear) + 1)
+
     Insert Into [dbo].[tblGroups]
 				(clmGroups_Year,  clmGroups_Camps,  clmGroups_RefNumber, clmGroups_AgentID, clmGroups_AgencyRef, clmGroups_Country,clmGroups_ArrivalDate,
 				clmGroups_Terminal, clmGroups_FlightNumber,clmGroups_DestinationFrom,clmGroups_ArrivalTime,clmGroups_DepartureDate,
 				clmGroups_DepartureTerminal,clmGroups_DepartureFlightNumber,clmGroups_DestinationTo,
 				clmGroups_FlightDepartureTime,clmGroups_InvType,clmGroups_CreateDate,clmGroups_Active,clmGroups_ApplyToAllStudent)
-		Values	(@PYear, @PCamps, @PRefNumber, @PAgentID, @PAgencyRef, @PCountry, @PArrivalDate, 
+		Values	(@PYear, @PCamps, CONCAT('GR',@PYear, '-',format(@RefNumberCount,'00')), @PAgentID, @PAgencyRef, @PCountry, @PArrivalDate, 
 		@PTerminal, @PFlightNumber,@PDestinationFrom,@PArrivalTime,@PDepartureDate,
 		@PDepartureTerminal,@PDepartureFlightNumber,@PDestinationTo, @PFlightDepartureTime,@PInvoiceType,
 		GETDATE(),1,@PApplyToAllStudent);
 
 		SET @PGroupID = SCOPE_IDENTITY();
+
+		 update [tblYears] set clmYear_GroupRef = (clmYear_GroupRef + 1)
+			where clmYear_Year = @PYear;
 END
 GO

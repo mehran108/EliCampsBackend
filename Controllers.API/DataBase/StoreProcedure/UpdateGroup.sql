@@ -21,7 +21,6 @@ Alter PROCEDURE [dbo].[UpdateGroup]
 	@PGroupID INT ,
 	@PYear INT,
 	@PCamps nvarchar(255),
-	@PRefNumber nvarchar(255),
 	@PAgentID INT,
 	@PAgencyRef nvarchar(50),
 	@PCountry nvarchar(50),
@@ -47,7 +46,6 @@ BEGIN
     update [dbo].[tblGroups]
 				set clmGroups_Year = @PYear,  
 				clmGroups_Camps = @PCamps, 
-				clmGroups_RefNumber = @PRefNumber, 
 				clmGroups_AgentID = @PAgentID,
 				 clmGroups_AgencyRef =  @PAgencyRef, 
 				 clmGroups_Country = @PCountry,

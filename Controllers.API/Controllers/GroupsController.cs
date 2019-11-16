@@ -143,6 +143,21 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpPut("updateGroupTrips")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> GroupTrips([FromBody] GroupViewModel groupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GroupTrips(groupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
 
         [HttpPost("addPaymentGroup")]
         public async Task<IActionResult> AddPaymentGroupAsync([FromBody] PaymentsGroupsViewModel paymentGroupVM)

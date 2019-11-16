@@ -11,11 +11,11 @@ BEGIN CREATE TABLE  [dbo].[tblCampuses](
 	[clmCampuses_AddressOnReports] [nvarchar](max) NULL,
 	[clmCampuses_CompleteName] [nvarchar](max) NULL,
 	[clmCampuses_Onelineaddress] [nvarchar](max) NULL,
-	[clmAgents_IsActive] [bit] default 1,
-	[clmGroups_CreateDate] [DATETIME] NULL,
-	[clmGroups_CreatedBy] [int] NULL,
-	[clmGroups_ModifiedDate] [DATETIME] NULL,
-	[clmGroups_ModifiedBy] [int] NULL
+	[clmCampuses_IsActive] [bit] default 1,
+	[clmCampuses_CreateDate] [DATETIME] NULL,
+	[clmCampuses_CreatedBy] [int] NULL,
+	[clmCampuses_ModifiedDate] [DATETIME] NULL,
+	[clmCampuses_ModifiedBy] [int] NULL
 	
  CONSTRAINT [PK_tblCampuses] PRIMARY KEY CLUSTERED 
 (

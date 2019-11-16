@@ -39,7 +39,8 @@ BEGIN
       ,[clmHome_Prefer] As  HomePrefer
       ,[clmHome_Rooms] As HomeRooms
       ,[clmHome_Agreement] As HomeAggrement
-      ,[clmHome_PoliceCheck] As HomePoliceCheck
+      ,[clmHome_PoliceCheck] As HomePoliceCheck,
+	  [clmHome_IsActive] As Active
 	 from tblHomestay;
 END
 GO

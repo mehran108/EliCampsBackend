@@ -27,6 +27,7 @@ namespace ELI.Data.Repositories.Main
         private const string ActivateStoredProcedureName = "ActivateGroup";
         private const string UpdateGroupPaymentStoredProcedureName = "UpdateGroupPayment";
         private const string GroupProgrameStoredProcedureName = "GroupPrograme";
+        private const string GroupTripsStoredProcedureName = "GroupTrips";
         private const string GroupPaymentStoredProcedureName = "GroupPayment";
         private const string AddPaymentGroupStoredProcedureName = "AddPaymentGroup";
         private const string UpdatePaymentGroupStoredProcedureName = "UpdatePaymentGroup";
@@ -59,6 +60,8 @@ namespace ELI.Data.Repositories.Main
         private const string FormatParameterName = "PFormat";
         private const string MealPlanParameterName = "PMealPlan";
         private const string AddinsIDParameterName = "PAddinsID";
+        private const string GroupTripsIDParameterName = "PGroupTripsID";
+        private const string ApplyToAllStudentParameterName = "PApplyToAllStudent";
 
         private const string NumberOfNightsParameterName = "PNumberOfNights";
         private const string TotalGrossPriceParameterName = "PTotalGrossPrice";
@@ -96,7 +99,11 @@ namespace ELI.Data.Repositories.Main
         private const string DepartureFlightNumberColumnName = "DepartureFlightNumber";
         private const string DestinationToColumnName = "DestinationTo";
         private const string FlightDepartureTimeColumnName = "FlightDepartureTime";
+        private const string ApplyToAllStudentColumnName = "ApplyToAllStudent";
         private const string AddinsIDColumnName = "AddinsID";
+        private const string LinkIDColumnName = "LinkID";
+        private const string LinkTypeIDColumnName = "LinkTypeID";
+        private const string GroupTripIDColumnName = "GroupTripID";
         private const string ProgrameStartDateColumnName = "ProgrameStartDate";
         private const string ProgrameEndDateColumnName = "ProgrameEndDate";
         private const string CampusColumnName = "Campus";
@@ -119,6 +126,10 @@ namespace ELI.Data.Repositories.Main
         private const string PaymentGroupAmountColumnName = "PaymentGroupAmount";
         private const string PaymentGroupRemarksColumnName = "PaymentGroupRemarks";
 
+        private const string AgentNameColumnName = "AgentName";
+        private const string CampusNameColumnName = "CampusName";
+        private const string FormatNameRemarksColumnName = "FormatName";
+
 
         public async Task<int> AddGroupAsync(GroupViewModel group)
         {
@@ -129,7 +140,7 @@ namespace ELI.Data.Repositories.Main
                     
                     base.GetParameter(GroupRepository.YearParameterName, group.Year),
                     base.GetParameter(GroupRepository.CampsParameterName, group.Camps),
-                    base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber),
+                    //base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber),
                     base.GetParameter(GroupRepository.AgentIDParameterName, group.AgentID),
                     base.GetParameter(GroupRepository.AgencyRefParameterName, group.AgencyRef),
                     base.GetParameter(GroupRepository.CountryParameterName, group.Country),
@@ -143,7 +154,8 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(GroupRepository.DepartureFlightNumberParameterName, group.DepartureFlightNumber),
                     base.GetParameter(GroupRepository.DestinationToParameterName, group.DestinationTo),
                     base.GetParameter(GroupRepository.FlightDepartureTimeParameterName, group.FlightDepartureTime),
-                    base.GetParameter(GroupRepository.InvoiceTypeParameterName, group.InvoiceType)
+                    base.GetParameter(GroupRepository.InvoiceTypeParameterName, group.InvoiceType),
+                    base.GetParameter(GroupRepository.ApplyToAllStudentParameterName, group.ApplyToAllStudent)
 
                 };
 
@@ -161,7 +173,7 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(GroupRepository.GroupIdParameterName, group.ID),
                     base.GetParameter(GroupRepository.YearParameterName, group.Year),
                     base.GetParameter(GroupRepository.CampsParameterName, group.Camps),
-                    base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber),
+                    
                     base.GetParameter(GroupRepository.AgentIDParameterName, group.AgentID),
                     base.GetParameter(GroupRepository.AgencyRefParameterName, group.AgencyRef),
                     base.GetParameter(GroupRepository.CountryParameterName, group.Country),
@@ -176,7 +188,8 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(GroupRepository.DestinationToParameterName, group.DestinationTo),
                     base.GetParameter(GroupRepository.FlightDepartureTimeParameterName, group.FlightDepartureTime),
                     base.GetParameter(BaseRepository.ActiveParameterName, group.Active),
-                    base.GetParameter(GroupRepository.InvoiceTypeParameterName, group.InvoiceType)
+                    base.GetParameter(GroupRepository.InvoiceTypeParameterName, group.InvoiceType),
+                    base.GetParameter(GroupRepository.ApplyToAllStudentParameterName, group.ApplyToAllStudent)
 
 
                 };
@@ -190,6 +203,7 @@ namespace ELI.Data.Repositories.Main
         {
             GroupViewModel groupVM = null;
             int AddinID;
+            int TripID;
             var parameters = new List<DbParameter>
                 {
                     base.GetParameter(GroupRepository.GroupIdParameterName, groupID)
@@ -238,17 +252,32 @@ namespace ELI.Data.Repositories.Main
                             PerStudent = dataReader.GetDecimalValue(GroupRepository.PerStudentColumnName),
                             PerGrpLeader = dataReader.GetDecimalValue(GroupRepository.PerGrpLeaderColumnName),
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
-                            ProgrameAddins = new List<int>()
+                            ApplyToAllStudent = dataReader.GetBooleanValue(GroupRepository.ApplyToAllStudentColumnName),
+                            ProgrameAddins = new List<int>(),
+                            GroupTrips = new List<int>()
                         };
-
                         if (dataReader.NextResult())
                         {
                             while (dataReader.Read())
                             {
-                                AddinID = dataReader.GetIntegerValue(GroupRepository.AddinsIDColumnName);
-                                groupVM?.ProgrameAddins.Add(AddinID);
+
+                                if (dataReader.GetStringValue(GroupRepository.LinkTypeIDColumnName).Equals("AddinsID"))
+                                {
+                                    AddinID = dataReader.GetIntegerValue(GroupRepository.LinkIDColumnName);
+                                    groupVM?.ProgrameAddins.Add(AddinID);
+                                }
+                                else
+                                {
+                                    TripID = dataReader.GetIntegerValue(GroupRepository.LinkIDColumnName);
+                                    groupVM?.GroupTrips.Add(TripID);
+                                }
+
+                                    
                             }
+                           
                         }
+
+                        
 
                     }
                 }
@@ -318,7 +347,13 @@ namespace ELI.Data.Repositories.Main
                                 NumOfStudents = dataReader.GetIntegerValue(GroupRepository.NumOfStudentsColumnName),
                                 NumOfGrpLeaders = dataReader.GetIntegerValue(GroupRepository.NumOfGrpLeadersColumnName),
                                 PerStudent = dataReader.GetDecimalValue(GroupRepository.PerStudentColumnName),
-                                PerGrpLeader = dataReader.GetDecimalValue(GroupRepository.PerGrpLeaderColumnName)
+                                PerGrpLeader = dataReader.GetDecimalValue(GroupRepository.PerGrpLeaderColumnName),
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
+                                ApplyToAllStudent = dataReader.GetBooleanValue(GroupRepository.ApplyToAllStudentColumnName),
+                                AgentName = dataReader.GetStringValue(GroupRepository.AgentNameColumnName),
+                                CampusName = dataReader.GetStringValue(GroupRepository.CampusNameColumnName),
+                                FormatName = dataReader.GetStringValue(GroupRepository.FormatNameRemarksColumnName),
+
                             };
                             result.Data.Add(groupVM);
                         }
@@ -327,8 +362,7 @@ namespace ELI.Data.Repositories.Main
                         {
                             dataReader.Close();
                         }
-
-                }
+    }
             }
 
             return result;
@@ -385,6 +419,21 @@ namespace ELI.Data.Repositories.Main
 
                 };
         var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.GroupPaymentStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<bool> GroupTrips(GroupViewModel group)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(GroupRepository.GroupIdParameterName, group.ID),
+                    base.GetParameter(GroupRepository.GroupTripsIDParameterName, group.GroupTripsID),
+                    base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.GroupTripsStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
         }

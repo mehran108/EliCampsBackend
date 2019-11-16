@@ -24,7 +24,7 @@ Alter PROCEDURE [dbo].[GroupPrograme]
 	@PCampus INT,
 	@PFormat INT,
 	@PMealPlan nvarchar(50),
-	@PAddinsID nvarchar(255),
+	@PAddinsID nvarchar(500),
 	@PRefNumber nvarchar(255)
 AS
 BEGIN

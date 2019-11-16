@@ -25,13 +25,6 @@ CREATE TABLE [dbo].[tblAddins](
 
 GO
 
-ALTER TABLE [dbo].[tblAddins]  WITH CHECK ADD  CONSTRAINT [FK_tblAddins_tblCamps] FOREIGN KEY([clmAddins_Camps])
-REFERENCES [dbo].[tblCamps] ([clmCamps_Camp])
-ON UPDATE CASCADE
-ON DELETE CASCADE
-GO
 
-ALTER TABLE [dbo].[tblAddins] CHECK CONSTRAINT [FK_tblAddins_tblCamps]
-GO
 
 

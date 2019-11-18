@@ -42,7 +42,8 @@ BEGIN
 	  ,[clmRoom_AvailableTo] As AvailableTo
 	  ,[clmRoom_ImportedOne] As ImportedOne
 	  ,[clmRoom_Weekno] As Weekno
-	  ,[clmRoom_Year] As Year
+	  ,[clmRoom_Year] As Year,
+	  [clmRoom_IsActive] As Active
 	 from tblRoomsList;
 END
 GO

@@ -21,7 +21,6 @@ Alter PROCEDURE [dbo].[UpdateGroup]
 	@PGroupID INT ,
 	@PYear INT,
 	@PCamps nvarchar(255),
-	@PRefNumber nvarchar(255),
 	@PAgentID INT,
 	@PAgencyRef nvarchar(50),
 	@PCountry nvarchar(50),
@@ -36,7 +35,8 @@ Alter PROCEDURE [dbo].[UpdateGroup]
 	@PDepartureFlightNumber nvarchar(255),
 	@PDestinationTo nvarchar(255),
 	@PFlightDepartureTime nvarchar(50),
-	@PActive bit
+	@PActive bit,
+	@PApplyToAllStudent bit
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -46,7 +46,6 @@ BEGIN
     update [dbo].[tblGroups]
 				set clmGroups_Year = @PYear,  
 				clmGroups_Camps = @PCamps, 
-				clmGroups_RefNumber = @PRefNumber, 
 				clmGroups_AgentID = @PAgentID,
 				 clmGroups_AgencyRef =  @PAgencyRef, 
 				 clmGroups_Country = @PCountry,
@@ -61,7 +60,9 @@ BEGIN
 				clmGroups_DestinationTo = @PDestinationTo,
 				clmGroups_FlightDepartureTime = @PFlightDepartureTime,
 				clmGroups_Active = @PActive,
-				clmGroups_InvType = @PInvoiceType
+				clmGroups_InvType = @PInvoiceType,
+				clmGroups_ApplyToAllStudent = @PApplyToAllStudent,
+				clmGroups_ModifiedDate = GETDATE()
 		where clmGroups_ID = @PGroupID;
 END
 GO

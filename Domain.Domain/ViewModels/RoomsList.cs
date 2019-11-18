@@ -22,5 +22,6 @@ namespace Domain.Domain.ViewModels
         public int ImportedOne { get; set; }
         public string Weekno { get; set; }
         public int Year { get; set; }
+        public bool Active { get; set; }
     }
 }

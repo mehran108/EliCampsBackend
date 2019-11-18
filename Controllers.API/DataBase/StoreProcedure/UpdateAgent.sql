@@ -28,7 +28,7 @@ Alter PROCEDURE [dbo].[UpdateAgent]
 	@PAgentCountry nvarchar(255),
 	@PAgentOther nvarchar(255),
 	@PAgentNotes text,
-	@PActive bit
+	@Active bit
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -46,7 +46,7 @@ BEGIN
 	clmAgents_Notes = @PAgentNotes,
 	clmAgents_Other = @PAgentOther,
 	clmAgents_ModifiedDate = GETDATE(),
-	clmAgents_IsActive = @PActive
+	clmAgents_IsActive = @Active
 	where clmAgents_ID = @PAgentID;
 
 END

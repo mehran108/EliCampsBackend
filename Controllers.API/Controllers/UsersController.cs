@@ -115,7 +115,7 @@ namespace ELI.API.Controllers
                 Users user = new Users();
                 if (userVM.RoleId == 0)
                 {
-                    userVM.RoleId = 2;
+                    userVM.RoleId = 1;
                 }
                 user = _mapper.Map<Users>(userVM);
                 user.IsDeleted = false;

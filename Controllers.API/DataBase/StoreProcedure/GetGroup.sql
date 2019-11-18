@@ -57,11 +57,15 @@ BEGIN
 				clmGroups_NumOfGrpLeaders As NumOfGrpLeaders,
 				clmGroups_PerStudent As PerStudent,
 				clmGroups_PerGrpLeader As PerGrpLeader,
-				clmGroups_Active As Active
+				clmGroups_Active As Active,
+				clmGroups_ApplyToAllStudent AS ApplyToAllStudent
 		from [dbo].[tblGroups] 
 		where clmGroups_ID = @PGroupID;
 
-		Select clmAdvsGrpCam_AddinsID As AddinsID from 
-		[dbo].[tblAddinsVsGropCam];
+		Select clmAdvsGrpCam_AddinsID As LinkID , 'AddinsID' AS LinkTypeID from 
+		[dbo].[tblAddinsVsGropCam] where clmAdvsGrpCam_GroupID = @PGroupID
+		UNION ALL
+		Select clmGpTrips_Trip As LinkID, 'GroupTripID' AS LinkTypeID from
+		[dbo].[tblGroupTrips] where clmGpTrips_GroupID = @PGroupID;
 END
 GO

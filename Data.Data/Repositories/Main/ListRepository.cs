@@ -1149,7 +1149,7 @@ namespace ELI.Data.Repositories.Main
                     {
                         campusVM = new CampuseViewModel
                         {
-                            ID = dataReader.GetIntegerValue(ListRepository.AgentIdColumnName),
+                            ID = dataReader.GetIntegerValue(ListRepository.CampusIDColumnName),
                             Campus = dataReader.GetStringValue(ListRepository.CampusColumnName),
                             Camps = dataReader.GetStringValue(ListRepository.CampusCampsColumnName),
                             AddressOnReports = dataReader.GetStringValue(ListRepository.CampusAddressOnReportsColumnName),
@@ -1194,7 +1194,7 @@ namespace ELI.Data.Repositories.Main
                     {
                          campusVM = new CampuseViewModel
                             {
-                                ID = dataReader.GetIntegerValue(ListRepository.AgentIdColumnName),
+                                ID = dataReader.GetIntegerValue(ListRepository.CampusIDColumnName),
                                 Campus = dataReader.GetStringValue(ListRepository.CampusColumnName),
                                 Camps = dataReader.GetStringValue(ListRepository.CampusCampsColumnName),
                                 AddressOnReports = dataReader.GetStringValue(ListRepository.CampusAddressOnReportsColumnName),

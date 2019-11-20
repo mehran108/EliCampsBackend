@@ -10,7 +10,8 @@ ALTER PROCEDURE [dbo].[GetAllRooms]
 	@POffset int, 
     @PPageSize int,
     @PSortColumn varchar(60),
-    @PSortAscending bit
+    @PSortAscending bit,
+	@PActive bit
 AS
 BEGIN
 	
@@ -35,4 +36,5 @@ BEGIN
 	  [clmRoom_IsActive] As Active
 	 from tblRoomsList
 	 inner join tblCamps tblc on [clmRoom_Campus] = tblc.clmCamps_ID
+	  where ( clmRoom_IsActive = (CASE WHEN @PActive is not null then @PActive else clmRoom_IsActive end))
 END

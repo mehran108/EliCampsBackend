@@ -21,7 +21,8 @@ Alter PROCEDURE [dbo].[GetAllAddins]
 	@POffset int, 
     @PPageSize int,
     @PSortColumn varchar(60),
-    @PSortAscending bit
+    @PSortAscending bit,
+	@PActive bit
 AS
 BEGIN
 	
@@ -32,5 +33,6 @@ BEGIN
       ,[clmAddins_Type] As AddinsType,
 	  clmAddins_IsActive AS Active
 	 from tblAddins
+	  where ( clmAddins_IsActive = (CASE WHEN @PActive is not null then @PActive else clmAddins_IsActive end));
 END
 GO

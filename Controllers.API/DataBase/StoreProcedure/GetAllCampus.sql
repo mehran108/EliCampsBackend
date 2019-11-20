@@ -25,7 +25,7 @@ Alter PROCEDURE [dbo].[GetAllCampus]
 AS
 BEGIN
 	
-     Select [clmCampuses_ID] As CampusID
+     Select [clmCampuses_ID] As AgentId
       ,[clmCampuses_Campus] As Campus
       ,[clmCampuses_Camps] As CampusCamps
       ,[clmCampuses_AddressOnReports] As  CampusAddressOnReports

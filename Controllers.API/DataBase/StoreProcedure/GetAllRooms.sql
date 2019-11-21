@@ -1,27 +1,17 @@
-
-
+USE [elicampsdb]
+GO
+/****** Object:  StoredProcedure [dbo].[GetAllRooms]    Script Date: 11/19/2019 10:52:42 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
--- ================================================
-
--- =============================================
--- Author:		<Author,,>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GetAllRooms]') AND type in (N'P', N'PC'))
-BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[GetAllRooms] AS' 
-END
-GO
-Alter PROCEDURE [dbo].[GetAllRooms] 
+ALTER PROCEDURE [dbo].[GetAllRooms] 
 	-- Add the parameters for the stored procedure here
 	@POffset int, 
     @PPageSize int,
     @PSortColumn varchar(60),
-    @PSortAscending bit
+    @PSortAscending bit,
+	@PActive bit
 AS
 BEGIN
 	
@@ -29,7 +19,7 @@ BEGIN
  Select
 	   [clmRoom_ID] As ID
       ,[clmRoom_RoomID] As RoomID
-      ,[clmRoom_Campus] As Campus
+       ,tblc.clmCamps_Camp As Campus
       ,[clmRoom_RoomType] As  RoomType
       ,[clmRoom_Building] As Building
       ,[clmRoom_Floor] As RoomFloor
@@ -44,6 +34,7 @@ BEGIN
 	  ,[clmRoom_Weekno] As Weekno
 	  ,[clmRoom_Year] As Year,
 	  [clmRoom_IsActive] As Active
-	 from tblRoomsList;
+	 from tblRoomsList
+	 inner join tblCamps tblc on [clmRoom_Campus] = tblc.clmCamps_ID
+	  where ( clmRoom_IsActive = (CASE WHEN @PActive is not null then @PActive else clmRoom_IsActive end))
 END
-GO

@@ -171,7 +171,7 @@ namespace ELI.Data.Repositories.Main
 
                                 ID = dataReader.GetIntegerValue(ListRepository.RIdColumnName),
                                 RoomID = dataReader.GetStringValue(ListRepository.RoomListRoomIdColumnName),
-                                CampusID = dataReader.GetIntegerValue(ListRepository.RoomCampusColumnName),
+                                Campus = dataReader.GetStringValue(ListRepository.RoomCampusColumnName),
                                 Building = dataReader.GetStringValue(ListRepository.RoomBuildingColumnName),
                                 RoomType = dataReader.GetStringValue(ListRepository.RoomTypeColumnName),
                                 Floor = dataReader.GetStringValue(ListRepository.FloorColumnName),

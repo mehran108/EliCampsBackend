@@ -568,6 +568,93 @@ namespace ELI.API.Controllers
 
 
 
+        [HttpPost("createProgram")]
+        public async Task<IActionResult> CreateProgramAsync([FromBody] ProgramViewModel programViewModel)
+        {
+
+            if (programViewModel != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.CreateProgramAsync(programViewModel));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Program model cannot be empty" });
+            }
+        }
+
+
+        [HttpGet("getProgram")]
+        [Produces(typeof(ProgramViewModel))]
+        public async Task<IActionResult> GetProgramAsync(int programId)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetProgramAsync(programId));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpPut("updateProgram")]
+        [Produces(typeof(CampuseViewModel))]
+        public async Task<IActionResult> UpdateProgramAsync([FromBody] ProgramViewModel programViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateProgramAsync(programViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpGet("getAllProgram")]
+        [Produces(typeof(List<ProgramViewModel>))]
+        public async Task<IActionResult> GetAllProgramAsync()
+        {
+            try
+            {
+                AllRequest<ProgramViewModel> programList = new AllRequest<ProgramViewModel>();
+                return new ObjectResult(await _ELIService.GetAllProgramAsync(programList));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("activateProgram")]
+        [Produces(typeof(ProgramViewModel))]
+        public async Task<IActionResult> ActivateProgramAsync([FromBody] ProgramViewModel programViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateProgramAsync(programViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
 
 

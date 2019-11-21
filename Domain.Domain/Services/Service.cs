@@ -707,7 +707,36 @@ namespace ELI.Domain.Services
         {
             return await _listRepository.ActivateCampusAsync(campusViewModel);
         }
-        
+
+        #endregion
+
+        #region Program
+
+        public async Task<int> CreateProgramAsync(ProgramViewModel programViewModel)
+        {
+            return await _listRepository.CreateProgramAsync(programViewModel);
+        }
+
+        public async Task<ProgramViewModel> GetProgramAsync(int programId)
+        {
+            return await _listRepository.GetProgramAsync(programId);
+        }
+
+        public async Task<AllResponse<ProgramViewModel>> GetAllProgramAsync(AllRequest<ProgramViewModel> programList)
+        {
+            return await _listRepository.GetAllProgramAsync(programList);
+        }
+
+        public async Task<bool> UpdateProgramAsync(ProgramViewModel programViewModel)
+        {
+            return await _listRepository.UpdateProgramAsync(programViewModel);
+        }
+
+        public async Task<bool> ActivateProgramAsync(ProgramViewModel programViewModel)
+        {
+            return await _listRepository.ActivateProgramAsync(programViewModel);
+        }
+
         #endregion
 
     }

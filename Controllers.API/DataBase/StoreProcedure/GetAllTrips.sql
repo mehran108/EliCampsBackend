@@ -21,7 +21,8 @@ Alter PROCEDURE [dbo].[GetAllTrips]
 	@POffset int, 
     @PPageSize int,
     @PSortColumn varchar(60),
-    @PSortAscending bit
+    @PSortAscending bit,
+	@PActive bit
 AS
 BEGIN
 	
@@ -35,5 +36,6 @@ BEGIN
       ,[clmTrips_IDX] As TripLdx,
 	  [clmTrips_IsActive] As Active
 	   from tblTrips
+	    where ( clmTrips_IsActive = (CASE WHEN @PActive is not null then @PActive else clmTrips_IsActive end));
 END
 GO

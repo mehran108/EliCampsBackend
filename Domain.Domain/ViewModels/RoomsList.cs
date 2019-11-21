@@ -8,7 +8,7 @@ namespace Domain.Domain.ViewModels
     {
         public int ID { get; set; }
         public string RoomID { get; set; }
-        public int CampusID { get; set; }
+        public string Campus { get; set; }
         public string Building { get; set; }
         public string RoomType { get; set; }
         public string Floor { get; set; }

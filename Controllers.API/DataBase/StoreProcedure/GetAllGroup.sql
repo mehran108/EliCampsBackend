@@ -17,7 +17,9 @@ EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[GetAllGroup] AS'
 END
 GO
 Alter PROCEDURE [dbo].[GetAllGroup] 
-	-- Add the parameters for the stored procedure here
+	-- Add the parameters for the stored procedure herez
+	@PActive bit
+
 AS
 BEGIN
 	
@@ -64,6 +66,7 @@ BEGIN
 		from [dbo].[tblGroups] tbl
 		left join [tblAgents] agents on tbl.clmGroups_AgentID = agents.clmAgents_ID
 		left join [tblCampuses] campus on tbl.clmGroups_Campus = campus.clmCampuses_ID
-		left join [LookupValue] lv on tbl.clmGroups_Format = lv.id;
+		left join [LookupValue] lv on tbl.clmGroups_Format = lv.id
+		 where ( tbl.clmGroups_Active = (CASE WHEN @PActive is not null then @PActive else tbl.clmGroups_Active end))
 END
 GO

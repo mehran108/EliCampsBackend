@@ -1,27 +1,17 @@
 
-
+/****** Object:  StoredProcedure [dbo].[GetAllAgent]    Script Date: 11/19/2019 2:29:28 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
--- ================================================
-
--- =============================================
--- Author:		<Author,,>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GetAllAgent]') AND type in (N'P', N'PC'))
-BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[GetAllAgent] AS' 
-END
-GO
-Alter PROCEDURE [dbo].[GetAllAgent] 
+ALTER PROCEDURE [dbo].[GetAllAgent] 
 	-- Add the parameters for the stored procedure here
-	@POffset int, 
-    @PPageSize int,
+	@POffset int = 1, 
+    @PPageSize int = 100,
     @PSortColumn varchar(60),
-    @PSortAscending bit
+    @PSortAscending bit,
+	@PActive bit
+
 AS
 BEGIN
 	
@@ -36,6 +26,9 @@ BEGIN
       ,[clmAgents_Notes] As AgentNotes
       ,[clmAgents_Other] As AgentOther
       ,[clmAgents_IsActive] As Active
-	 from tblAgents ;
+	 from tblAgents 
+	 where ( clmAgents_IsActive = (CASE WHEN @PActive is not null then @PActive else clmAgents_IsActive end))
+	  ORDER BY [clmAgents_ID]
+  OFFSET 5 ROWS
+  FETCH NEXT @PPageSize ROWS ONLY;
 END
-GO

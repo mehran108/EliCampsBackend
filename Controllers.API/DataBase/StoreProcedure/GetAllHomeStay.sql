@@ -21,7 +21,8 @@ Alter PROCEDURE [dbo].[GetAllHomeStay]
 	@POffset int, 
     @PPageSize int,
     @PSortColumn varchar(60),
-    @PSortAscending bit
+    @PSortAscending bit,
+	@PActive bit
 AS
 BEGIN
 	
@@ -41,6 +42,7 @@ BEGIN
       ,[clmHome_Agreement] As HomeAggrement
       ,[clmHome_PoliceCheck] As HomePoliceCheck,
 	  [clmHome_IsActive] As Active
-	 from tblHomestay;
+	 from tblHomestay
+	 where ( clmHome_IsActive = (CASE WHEN @PActive is not null then @PActive else clmHome_IsActive end));
 END
 GO

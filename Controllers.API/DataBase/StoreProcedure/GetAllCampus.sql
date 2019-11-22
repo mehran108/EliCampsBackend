@@ -21,17 +21,19 @@ Alter PROCEDURE [dbo].[GetAllCampus]
 	@POffset int, 
     @PPageSize int,
     @PSortColumn varchar(60),
-    @PSortAscending bit
+    @PSortAscending bit,
+	@PActive bit
 AS
 BEGIN
 	
-     Select [clmCampuses_ID] As CampusID
+     Select [clmCampuses_ID] As AgentId
       ,[clmCampuses_Campus] As Campus
       ,[clmCampuses_Camps] As CampusCamps
       ,[clmCampuses_AddressOnReports] As  CampusAddressOnReports
       ,[clmCampuses_CompleteName] As CampusCompleteName
       ,[clmCampuses_Onelineaddress] As CampusOnelineaddress
       ,[clmCampuses_IsActive] As Active
-	 from [tblCampuses] ;
+	 from [tblCampuses] 
+	 where ( clmCampuses_IsActive = (CASE WHEN @PActive is not null then @PActive else clmCampuses_IsActive end));
 END
 GO

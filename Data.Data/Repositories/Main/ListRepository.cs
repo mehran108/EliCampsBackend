@@ -171,7 +171,7 @@ namespace ELI.Data.Repositories.Main
 
                                 ID = dataReader.GetIntegerValue(ListRepository.RIdColumnName),
                                 RoomID = dataReader.GetStringValue(ListRepository.RoomListRoomIdColumnName),
-                                CampusID = dataReader.GetIntegerValue(ListRepository.RoomCampusColumnName),
+                                Campus = dataReader.GetStringValue(ListRepository.RoomCampusColumnName),
                                 Building = dataReader.GetStringValue(ListRepository.RoomBuildingColumnName),
                                 RoomType = dataReader.GetStringValue(ListRepository.RoomTypeColumnName),
                                 Floor = dataReader.GetStringValue(ListRepository.FloorColumnName),
@@ -386,7 +386,7 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(ListRepository.AgentCountryParameterName, agent.Country),
                     base.GetParameter(ListRepository.AgentNotesParameterName, agent.Notes),
                     base.GetParameter(ListRepository.AgentOtherParameterName, agent.Other),
-                    base.GetParameter(BaseRepository.ActiveColumnName, agent.Active),
+                    base.GetParameter(BaseRepository.ActiveParameterName, agent.Active),
 
                 };
 
@@ -400,7 +400,7 @@ namespace ELI.Data.Repositories.Main
             var parameters = new List<DbParameter>
                 {
                     base.GetParameter(ListRepository.AgentIdParameterName, agent.ID),
-                    base.GetParameter(BaseRepository.ActiveColumnName, agent.Active)
+                    base.GetParameter(BaseRepository.ActiveParameterName, agent.Active)
                 };
 
             var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.ActivateAgentStoredProcedureName, CommandType.StoredProcedure);
@@ -1110,7 +1110,7 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(ListRepository.CampusAddressOnReportsParameterName, campusViewModel.AddressOnReports),
                     base.GetParameter(ListRepository.CampusCompleteNameParameterName, campusViewModel.CompleteName),
                     base.GetParameter(ListRepository.CampusOnelineaddressParameterName, campusViewModel.Onelineaddress),
-                    base.GetParameter(BaseRepository.ActiveColumnName, campusViewModel.Active)
+                    base.GetParameter(BaseRepository.ActiveParameterName, campusViewModel.Active)
 
                 };
 
@@ -1124,7 +1124,7 @@ namespace ELI.Data.Repositories.Main
             var parameters = new List<DbParameter>
                 {
                     base.GetParameter(ListRepository.CampusIDParameterName, campusViewModel.ID),
-                    base.GetParameter(BaseRepository.ActiveColumnName, campusViewModel.Active)
+                    base.GetParameter(BaseRepository.ActiveParameterName, campusViewModel.Active)
 
                 };
 
@@ -1219,6 +1219,150 @@ namespace ELI.Data.Repositories.Main
 
         #endregion
 
+
+        #region Program
+
+
+        //private const string AddCampusStoredProcedureName = "AddCampus";
+        //private const string UpdateCampusStoredProcedureName = "UpdateCampus";
+        //private const string GetCampusStoredProcedureName = "GetCampus";
+        //private const string GetAllCampusStoredProcedureName = "GetAllCampus";
+        //private const string ActivateCampusStoredProcedureName = "ActivateCampus";
+
+        private const string AddProgramStoredProcedureName = "AddProgram";
+        private const string UpdateProgramStoredProcedureName = "UpdateProgram";
+        private const string GetProgramStoredProcedureName = "GetProgram";
+        private const string GetAllProgramStoredProcedureName = "GetAllProgram";
+        private const string ActivateProgramStoredProcedureName = "ActivateProgram";
+
+        private const string ProgramIDParameterName = "PProgramID";
+        private const string ProgramNameParameterName = "PName";
+
+
+        private const string ProgramIDColumnName = "ProgramID";
+        private const string ProgramNameColumnName = "ProgramName";
+
+
+        public async Task<int> CreateProgramAsync(ProgramViewModel programViewModel)
+        {
+            var programIdParamter = base.GetParameterOut(ListRepository.ProgramIDParameterName, SqlDbType.Int, programViewModel.ID);
+            var parameters = new List<DbParameter>
+                {
+                    programIdParamter,
+                    
+                    base.GetParameter(ListRepository.ProgramNameParameterName, programViewModel.ProgramName)
+
+                };
+
+            await base.ExecuteNonQuery(parameters, ListRepository.AddProgramStoredProcedureName, CommandType.StoredProcedure);
+
+            programViewModel.ID = Convert.ToInt32(programIdParamter.Value);
+
+            return programViewModel.ID;
+        }
+
+        public async Task<bool> UpdateProgramAsync(ProgramViewModel programViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.ProgramIDParameterName, programViewModel.ID),
+                    base.GetParameter(ListRepository.ProgramNameParameterName, programViewModel.ProgramName),
+                    base.GetParameter(BaseRepository.ActiveParameterName, programViewModel.Active)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateProgramStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<bool> ActivateProgramAsync(ProgramViewModel programViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.ProgramIDParameterName, programViewModel.ID),
+                    base.GetParameter(BaseRepository.ActiveParameterName, programViewModel.Active)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.ActivateProgramStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<ProgramViewModel> GetProgramAsync(int programId)
+        {
+            ProgramViewModel programVM = null;
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.ProgramIDParameterName, programId)
+                };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetProgramStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        programVM = new ProgramViewModel
+                        {
+                            ID = dataReader.GetIntegerValue(ListRepository.ProgramIDColumnName),
+                            ProgramName = dataReader.GetStringValue(ListRepository.ProgramNameColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                        };
+                    }
+                }
+            }
+            return programVM;
+        }
+
+        public async Task<AllResponse<ProgramViewModel>> GetAllProgramAsync(AllRequest<ProgramViewModel> programList)
+        {
+            ProgramViewModel programVM = null;
+
+            var result = new AllResponse<ProgramViewModel>
+            {
+                Data = new List<ProgramViewModel>(),
+                Offset = programList.Offset,
+                PageSize = programList.PageSize,
+                SortColumn = programList.SortColumn,
+                SortAscending = programList.SortAscending
+            };
+
+            var parameters = new List<DbParameter>
+            {
+
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllProgramStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+
+                    while (dataReader.Read())
+                    {
+                        programVM = new ProgramViewModel
+                        {
+                            ID = dataReader.GetIntegerValue(ListRepository.ProgramIDColumnName),
+                            ProgramName = dataReader.GetStringValue(ListRepository.ProgramNameColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                        };
+                        result.Data.Add(programVM);
+                    }
+
+                    if (!dataReader.IsClosed)
+                    {
+                        dataReader.Close();
+                    }
+
+
+                }
+            }
+
+            return result;
+        }
+
+        #endregion
 
     }
 }

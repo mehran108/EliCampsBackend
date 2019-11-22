@@ -6,11 +6,6 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 ALTER PROCEDURE [dbo].[GetAllRooms] 
-	-- Add the parameters for the stored procedure here
-	@POffset int, 
-    @PPageSize int,
-    @PSortColumn varchar(60),
-    @PSortAscending bit,
 	@PActive bit
 AS
 BEGIN

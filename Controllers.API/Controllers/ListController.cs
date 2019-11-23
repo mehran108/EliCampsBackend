@@ -85,12 +85,12 @@ namespace ELI.API.Controllers
 
         [HttpGet("getAllAgent")]
         [Produces(typeof(List<AgentViewModel>))]
-        public async Task<IActionResult> GetAllAgent()
+        public async Task<IActionResult> GetAllAgent([FromQuery] AgentRequestVm requestVm)
         {
             try
             {
-                AllRequest<AgentViewModel> agentList = new AllRequest<AgentViewModel>();
-                return new ObjectResult(await _ELIService.GetAllAgent(agentList));
+                //AllRequest<AgentViewModel> agentList = new AllRequest<AgentViewModel>();
+                return new ObjectResult(await _ELIService.GetAllAgent(requestVm));
             }
             catch (Exception ex)
             {
@@ -191,12 +191,12 @@ namespace ELI.API.Controllers
 
         [HttpGet("getAllRoomList")]
         [Produces(typeof(List<RoomsViewModel>))]
-        public async Task<IActionResult> GetAllRoomList()
+        public async Task<IActionResult> GetAllRoomList([FromQuery] RoomsRequestVm requestVm)
         {
             try
             {
-                AllRequest<RoomsList> roomlist = new AllRequest<RoomsList>();
-                return new ObjectResult(await _ELIService.GetAllRomeList(roomlist));
+               
+                return new ObjectResult(await _ELIService.GetAllRomeList(requestVm));
             }
             catch (Exception ex)
             {
@@ -246,12 +246,12 @@ namespace ELI.API.Controllers
 
         [HttpGet("getAllTrips")]
         [Produces(typeof(List<TripsViewModel>))]
-        public async Task<IActionResult> GettAllTrips()
+        public async Task<IActionResult> GettAllTrips([FromQuery] TripsRequestVm requestVm)
         {
             try
             {
-                AllRequest<TripsViewModel> tripslist = new AllRequest<TripsViewModel>();
-                return new ObjectResult(await _ELIService.GetAllTripsList(tripslist));
+                
+                return new ObjectResult(await _ELIService.GetAllTripsList(requestVm));
             }
             catch (Exception ex)
             {
@@ -347,12 +347,12 @@ namespace ELI.API.Controllers
 
         [HttpGet("getAllHomeStay")]
         [Produces(typeof(List<HomeStayViewModel>))]
-        public async Task<IActionResult> GetAllHomeStay()
+        public async Task<IActionResult> GetAllHomeStay([FromQuery] HomeStayRequestVm requestVm)
         {
             try
             {
-                AllRequest<HomeStayViewModel> homeStay = new AllRequest<HomeStayViewModel>();
-                return new ObjectResult(await _ELIService.GetAllHomeStay(homeStay));
+
+                return new ObjectResult(await _ELIService.GetAllHomeStay(requestVm));
             }
             catch (Exception ex)
             {
@@ -432,12 +432,12 @@ namespace ELI.API.Controllers
 
         [HttpGet("getAllAddins")]
         [Produces(typeof(List<AddinsViewModel>))]
-        public async Task<IActionResult> getAllAddins()
+        public async Task<IActionResult> getAllAddins([FromQuery] AddinsRequestVm requestVm)
         {
             try
             {
-                AllRequest<AddinsViewModel> addinslist = new AllRequest<AddinsViewModel>();
-                return new ObjectResult(await _ELIService.GetAllAddinsList(addinslist));
+               
+                return new ObjectResult(await _ELIService.GetAllAddinsList(requestVm));
             }
             catch (Exception ex)
             {

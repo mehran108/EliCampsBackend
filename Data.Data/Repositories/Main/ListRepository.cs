@@ -136,26 +136,20 @@ namespace ELI.Data.Repositories.Main
             return agentVM;
         }
 
-        public async Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms)
+        public async Task<AllResponse<RoomsList>> GetAllRomeList(RoomsRequestVm rooms)
         {
             RoomsList roomsList = null;
 
             var result = new AllResponse<RoomsList>
             {
-                Data = new List<RoomsList>(),
-                Offset = rooms.Offset,
-                PageSize = rooms.PageSize,
-                SortColumn = rooms.SortColumn,
-                SortAscending = rooms.SortAscending
+                Data = new List<RoomsList>()
             };
 
             var parameters = new List<DbParameter>
             {
 
-                base.GetParameter(BaseRepository.OffsetParameterName, rooms.Offset),
-                base.GetParameter(BaseRepository.PageSizeParameterName, rooms.PageSize),
-                base.GetParameter(BaseRepository.SortColumnParameterName, rooms.SortColumn),
-                base.GetParameter(BaseRepository.SortAscendingParameterName, rooms.SortAscending),
+               
+                base.GetParameter(BaseRepository.ActiveParameterName, rooms.Active)
             };
 
             using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllRoomsStoredProcedureName, CommandType.StoredProcedure))
@@ -408,26 +402,19 @@ namespace ELI.Data.Repositories.Main
             return returnValue > 0;
         }
 
-        public async Task<AllResponse<AgentViewModel>> GetAllAgent(AllRequest<AgentViewModel> agent)
+        public async Task<AllResponse<AgentViewModel>> GetAllAgent(AgentRequestVm agent)
         {
             AgentViewModel agentVM = null;
 
             var result = new AllResponse<AgentViewModel>
             {
-                Data = new List<AgentViewModel>(),
-                Offset = agent.Offset,
-                PageSize = agent.PageSize,
-                SortColumn = agent.SortColumn,
-                SortAscending = agent.SortAscending
+                Data = new List<AgentViewModel>()
             };
 
             var parameters = new List<DbParameter>
             {
 
-                base.GetParameter(BaseRepository.OffsetParameterName, agent.Offset),
-                base.GetParameter(BaseRepository.PageSizeParameterName, agent.PageSize),
-                base.GetParameter(BaseRepository.SortColumnParameterName, agent.SortColumn),
-                base.GetParameter(BaseRepository.SortAscendingParameterName, agent.SortAscending)
+                base.GetParameter(BaseRepository.ActiveParameterName, agent.Active)
             };
 
             using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllAgentProcedureName, CommandType.StoredProcedure))
@@ -545,26 +532,21 @@ namespace ELI.Data.Repositories.Main
             return agentVM;
         }
 
-        public async Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> trips)
+        public async Task<AllResponse<TripsViewModel>> GetAllTripsList(TripsRequestVm trips)
         {
             TripsViewModel tripsViewModel = null;
 
             var result = new AllResponse<TripsViewModel>
             {
-                Data = new List<TripsViewModel>(),
-                Offset = trips.Offset,
-                PageSize = trips.PageSize,
-                SortColumn = trips.SortColumn,
-                SortAscending = trips.SortAscending
+                Data = new List<TripsViewModel>()
+                
             };
 
             var parameters = new List<DbParameter>
             {
 
-                base.GetParameter(BaseRepository.OffsetParameterName, trips.Offset),
-                base.GetParameter(BaseRepository.PageSizeParameterName, trips.PageSize),
-                base.GetParameter(BaseRepository.SortColumnParameterName, trips.SortColumn),
-                base.GetParameter(BaseRepository.SortAscendingParameterName, trips.SortAscending),
+       
+                base.GetParameter(BaseRepository.ActiveParameterName, trips.Active)
             };
 
             using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllTripsStoredProcedureName, CommandType.StoredProcedure))
@@ -745,26 +727,20 @@ namespace ELI.Data.Repositories.Main
             return homeStayVM;
         }
 
-        public async Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(AllRequest<HomeStayViewModel> homeStay)
+        public async Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(HomeStayRequestVm homeStay)
         {
             HomeStayViewModel homeStayViewModel = null;
 
             var result = new AllResponse<HomeStayViewModel>
             {
-                Data = new List<HomeStayViewModel>(),
-                Offset = homeStay.Offset,
-                PageSize = homeStay.PageSize,
-                SortColumn = homeStay.SortColumn,
-                SortAscending = homeStay.SortAscending
+                Data = new List<HomeStayViewModel>()
             };
 
             var parameters = new List<DbParameter>
             {
 
-                base.GetParameter(BaseRepository.OffsetParameterName, homeStay.Offset),
-                base.GetParameter(BaseRepository.PageSizeParameterName, homeStay.PageSize),
-                base.GetParameter(BaseRepository.SortColumnParameterName, homeStay.SortColumn),
-                base.GetParameter(BaseRepository.SortAscendingParameterName, homeStay.SortAscending),
+                
+                base.GetParameter(BaseRepository.ActiveParameterName, homeStay.Active)
             };
 
             using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllHomeStayStoredProcedureName, CommandType.StoredProcedure))
@@ -926,26 +902,21 @@ namespace ELI.Data.Repositories.Main
         }
 
 
-        public async Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AllRequest<AddinsViewModel> addins)
+        public async Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AddinsRequestVm addins)
         {
             AddinsViewModel addinsViewModel = null;
 
             var result = new AllResponse<AddinsViewModel>
             {
-                Data = new List<AddinsViewModel>(),
-                Offset = addins.Offset,
-                PageSize = addins.PageSize,
-                SortColumn = addins.SortColumn,
-                SortAscending = addins.SortAscending
+                Data = new List<AddinsViewModel>()
+               
             };
 
             var parameters = new List<DbParameter>
             {
 
-                base.GetParameter(BaseRepository.OffsetParameterName, addins.Offset),
-                base.GetParameter(BaseRepository.PageSizeParameterName, addins.PageSize),
-                base.GetParameter(BaseRepository.SortColumnParameterName, addins.SortColumn),
-                base.GetParameter(BaseRepository.SortAscendingParameterName, addins.SortAscending),
+               
+                base.GetParameter(BaseRepository.ActiveParameterName, addins.Active)
             };
 
             using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllAddinsTripStoredProcedureName, CommandType.StoredProcedure))

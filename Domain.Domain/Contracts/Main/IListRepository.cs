@@ -14,13 +14,13 @@ namespace ELI.Domain.Contracts.Main
         Task<int> CreateAgentAsync(AgentViewModel agent);
         Task<AgentViewModel> GetAgentAsync(int agentID);
         Task<bool> UpdateAgentAsync(AgentViewModel AgentViewModel);
-        Task<AllResponse<AgentViewModel>> GetAllAgent(AllRequest<AgentViewModel> agent);
+        Task<AllResponse<AgentViewModel>> GetAllAgent(AgentRequestVm agent);
         Task<bool> ActivateAgentAsync(AgentViewModel agent);
 
         #endregion
         #region Room
         Task<RoomsViewModel> GetRomeListAsync(int roomListId);
-        Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms);
+        Task<AllResponse<RoomsList>> GetAllRomeList(RoomsRequestVm rooms);
         Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel);
 
         Task<bool> ActivateRoom(RoomsViewModel roomsViewModel);
@@ -28,7 +28,7 @@ namespace ELI.Domain.Contracts.Main
         #region TripList
         Task<int> CreateTirpsAsync(TripsViewModel tripsViewModel);
         Task<TripsViewModel> GetTripAsync(int tripID);
-        Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> rooms);
+        Task<AllResponse<TripsViewModel>> GetAllTripsList(TripsRequestVm rooms);
         Task<bool> UpdateTirpsAsync(TripsViewModel tripsViewModel);
         /// <summary>
         /// Trips
@@ -45,7 +45,7 @@ namespace ELI.Domain.Contracts.Main
 
         Task<HomeStayViewModel> GetHomeStayAsync(int homeStayId);
 
-        Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(AllRequest<HomeStayViewModel> homeStay);
+        Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(HomeStayRequestVm homeStay);
 
         Task<bool> UpdateHomeStayAsync(HomeStayViewModel homeStayView);
 
@@ -59,7 +59,7 @@ namespace ELI.Domain.Contracts.Main
 
         Task<AddinsViewModel> GetAddins(int addinsId);
 
-        Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AllRequest<AddinsViewModel> AddinsList);
+        Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AddinsRequestVm AddinsList);
 
         Task<bool> UpdateAddinsAsync(AddinsViewModel addinsViewModel);
 

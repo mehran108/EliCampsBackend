@@ -486,7 +486,7 @@ namespace ELI.Domain.Services
             return await _listRepository.ActivateAgentAsync(agent);
         }
 
-        public async Task<AllResponse<AgentViewModel>> GetAllAgent(AllRequest<AgentViewModel> agent)
+        public async Task<AllResponse<AgentViewModel>> GetAllAgent(AgentRequestVm agent)
         {
             return await _listRepository.GetAllAgent(agent);
         }
@@ -496,7 +496,7 @@ namespace ELI.Domain.Services
             return await _listRepository.GetRomeListAsync(roomListID);
         }
 
-        public async Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms)
+        public async Task<AllResponse<RoomsList>> GetAllRomeList(RoomsRequestVm rooms)
         {
             return await _listRepository.GetAllRomeList(rooms);
         }
@@ -534,7 +534,7 @@ namespace ELI.Domain.Services
             return await _listRepository.GetTripAsync(agentID);
         }
 
-        public async Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> rooms)
+        public async Task<AllResponse<TripsViewModel>> GetAllTripsList(TripsRequestVm rooms)
         {
             return await _listRepository.GetAllTripsList(rooms);
         }
@@ -628,7 +628,7 @@ namespace ELI.Domain.Services
         {
             return await _listRepository.GetHomeStayAsync(homeStayId);
         }
-        public async Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(AllRequest<HomeStayViewModel> HomeStay)
+        public async Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(HomeStayRequestVm HomeStay)
         {
             return await _listRepository.GetAllHomeStay(HomeStay);
         }
@@ -658,7 +658,7 @@ namespace ELI.Domain.Services
             return await _listRepository.GetAddins(addinsId);
         }
 
-        public async Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AllRequest<AddinsViewModel> addinsList)
+        public async Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AddinsRequestVm addinsList)
         {
             return await _listRepository.GetAllAddinsList(addinsList);
         }

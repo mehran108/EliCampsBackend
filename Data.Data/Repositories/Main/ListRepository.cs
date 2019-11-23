@@ -1223,12 +1223,6 @@ namespace ELI.Data.Repositories.Main
         #region Program
 
 
-        //private const string AddCampusStoredProcedureName = "AddCampus";
-        //private const string UpdateCampusStoredProcedureName = "UpdateCampus";
-        //private const string GetCampusStoredProcedureName = "GetCampus";
-        //private const string GetAllCampusStoredProcedureName = "GetAllCampus";
-        //private const string ActivateCampusStoredProcedureName = "ActivateCampus";
-
         private const string AddProgramStoredProcedureName = "AddProgram";
         private const string UpdateProgramStoredProcedureName = "UpdateProgram";
         private const string GetProgramStoredProcedureName = "GetProgram";
@@ -1331,7 +1325,7 @@ namespace ELI.Data.Repositories.Main
 
             var parameters = new List<DbParameter>
             {
-
+                base.GetParameter(BaseRepository.ActiveParameterName, programList.Data.Active)
             };
 
             using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllProgramStoredProcedureName, CommandType.StoredProcedure))
@@ -1348,6 +1342,153 @@ namespace ELI.Data.Repositories.Main
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
                         };
                         result.Data.Add(programVM);
+                    }
+
+                    if (!dataReader.IsClosed)
+                    {
+                        dataReader.Close();
+                    }
+
+
+                }
+            }
+
+            return result;
+        }
+
+        #endregion
+
+        #region SubProgram
+
+
+        private const string AddSubProgramStoredProcedureName = "AddSubProgram";
+        private const string UpdateSubProgramStoredProcedureName = "UpdateSubProgram";
+        private const string GetSubProgramStoredProcedureName = "GetSubProgram";
+        private const string GetAllSubProgramStoredProcedureName = "GetAllSubProgram";
+        private const string ActivateSubProgramStoredProcedureName = "ActivateSubProgram";
+
+        private const string SubProgramIDParameterName = "PSubProgramID";
+        private const string SubProgramProgramIDParameterName = "PProgramID";
+        private const string SubProgramNameParameterName = "PSubProgramName";
+
+
+        private const string SubProgramIDColumnName = "SubProgramID";
+        private const string SubProgramProgramIDColumnName = "ProgramID";
+        private const string SubProgramProgramNameColumnName = "ProgramName";
+        private const string SubProgramNameColumnName = "SubProgramName";
+
+
+        public async Task<int> CreateSubProgramAsync(SubProgramViewModel subProgramViewModel)
+        {
+            var subProgramIdParamter = base.GetParameterOut(ListRepository.SubProgramIDParameterName, SqlDbType.Int, 0);
+            var parameters = new List<DbParameter>
+                {
+                    subProgramIdParamter,
+
+                    base.GetParameter(ListRepository.SubProgramProgramIDParameterName, subProgramViewModel.ProgramID),
+                    base.GetParameter(ListRepository.SubProgramNameParameterName, subProgramViewModel.SubProgramName)
+
+                };
+
+            await base.ExecuteNonQuery(parameters, ListRepository.AddSubProgramStoredProcedureName, CommandType.StoredProcedure);
+
+            subProgramViewModel.ID = Convert.ToInt32(subProgramIdParamter.Value);
+
+            return subProgramViewModel.ID;
+        }
+
+        public async Task<bool> UpdateSubrogramAsync(SubProgramViewModel subProgramViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.SubProgramIDParameterName, subProgramViewModel.ID),
+                    base.GetParameter(ListRepository.SubProgramProgramIDParameterName, subProgramViewModel.ProgramID),
+                    base.GetParameter(ListRepository.SubProgramNameParameterName, subProgramViewModel.SubProgramName),
+                    base.GetParameter(BaseRepository.ActiveParameterName, subProgramViewModel.Active)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateSubProgramStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<bool> ActivateSubProgramAsync(SubProgramViewModel subProgramViewModel)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.SubProgramIDParameterName, subProgramViewModel.ID),
+                    base.GetParameter(BaseRepository.ActiveParameterName, subProgramViewModel.Active)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.ActivateSubProgramStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<SubProgramViewModel> GetSubProgramAsync(int subProgramId)
+        {
+            SubProgramViewModel subProgramVM = null;
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.SubProgramIDParameterName, subProgramId)
+                };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetSubProgramStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        subProgramVM = new SubProgramViewModel
+                        {
+                            ID = dataReader.GetIntegerValue(ListRepository.SubProgramIDColumnName),
+                            ProgramID = dataReader.GetIntegerValue(ListRepository.SubProgramProgramIDColumnName),
+                            SubProgramName = dataReader.GetStringValue(ListRepository.SubProgramNameColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                        };
+                    }
+                }
+            }
+            return subProgramVM;
+        }
+
+        public async Task<AllResponse<SubProgramViewModel>> GetAllSubProgramAsync(AllRequest<SubProgramViewModel> subProgramList)
+        {
+            SubProgramViewModel subProgramVM = null;
+
+            var result = new AllResponse<SubProgramViewModel>
+            {
+                Data = new List<SubProgramViewModel>(),
+                Offset = subProgramList.Offset,
+                PageSize = subProgramList.PageSize,
+                SortColumn = subProgramList.SortColumn,
+                SortAscending = subProgramList.SortAscending
+            };
+
+            var parameters = new List<DbParameter>
+            {
+                base.GetParameter(ListRepository.ProgramIDParameterName, subProgramList.Data.ProgramID),
+                base.GetParameter(BaseRepository.ActiveParameterName, subProgramList.Data.Active)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllSubProgramStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+
+                    while (dataReader.Read())
+                    {
+                        subProgramVM = new SubProgramViewModel
+                        {
+                            ID = dataReader.GetIntegerValue(ListRepository.SubProgramIDColumnName),
+                            ProgramID = dataReader.GetIntegerValue(ListRepository.SubProgramProgramIDColumnName),
+                            SubProgramName = dataReader.GetStringValue(ListRepository.SubProgramNameColumnName),
+                            ProgramName = dataReader.GetStringValue(ListRepository.ProgramNameColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                        };
+                        result.Data.Add(subProgramVM);
                     }
 
                     if (!dataReader.IsClosed)

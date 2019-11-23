@@ -256,7 +256,19 @@ namespace ELI.Domain.Services
         Task<bool> ActivateProgramAsync(ProgramViewModel programViewModel);
         #endregion
 
-        
+        #region SubProgram
+        Task<int> CreateSubProgramAsync(SubProgramViewModel subProgramViewModel);
+
+        Task<SubProgramViewModel> GetSubProgramAsync(int subProgramId);
+
+        Task<AllResponse<SubProgramViewModel>> GetAllSubProgramAsync(AllRequest<SubProgramViewModel> subProgramList);
+
+        Task<bool> UpdateSubProgramAsync(SubProgramViewModel subProgramViewModel);
+
+        Task<bool> ActivateSubProgramAsync(SubProgramViewModel subProgramViewModel);
+        #endregion
+
+
 
     }
 }

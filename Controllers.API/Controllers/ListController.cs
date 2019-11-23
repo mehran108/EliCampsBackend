@@ -568,8 +568,184 @@ namespace ELI.API.Controllers
 
 
 
+        [HttpPost("createProgram")]
+        public async Task<IActionResult> CreateProgramAsync([FromBody] ProgramViewModel programViewModel)
+        {
+
+            if (programViewModel != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.CreateProgramAsync(programViewModel));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Program model cannot be empty" });
+            }
+        }
 
 
+        [HttpGet("getProgram")]
+        [Produces(typeof(ProgramViewModel))]
+        public async Task<IActionResult> GetProgramAsync(int programId)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetProgramAsync(programId));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpPut("updateProgram")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> UpdateProgramAsync([FromBody] ProgramViewModel programViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateProgramAsync(programViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpGet("getAllProgram")]
+        [Produces(typeof(List<ProgramViewModel>))]
+        public async Task<IActionResult> GetAllProgramAsync([FromQuery] ProgramViewModel programViewModel)
+        {
+            try
+            {
+                AllRequest<ProgramViewModel> programList = new AllRequest<ProgramViewModel>();
+                programList.Data = programViewModel;
+                return new ObjectResult(await _ELIService.GetAllProgramAsync(programList));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("activateProgram")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> ActivateProgramAsync([FromBody] ProgramViewModel programViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateProgramAsync(programViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpPost("createSubProgram")]
+        public async Task<IActionResult> CreateSubProgramAsync([FromBody] SubProgramViewModel subProgramViewModel)
+        {
+
+            if (subProgramViewModel != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.CreateSubProgramAsync(subProgramViewModel));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "SubProgram model cannot be empty" });
+            }
+        }
+
+
+        [HttpGet("getSubProgram")]
+        [Produces(typeof(SubProgramViewModel))]
+        public async Task<IActionResult> GetSubProgramAsync(int subProgramId)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetSubProgramAsync(subProgramId));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpPut("updateSubProgram")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> UpdateSubProgramAsync([FromBody] SubProgramViewModel subProgramViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateSubProgramAsync(subProgramViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpGet("getAllSubProgram")]
+        [Produces(typeof(List<SubProgramViewModel>))]
+        public async Task<IActionResult> GetAllSubProgramAsync([FromQuery] SubProgramViewModel subProgramViewModel)
+        {
+            try
+            {
+                AllRequest<SubProgramViewModel> subProgramList = new AllRequest<SubProgramViewModel>();
+                subProgramList.Data = subProgramViewModel;
+                return new ObjectResult(await _ELIService.GetAllSubProgramAsync(subProgramList));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("activateSubProgram")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> ActivateSubProgramAsync([FromBody] SubProgramViewModel subProgramViewModel)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateSubProgramAsync(subProgramViewModel));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
 
 

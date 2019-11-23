@@ -244,6 +244,31 @@ namespace ELI.Domain.Services
         Task<bool> ActivateCampusAsync(CampuseViewModel campusViewModel);
         #endregion
 
+        #region Program
+        Task<int> CreateProgramAsync(ProgramViewModel programViewModel);
+
+        Task<ProgramViewModel> GetProgramAsync(int programId);
+
+        Task<AllResponse<ProgramViewModel>> GetAllProgramAsync(AllRequest<ProgramViewModel> programList);
+
+        Task<bool> UpdateProgramAsync(ProgramViewModel programViewModel);
+
+        Task<bool> ActivateProgramAsync(ProgramViewModel programViewModel);
+        #endregion
+
+        #region SubProgram
+        Task<int> CreateSubProgramAsync(SubProgramViewModel subProgramViewModel);
+
+        Task<SubProgramViewModel> GetSubProgramAsync(int subProgramId);
+
+        Task<AllResponse<SubProgramViewModel>> GetAllSubProgramAsync(AllRequest<SubProgramViewModel> subProgramList);
+
+        Task<bool> UpdateSubProgramAsync(SubProgramViewModel subProgramViewModel);
+
+        Task<bool> ActivateSubProgramAsync(SubProgramViewModel subProgramViewModel);
+        #endregion
+
+
 
     }
 }

@@ -124,7 +124,7 @@ namespace ELI.Domain.Services
         Task<bool> UpdateAgentAsync(AgentViewModel agent);
 
         Task<bool> ActivateAgentAsync(AgentViewModel agent);
-        Task<AllResponse<AgentViewModel>> GetAllAgent(AllRequest<AgentViewModel> agent);
+        Task<AllResponse<AgentViewModel>> GetAllAgent(AgentRequestVm agent);
 
         #endregion
 
@@ -132,7 +132,7 @@ namespace ELI.Domain.Services
 
         Task<RoomsViewModel> GetRomeList(int roomListId);
 
-        Task<AllResponse<RoomsList>> GetAllRomeList(AllRequest<RoomsList> rooms);
+        Task<AllResponse<RoomsList>> GetAllRomeList(RoomsRequestVm rooms);
         Task<int> CreateRoomListAsync(RoomsViewModel roomsViewModel);
 
         Task<bool> UpdateRoomListAsync(RoomsViewModel roomsViewModel);
@@ -155,7 +155,7 @@ namespace ELI.Domain.Services
         /// </summary>
         /// <param name="rooms"></param>
         /// <returns></returns>
-        Task<AllResponse<TripsViewModel>> GetAllTripsList(AllRequest<TripsViewModel> rooms);
+        Task<AllResponse<TripsViewModel>> GetAllTripsList(TripsRequestVm rooms);
         /// <summary>
         /// 
         /// </summary>
@@ -202,7 +202,7 @@ namespace ELI.Domain.Services
 
         Task<HomeStayViewModel> GetHomeStayAsync(int homeStayId);
 
-        Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(AllRequest<HomeStayViewModel> homeStay);
+        Task<AllResponse<HomeStayViewModel>> GetAllHomeStay(HomeStayRequestVm homeStay);
 
         Task<bool> UpdateHomeStayAsync(HomeStayViewModel homeStayView);
 
@@ -218,7 +218,7 @@ namespace ELI.Domain.Services
         /// </summary>
         /// <param name="rooms"></param>
         /// <returns></returns>
-        Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AllRequest<AddinsViewModel> AddinsList);
+        Task<AllResponse<AddinsViewModel>> GetAllAddinsList(AddinsRequestVm AddinsList);
         /// <summary>
         /// 
         /// </summary>
@@ -256,7 +256,19 @@ namespace ELI.Domain.Services
         Task<bool> ActivateProgramAsync(ProgramViewModel programViewModel);
         #endregion
 
-        
+        #region SubProgram
+        Task<int> CreateSubProgramAsync(SubProgramViewModel subProgramViewModel);
+
+        Task<SubProgramViewModel> GetSubProgramAsync(int subProgramId);
+
+        Task<AllResponse<SubProgramViewModel>> GetAllSubProgramAsync(AllRequest<SubProgramViewModel> subProgramList);
+
+        Task<bool> UpdateSubProgramAsync(SubProgramViewModel subProgramViewModel);
+
+        Task<bool> ActivateSubProgramAsync(SubProgramViewModel subProgramViewModel);
+        #endregion
+
+
 
     }
 }

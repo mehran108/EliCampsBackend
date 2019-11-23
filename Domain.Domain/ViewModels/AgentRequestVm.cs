@@ -4,10 +4,10 @@ using System.Text;
 
 namespace ELI.Domain.ViewModels
 {
-    public class ProgramViewModel
+    public class AgentRequestVm
     {
-        public int ID { get; set; }
-        public string ProgramName { get; set; }
+
         public bool? Active { get; set; }
+
     }
 }

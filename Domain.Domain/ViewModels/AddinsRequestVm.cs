@@ -4,10 +4,11 @@ using System.Text;
 
 namespace ELI.Domain.ViewModels
 {
-    public class ProgramViewModel
+   
+    public class AddinsRequestVm
     {
-        public int ID { get; set; }
-        public string ProgramName { get; set; }
+
         public bool? Active { get; set; }
+
     }
 }

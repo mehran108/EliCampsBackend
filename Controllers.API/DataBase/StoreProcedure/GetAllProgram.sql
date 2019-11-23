@@ -18,13 +18,14 @@ END
 GO
 Alter PROCEDURE [dbo].[GetAllProgram] 
 	-- Add the parameters for the stored procedure here
-	
+@PActive bit	
 AS
 BEGIN
 	
     Select [clmPrograms_ID] As ProgramID
       ,[clmPrograms_Name] As ProgramName
       ,[clmPrograms_IsActive] As Active
-	 from [tblPrograms] ;
+	 from [tblPrograms]
+	 where ( [clmPrograms_IsActive] = (CASE WHEN @PActive is not null then @PActive else [clmPrograms_IsActive] end)) ;
 END
 GO

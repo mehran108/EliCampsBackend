@@ -46,5 +46,20 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = "Student model cannot be empty" });
             }
         }
+
+        [HttpPut("updateStudent")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> UpdateStudentAsync([FromBody] StudentRegistration studentVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateStudentAsync(studentVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace ELI.Domain.ViewModels
         public DateTime DOB { get; set; }
         public int Age { get; set; }
         public string PassportNumber { get; set; }
-        public int AgencyID { get; set; }
+        public int? AgencyID { get; set; }
         public DateTime ArrivalDate { get; set; }
         public string Terminal { get; set; }
         public string FlightNumber { get; set; }
@@ -42,14 +42,35 @@ namespace ELI.Domain.ViewModels
         public string MedicalNotes { get; set; }
         public DateTime ProgrameStartDate { get; set; }
         public DateTime ProgrameEndDate { get; set; }
-        public int Campus { get; set; }
-        public int Format { get; set; }
+        public int? Campus { get; set; }
+        public int? Format { get; set; }
         public string MealPlan { get; set; }
         public List<int> ProgrameAddins { get; set; }
         public string AddinsID { get; set; }
         public string ExtraNotes { get; set; }
         public string ExtraNotesHTML { get; set; }
         public string Status { get; set; }
+
+        public string HomestayOrResi { get; set; }
+        public int? HomestayID { get; set; }
+        public int? RoomID { get; set; }
+        public int? RoomSearchCampus { get; set; }
+        public DateTime RoomSearchFrom { get; set; }
+        public DateTime RoomSearchTo { get; set; }
+        public int NumberOfNights { get; set; }
+        public double TotalGrossPrice { get; set; }
+        public double TotalAddins { get; set; }
+        public double Paid { get; set; }
+        public double Commision { get; set; }
+        public double CommissionAddins { get; set; }
+        public string ProfilePic { get; set; }
+        public double NetPrice { get; set; }
+        public double Balance { get; set; }
+        public List<int> StudentTrips { get; set; }
+        public string StudentTripsID { get; set; }
+        public bool Active { get; set; }
+
+
 
 
     }

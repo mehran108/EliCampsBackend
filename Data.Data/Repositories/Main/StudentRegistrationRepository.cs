@@ -71,6 +71,24 @@ namespace ELI.Data.Repositories.Main
         private const string ExtraNotesHTMLParameterName = "PExtraNotesHTML";
         private const string StatusParameterName = "PStatus";
 
+        private const string HomestayOrResiParameterName = "PHomestayOrResi";
+        private const string HomestayIDParameterName = "PHomestayID";
+        private const string RoomIDParameterName = "PRoomID";
+        private const string RoomSearchCampusParameterName = "PRoomSearchCampus";
+        private const string RoomSearchFromParameterName = "PRoomSearchFrom";
+        private const string RoomSearchToParameterName = "PRoomSearchTo";
+        private const string NumberOfNightsParameterName = "PNumberOfNights";
+        private const string TotalGrossPriceParameterName = "PTotalGrossPrice";
+        private const string TotalAddinsParameterName = "PTotalAddins";
+        private const string PaidParameterName = "PPaid";
+        private const string CommisionParameterName = "PCommision";
+        private const string CommissionAddinsParameterName = "PCommissionAddins";
+        private const string NetPriceParameterName = "PNetPrice";
+        private const string BalanceParameterName = "PBalance";
+        private const string StudentTripsIDParameterName = "PStudentTripsID";
+
+
+
         
         private const string IDColumnName = "ID";
         private const string YearColumnName = "Year";
@@ -115,6 +133,24 @@ namespace ELI.Data.Repositories.Main
         private const string ExtraNotesColumnName = "ExtraNotes";
         private const string ExtraNotesHTMLColumnName = "ExtraNotesHTML";
 
+        private const string StatusColumnName = "Status";
+
+        private const string HomestayOrResiColumnName = "HomestayOrResi";
+        private const string HomestayIDColumnName = "HomestayID";
+        private const string RoomIDColumnName = "RoomID";
+        private const string RoomSearchCampusColumnName = "RoomSearchCampus";
+        private const string RoomSearchFromColumnName = "RoomSearchFrom";
+        private const string RoomSearchToColumnName = "RoomSearchTo";
+        private const string NumberOfNightsColumnName = "NumberOfNights";
+        private const string TotalGrossPriceColumnName = "TotalGrossPrice";
+        private const string TotalAddinsColumnName = "TotalAddins";
+        private const string PaidColumnName = "Paid";
+        private const string CommisionColumnName = "Commision";
+        private const string CommissionAddinsColumnName = "CommissionAddins";
+        private const string NetPriceColumnName = "NetPrice";
+        private const string BalanceColumnName = "Balance";
+        private const string StudentTripsIDColumnName = "StudentTripsID";
+
 
         public async Task<int> AddStudentAsync(StudentRegistration student)
         {
@@ -154,17 +190,11 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.DietaryNeedsParameterName, student.DietaryNeeds),
                     base.GetParameter(StudentRegistrationRepository.AllergiesParameterName, student.Allergies),
                     base.GetParameter(StudentRegistrationRepository.MedicalNotesParameterName, student.MedicalNotes),
-                    //base.GetParameter(StudentRegistrationRepository.ProgrameStartDateParameterName, student.ProgrameStartDate),
-                    //base.GetParameter(StudentRegistrationRepository.ProgrameEndDateParameterName, student.ProgrameEndDate),
-                    //base.GetParameter(StudentRegistrationRepository.CampusParameterName, student.Campus),
-                    //base.GetParameter(StudentRegistrationRepository.FormatParameterName, student.Format),
-                    //base.GetParameter(StudentRegistrationRepository.MealPlanParameterName, student.MealPlan),
-                    //base.GetParameter(StudentRegistrationRepository.AddinsIDParameterName, student.AddinsID),
                     base.GetParameter(StudentRegistrationRepository.ExtraNotesParameterName, student.ExtraNotes),
                     base.GetParameter(StudentRegistrationRepository.ExtraNotesHTMLParameterName, student.ExtraNotesHTML),
                     base.GetParameter(StudentRegistrationRepository.StatusParameterName, student.Status)
-                    
-       
+
+
     };
 
             await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.AddStoredProcedureName, CommandType.StoredProcedure);
@@ -172,6 +202,80 @@ namespace ELI.Data.Repositories.Main
             student.ID = Convert.ToInt32(studentIdParamter.Value);
 
             return student.ID;
+        }
+
+
+        public async Task<bool> UpdateStudentAsync(StudentRegistration student)
+        {
+            var parameters = new List<DbParameter>
+                {
+                
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, student.ID),
+                    base.GetParameter(StudentRegistrationRepository.YearParameterName, student.Year),
+                    base.GetParameter(StudentRegistrationRepository.GroupRefParameterName, student.GroupRef),
+                    base.GetParameter(StudentRegistrationRepository.CampsParameterName, student.Camps),
+                    base.GetParameter(StudentRegistrationRepository.GenderParameterName, student.Gender),
+                    base.GetParameter(StudentRegistrationRepository.FirstNameParameterName, student.FirstName),
+                    base.GetParameter(StudentRegistrationRepository.LastNameParameterName, student.LastName),
+                    base.GetParameter(StudentRegistrationRepository.HomeAddressParameterName, student.HomeAddress),
+                    base.GetParameter(StudentRegistrationRepository.CityParameterName, student.City),
+                    base.GetParameter(StudentRegistrationRepository.StateParameterName, student.State),
+                    base.GetParameter(StudentRegistrationRepository.CountryParameterName, student.Country),
+                    base.GetParameter(StudentRegistrationRepository.PostCodeParameterName, student.PostCode),
+                    base.GetParameter(StudentRegistrationRepository.EmergencyContactParameterName, student.EmergencyContact),
+                    base.GetParameter(StudentRegistrationRepository.EmailParameterName, student.Email),
+                    base.GetParameter(StudentRegistrationRepository.PhoneParameterName, student.Phone),
+                    base.GetParameter(StudentRegistrationRepository.DOBParameterName, student.DOB),
+                    base.GetParameter(StudentRegistrationRepository.AgeParameterName, student.Age),
+                    base.GetParameter(StudentRegistrationRepository.PassportNumberParameterName, student.PassportNumber),
+                    base.GetParameter(StudentRegistrationRepository.AgencyIDParameterName, student.AgencyID),
+                    base.GetParameter(StudentRegistrationRepository.ArrivalDateParameterName, student.ArrivalDate),
+                    base.GetParameter(StudentRegistrationRepository.TerminalParameterName, student.Terminal),
+                    base.GetParameter(StudentRegistrationRepository.FlightNumberParameterName, student.FlightNumber),
+                    base.GetParameter(StudentRegistrationRepository.DestinationFromParameterName, student.DestinationFrom),
+                    base.GetParameter(StudentRegistrationRepository.ArrivalTimeParameterName, student.ArrivalTime),
+                    base.GetParameter(StudentRegistrationRepository.DepartureDateParameterName, student.DepartureDate),
+                    base.GetParameter(StudentRegistrationRepository.DepartureTerminalParameterName, student.DepartureTerminal),
+                    base.GetParameter(StudentRegistrationRepository.DepartureFlightNumberParameterName, student.DepartureFlightNumber),
+                    base.GetParameter(StudentRegistrationRepository.DestinationToParameterName, student.DestinationTo),
+                    base.GetParameter(StudentRegistrationRepository.FlightDepartureTimeParameterName, student.FlightDepartureTime),
+                    base.GetParameter(StudentRegistrationRepository.MedicalInformationParameterName, student.MedicalInformation),
+                    base.GetParameter(StudentRegistrationRepository.DietaryNeedsParameterName, student.DietaryNeeds),
+                    base.GetParameter(StudentRegistrationRepository.AllergiesParameterName, student.Allergies),
+                    base.GetParameter(StudentRegistrationRepository.MedicalNotesParameterName, student.MedicalNotes),
+                    base.GetParameter(StudentRegistrationRepository.ProgrameStartDateParameterName, student.ProgrameStartDate),
+                    base.GetParameter(StudentRegistrationRepository.ProgrameEndDateParameterName, student.ProgrameEndDate),
+                    base.GetParameter(StudentRegistrationRepository.CampusParameterName, student.Campus),
+                    base.GetParameter(StudentRegistrationRepository.FormatParameterName, student.Format),
+                    base.GetParameter(StudentRegistrationRepository.MealPlanParameterName, student.MealPlan),
+                    base.GetParameter(StudentRegistrationRepository.AddinsIDParameterName, student.AddinsID),
+                    base.GetParameter(StudentRegistrationRepository.ExtraNotesParameterName, student.ExtraNotes),
+                    base.GetParameter(StudentRegistrationRepository.ExtraNotesHTMLParameterName, student.ExtraNotesHTML),
+                    base.GetParameter(StudentRegistrationRepository.StatusParameterName, student.Status),
+                    base.GetParameter(StudentRegistrationRepository.HomestayOrResiParameterName, student.HomestayOrResi),
+                    base.GetParameter(StudentRegistrationRepository.HomestayIDParameterName, student.HomestayID),
+                    base.GetParameter(StudentRegistrationRepository.RoomIDParameterName, student.RoomID),
+                    base.GetParameter(StudentRegistrationRepository.RoomSearchCampusParameterName, student.RoomSearchCampus),
+                    base.GetParameter(StudentRegistrationRepository.RoomSearchFromParameterName, student.RoomSearchFrom),
+                    base.GetParameter(StudentRegistrationRepository.RoomSearchToParameterName, student.RoomSearchTo),
+                    base.GetParameter(StudentRegistrationRepository.NumberOfNightsParameterName, student.NumberOfNights),
+                    base.GetParameter(StudentRegistrationRepository.TotalGrossPriceParameterName, student.TotalGrossPrice),
+                    base.GetParameter(StudentRegistrationRepository.TotalAddinsParameterName, student.TotalAddins),
+                    base.GetParameter(StudentRegistrationRepository.PaidParameterName, student.Paid),
+                    base.GetParameter(StudentRegistrationRepository.CommisionParameterName, student.Commision),
+                    base.GetParameter(StudentRegistrationRepository.CommissionAddinsParameterName, student.CommissionAddins),
+                    base.GetParameter(StudentRegistrationRepository.NetPriceParameterName, student.NetPrice),
+                    base.GetParameter(StudentRegistrationRepository.BalanceParameterName, student.Balance),
+                    base.GetParameter(StudentRegistrationRepository.StudentTripsIDParameterName, student.StudentTripsID),
+                    base.GetParameter(BaseRepository.ActiveParameterName, student.Active)
+
+
+                  
+    };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.UpdateStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
         }
 
     }

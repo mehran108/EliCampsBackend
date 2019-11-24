@@ -270,6 +270,7 @@ namespace ELI.Domain.Services
 
         #region Student
         Task<int> AddStudentAsync(StudentRegistration student);
+        Task<bool> UpdateStudentAsync(StudentRegistration student);
         #endregion
 
     }

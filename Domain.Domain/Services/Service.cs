@@ -778,6 +778,13 @@ namespace ELI.Domain.Services
             return await _studentRepository.AddStudentAsync(student);
         }
 
+        public async Task<bool> UpdateStudentAsync(StudentRegistration student)
+        {
+            student.AddinsID = string.Join(",", student.ProgrameAddins.ToArray());
+            student.StudentTripsID = string.Join(",", student.StudentTrips.ToArray());
+            return await _studentRepository.UpdateStudentAsync(student);
+        }
+
         #endregion
 
     }

@@ -268,7 +268,9 @@ namespace ELI.Domain.Services
         Task<bool> ActivateSubProgramAsync(SubProgramViewModel subProgramViewModel);
         #endregion
 
-
+        #region Student
+        Task<int> AddStudentAsync(StudentRegistration student);
+        #endregion
 
     }
 }

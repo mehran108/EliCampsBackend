@@ -32,6 +32,7 @@ namespace ELI.Domain.Services
         private readonly IReportRepository _reportRepository;
         private readonly IListRepository _listRepository;
         private readonly IGroupRepository _groupRepository;
+        private readonly IStudentRegistrationRepository _studentRepository;
 
 
         public ELIService(
@@ -49,7 +50,9 @@ namespace ELI.Domain.Services
                ILeadsRepository leadsRepository,
                IReportRepository reportRepository,
                IListRepository listRepository,
-               IGroupRepository groupRepository
+               IGroupRepository groupRepository,
+               IStudentRegistrationRepository studentRepository
+
 
             )
         {
@@ -68,6 +71,7 @@ namespace ELI.Domain.Services
             _reportRepository = reportRepository;
             _listRepository = listRepository;
             _groupRepository = groupRepository;
+            _studentRepository = studentRepository;
 
         }
         public async Task<bool> DeleteInvoiceAsync(int id, CancellationToken ct = default(CancellationToken))
@@ -764,6 +768,14 @@ namespace ELI.Domain.Services
         public async Task<bool> ActivateSubProgramAsync(SubProgramViewModel subProgramViewModel)
         {
             return await _listRepository.ActivateSubProgramAsync(subProgramViewModel);
+        }
+
+        #endregion
+
+        #region Student
+        public async Task<int> AddStudentAsync(StudentRegistration student)
+        {
+            return await _studentRepository.AddStudentAsync(student);
         }
 
         #endregion

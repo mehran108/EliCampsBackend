@@ -789,7 +789,17 @@ namespace ELI.Domain.Services
         {
             return await _studentRepository.GetStudentAsync(studentID);
         }
-        
+        public async Task<bool> ActivateStudentAsync(StudentRegistration student)
+        {
+            return await _studentRepository.ActivateStudentAsync(student);
+        }
+
+        public async Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student)
+        {
+            return await _studentRepository.GetAllStudentAsync(student);
+        }
+
+
         #endregion
 
     }

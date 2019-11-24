@@ -154,6 +154,8 @@ namespace ELI.Data.Repositories.Main
 
         private const string LinkTypeIDColumnName = "LinkTypeID";
         private const string LinkIDColumnName = "LinkID";
+        private const string AgentNameColumnName = "AgentName";
+        private const string FormatNameColumnName = "FormatName";
 
 
         public async Task<int> AddStudentAsync(StudentRegistration student)
@@ -282,6 +284,21 @@ namespace ELI.Data.Repositories.Main
             return returnValue > 0;
         }
 
+        public async Task<bool> ActivateStudentAsync(StudentRegistration student)
+        {
+            var parameters = new List<DbParameter>
+                {
+
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, student.ID),
+                    base.GetParameter(BaseRepository.ActiveParameterName, student.Active)
+                    
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.ActivateStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
         public async Task<StudentRegistration> GetStudentAsync(int studentID)
         {
             StudentRegistration studentVM = null;
@@ -389,6 +406,111 @@ namespace ELI.Data.Repositories.Main
 
             return studentVM;
         }
+
+
+        public async Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student)
+        {
+            StudentRegistration studentVM = null;
+
+            var result = new AllResponse<StudentRegistration>
+            {
+                Data = new List<StudentRegistration>(),
+                Offset = student.Offset,
+                PageSize = student.PageSize,
+                SortColumn = student.SortColumn,
+                SortAscending = student.SortAscending
+            };
+
+            var parameters = new List<DbParameter>
+            {
+                base.GetParameter(BaseRepository.ActiveParameterName, student.Data.Active)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, StudentRegistrationRepository.GetAllStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+
+                    while (dataReader.Read())
+                    {
+                        studentVM = new StudentRegistration
+                        {
+
+                            ID = dataReader.GetIntegerValue(StudentRegistrationRepository.IDColumnName),
+                            Year = dataReader.GetIntegerValue(StudentRegistrationRepository.YearColumnName),
+                            Reg_Ref = dataReader.GetStringValue(StudentRegistrationRepository.Reg_RefColumnName),
+                            GroupRef = dataReader.GetStringValue(StudentRegistrationRepository.GroupRefColumnName),
+                            Camps = dataReader.GetStringValue(StudentRegistrationRepository.CampsColumnName),
+                            Gender = dataReader.GetStringValue(StudentRegistrationRepository.GenderColumnName),
+                            FirstName = dataReader.GetStringValue(StudentRegistrationRepository.FirstNameColumnName),
+                            LastName = dataReader.GetStringValue(StudentRegistrationRepository.LastNameColumnName),
+                            HomeAddress = dataReader.GetStringValue(StudentRegistrationRepository.HomeAddressColumnName),
+                            City = dataReader.GetStringValue(StudentRegistrationRepository.CityColumnName),
+                            State = dataReader.GetStringValue(StudentRegistrationRepository.StateColumnName),
+                            Country = dataReader.GetStringValue(StudentRegistrationRepository.CountryColumnName),
+                            PostCode = dataReader.GetStringValue(StudentRegistrationRepository.PostCodeColumnName),
+                            EmergencyContact = dataReader.GetStringValue(StudentRegistrationRepository.EmergencyContactColumnName),
+                            Email = dataReader.GetStringValue(StudentRegistrationRepository.EmailColumnName),
+                            Phone = dataReader.GetStringValue(StudentRegistrationRepository.PhoneColumnName),
+                            DOB = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.DOBColumnName),
+                            Age = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.AgeColumnName),
+                            PassportNumber = dataReader.GetStringValue(StudentRegistrationRepository.PassportNumberColumnName),
+                            AgencyID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.AgencyIDColumnName),
+                            ArrivalDate = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.ArrivalDateColumnName),
+                            Terminal = dataReader.GetStringValue(StudentRegistrationRepository.TerminalColumnName),
+                            FlightNumber = dataReader.GetStringValue(StudentRegistrationRepository.FlightNumberColumnName),
+                            DestinationFrom = dataReader.GetStringValue(StudentRegistrationRepository.DestinationFromColumnName),
+                            ArrivalTime = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.ArrivalTimeColumnName),
+                            DepartureDate = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.DepartureDateColumnName),
+                            DepartureTerminal = dataReader.GetStringValue(StudentRegistrationRepository.DepartureTerminalColumnName),
+                            DepartureFlightNumber = dataReader.GetStringValue(StudentRegistrationRepository.DepartureFlightNumberColumnName),
+                            DestinationTo = dataReader.GetStringValue(StudentRegistrationRepository.DestinationToColumnName),
+                            FlightDepartureTime = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.FlightDepartureTimeColumnName),
+                            MedicalInformation = dataReader.GetStringValue(StudentRegistrationRepository.MedicalInformationColumnName),
+                            DietaryNeeds = dataReader.GetStringValue(StudentRegistrationRepository.DietaryNeedsColumnName),
+                            Allergies = dataReader.GetStringValue(StudentRegistrationRepository.AllergiesColumnName),
+                            MedicalNotes = dataReader.GetStringValue(StudentRegistrationRepository.MedicalNotesColumnName),
+                            ProgrameStartDate = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.ProgrameStartDateColumnName),
+                            ProgrameEndDate = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.ProgrameEndDateColumnName),
+                            Campus = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.CampusColumnName),
+                            Format = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.FormatColumnName),
+                            MealPlan = dataReader.GetStringValue(StudentRegistrationRepository.MealPlanColumnName),
+                            ExtraNotes = dataReader.GetStringValue(StudentRegistrationRepository.ExtraNotesColumnName),
+                            ExtraNotesHTML = dataReader.GetStringValue(StudentRegistrationRepository.ExtraNotesHTMLColumnName),
+                            Status = dataReader.GetStringValue(StudentRegistrationRepository.StatusColumnName),
+                            HomestayOrResi = dataReader.GetStringValue(StudentRegistrationRepository.HomestayOrResiColumnName),
+                            HomestayID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.HomestayIDColumnName),
+                            RoomID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.RoomIDColumnName),
+                            RoomSearchCampus = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.RoomSearchCampusColumnName),
+                            RoomSearchFrom = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.RoomSearchFromColumnName),
+                            RoomSearchTo = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.RoomSearchToColumnName),
+                            NumberOfNights = dataReader.GetIntegerValue(StudentRegistrationRepository.NumberOfNightsColumnName),
+                            TotalGrossPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.TotalGrossPriceColumnName),
+                            TotalAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.TotalAddinsColumnName),
+                            Paid = dataReader.GetDoubleValue(StudentRegistrationRepository.PaidColumnName),
+                            Commision = dataReader.GetDoubleValue(StudentRegistrationRepository.CommisionColumnName),
+                            CommissionAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.CommissionAddinsColumnName),
+                            NetPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.NetPriceColumnName),
+                            Balance = dataReader.GetDoubleValue(StudentRegistrationRepository.BalanceColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
+                            AgentName = dataReader.GetStringValue(StudentRegistrationRepository.AgentNameColumnName),
+                            FormatName = dataReader.GetStringValue(StudentRegistrationRepository.FormatNameColumnName),
+                            ProgrameAddins = new List<int>(),
+                            StudentTrips = new List<int>()
+                        };
+                        result.Data.Add(studentVM);
+                    }
+                  
+                    if (!dataReader.IsClosed)
+                    {
+                        dataReader.Close();
+                    }
+                }
+            }
+
+            return result;
+        }
+
 
     }
 }

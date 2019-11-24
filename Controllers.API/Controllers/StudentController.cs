@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ELI.Data.Repositories.Main;
 using ELI.Domain.Helpers;
 using ELI.Domain.Services;
 using ELI.Domain.ViewModels;
@@ -70,6 +71,38 @@ namespace ELI.API.Controllers
             try
             {
                 return new ObjectResult(await _ELIService.GetStudentAsync(studentID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("activateStudent")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> ActivateStudentAsync([FromBody] StudentRegistration studentVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivateStudentAsync(studentVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("getAllStudent")]
+        [Produces(typeof(List<StudentRegistration>))]
+        public async Task<IActionResult> GetAllStudentAsync([FromQuery] StudentRegistration studentVM)
+        {
+            try
+            {
+                AllRequest<StudentRegistration> studentlist = new AllRequest<StudentRegistration>();
+                studentlist.Data = studentVM;
+                return new ObjectResult(await _ELIService.GetAllStudentAsync(studentlist));
             }
             catch (Exception ex)
             {

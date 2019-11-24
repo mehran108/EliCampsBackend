@@ -69,7 +69,7 @@ namespace ELI.API.Controllers
 
         [HttpGet("getAllGroups")]
         [Produces(typeof(List<GroupViewModel>))]
-        public async Task<IActionResult> GetAllGroups([FromBody] GroupViewModel groupVM)
+        public async Task<IActionResult> GetAllGroups([FromQuery] GroupViewModel groupVM)
         {
             try
             {

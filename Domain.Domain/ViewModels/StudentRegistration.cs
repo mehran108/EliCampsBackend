@@ -68,7 +68,9 @@ namespace ELI.Domain.ViewModels
         public double Balance { get; set; }
         public List<int> StudentTrips { get; set; }
         public string StudentTripsID { get; set; }
-        public bool Active { get; set; }
+        public string FormatName { get; set; }
+        public string AgentName { get; set; }
+        public bool? Active { get; set; }
 
 
 

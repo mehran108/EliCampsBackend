@@ -9,7 +9,7 @@ namespace ELI.Domain.ViewModels
         public int ID { get; set; }
         public int Year { get; set; }
         public string Reg_Ref { get; set; }
-        public string GrpRef { get; set; }
+        public string GroupRef { get; set; }
         public string Camps { get; set; }
         public string Gender { get; set; }
         public string FirstName { get; set; }
@@ -38,7 +38,17 @@ namespace ELI.Domain.ViewModels
         public string FlightDepartureTime { get; set; }
         public string MedicalInformation { get; set; }
         public string DietaryNeeds { get; set; }
+        public string Allergies { get; set; }
+        public string MedicalNotes { get; set; }
+        public DateTime ProgrameStartDate { get; set; }
+        public DateTime ProgrameEndDate { get; set; }
+        public int Campus { get; set; }
+        public int Format { get; set; }
+        public string MealPlan { get; set; }
+        public List<int> ProgrameAddins { get; set; }
+        public string AddinsID { get; set; }
+        public string ExtraNotes { get; set; }
 
-        
+
     }
 }

@@ -785,6 +785,11 @@ namespace ELI.Domain.Services
             return await _studentRepository.UpdateStudentAsync(student);
         }
 
+        public async Task<StudentRegistration> GetStudentAsync(int studentID)
+        {
+            return await _studentRepository.GetStudentAsync(studentID);
+        }
+        
         #endregion
 
     }

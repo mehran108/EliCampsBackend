@@ -61,5 +61,21 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+
+        [HttpGet("getStudent")]
+        [Produces(typeof(StudentRegistration))]
+        public async Task<IActionResult> GetStudentAsync(int studentID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetStudentAsync(studentID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

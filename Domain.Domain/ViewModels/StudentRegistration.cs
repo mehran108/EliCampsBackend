@@ -22,26 +22,26 @@ namespace ELI.Domain.ViewModels
         public string EmergencyContact { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public DateTime DOB { get; set; }
-        public int Age { get; set; }
+        public DateTime? DOB { get; set; }
+        public int? Age { get; set; }
         public string PassportNumber { get; set; }
         public int? AgencyID { get; set; }
-        public DateTime ArrivalDate { get; set; }
+        public DateTime? ArrivalDate { get; set; }
         public string Terminal { get; set; }
         public string FlightNumber { get; set; }
         public string DestinationFrom { get; set; }
-        public DateTime ArrivalTime { get; set; }
-        public DateTime DepartureDate { get; set; }
+        public DateTime? ArrivalTime { get; set; }
+        public DateTime? DepartureDate { get; set; }
         public string DepartureTerminal { get; set; }
         public string DepartureFlightNumber { get; set; }
         public string DestinationTo { get; set; }
-        public DateTime FlightDepartureTime { get; set; }
+        public DateTime? FlightDepartureTime { get; set; }
         public string MedicalInformation { get; set; }
         public string DietaryNeeds { get; set; }
         public string Allergies { get; set; }
         public string MedicalNotes { get; set; }
-        public DateTime ProgrameStartDate { get; set; }
-        public DateTime ProgrameEndDate { get; set; }
+        public DateTime? ProgrameStartDate { get; set; }
+        public DateTime? ProgrameEndDate { get; set; }
         public int? Campus { get; set; }
         public int? Format { get; set; }
         public string MealPlan { get; set; }
@@ -55,8 +55,8 @@ namespace ELI.Domain.ViewModels
         public int? HomestayID { get; set; }
         public int? RoomID { get; set; }
         public int? RoomSearchCampus { get; set; }
-        public DateTime RoomSearchFrom { get; set; }
-        public DateTime RoomSearchTo { get; set; }
+        public DateTime? RoomSearchFrom { get; set; }
+        public DateTime? RoomSearchTo { get; set; }
         public int NumberOfNights { get; set; }
         public double TotalGrossPrice { get; set; }
         public double TotalAddins { get; set; }

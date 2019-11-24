@@ -52,7 +52,8 @@ Alter PROCEDURE [dbo].[AddStudent]
 	@PAllergies [ntext],
 	@PMedicalNotes [ntext],
 	@PExtraNotes [ntext],
-	@PExtraNotesHTML [ntext]
+	@PExtraNotesHTML [ntext],
+	@PStatus [nvarchar](50)
 	
 AS
 BEGIN
@@ -75,7 +76,7 @@ BEGIN
 				 ,[clmReg_DepartureDate], [clmReg_DepartureTerminal], [clmReg_DepartureFlightNumber]
 				 ,[clmReg_DestinationTo], [clmReg_FlightDepartureTime], [clmReg_MedicalInformation]
 				 ,[clmReg_DietaryNeeds], [clmReg_Allergies], [clmRerameStartDatg_Notes]
-				 ,[clmReg_ExtraNotes], [clmReg_ExtraNotesHTML], [clmReg_IsActive], [clmReg_CreateDate])
+				 ,[clmReg_ExtraNotes], [clmReg_ExtraNotesHTML], [clmReg_Status], [clmReg_IsActive], [clmReg_CreateDate])
 		Values	(@PYear,CONCAT(@PYear, '-',format(@RefNumberCount,'00')),@PGroupRef,@PCamps
 				,@PGender, @PFirstName, @PLastName, @PHomeAddress, @PCity, @PState
 				,@PCountry, @PPostCode, @PEmergencyContact, @PEmail, @PPhone
@@ -84,7 +85,7 @@ BEGIN
 				,@PDepartureDate, @PDepartureTerminal, @PDepartureFlightNumber
 				,@PDestinationTo, @PFlightDepartureTime, @PMedicalInformation 
 				,@PDietaryNeeds, @PAllergies, @PMedicalNotes
-				,@PExtraNotes,@PExtraNotesHTML,1, GETDATE()
+				,@PExtraNotes,@PExtraNotesHTML, @PStatus, 1, GETDATE()
 				);
 
 		SET @PID = SCOPE_IDENTITY();

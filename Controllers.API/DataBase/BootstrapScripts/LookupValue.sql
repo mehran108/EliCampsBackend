@@ -174,3 +174,26 @@ INSERT INTO [dbo].[LookupValue]
      VALUES
            ('Included services', 'Included services', (Select top 1 id from LookupTable  where name = 'AddinType'))
 END
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Active' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'StudentStatus'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Active', 'Active', (Select top 1 id from LookupTable  where name = 'StudentStatus'))
+END
+
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Canceled' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'StudentStatus'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Canceled', 'Canceled', (Select top 1 id from LookupTable  where name = 'StudentStatus'))
+END

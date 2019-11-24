@@ -49,6 +49,7 @@ namespace ELI.Domain.ViewModels
         public string AddinsID { get; set; }
         public string ExtraNotes { get; set; }
         public string ExtraNotesHTML { get; set; }
+        public string Status { get; set; }
 
 
     }

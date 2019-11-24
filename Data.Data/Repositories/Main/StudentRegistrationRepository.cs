@@ -69,6 +69,7 @@ namespace ELI.Data.Repositories.Main
         private const string AddinsIDParameterName = "PAddinsID";
         private const string ExtraNotesParameterName = "PExtraNotes";
         private const string ExtraNotesHTMLParameterName = "PExtraNotesHTML";
+        private const string StatusParameterName = "PStatus";
 
         
         private const string IDColumnName = "ID";
@@ -160,7 +161,8 @@ namespace ELI.Data.Repositories.Main
                     //base.GetParameter(StudentRegistrationRepository.MealPlanParameterName, student.MealPlan),
                     //base.GetParameter(StudentRegistrationRepository.AddinsIDParameterName, student.AddinsID),
                     base.GetParameter(StudentRegistrationRepository.ExtraNotesParameterName, student.ExtraNotes),
-                    base.GetParameter(StudentRegistrationRepository.ExtraNotesHTMLParameterName, student.ExtraNotesHTML)
+                    base.GetParameter(StudentRegistrationRepository.ExtraNotesHTMLParameterName, student.ExtraNotesHTML),
+                    base.GetParameter(StudentRegistrationRepository.StatusParameterName, student.Status)
                     
        
     };

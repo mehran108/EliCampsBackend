@@ -45,3 +45,12 @@ INSERT INTO [dbo].[LookupTable]
      VALUES
            ('AddinType','AddinType')
 END
+
+IF NOT EXISTS (SELECT id FROM [LookupTable] WHERE Name = 'StudentStatus')
+BEGIN
+INSERT INTO [dbo].[LookupTable]
+           ([Name]
+           ,[Description])
+     VALUES
+           ('StudentStatus','StudentStatus')
+END

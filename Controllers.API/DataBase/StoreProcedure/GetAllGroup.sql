@@ -18,7 +18,8 @@ END
 GO
 Alter PROCEDURE [dbo].[GetAllGroup] 
 	-- Add the parameters for the stored procedure herez
-	--@PActive bit
+	@PActive bit,
+	@PYear int
 
 AS
 BEGIN
@@ -67,6 +68,7 @@ BEGIN
 		left join [tblAgents] agents on tbl.clmGroups_AgentID = agents.clmAgents_ID
 		left join [tblCampuses] campus on tbl.clmGroups_Campus = campus.clmCampuses_ID
 		left join [LookupValue] lv on tbl.clmGroups_Format = lv.id
-		-- where ( tbl.clmGroups_Active = (CASE WHEN @PActive is not null then @PActive else tbl.clmGroups_Active end))
+		 where ( tbl.clmGroups_Active = (CASE WHEN @PActive is not null then @PActive else tbl.clmGroups_Active end))
+		 and ( tbl.clmGroups_Year = (CASE WHEN (@PYear is not null and @PYear <> 0) then @PYear else tbl.clmGroups_Year end))
 END
 GO

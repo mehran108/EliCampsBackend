@@ -301,8 +301,8 @@ namespace ELI.Data.Repositories.Main
 
             var parameters = new List<DbParameter>
             {
-
-                
+                base.GetParameter(GroupRepository.YearParameterName, groups.Data.Year),
+                base.GetParameter(BaseRepository.ActiveParameterName, groups.Data.Active)
             };
 
             using (var dataReader = await base.ExecuteReader(parameters, GroupRepository.GetAllStoredProcedureName, CommandType.StoredProcedure))

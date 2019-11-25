@@ -29,6 +29,7 @@ namespace ELI.Data.Repositories.Main
         private const string GroupProgrameStoredProcedureName = "GroupPrograme";
         private const string GroupTripsStoredProcedureName = "GroupTrips";
         private const string GroupPaymentStoredProcedureName = "GroupPayment";
+
         private const string AddPaymentGroupStoredProcedureName = "AddPaymentGroup";
         private const string UpdatePaymentGroupStoredProcedureName = "UpdatePaymentGroup";
         private const string GetPaymentGroupStoredProcedureName = "GetPaymentGroup";

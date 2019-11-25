@@ -110,5 +110,91 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+
+        [HttpPost("createPaymentStudent")]
+        public async Task<IActionResult> AddPaymentStudentAsync([FromBody] PaymentsViewModel paymentStudentVM)
+        {
+
+            if (paymentStudentVM != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.AddPaymentStudentAsync(paymentStudentVM));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Payment model cannot be empty" });
+            }
+        }
+
+        [HttpPut("updatePaymentStudent")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> UpdatePaymentStudentAsync([FromBody] PaymentsViewModel paymentStudentVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdatePaymentStudentAsync(paymentStudentVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpGet("getPaymentStudent")]
+        [Produces(typeof(PaymentsViewModel))]
+        public async Task<IActionResult> GetPaymentStudentAsync(int paymentStudentID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetPaymentStudentAsync(paymentStudentID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("activatePaymentStudent")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> ActivatePaymentStudentAsync([FromBody] PaymentsViewModel paymentStudentVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivatePaymentStudentAsync(paymentStudentVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("getAllPaymentStudentByStudentId")]
+        [Produces(typeof(List<PaymentsViewModel>))]
+        public async Task<IActionResult> GetAllPaymentStudentByStudentIdAsync([FromQuery] int studentID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetAllPaymentStudentByStudentIdAsync(studentID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

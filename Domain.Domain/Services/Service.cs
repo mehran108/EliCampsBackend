@@ -798,7 +798,34 @@ namespace ELI.Domain.Services
         {
             return await _studentRepository.GetAllStudentAsync(student);
         }
+        #region PaymentsStudent
 
+        public async Task<int> AddPaymentStudentAsync(PaymentsViewModel paymentStudent)
+        {
+            return await _studentRepository.AddPaymentStudentAsync(paymentStudent);
+        }
+
+        public async Task<bool> UpdatePaymentStudentAsync(PaymentsViewModel paymentStudent)
+        {
+            return await _studentRepository.UpdatePaymentStudentAsync(paymentStudent);
+        }
+
+        public async Task<PaymentsViewModel> GetPaymentStudentAsync(int paymentStudentID)
+        {
+            return await _studentRepository.GetPaymentStudentAsync(paymentStudentID);
+        }
+        public async Task<List<PaymentsViewModel>> GetAllPaymentStudentByStudentIdAsync(int studentID)
+        {
+            return await _studentRepository.GetAllPaymentStudentByStudentIdAsync(studentID);
+        }
+
+        public async Task<bool> ActivatePaymentStudentAsync(PaymentsViewModel paymentStudent)
+        {
+            return await _studentRepository.ActivatePaymentStudentAsync(paymentStudent);
+        }
+        
+        
+        #endregion
 
         #endregion
 

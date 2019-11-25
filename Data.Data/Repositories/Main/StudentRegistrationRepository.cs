@@ -28,6 +28,12 @@ namespace ELI.Data.Repositories.Main
         private const string ActivateStoredProcedureName = "ActivateStudent";
 
 
+        private const string AddPaymentStudentStoredProcedureName = "AddPaymentStudent";
+        private const string UpdatePaymentStudentStoredProcedureName = "UpdatePaymentStudent";
+        private const string GetPaymentStudentStoredProcedureName = "GetPaymentStudent";
+        private const string GetAllPaymentStudentByStudentIDStoredProcedureName = "GetAllPaymentStudentByStudentID";
+        private const string ActivatePaymentStudentStoredProcedureName = "ActivatePaymentStudent";
+
         private const string IDParameterName = "PID";
         private const string YearParameterName = "PYear";
         private const string Reg_RefParameterName = "PReg_Ref";
@@ -88,9 +94,14 @@ namespace ELI.Data.Repositories.Main
         private const string BalanceParameterName = "PBalance";
         private const string StudentTripsIDParameterName = "PStudentTripsID";
 
+        private const string PaymentStudentIDParameterName = "PPaymentStudentID";
+        private const string PaymentStudentDateParameterName = "PPaymentStudentDate";
+        private const string PaymentStudentAmountParameterName = "PPaymentStudentAmount";
+        private const string PaymentStudentRemarksParameterName = "PPaymentStudentRemarks";
 
 
-        
+
+
         private const string IDColumnName = "ID";
         private const string YearColumnName = "Year";
         private const string Reg_RefColumnName = "Reg_Ref";
@@ -158,6 +169,12 @@ namespace ELI.Data.Repositories.Main
         private const string FormatNameColumnName = "FormatName";
 
 
+        private const string PaymentStudentIDColumnName = "PaymentStudentID";
+        private const string PaymentStudentDateColumnName = "PaymentStudentDate";
+        private const string PaymentStudentAmountColumnName = "PaymentStudentAmount";
+        private const string PaymentStudentRemarksColumnName = "PaymentStudentRemarks";
+
+
         public async Task<int> AddStudentAsync(StudentRegistration student)
         {
             var studentIdParamter = base.GetParameterOut(StudentRegistrationRepository.IDParameterName, SqlDbType.Int, student.ID);
@@ -215,7 +232,7 @@ namespace ELI.Data.Repositories.Main
         {
             var parameters = new List<DbParameter>
                 {
-                
+
                     base.GetParameter(StudentRegistrationRepository.IDParameterName, student.ID),
                     base.GetParameter(StudentRegistrationRepository.YearParameterName, student.Year),
                     base.GetParameter(StudentRegistrationRepository.GroupRefParameterName, student.GroupRef),
@@ -276,7 +293,7 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(BaseRepository.ActiveParameterName, student.Active)
 
 
-                  
+
     };
 
             var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.UpdateStoredProcedureName, CommandType.StoredProcedure);
@@ -291,7 +308,7 @@ namespace ELI.Data.Repositories.Main
 
                     base.GetParameter(StudentRegistrationRepository.IDParameterName, student.ID),
                     base.GetParameter(BaseRepository.ActiveParameterName, student.Active)
-                    
+
                 };
 
             var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.ActivateStoredProcedureName, CommandType.StoredProcedure);
@@ -400,7 +417,7 @@ namespace ELI.Data.Repositories.Main
                         }
 
 
-    }
+                    }
                 }
             }
 
@@ -500,7 +517,7 @@ namespace ELI.Data.Repositories.Main
                         };
                         result.Data.Add(studentVM);
                     }
-                  
+
                     if (!dataReader.IsClosed)
                     {
                         dataReader.Close();
@@ -511,6 +528,133 @@ namespace ELI.Data.Repositories.Main
             return result;
         }
 
+
+        #region PaymentsStudent
+        public async Task<int> AddPaymentStudentAsync(PaymentsViewModel paymentStudent)
+        {
+            var paymentStudentIDParamter = base.GetParameterOut(StudentRegistrationRepository.PaymentStudentIDParameterName, SqlDbType.Int, paymentStudent.ID);
+            var parameters = new List<DbParameter>
+                {
+                    paymentStudentIDParamter,
+
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, paymentStudent.StudentRegID),
+                    base.GetParameter(StudentRegistrationRepository.PaymentStudentDateParameterName, paymentStudent.Date),
+                    base.GetParameter(StudentRegistrationRepository.PaymentStudentAmountParameterName, paymentStudent.Amount),
+                    base.GetParameter(StudentRegistrationRepository.PaymentStudentRemarksParameterName, paymentStudent.Remarks)
+
+                };
+            
+            await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.AddPaymentStudentStoredProcedureName, CommandType.StoredProcedure);
+
+            paymentStudent.ID = Convert.ToInt32(paymentStudentIDParamter.Value);
+
+            return paymentStudent.ID;
+        }
+
+        public async Task<bool> UpdatePaymentStudentAsync(PaymentsViewModel paymentStudent)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(StudentRegistrationRepository.PaymentStudentIDParameterName, paymentStudent.ID),
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, paymentStudent.StudentRegID),
+                    base.GetParameter(StudentRegistrationRepository.PaymentStudentDateParameterName, paymentStudent.Date),
+                    base.GetParameter(StudentRegistrationRepository.PaymentStudentAmountParameterName, paymentStudent.Amount),
+                    base.GetParameter(StudentRegistrationRepository.PaymentStudentRemarksParameterName, paymentStudent.Remarks),
+                    base.GetParameter(BaseRepository.ActiveParameterName, paymentStudent.Active)
+
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.UpdatePaymentStudentStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<PaymentsViewModel> GetPaymentStudentAsync(int paymentStudentID)
+        {
+            PaymentsViewModel paymentStudentVM = null;
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(StudentRegistrationRepository.PaymentStudentIDParameterName, paymentStudentID)
+                };
+
+            using (var dataReader = await base.ExecuteReader(parameters, StudentRegistrationRepository.GetPaymentStudentStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        paymentStudentVM = new PaymentsViewModel
+                        {
+                            ID = dataReader.GetIntegerValue(StudentRegistrationRepository.PaymentStudentIDColumnName),
+                            StudentRegID = dataReader.GetIntegerValue(StudentRegistrationRepository.IDColumnName),
+                            Date = dataReader.GetDateTimeValue(StudentRegistrationRepository.PaymentStudentDateColumnName),
+                            Amount = dataReader.GetDecimalValue(StudentRegistrationRepository.PaymentStudentAmountColumnName),
+                            Remarks = dataReader.GetStringValue(StudentRegistrationRepository.PaymentStudentRemarksColumnName),
+                            Active = dataReader.GetBooleanValue(StudentRegistrationRepository.ActiveColumnName)
+                        };
+
+                    }
+                }
+            }
+            return paymentStudentVM;
+        }
+
+        public async Task<List<PaymentsViewModel>> GetAllPaymentStudentByStudentIdAsync(int studentID)
+        {
+            PaymentsViewModel paymentStudentVM = null;
+            List<PaymentsViewModel> paymentStudentVMList = new List<PaymentsViewModel>();
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, studentID)
+                };
+
+
+            using (var dataReader = await base.ExecuteReader(parameters, StudentRegistrationRepository.GetAllPaymentStudentByStudentIDStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+
+                    while (dataReader.Read())
+                    {
+                        paymentStudentVM = new PaymentsViewModel
+                        {
+                            ID = dataReader.GetIntegerValue(StudentRegistrationRepository.PaymentStudentIDColumnName),
+                            StudentRegID = dataReader.GetIntegerValue(StudentRegistrationRepository.IDColumnName),
+                            Date = dataReader.GetDateTimeValue(StudentRegistrationRepository.PaymentStudentDateColumnName),
+                            Amount = dataReader.GetDecimalValue(StudentRegistrationRepository.PaymentStudentAmountColumnName),
+                            Remarks = dataReader.GetStringValue(StudentRegistrationRepository.PaymentStudentRemarksColumnName),
+                            Active = dataReader.GetBooleanValue(StudentRegistrationRepository.ActiveColumnName)
+                        };
+                        paymentStudentVMList.Add(paymentStudentVM);
+                    }
+
+                    if (!dataReader.IsClosed)
+                    {
+                        dataReader.Close();
+                    }
+
+                }
+            }
+
+            return paymentStudentVMList;
+        }
+
+        public async Task<bool> ActivatePaymentStudentAsync(PaymentsViewModel paymentStudent)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(StudentRegistrationRepository.PaymentStudentIDParameterName, paymentStudent.ID),
+                    base.GetParameter(BaseRepository.ActiveParameterName, paymentStudent.Active)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.ActivatePaymentStudentStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        #endregion
 
     }
 }

@@ -99,6 +99,10 @@ namespace ELI.Data.Repositories.Main
         private const string PaymentStudentAmountParameterName = "PPaymentStudentAmount";
         private const string PaymentStudentRemarksParameterName = "PPaymentStudentRemarks";
 
+        private const string ChapFamilyParameterName = "PChapFamily";
+        private const string ProgramIDParameterName = "PProgramID";
+        private const string SubProgramIDParameterName = "PSubProgramID";
+
 
 
 
@@ -173,6 +177,10 @@ namespace ELI.Data.Repositories.Main
         private const string PaymentStudentDateColumnName = "PaymentStudentDate";
         private const string PaymentStudentAmountColumnName = "PaymentStudentAmount";
         private const string PaymentStudentRemarksColumnName = "PaymentStudentRemarks";
+
+        private const string ChapFamilyColumnName = "ChapFamily";
+        private const string ProgramIDColumnName = "ProgramID";
+        private const string SubProgramIDColumnName = "SubProgramID";
 
 
         public async Task<int> AddStudentAsync(StudentRegistration student)
@@ -290,7 +298,10 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.NetPriceParameterName, student.NetPrice),
                     base.GetParameter(StudentRegistrationRepository.BalanceParameterName, student.Balance),
                     base.GetParameter(StudentRegistrationRepository.StudentTripsIDParameterName, student.StudentTripsID),
-                    base.GetParameter(BaseRepository.ActiveParameterName, student.Active)
+                    base.GetParameter(BaseRepository.ActiveParameterName, student.Active),
+                    base.GetParameter(StudentRegistrationRepository.ChapFamilyParameterName, student.ChapFamily),
+                    base.GetParameter(StudentRegistrationRepository.ProgramIDParameterName, student.ProgramID),
+                    base.GetParameter(StudentRegistrationRepository.SubProgramIDParameterName, student.SubProgramID)
 
 
 
@@ -392,6 +403,9 @@ namespace ELI.Data.Repositories.Main
                             NetPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.NetPriceColumnName),
                             Balance = dataReader.GetDoubleValue(StudentRegistrationRepository.BalanceColumnName),
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
+                            ChapFamily = dataReader.GetStringValue(StudentRegistrationRepository.ChapFamilyColumnName),
+                            ProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.ProgramIDColumnName),
+                            SubProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.SubProgramIDColumnName),
                             ProgrameAddins = new List<int>(),
                             StudentTrips = new List<int>()
                         };
@@ -512,6 +526,9 @@ namespace ELI.Data.Repositories.Main
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
                             AgentName = dataReader.GetStringValue(StudentRegistrationRepository.AgentNameColumnName),
                             FormatName = dataReader.GetStringValue(StudentRegistrationRepository.FormatNameColumnName),
+                            ChapFamily = dataReader.GetStringValue(StudentRegistrationRepository.ChapFamilyColumnName),
+                            ProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.ProgramIDColumnName),
+                            SubProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.SubProgramIDColumnName),
                             ProgrameAddins = new List<int>(),
                             StudentTrips = new List<int>()
                         };

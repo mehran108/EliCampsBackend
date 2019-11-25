@@ -76,7 +76,10 @@ Alter PROCEDURE [dbo].[UpdateStudent]
 	@PNetPrice  [money]  ,
 	@PBalance   [money] ,
 	@PStudentTripsID  [nvarchar](500),
-	@PActive  bit
+	@PActive  bit,
+	@PChapFamily nvarchar(255),
+	@PProgramID INT,
+	@PSubProgramID INT
 	
 AS
 BEGIN
@@ -151,7 +154,11 @@ BEGIN
 	[clmReg_NetPrice] = @PNetPrice   ,
 	[clmReg_Balance] = @PBalance    ,
 	[clmReg_IsActive] = @PActive,
-	[clmReg_ModifiedDate] = GETDATE()
+	[clmReg_ModifiedDate] = GETDATE(),
+
+	clmReg_ChapFamily = @PChapFamily,
+	clmReg_ProgramID = @PProgramID,
+	clmReg_SubProgramID = @PSubProgramID
 
 	where [clmReg_ID] = @PID;
 				

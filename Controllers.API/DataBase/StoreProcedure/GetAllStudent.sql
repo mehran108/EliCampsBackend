@@ -82,7 +82,10 @@ BEGIN
       ,tbl.[clmReg_RoomSearchTo] AS RoomSearchTo
       ,tbl.[clmReg_IsActive] AS Active
 	  ,agents.clmAgents_Agent AS AgentName
-	  ,lv.name AS FormatName
+	  ,lv.name AS FormatName,
+	  tbl.clmReg_ChapFamily AS  ChapFamily,
+		tbl.clmReg_ProgramID AS ProgramID,
+		tbl.clmReg_SubProgramID AS SubProgramID
   FROM [dbo].[tblRegistration] tbl
 		left join [tblAgents] agents on tbl.[clmReg_AgencyID] = agents.clmAgents_ID
 		left join [LookupValue] lv on tbl.[clmReg_Format] = lv.id

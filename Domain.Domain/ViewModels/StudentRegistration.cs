@@ -71,6 +71,9 @@ namespace ELI.Domain.ViewModels
         public string FormatName { get; set; }
         public string AgentName { get; set; }
         public bool? Active { get; set; }
+        public string ChapFamily { get; set; }
+        public int? ProgramID { get; set; }
+        public int? SubProgramID { get; set; }
 
 
 

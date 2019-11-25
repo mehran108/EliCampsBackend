@@ -77,7 +77,10 @@ BEGIN
       ,[clmReg_RoomSearchCampus] AS RoomSearchCampus 
       ,[clmReg_RoomSearchFrom] AS RoomSearchFrom
       ,[clmReg_RoomSearchTo] AS RoomSearchTo
-      ,[clmReg_IsActive] AS Active
+      ,[clmReg_IsActive] AS Active,
+		clmReg_ChapFamily AS  ChapFamily,
+		clmReg_ProgramID AS ProgramID,
+		clmReg_SubProgramID AS SubProgramID
   FROM [dbo].[tblRegistration]
 	where [clmReg_ID] = @PID;
 

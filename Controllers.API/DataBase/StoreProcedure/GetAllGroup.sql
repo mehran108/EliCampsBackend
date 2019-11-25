@@ -63,7 +63,10 @@ BEGIN
 				tbl.clmGroups_ApplyToAllStudent AS ApplyToAllStudent,
 				agents.clmAgents_Agent AS AgentName,
 				campus.clmCampuses_Campus AS CampusName,
-				lv.name AS FormatName
+				lv.name AS FormatName,
+				tbl.clmGroups_ChapFamily AS  ChapFamily,
+				tbl.clmGroups_ProgramID AS ProgramID,
+				tbl.clmGroups_SubProgramID AS SubProgramID
 		from [dbo].[tblGroups] tbl
 		left join [tblAgents] agents on tbl.clmGroups_AgentID = agents.clmAgents_ID
 		left join [tblCampuses] campus on tbl.clmGroups_Campus = campus.clmCampuses_ID

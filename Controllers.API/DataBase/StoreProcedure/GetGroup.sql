@@ -58,7 +58,10 @@ BEGIN
 				clmGroups_PerStudent As PerStudent,
 				clmGroups_PerGrpLeader As PerGrpLeader,
 				clmGroups_Active As Active,
-				clmGroups_ApplyToAllStudent AS ApplyToAllStudent
+				clmGroups_ApplyToAllStudent AS ApplyToAllStudent,
+				clmGroups_ChapFamily AS  ChapFamily,
+				clmGroups_ProgramID AS ProgramID,
+				clmGroups_SubProgramID AS SubProgramID
 		from [dbo].[tblGroups] 
 		where clmGroups_ID = @PGroupID;
 

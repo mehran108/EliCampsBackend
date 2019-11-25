@@ -118,3 +118,71 @@ BEGIN
  END
 
 END
+
+
+
+-- Adding column clmGroups_ChapFamily
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblGroups]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'clmGroups_ChapFamily'
+   AND Object_ID = Object_ID(N'[dbo].[tblGroups]')
+   )
+ BEGIN
+     ALTER TABLE tblGroups
+	 ADD [clmGroups_ChapFamily] [nvarchar](100) NULL
+ END
+
+END
+
+-- Adding column  clmGroups_ProgramID
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblGroups]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'clmGroups_ProgramID'
+   AND Object_ID = Object_ID(N'[dbo].[tblGroups]')
+   )
+ BEGIN
+     ALTER TABLE tblGroups
+	 ADD [clmGroups_ProgramID] [int] NULL
+ END
+
+END
+
+-- Adding column  clmGroups_SubProgramID
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblGroups]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'clmGroups_SubProgramID'
+   AND Object_ID = Object_ID(N'[dbo].[tblGroups]')
+   )
+ BEGIN
+     ALTER TABLE tblGroups
+	 ADD [clmGroups_SubProgramID] [int] NULL
+ END
+
+END

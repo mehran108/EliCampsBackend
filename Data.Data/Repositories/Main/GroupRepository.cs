@@ -29,6 +29,7 @@ namespace ELI.Data.Repositories.Main
         private const string GroupProgrameStoredProcedureName = "GroupPrograme";
         private const string GroupTripsStoredProcedureName = "GroupTrips";
         private const string GroupPaymentStoredProcedureName = "GroupPayment";
+
         private const string AddPaymentGroupStoredProcedureName = "AddPaymentGroup";
         private const string UpdatePaymentGroupStoredProcedureName = "UpdatePaymentGroup";
         private const string GetPaymentGroupStoredProcedureName = "GetPaymentGroup";
@@ -61,6 +62,9 @@ namespace ELI.Data.Repositories.Main
         private const string MealPlanParameterName = "PMealPlan";
         private const string AddinsIDParameterName = "PAddinsID";
         private const string GroupTripsIDParameterName = "PGroupTripsID";
+        private const string ChapFamilyParameterName = "PChapFamily";
+        private const string ProgramIDParameterName = "PProgramID";
+        private const string SubProgramIDParameterName = "PSubProgramID";
         private const string ApplyToAllStudentParameterName = "PApplyToAllStudent";
 
         private const string NumberOfNightsParameterName = "PNumberOfNights";
@@ -130,6 +134,10 @@ namespace ELI.Data.Repositories.Main
         private const string CampusNameColumnName = "CampusName";
         private const string FormatNameRemarksColumnName = "FormatName";
 
+        private const string ChapFamilyColumnName = "ChapFamily";
+        private const string ProgramIDColumnName = "ProgramID";
+        private const string SubProgramIDColumnName = "SubProgramID";
+
 
         public async Task<int> AddGroupAsync(GroupViewModel group)
         {
@@ -137,7 +145,7 @@ namespace ELI.Data.Repositories.Main
             var parameters = new List<DbParameter>
                 {
                     groupIdParamter,
-                    
+
                     base.GetParameter(GroupRepository.YearParameterName, group.Year),
                     base.GetParameter(GroupRepository.CampsParameterName, group.Camps),
                     //base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber),
@@ -168,12 +176,12 @@ namespace ELI.Data.Repositories.Main
 
         public async Task<bool> UpdateGroupAsync(GroupViewModel group)
         {
-             var parameters = new List<DbParameter>
+            var parameters = new List<DbParameter>
                 {
                     base.GetParameter(GroupRepository.GroupIdParameterName, group.ID),
                     base.GetParameter(GroupRepository.YearParameterName, group.Year),
                     base.GetParameter(GroupRepository.CampsParameterName, group.Camps),
-                    
+
                     base.GetParameter(GroupRepository.AgentIDParameterName, group.AgentID),
                     base.GetParameter(GroupRepository.AgencyRefParameterName, group.AgencyRef),
                     base.GetParameter(GroupRepository.CountryParameterName, group.Country),
@@ -195,7 +203,7 @@ namespace ELI.Data.Repositories.Main
                 };
 
             var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.UpdateStoredProcedureName, CommandType.StoredProcedure);
-            
+
             return returnValue > 0;
         }
 
@@ -222,16 +230,16 @@ namespace ELI.Data.Repositories.Main
                             Year = dataReader.GetIntegerValue(GroupRepository.YearColumnName),
                             Camps = dataReader.GetStringValue(GroupRepository.CampsColumnName),
                             RefNumber = dataReader.GetStringValue(GroupRepository.RefNumberColumnName),
-                            AgentID = dataReader.GetIntegerValue(GroupRepository.AgentIDColumnName),
+                            AgentID = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.AgentIDColumnName),
                             AgencyRef = dataReader.GetStringValue(GroupRepository.AgencyRefColumnName),
                             Country = dataReader.GetStringValue(GroupRepository.CountryColumnName),
                             InvoiceType = dataReader.GetStringValue(GroupRepository.InvoiceTypeColumnName),
-                            ArrivalDate = dataReader.GetDateTimeValue(GroupRepository.ArrivalDateColumnName),
+                            ArrivalDate = dataReader.GetDateTimeValueNullable(GroupRepository.ArrivalDateColumnName),
                             Terminal = dataReader.GetStringValue(GroupRepository.TerminalColumnName),
                             FlightNumber = dataReader.GetStringValue(GroupRepository.FlightNumberColumnName),
                             DestinationFrom = dataReader.GetStringValue(GroupRepository.DestinationFromColumnName),
                             ArrivalTime = dataReader.GetStringValue(GroupRepository.ArrivalTimeColumnName),
-                            DepartureDate = dataReader.GetDateTimeValue(GroupRepository.DepartureDateColumnName),
+                            DepartureDate = dataReader.GetDateTimeValueNullable(GroupRepository.DepartureDateColumnName),
                             DepartureTerminal = dataReader.GetStringValue(GroupRepository.DepartureTerminalColumnName),
                             DepartureFlightNumber = dataReader.GetStringValue(GroupRepository.DepartureFlightNumberColumnName),
                             DestinationTo = dataReader.GetStringValue(GroupRepository.DestinationToColumnName),
@@ -253,8 +261,12 @@ namespace ELI.Data.Repositories.Main
                             PerGrpLeader = dataReader.GetDecimalValue(GroupRepository.PerGrpLeaderColumnName),
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
                             ApplyToAllStudent = dataReader.GetBooleanValue(GroupRepository.ApplyToAllStudentColumnName),
+                            ChapFamily = dataReader.GetStringValue(GroupRepository.ChapFamilyColumnName),
+                            ProgramID = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.ProgramIDColumnName),
+                            SubProgramID = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.SubProgramIDColumnName),
                             ProgrameAddins = new List<int>(),
                             GroupTrips = new List<int>()
+
                         };
                         if (dataReader.NextResult())
                         {
@@ -272,12 +284,12 @@ namespace ELI.Data.Repositories.Main
                                     groupVM?.GroupTrips.Add(TripID);
                                 }
 
-                                    
+
                             }
-                           
+
                         }
 
-                        
+
 
                     }
                 }
@@ -301,68 +313,71 @@ namespace ELI.Data.Repositories.Main
 
             var parameters = new List<DbParameter>
             {
-
-                
+                base.GetParameter(GroupRepository.YearParameterName, groups.Data.Year),
+                base.GetParameter(BaseRepository.ActiveParameterName, groups.Data.Active)
             };
 
             using (var dataReader = await base.ExecuteReader(parameters, GroupRepository.GetAllStoredProcedureName, CommandType.StoredProcedure))
             {
                 if (dataReader != null && dataReader.HasRows)
                 {
-                    
-                        while (dataReader.Read())
+
+                    while (dataReader.Read())
+                    {
+                        groupVM = new GroupViewModel
                         {
-                            groupVM = new GroupViewModel
-                            {
 
-                                ID = dataReader.GetIntegerValue(GroupRepository.GroupIdColumnName),
-                                Year = dataReader.GetIntegerValue(GroupRepository.YearColumnName),
-                                Camps = dataReader.GetStringValue(GroupRepository.CampsColumnName),
-                                RefNumber = dataReader.GetStringValue(GroupRepository.RefNumberColumnName),
-                                AgentID = dataReader.GetIntegerValue(GroupRepository.AgentIDColumnName),
-                                AgencyRef = dataReader.GetStringValue(GroupRepository.AgencyRefColumnName),
-                                Country = dataReader.GetStringValue(GroupRepository.CountryColumnName),
-                                InvoiceType = dataReader.GetStringValue(GroupRepository.InvoiceTypeColumnName),
-                                ArrivalDate = dataReader.GetDateTimeValue(GroupRepository.ArrivalDateColumnName),
-                                Terminal = dataReader.GetStringValue(GroupRepository.TerminalColumnName),
-                                FlightNumber = dataReader.GetStringValue(GroupRepository.FlightNumberColumnName),
-                                DestinationFrom = dataReader.GetStringValue(GroupRepository.DestinationFromColumnName),
-                                ArrivalTime = dataReader.GetStringValue(GroupRepository.ArrivalTimeColumnName),
-                                DepartureDate = dataReader.GetDateTimeValue(GroupRepository.DepartureDateColumnName),
-                                DepartureTerminal = dataReader.GetStringValue(GroupRepository.DepartureTerminalColumnName),
-                                DepartureFlightNumber = dataReader.GetStringValue(GroupRepository.DepartureFlightNumberColumnName),
-                                DestinationTo = dataReader.GetStringValue(GroupRepository.DestinationToColumnName),
-                                FlightDepartureTime = dataReader.GetStringValue(GroupRepository.FlightDepartureTimeColumnName),
-                                ProgrameStartDate = dataReader.GetDateTimeValueNullable(GroupRepository.ProgrameStartDateColumnName),
-                                ProgrameEndDate = dataReader.GetDateTimeValueNullable(GroupRepository.ProgrameEndDateColumnName),
-                                Campus = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.CampusColumnName),
-                                Format = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.FormatColumnName),
-                                MealPlan = dataReader.GetStringValue(GroupRepository.MealPlanColumnName),
-                                NumberOfNights = dataReader.GetIntegerValue(GroupRepository.NumberOfNightsColumnName),
-                                TotalGrossPrice = dataReader.GetDecimalValue(GroupRepository.TotalGrossPriceColumnName),
-                                Paid = dataReader.GetDecimalValue(GroupRepository.PaidColumnName),
-                                Commision = dataReader.GetDecimalValue(GroupRepository.CommisionColumnName),
-                                NetPrice = dataReader.GetDecimalValue(GroupRepository.NetPriceColumnName),
-                                Balance = dataReader.GetDecimalValue(GroupRepository.BalanceColumnName),
-                                NumOfStudents = dataReader.GetIntegerValue(GroupRepository.NumOfStudentsColumnName),
-                                NumOfGrpLeaders = dataReader.GetIntegerValue(GroupRepository.NumOfGrpLeadersColumnName),
-                                PerStudent = dataReader.GetDecimalValue(GroupRepository.PerStudentColumnName),
-                                PerGrpLeader = dataReader.GetDecimalValue(GroupRepository.PerGrpLeaderColumnName),
-                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
-                                ApplyToAllStudent = dataReader.GetBooleanValue(GroupRepository.ApplyToAllStudentColumnName),
-                                AgentName = dataReader.GetStringValue(GroupRepository.AgentNameColumnName),
-                                CampusName = dataReader.GetStringValue(GroupRepository.CampusNameColumnName),
-                                FormatName = dataReader.GetStringValue(GroupRepository.FormatNameRemarksColumnName),
+                            ID = dataReader.GetIntegerValue(GroupRepository.GroupIdColumnName),
+                            Year = dataReader.GetIntegerValue(GroupRepository.YearColumnName),
+                            Camps = dataReader.GetStringValue(GroupRepository.CampsColumnName),
+                            RefNumber = dataReader.GetStringValue(GroupRepository.RefNumberColumnName),
+                            AgentID = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.AgentIDColumnName),
+                            AgencyRef = dataReader.GetStringValue(GroupRepository.AgencyRefColumnName),
+                            Country = dataReader.GetStringValue(GroupRepository.CountryColumnName),
+                            InvoiceType = dataReader.GetStringValue(GroupRepository.InvoiceTypeColumnName),
+                            ArrivalDate = dataReader.GetDateTimeValueNullable(GroupRepository.ArrivalDateColumnName),
+                            Terminal = dataReader.GetStringValue(GroupRepository.TerminalColumnName),
+                            FlightNumber = dataReader.GetStringValue(GroupRepository.FlightNumberColumnName),
+                            DestinationFrom = dataReader.GetStringValue(GroupRepository.DestinationFromColumnName),
+                            ArrivalTime = dataReader.GetStringValue(GroupRepository.ArrivalTimeColumnName),
+                            DepartureDate = dataReader.GetDateTimeValueNullable(GroupRepository.DepartureDateColumnName),
+                            DepartureTerminal = dataReader.GetStringValue(GroupRepository.DepartureTerminalColumnName),
+                            DepartureFlightNumber = dataReader.GetStringValue(GroupRepository.DepartureFlightNumberColumnName),
+                            DestinationTo = dataReader.GetStringValue(GroupRepository.DestinationToColumnName),
+                            FlightDepartureTime = dataReader.GetStringValue(GroupRepository.FlightDepartureTimeColumnName),
+                            ProgrameStartDate = dataReader.GetDateTimeValueNullable(GroupRepository.ProgrameStartDateColumnName),
+                            ProgrameEndDate = dataReader.GetDateTimeValueNullable(GroupRepository.ProgrameEndDateColumnName),
+                            Campus = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.CampusColumnName),
+                            Format = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.FormatColumnName),
+                            MealPlan = dataReader.GetStringValue(GroupRepository.MealPlanColumnName),
+                            NumberOfNights = dataReader.GetIntegerValue(GroupRepository.NumberOfNightsColumnName),
+                            TotalGrossPrice = dataReader.GetDecimalValue(GroupRepository.TotalGrossPriceColumnName),
+                            Paid = dataReader.GetDecimalValue(GroupRepository.PaidColumnName),
+                            Commision = dataReader.GetDecimalValue(GroupRepository.CommisionColumnName),
+                            NetPrice = dataReader.GetDecimalValue(GroupRepository.NetPriceColumnName),
+                            Balance = dataReader.GetDecimalValue(GroupRepository.BalanceColumnName),
+                            NumOfStudents = dataReader.GetIntegerValue(GroupRepository.NumOfStudentsColumnName),
+                            NumOfGrpLeaders = dataReader.GetIntegerValue(GroupRepository.NumOfGrpLeadersColumnName),
+                            PerStudent = dataReader.GetDecimalValue(GroupRepository.PerStudentColumnName),
+                            PerGrpLeader = dataReader.GetDecimalValue(GroupRepository.PerGrpLeaderColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
+                            ApplyToAllStudent = dataReader.GetBooleanValue(GroupRepository.ApplyToAllStudentColumnName),
+                            AgentName = dataReader.GetStringValue(GroupRepository.AgentNameColumnName),
+                            CampusName = dataReader.GetStringValue(GroupRepository.CampusNameColumnName),
+                            FormatName = dataReader.GetStringValue(GroupRepository.FormatNameRemarksColumnName),
+                            ChapFamily = dataReader.GetStringValue(GroupRepository.ChapFamilyColumnName),
+                            ProgramID = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.ProgramIDColumnName),
+                            SubProgramID = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.SubProgramIDColumnName)
 
-                            };
-                            result.Data.Add(groupVM);
-                        }
+                        };
+                        result.Data.Add(groupVM);
+                    }
 
-                        if (!dataReader.IsClosed)
-                        {
-                            dataReader.Close();
-                        }
-    }
+                    if (!dataReader.IsClosed)
+                    {
+                        dataReader.Close();
+                    }
+                }
             }
 
             return result;
@@ -392,11 +407,14 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(GroupRepository.FormatParameterName, group.Format),
                     base.GetParameter(GroupRepository.MealPlanParameterName, group.MealPlan),
                     base.GetParameter(GroupRepository.AddinsIDParameterName, group.AddinsID),
-                    base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber)
+                    base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber),
+                    base.GetParameter(GroupRepository.ChapFamilyParameterName, group.ChapFamily),
+                    base.GetParameter(GroupRepository.ProgramIDParameterName, group.ProgramID),
+                    base.GetParameter(GroupRepository.SubProgramIDParameterName, group.SubProgramID)
 
                 };
 
-        var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.GroupProgrameStoredProcedureName, CommandType.StoredProcedure);
+            var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.GroupProgrameStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
         }
@@ -418,7 +436,7 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(GroupRepository.PerGrpLeaderParameterName, group.PerGrpLeader),
 
                 };
-        var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.GroupPaymentStoredProcedureName, CommandType.StoredProcedure);
+            var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.GroupPaymentStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
         }
@@ -455,7 +473,7 @@ namespace ELI.Data.Repositories.Main
 
                 };
 
-        await base.ExecuteNonQuery(parameters, GroupRepository.AddPaymentGroupStoredProcedureName, CommandType.StoredProcedure);
+            await base.ExecuteNonQuery(parameters, GroupRepository.AddPaymentGroupStoredProcedureName, CommandType.StoredProcedure);
 
             paymentGroup.ID = Convert.ToInt32(paymentGroupIDParamter.Value);
 
@@ -506,7 +524,7 @@ namespace ELI.Data.Repositories.Main
                             Remarks = dataReader.GetStringValue(GroupRepository.PaymentGroupRemarksColumnName),
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
                         };
-                        
+
                     }
                 }
             }

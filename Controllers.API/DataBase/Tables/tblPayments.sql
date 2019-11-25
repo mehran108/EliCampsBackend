@@ -10,6 +10,11 @@ BEGIN CREATE TABLE [dbo].[tblPayments](
 	[ClmPayments_Date] [date] NULL,
 	[ClmPayments_Amount] [money] NULL,
 	[ClmPayments_Remarks] [nvarchar](255) NULL,
+	[ClmPayments_IsActive] [bit] default 1,
+	[ClmPayments_CreateDate] [DATETIME] NULL,
+	[ClmPayments_CreatedBy] [int] NULL,
+	[ClmPayments_ModifiedDate] [DATETIME] NULL,
+	[ClmPayments_ModifiedBy] [int] NULL
  CONSTRAINT [PK_tblPayments] PRIMARY KEY CLUSTERED 
 (
 	[ClmPayments_ID] ASC

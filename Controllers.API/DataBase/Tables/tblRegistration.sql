@@ -142,3 +142,70 @@ ALTER TABLE [dbo].[tblRegistration] ADD  CONSTRAINT [DF_tblRegistration_clmReg_I
 
 END 
 GO
+
+
+-- Adding column clmReg_ChapFamily
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblRegistration]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'clmReg_ChapFamily'
+   AND Object_ID = Object_ID(N'[dbo].[tblRegistration]')
+   )
+ BEGIN
+     ALTER TABLE tblRegistration
+	 ADD [clmReg_ChapFamily] [nvarchar](100) NULL
+ END
+
+END
+
+-- Adding column  clmReg_ProgramID
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblRegistration]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'clmReg_ProgramID'
+   AND Object_ID = Object_ID(N'[dbo].[tblRegistration]')
+   )
+ BEGIN
+     ALTER TABLE tblRegistration
+	 ADD [clmReg_ProgramID] [int] NULL
+ END
+
+END
+
+-- Adding column  clmReg_SubProgramID
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblRegistration]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'clmReg_SubProgramID'
+   AND Object_ID = Object_ID(N'[dbo].[tblRegistration]')
+   )
+ BEGIN
+     ALTER TABLE tblRegistration
+	 ADD [clmReg_SubProgramID] [int] NULL
+ END
+
+END

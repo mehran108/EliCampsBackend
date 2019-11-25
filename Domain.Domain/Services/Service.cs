@@ -32,6 +32,7 @@ namespace ELI.Domain.Services
         private readonly IReportRepository _reportRepository;
         private readonly IListRepository _listRepository;
         private readonly IGroupRepository _groupRepository;
+        private readonly IStudentRegistrationRepository _studentRepository;
 
 
         public ELIService(
@@ -49,7 +50,9 @@ namespace ELI.Domain.Services
                ILeadsRepository leadsRepository,
                IReportRepository reportRepository,
                IListRepository listRepository,
-               IGroupRepository groupRepository
+               IGroupRepository groupRepository,
+               IStudentRegistrationRepository studentRepository
+
 
             )
         {
@@ -68,6 +71,7 @@ namespace ELI.Domain.Services
             _reportRepository = reportRepository;
             _listRepository = listRepository;
             _groupRepository = groupRepository;
+            _studentRepository = studentRepository;
 
         }
         public async Task<bool> DeleteInvoiceAsync(int id, CancellationToken ct = default(CancellationToken))
@@ -765,6 +769,63 @@ namespace ELI.Domain.Services
         {
             return await _listRepository.ActivateSubProgramAsync(subProgramViewModel);
         }
+
+        #endregion
+
+        #region Student
+        public async Task<int> AddStudentAsync(StudentRegistration student)
+        {
+            return await _studentRepository.AddStudentAsync(student);
+        }
+
+        public async Task<bool> UpdateStudentAsync(StudentRegistration student)
+        {
+            student.AddinsID = string.Join(",", student.ProgrameAddins.ToArray());
+            student.StudentTripsID = string.Join(",", student.StudentTrips.ToArray());
+            return await _studentRepository.UpdateStudentAsync(student);
+        }
+
+        public async Task<StudentRegistration> GetStudentAsync(int studentID)
+        {
+            return await _studentRepository.GetStudentAsync(studentID);
+        }
+        public async Task<bool> ActivateStudentAsync(StudentRegistration student)
+        {
+            return await _studentRepository.ActivateStudentAsync(student);
+        }
+
+        public async Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student)
+        {
+            return await _studentRepository.GetAllStudentAsync(student);
+        }
+        #region PaymentsStudent
+
+        public async Task<int> AddPaymentStudentAsync(PaymentsViewModel paymentStudent)
+        {
+            return await _studentRepository.AddPaymentStudentAsync(paymentStudent);
+        }
+
+        public async Task<bool> UpdatePaymentStudentAsync(PaymentsViewModel paymentStudent)
+        {
+            return await _studentRepository.UpdatePaymentStudentAsync(paymentStudent);
+        }
+
+        public async Task<PaymentsViewModel> GetPaymentStudentAsync(int paymentStudentID)
+        {
+            return await _studentRepository.GetPaymentStudentAsync(paymentStudentID);
+        }
+        public async Task<List<PaymentsViewModel>> GetAllPaymentStudentByStudentIdAsync(int studentID)
+        {
+            return await _studentRepository.GetAllPaymentStudentByStudentIdAsync(studentID);
+        }
+
+        public async Task<bool> ActivatePaymentStudentAsync(PaymentsViewModel paymentStudent)
+        {
+            return await _studentRepository.ActivatePaymentStudentAsync(paymentStudent);
+        }
+        
+        
+        #endregion
 
         #endregion
 

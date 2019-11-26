@@ -197,3 +197,47 @@ INSERT INTO [dbo].[LookupValue]
      VALUES
            ('Canceled', 'Canceled', (Select top 1 id from LookupTable  where name = 'StudentStatus'))
 END
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Student' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'ChapFamily'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Student', 'Student', (Select top 1 id from LookupTable  where name = 'ChapFamily'))
+END
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Chaperone' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'ChapFamily'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Chaperone', 'Chaperone', (Select top 1 id from LookupTable  where name = 'ChapFamily'))
+END
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Staff' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'ChapFamily'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Staff', 'Staff', (Select top 1 id from LookupTable  where name = 'ChapFamily'))
+END
+
+IF NOT EXISTS (SELECT id FROM LookupValue WHERE Name = 'Family Program' 
+and lookupTableId = (Select top 1 id from LookupTable  where name = 'ChapFamily'))
+BEGIN
+INSERT INTO [dbo].[LookupValue]
+           ([Name]
+           ,[Description]
+		   ,lookupTableId)
+     VALUES
+           ('Family Program', 'Family Program', (Select top 1 id from LookupTable  where name = 'ChapFamily'))
+END

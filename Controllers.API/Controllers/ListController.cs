@@ -537,12 +537,12 @@ namespace ELI.API.Controllers
 
         [HttpGet("getAllCampus")]
         [Produces(typeof(List<CampuseViewModel>))]
-        public async Task<IActionResult> GetAllCampus()
+        public async Task<IActionResult> GetAllCampus([FromQuery] CampuseViewModel requestVm)
         {
             try
             {
-                AllRequest<CampuseViewModel> campusList = new AllRequest<CampuseViewModel>();
-                return new ObjectResult(await _ELIService.GetAllCampus(campusList));
+                
+                return new ObjectResult(await _ELIService.GetAllCampus(requestVm));
             }
             catch (Exception ex)
             {

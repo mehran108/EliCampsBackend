@@ -693,7 +693,7 @@ namespace ELI.Domain.Services
             return await _listRepository.GetCampus(campusId);
         }
 
-        public async Task<AllResponse<CampuseViewModel>> GetAllCampus(AllRequest<CampuseViewModel> campusList)
+        public async Task<AllResponse<CampuseViewModel>> GetAllCampus(CampuseViewModel campusList)
         {
             return await _listRepository.GetAllCampus(campusList);
         }

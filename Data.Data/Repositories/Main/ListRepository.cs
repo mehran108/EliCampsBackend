@@ -1134,26 +1134,19 @@ namespace ELI.Data.Repositories.Main
             return campusVM;
         }
 
-        public async Task<AllResponse<CampuseViewModel>> GetAllCampus(AllRequest<CampuseViewModel> campusList)
+        public async Task<AllResponse<CampuseViewModel>> GetAllCampus(CampuseViewModel campusList)
         {
             CampuseViewModel campusVM = null;
 
             var result = new AllResponse<CampuseViewModel>
             {
-                Data = new List<CampuseViewModel>(),
-                Offset = campusList.Offset,
-                PageSize = campusList.PageSize,
-                SortColumn = campusList.SortColumn,
-                SortAscending = campusList.SortAscending
+                Data = new List<CampuseViewModel>()
             };
 
             var parameters = new List<DbParameter>
             {
 
-                base.GetParameter(BaseRepository.OffsetParameterName, campusList.Offset),
-                base.GetParameter(BaseRepository.PageSizeParameterName, campusList.PageSize),
-                base.GetParameter(BaseRepository.SortColumnParameterName, campusList.SortColumn),
-                base.GetParameter(BaseRepository.SortAscendingParameterName, campusList.SortAscending)
+                base.GetParameter(BaseRepository.ActiveParameterName, campusList.Active)
             };
 
             using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetAllCampusStoredProcedureName, CommandType.StoredProcedure))

@@ -73,7 +73,7 @@ namespace ELI.Domain.Contracts.Main
 
         Task<CampuseViewModel> GetCampus(int campusId);
 
-        Task<AllResponse<CampuseViewModel>> GetAllCampus(AllRequest<CampuseViewModel> campusList);
+        Task<AllResponse<CampuseViewModel>> GetAllCampus(CampuseViewModel campusList);
 
         Task<bool> UpdateCampusAsync(CampuseViewModel campusViewModel);
 

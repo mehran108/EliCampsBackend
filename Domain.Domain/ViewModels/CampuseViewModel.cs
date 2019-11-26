@@ -12,6 +12,6 @@ namespace ELI.Domain.ViewModels
         public string AddressOnReports { get; set; }
         public string CompleteName { get; set; }
         public string Onelineaddress { get; set; }
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
     }
 }

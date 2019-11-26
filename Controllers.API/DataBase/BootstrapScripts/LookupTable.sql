@@ -54,3 +54,12 @@ INSERT INTO [dbo].[LookupTable]
      VALUES
            ('StudentStatus','StudentStatus')
 END
+
+IF NOT EXISTS (SELECT id FROM [LookupTable] WHERE Name = 'ChapFamily')
+BEGIN
+INSERT INTO [dbo].[LookupTable]
+           ([Name]
+           ,[Description])
+     VALUES
+           ('ChapFamily','ChapFamily')
+END

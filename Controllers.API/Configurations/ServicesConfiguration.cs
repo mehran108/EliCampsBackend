@@ -30,6 +30,7 @@ namespace ELI.API.Configurations
             services.AddScoped<IReportRepository, ReportRepository>();
             services.AddScoped<IListRepository, ListRepository>();
             services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IStudentRegistrationRepository, StudentRegistrationRepository>();
 
             return services;
         }

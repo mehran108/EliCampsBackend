@@ -69,11 +69,12 @@ namespace ELI.API.Controllers
 
         [HttpGet("getAllGroups")]
         [Produces(typeof(List<GroupViewModel>))]
-        public async Task<IActionResult> GetAllGroups()
+        public async Task<IActionResult> GetAllGroups([FromQuery] GroupViewModel groupVM)
         {
             try
             {
                 AllRequest<GroupViewModel> grouplist = new AllRequest<GroupViewModel>();
+                grouplist.Data = groupVM;
                 return new ObjectResult(await _ELIService.GetAllGroupList(grouplist));
             }
             catch (Exception ex)

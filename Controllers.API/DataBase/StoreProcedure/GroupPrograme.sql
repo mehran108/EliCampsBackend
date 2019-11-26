@@ -25,7 +25,10 @@ Alter PROCEDURE [dbo].[GroupPrograme]
 	@PFormat INT,
 	@PMealPlan nvarchar(50),
 	@PAddinsID nvarchar(500),
-	@PRefNumber nvarchar(255)
+	@PRefNumber nvarchar(255),
+	@PChapFamily nvarchar(255),
+	@PProgramID INT,
+	@PSubProgramID INT
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -53,7 +56,10 @@ BEGIN
 				clmGroups_ProgrameEndDate = @PProgrameEndDate,
 				clmGroups_Campus = @PCampus,
 				clmGroups_Format = @PFormat,
-				clmGroups_MealPlan = @PMealPlan
+				clmGroups_MealPlan = @PMealPlan,
+				clmGroups_ChapFamily = @PChapFamily,
+				clmGroups_ProgramID = @PProgramID,
+				clmGroups_SubProgramID = @PSubProgramID
 		where clmGroups_ID = @PGroupID;
 	
 

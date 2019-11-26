@@ -268,7 +268,22 @@ namespace ELI.Domain.Services
         Task<bool> ActivateSubProgramAsync(SubProgramViewModel subProgramViewModel);
         #endregion
 
+        #region Student
+        Task<int> AddStudentAsync(StudentRegistration student);
+        Task<bool> UpdateStudentAsync(StudentRegistration student);
+        Task<StudentRegistration> GetStudentAsync(int studentID);
+        Task<bool> ActivateStudentAsync(StudentRegistration student);
+        Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student);
 
+        #region PaymentsStudent
+        Task<int> AddPaymentStudentAsync(PaymentsViewModel paymentStudent);
+        Task<bool> UpdatePaymentStudentAsync(PaymentsViewModel paymentStudent);
+        Task<PaymentsViewModel> GetPaymentStudentAsync(int paymentStudentID);
+        Task<List<PaymentsViewModel>> GetAllPaymentStudentByStudentIdAsync(int studentID);
+        Task<bool> ActivatePaymentStudentAsync(PaymentsViewModel paymentStudent);
+
+        #endregion
+        #endregion
 
     }
 }

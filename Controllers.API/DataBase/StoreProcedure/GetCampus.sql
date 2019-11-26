@@ -23,7 +23,7 @@ AS
 BEGIN
 	
 
-    Select [clmCampuses_ID] As AgentId
+    Select [clmCampuses_ID] As CampusID
       ,[clmCampuses_Campus] As Campus
       ,[clmCampuses_Camps] As CampusCamps
       ,[clmCampuses_AddressOnReports] As  CampusAddressOnReports

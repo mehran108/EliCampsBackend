@@ -262,8 +262,8 @@ namespace ELI.Data.Repositories.Main
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
                             ApplyToAllStudent = dataReader.GetBooleanValue(GroupRepository.ApplyToAllStudentColumnName),
                             ChapFamily = dataReader.GetStringValue(GroupRepository.ChapFamilyColumnName),
-                            ProgramID = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.ProgramIDColumnName),
-                            SubProgramID = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.SubProgramIDColumnName),
+                            ProgramId = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.ProgramIDColumnName),
+                            SubProgramId = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.SubProgramIDColumnName),
                             ProgrameAddins = new List<int>(),
                             GroupTrips = new List<int>()
 
@@ -366,8 +366,8 @@ namespace ELI.Data.Repositories.Main
                             CampusName = dataReader.GetStringValue(GroupRepository.CampusNameColumnName),
                             FormatName = dataReader.GetStringValue(GroupRepository.FormatNameRemarksColumnName),
                             ChapFamily = dataReader.GetStringValue(GroupRepository.ChapFamilyColumnName),
-                            ProgramID = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.ProgramIDColumnName),
-                            SubProgramID = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.SubProgramIDColumnName)
+                            ProgramId = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.ProgramIDColumnName),
+                            SubProgramId = dataReader.GetUnsignedIntegerValueNullable(GroupRepository.SubProgramIDColumnName)
 
                         };
                         result.Data.Add(groupVM);
@@ -409,8 +409,8 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(GroupRepository.AddinsIDParameterName, group.AddinsID),
                     base.GetParameter(GroupRepository.RefNumberParameterName, group.RefNumber),
                     base.GetParameter(GroupRepository.ChapFamilyParameterName, group.ChapFamily),
-                    base.GetParameter(GroupRepository.ProgramIDParameterName, group.ProgramID),
-                    base.GetParameter(GroupRepository.SubProgramIDParameterName, group.SubProgramID)
+                    base.GetParameter(GroupRepository.ProgramIDParameterName, group.ProgramId),
+                    base.GetParameter(GroupRepository.SubProgramIDParameterName, group.SubProgramId)
 
                 };
 

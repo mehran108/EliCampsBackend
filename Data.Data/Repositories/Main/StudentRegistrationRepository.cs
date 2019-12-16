@@ -95,6 +95,7 @@ namespace ELI.Data.Repositories.Main
         private const string NetPriceParameterName = "PNetPrice";
         private const string BalanceParameterName = "PBalance";
         private const string StudentTripsIDParameterName = "PStudentTripsID";
+        private const string StudentDocumentIdParameterName = "PStudentDocumentId";
 
         private const string PaymentStudentIDParameterName = "PPaymentStudentID";
         private const string PaymentStudentDateParameterName = "PPaymentStudentDate";
@@ -183,7 +184,7 @@ namespace ELI.Data.Repositories.Main
         private const string ChapFamilyColumnName = "ChapFamily";
         private const string ProgramIDColumnName = "ProgramID";
         private const string SubProgramIDColumnName = "SubProgramID";
-
+        private const string DocumentPathColumnName = "documentPath";
         private const string DocumentIdParameterName = "PDocumentId";
         private const string DocumentNameParameterName = "PDocumentName";
         private const string DocumentPathParameterName = "PDocumentPath";
@@ -304,6 +305,7 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.NetPriceParameterName, student.NetPrice),
                     base.GetParameter(StudentRegistrationRepository.BalanceParameterName, student.Balance),
                     base.GetParameter(StudentRegistrationRepository.StudentTripsIDParameterName, student.StudentTripsID),
+                    base.GetParameter(StudentRegistrationRepository.StudentDocumentIdParameterName, student.DocumentId),
                     base.GetParameter(BaseRepository.ActiveParameterName, student.Active),
                     base.GetParameter(StudentRegistrationRepository.ChapFamilyParameterName, student.ChapFamily),
                     base.GetParameter(StudentRegistrationRepository.ProgramIDParameterName, student.ProgramID),
@@ -412,6 +414,7 @@ namespace ELI.Data.Repositories.Main
                             ChapFamily = dataReader.GetStringValue(StudentRegistrationRepository.ChapFamilyColumnName),
                             ProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.ProgramIDColumnName),
                             SubProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.SubProgramIDColumnName),
+                            DocumentPath = dataReader.GetStringValue(StudentRegistrationRepository.DocumentPathColumnName),
                             ProgrameAddins = new List<int>(),
                             StudentTrips = new List<int>()
                         };
@@ -684,7 +687,6 @@ namespace ELI.Data.Repositories.Main
                 {
                     uploadDocumentIdParamter,
 
-                    base.GetParameter(StudentRegistrationRepository.RegistrantionIdParameterName, uploadDocuments.StudentId),
                     base.GetParameter(StudentRegistrationRepository.DocumentPathParameterName, uploadDocuments.FilePath),
                     base.GetParameter(StudentRegistrationRepository.DocumentNameParameterName, uploadDocuments.FileName)
 

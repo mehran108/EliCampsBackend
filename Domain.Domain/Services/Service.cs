@@ -832,7 +832,6 @@ namespace ELI.Domain.Services
             foreach (var path in studentDocuments.FilePath)
             {
                 documents.FilePath = path;
-                documents.StudentId = studentDocuments.StudentId;
                 documents.FileName = studentDocuments.FileName;
                 Id = await _studentRepository.UploadDocuments(documents);
             }

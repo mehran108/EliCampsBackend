@@ -80,9 +80,13 @@ BEGIN
       ,[clmReg_IsActive] AS Active,
 		clmReg_ChapFamily AS  ChapFamily,
 		clmReg_ProgramID AS ProgramID,
-		clmReg_SubProgramID AS SubProgramID
+		clmReg_SubProgramID AS SubProgramID,
+		dl.documentPath As documentPath
   FROM [dbo].[tblRegistration]
+  inner join tblDocuments dl on dl.documentId = tblRegistration.documentId 
 	where [clmReg_ID] = @PID;
+	
+	
 
 		Select clmAdvsSt_AddinsID As LinkID , 'AddinsID' AS LinkTypeID from 
 		[dbo].[tblAddinsVsStudent] where clmAdvsSt_StudentID = @PID

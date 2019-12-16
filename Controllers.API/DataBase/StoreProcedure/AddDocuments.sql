@@ -19,7 +19,6 @@ GO
 Alter PROCEDURE [dbo].[AddDocuments] 
 	-- Add the parameters for the stored procedure here
 	@PDocumentId INT = NULL OUTPUT,
-	@PRegistrantionId INT,
 	@PDocumentPath nvarchar(max),
 	@PDocumentName nvarchar(255)
 AS
@@ -29,8 +28,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     Insert Into [dbo].[tblDocuments]
-					([clmReg_ID],[documentPath],[documentName],[IsActive],[CreateDate])
-		Values	(@PRegistrantionId,@PDocumentPath,@PDocumentName,1,GETDATE());
+					([documentPath],[documentName],[IsActive],[CreateDate])
+		Values	(@PDocumentPath,@PDocumentName,1,GETDATE());
 
 		SET @PDocumentId = SCOPE_IDENTITY();
 END

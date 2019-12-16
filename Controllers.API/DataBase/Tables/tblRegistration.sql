@@ -209,3 +209,12 @@ BEGIN
  END
 
 END
+
+
+ALTER TABLE tblRegistration
+ADD documentId int;
+
+
+ALTER TABLE tblRegistration
+ADD CONSTRAINT FK_tblDocuments_documentId FOREIGN KEY (documentId)
+    REFERENCES tblDocuments(documentId);

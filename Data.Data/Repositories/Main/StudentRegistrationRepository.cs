@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetPaymentStudentStoredProcedureName = "GetPaymentStudent";
         private const string GetAllPaymentStudentByStudentIDStoredProcedureName = "GetAllPaymentStudentByStudentID";
         private const string ActivatePaymentStudentStoredProcedureName = "ActivatePaymentStudent";
+        private const string AddDocumentStoredProcedureName = "AddDocuments";
 
         private const string IDParameterName = "PID";
         private const string YearParameterName = "PYear";
@@ -182,6 +184,10 @@ namespace ELI.Data.Repositories.Main
         private const string ProgramIDColumnName = "ProgramID";
         private const string SubProgramIDColumnName = "SubProgramID";
 
+        private const string DocumentIdParameterName = "PDocumentId";
+        private const string DocumentNameParameterName = "PDocumentName";
+        private const string DocumentPathParameterName = "PDocumentPath";
+        private const string RegistrantionIdParameterName = "PRegistrantionId";
 
         public async Task<int> AddStudentAsync(StudentRegistration student)
         {
@@ -669,6 +675,26 @@ namespace ELI.Data.Repositories.Main
             var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.ActivatePaymentStudentStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
+        }
+
+        public async Task<int> UploadDocuments(UploadDocuments uploadDocuments)
+        {
+            var uploadDocumentIdParamter = base.GetParameterOut(StudentRegistrationRepository.DocumentIdParameterName, SqlDbType.Int, uploadDocuments.DocumentId);
+            var parameters = new List<DbParameter>
+                {
+                    uploadDocumentIdParamter,
+
+                    base.GetParameter(StudentRegistrationRepository.RegistrantionIdParameterName, uploadDocuments.StudentId),
+                    base.GetParameter(StudentRegistrationRepository.DocumentPathParameterName, uploadDocuments.FilePath),
+                    base.GetParameter(StudentRegistrationRepository.DocumentNameParameterName, uploadDocuments.FileName)
+
+                };
+
+            await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.AddDocumentStoredProcedureName, CommandType.StoredProcedure);
+
+            uploadDocuments.DocumentId = Convert.ToInt32(uploadDocumentIdParamter.Value);
+
+            return uploadDocuments.DocumentId;
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ELI.Data.Repositories.Main;
@@ -196,5 +197,31 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+
+        [HttpPost("uploadDocuments")]
+       // [Produces(typeof(StudentDocuments))]
+        public async Task<IActionResult> UploadDocuments([FromForm] StudentDocuments documents)
+        {
+            foreach (var formFile in documents.Files)
+            {
+                if (formFile.Length > 0)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(formFile.FileName);
+                    var SavePath = Path.Combine(Directory.GetCurrentDirectory(), "www/Images", fileName);
+                    documents.FilePath = new List<string>();
+                    using (var stream = new FileStream(SavePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                        documents.FilePath.Add(SavePath);
+                        documents.FileName = fileName;
+                    }
+                  var upload =  await _ELIService.UploadDocuments(documents);
+                }
+            }
+
+            return Ok();
+        }
+        
     }
 }

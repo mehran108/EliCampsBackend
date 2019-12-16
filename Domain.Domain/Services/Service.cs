@@ -823,8 +823,25 @@ namespace ELI.Domain.Services
         {
             return await _studentRepository.ActivatePaymentStudentAsync(paymentStudent);
         }
-        
-        
+
+
+        public async Task<int> UploadDocuments(StudentDocuments studentDocuments)
+        {
+            int Id = 0;
+            UploadDocuments documents = new UploadDocuments();
+            foreach (var path in studentDocuments.FilePath)
+            {
+                documents.FilePath = path;
+                documents.StudentId = studentDocuments.StudentId;
+                documents.FileName = studentDocuments.FileName;
+                Id = await _studentRepository.UploadDocuments(documents);
+            }
+            return Id;
+
+
+        }
+
+
         #endregion
 
         #endregion

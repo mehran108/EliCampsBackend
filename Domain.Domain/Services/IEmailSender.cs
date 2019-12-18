@@ -11,5 +11,6 @@ namespace ELI.Domain.Services
     {
         ResetPasswordViewModel GeneratePasswordResetTokenAsync();
         Task SendEmail(string code, string Email, EmailTemplate emailTemplateId);
+        Task<bool> SendRegistrationEmail(List<Documents> document);
     }
 }

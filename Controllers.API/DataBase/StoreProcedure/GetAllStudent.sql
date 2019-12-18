@@ -61,6 +61,7 @@ BEGIN
       ,tbl.[clmReg_Proge] AS ProgrameStartDate
       ,tbl.[clmReg_ProgrameEndDate] AS ProgrameEndDate
       ,tbl.[clmReg_Campus] AS Campus
+	  ,cam.[clmCampuses_Campus] AS CampusName
       ,tbl.[clmReg_Format] AS Format
       ,tbl.[clmReg_MealPlan] AS MealPlan
       ,tbl.[clmReg_NumberOfNights] AS NumberOfNights 
@@ -89,6 +90,7 @@ BEGIN
   FROM [dbo].[tblRegistration] tbl
 		left join [tblAgents] agents on tbl.[clmReg_AgencyID] = agents.clmAgents_ID
 		left join [LookupValue] lv on tbl.[clmReg_Format] = lv.id
+		left join [dbo].[tblCampuses] cam on tbl.[clmReg_Campus] = cam.clmCampuses_ID
 		 where ( tbl.[clmReg_IsActive] = (CASE WHEN @PActive is not null then @PActive else tbl.[clmReg_IsActive] end))
 END
 GO

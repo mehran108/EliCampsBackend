@@ -603,7 +603,7 @@ namespace ELI.Data.Repositories.Main.Extensions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static byte[] GetBytes(this Stream input)
+        public static byte[] GetBytess(this Stream input)
         {
             using (MemoryStream ms = new MemoryStream())
             {

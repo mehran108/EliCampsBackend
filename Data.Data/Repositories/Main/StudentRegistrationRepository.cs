@@ -114,6 +114,7 @@ namespace ELI.Data.Repositories.Main
         private const string GenderColumnName = "Gender";
         private const string FirstNameColumnName = "FirstName";
         private const string LastNameColumnName = "LastName";
+        private const string CampusNameColumnName = "CampusName";
         private const string HomeAddressColumnName = "HomeAddress";
         private const string CityColumnName = "City";
         private const string StateColumnName = "State";
@@ -475,6 +476,7 @@ namespace ELI.Data.Repositories.Main
                             Gender = dataReader.GetStringValue(StudentRegistrationRepository.GenderColumnName),
                             FirstName = dataReader.GetStringValue(StudentRegistrationRepository.FirstNameColumnName),
                             LastName = dataReader.GetStringValue(StudentRegistrationRepository.LastNameColumnName),
+                            CampusName = dataReader.GetStringValue(StudentRegistrationRepository.CampusNameColumnName),
                             HomeAddress = dataReader.GetStringValue(StudentRegistrationRepository.HomeAddressColumnName),
                             City = dataReader.GetStringValue(StudentRegistrationRepository.CityColumnName),
                             State = dataReader.GetStringValue(StudentRegistrationRepository.StateColumnName),

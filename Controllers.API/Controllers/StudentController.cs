@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ELI.Data.Repositories.Main;
+using ELI.Data.Repositories.Main.Extensions;
 using ELI.Domain.Helpers;
 using ELI.Domain.Services;
 using ELI.Domain.ViewModels;
@@ -18,10 +20,12 @@ namespace ELI.API.Controllers
     {
         private readonly IHostingEnvironment _appEnvironment;
         private readonly IELIService _ELIService;
-        public StudentController(IELIService eLIService, IHostingEnvironment appEnvironment)
+        private readonly IEmailSender _EmailSender;
+        public StudentController(IELIService eLIService, IHostingEnvironment appEnvironment, IEmailSender emailSender)
         {
             _ELIService = eLIService;
             _appEnvironment = appEnvironment;
+            _EmailSender = emailSender;
         }
 
         [HttpPost("createStudent")]
@@ -70,6 +74,7 @@ namespace ELI.API.Controllers
         {
             try
             {
+               
                 return new ObjectResult(await _ELIService.GetStudentAsync(studentID));
             }
             catch (Exception ex)
@@ -196,5 +201,39 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+
+        [HttpPost("UploadFiles")]
+        public async Task<uint> UploadsFile([FromForm] List<IFormFile> documentVM)
+        {
+            //var files = new List<Documents>();
+            //foreach(var file in documentVM)
+            //{
+            //    files.Add(new Documents
+            //    {
+            //        DocumentName = file.FileName,
+            //        DocumentByte = file.OpenReadStream().GetBytess()
+              
+            //    }
+            //    );
+            //}
+            //await _EmailSender.SendRegistrationEmail(files);
+            //Documents document = requestVM.Convert();
+            // var result = await this.DocumentApplication.Add(document);
+            return 1;
+        }
+
+        private static string TrimDocumentName(string name)
+        {
+            string documentName = name;
+
+            if (name.Length > 2)
+            {
+                documentName = documentName.Substring(0, 2);
+            }
+
+            return documentName;
+        }
+      
     }
 }

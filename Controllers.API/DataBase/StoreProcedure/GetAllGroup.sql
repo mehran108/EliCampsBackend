@@ -67,11 +67,12 @@ BEGIN
 				tbl.clmGroups_ChapFamily AS  ChapFamily,
 				tbl.clmGroups_ProgramID AS ProgramID,
 				tbl.clmGroups_SubProgramID AS SubProgramID
-		from [dbo].[tblGroups] tbl
-		left join [tblAgents] agents on tbl.clmGroups_AgentID = agents.clmAgents_ID
-		left join [tblCampuses] campus on tbl.clmGroups_Campus = campus.clmCampuses_ID
-		left join [LookupValue] lv on tbl.clmGroups_Format = lv.id
+		from [dbo].[tblGroups] tbl with (nolock)
+		left join [tblAgents] agents with (nolock) on tbl.clmGroups_AgentID = agents.clmAgents_ID
+		left join [tblCampuses] campus with (nolock) on tbl.clmGroups_Campus = campus.clmCampuses_ID
+		left join [LookupValue] lv with (nolock) on tbl.clmGroups_Format = lv.id
 		 where ( tbl.clmGroups_Active = (CASE WHEN @PActive is not null then @PActive else tbl.clmGroups_Active end))
 		 and ( tbl.clmGroups_Year = (CASE WHEN (@PYear is not null and @PYear <> 0) then @PYear else tbl.clmGroups_Year end))
+		 order by tbl.clmGroups_ID desc;
 END
 GO

@@ -12,6 +12,7 @@ namespace ELI.Domain.ViewModels
         public string GroupRef { get; set; }
         public string Camps { get; set; }
         public string Gender { get; set; }
+        public string CampusName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string HomeAddress { get; set; }

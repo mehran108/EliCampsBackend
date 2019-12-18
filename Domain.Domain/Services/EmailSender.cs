@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using ELI.Domain.Helpers;
 using ELI.Domain.Contracts.Auth;
 using ELI.Domain.Contracts.Main;
+using System.Net.Mail;
+using System.Net;
 
 namespace ELI.Domain.Services
 {
@@ -146,9 +148,9 @@ namespace ELI.Domain.Services
             catch (AppException ex)
             {
                 new ExceptionHandlingService(ex, null, null).LogException();
-                return ;
+                return;
             }
-            
+
         }
         public EmailTemplateViewModel GetEmailTemplate(EmailTemplate Email_templateId, string RegionName)
         {
@@ -198,5 +200,73 @@ namespace ELI.Domain.Services
             };
             return resetPasswordViewModel;
         }
+
+
+        public async Task<bool> SendRegistrationEmail(List<Documents> document)
+        {
+            // Common method for getting template from database based email template code
+            //var emailTemplate = await GetNotificationEmailTemplate(EmailApplication.FleetSalesCode);
+            var emailTemplate = "My name is Zaki";
+            var response = false;
+
+            var email = new EmailViewModel();
+            email.Subject = "Test Email";
+            email.Message = emailTemplate; ;
+            email.To = "Zulqarnain.SaleemBajwa@gmail.com";
+            await sendEmail(document);
+            response = true;
+
+            return response;
+        }
+
+        private async Task sendEmail(List<Documents> document)
+        {
+
+
+            try
+            {
+
+
+
+
+                var apiKey = "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";
+                var client = new SendGridClient(apiKey);
+                var from = new EmailAddress("elicampswork@gmail.com", "elicamps");
+                var subject = "Sending with Twilio SendGrid is Fun";
+                var to = new EmailAddress("Zulqarnain.SaleemBajwa@gmail.com", "Zulqarnain");
+                var plainTextContent = "";
+                var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
+
+                var attachments = new List<SendGrid.Helpers.Mail.Attachment>();
+                
+
+                foreach(var attchment in document)
+                {
+                    attachments.Add(new SendGrid.Helpers.Mail.Attachment()
+                    {
+                        Content = Convert.ToBase64String(attchment.DocumentByte, 0, attchment.DocumentByte.Length),
+                        Type = "application/pdf",
+                        Filename = attchment.DocumentName,
+                        Disposition = "attachment"
+                    }
+                        );
+                }
+               
+                var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+                msg.AddAttachments(attachments);
+
+                var response = await client.SendEmailAsync(msg);
+
+            }
+            catch (AppException ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return;
+            }
+
+
+        }
+
+        // public 
     }
 }

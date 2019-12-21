@@ -203,6 +203,36 @@ namespace ELI.API.Controllers
         }
 
 
+        [HttpPost("uploadDocuments")]
+       // [Produces(typeof(StudentDocuments))]
+        public async  Task<IActionResult> UploadDocuments([FromForm] StudentDocuments documents)
+        {
+            // List<int> Ids = new List<int>();
+            int documentId = 0;
+            foreach (var formFile in documents.Files)
+            {
+                if (formFile.Length > 0)
+                {
+                   
+                    
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(formFile.FileName);
+                    var SavePath = Path.Combine(Directory.GetCurrentDirectory(), "www/Images", fileName);
+                    documents.FilePath = new List<string>();
+                    using (var stream = new FileStream(SavePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                        documents.FilePath.Add(SavePath);
+                        documents.FileName = fileName;
+                    }
+                    documentId =  await _ELIService.UploadDocuments(documents);
+                 //   Ids.Add(documentId);
+                }
+            }
+
+            return Ok(documentId);
+        }
+
+
         [HttpPost("UploadFiles")]
         public async Task<uint> UploadsFile([FromForm] List<IFormFile> documentVM)
         {

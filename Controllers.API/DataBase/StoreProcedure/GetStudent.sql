@@ -88,10 +88,11 @@ BEGIN
 		 ,room.clmRoom_RoomID AS RoomName
 		 ,pro.clmPrograms_Name AS ProgramName
 		 ,subPro.clmSubPrograms_Name AS SubProgramName
-
+		 ,dl.documentPath As documentPath
 
 
   FROM [dbo].[tblRegistration] tbl
+	left join tblDocuments dl on dl.documentId = tblRegistration.documentId 
 	left join [tblAgents] agents on tbl.[clmReg_AgencyID] = agents.clmAgents_ID
 	left join [LookupValue] lv on tbl.[clmReg_Format] = lv.id
 	left join [dbo].[tblCampuses] cam on tbl.[clmReg_Campus] = cam.clmCampuses_ID

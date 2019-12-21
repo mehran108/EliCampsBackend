@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetPaymentStudentStoredProcedureName = "GetPaymentStudent";
         private const string GetAllPaymentStudentByStudentIDStoredProcedureName = "GetAllPaymentStudentByStudentID";
         private const string ActivatePaymentStudentStoredProcedureName = "ActivatePaymentStudent";
+        private const string AddDocumentStoredProcedureName = "AddDocuments";
 
         private const string IDParameterName = "PID";
         private const string YearParameterName = "PYear";
@@ -93,6 +95,7 @@ namespace ELI.Data.Repositories.Main
         private const string NetPriceParameterName = "PNetPrice";
         private const string BalanceParameterName = "PBalance";
         private const string StudentTripsIDParameterName = "PStudentTripsID";
+        private const string StudentDocumentIdParameterName = "PStudentDocumentId";
 
         private const string PaymentStudentIDParameterName = "PPaymentStudentID";
         private const string PaymentStudentDateParameterName = "PPaymentStudentDate";
@@ -182,6 +185,11 @@ namespace ELI.Data.Repositories.Main
         private const string ChapFamilyColumnName = "ChapFamily";
         private const string ProgramIDColumnName = "ProgramID";
         private const string SubProgramIDColumnName = "SubProgramID";
+        private const string DocumentPathColumnName = "documentPath";
+        private const string DocumentIdParameterName = "PDocumentId";
+        private const string DocumentNameParameterName = "PDocumentName";
+        private const string DocumentPathParameterName = "PDocumentPath";
+        private const string RegistrantionIdParameterName = "PRegistrantionId";
 
         private const string HomestayNameColumnName = "HomestayName";
         private const string RoomNameColumnName = "RoomName";
@@ -312,6 +320,7 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.NetPriceParameterName, student.NetPrice),
                     base.GetParameter(StudentRegistrationRepository.BalanceParameterName, student.Balance),
                     base.GetParameter(StudentRegistrationRepository.StudentTripsIDParameterName, student.StudentTripsID),
+                    base.GetParameter(StudentRegistrationRepository.StudentDocumentIdParameterName, student.DocumentId),
                     base.GetParameter(BaseRepository.ActiveParameterName, student.Active),
                     base.GetParameter(StudentRegistrationRepository.ChapFamilyParameterName, student.ChapFamily),
                     base.GetParameter(StudentRegistrationRepository.ProgramIDParameterName, student.ProgramID),
@@ -427,6 +436,7 @@ namespace ELI.Data.Repositories.Main
                             RoomName = dataReader.GetStringValue(StudentRegistrationRepository.RoomNameColumnName),
                             ProgramName = dataReader.GetStringValue(StudentRegistrationRepository.ProgramNameColumnName),
                             SubProgramName = dataReader.GetStringValue(StudentRegistrationRepository.SubProgramNameColumnName),
+                            DocumentPath = dataReader.GetStringValue(StudentRegistrationRepository.DocumentPathColumnName),
                             ProgrameAddins = new List<int>(),
                             StudentTrips = new List<int>()
                         };
@@ -691,6 +701,25 @@ namespace ELI.Data.Repositories.Main
             var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.ActivatePaymentStudentStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
+        }
+
+        public async Task<int> UploadDocuments(UploadDocuments uploadDocuments)
+        {
+            var uploadDocumentIdParamter = base.GetParameterOut(StudentRegistrationRepository.DocumentIdParameterName, SqlDbType.Int, uploadDocuments.DocumentId);
+            var parameters = new List<DbParameter>
+                {
+                    uploadDocumentIdParamter,
+
+                    base.GetParameter(StudentRegistrationRepository.DocumentPathParameterName, uploadDocuments.FilePath),
+                    base.GetParameter(StudentRegistrationRepository.DocumentNameParameterName, uploadDocuments.FileName)
+
+                };
+
+            await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.AddDocumentStoredProcedureName, CommandType.StoredProcedure);
+
+            uploadDocuments.DocumentId = Convert.ToInt32(uploadDocumentIdParamter.Value);
+
+            return uploadDocuments.DocumentId;
         }
 
         #endregion

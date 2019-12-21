@@ -79,6 +79,8 @@ namespace ELI.Domain.ViewModels
         public string ChapFamily { get; set; }
         public int? ProgramID { get; set; }
         public int? SubProgramID { get; set; }
+        public int DocumentId { get; set; }
+        public string DocumentPath { get; set; }
 
 
 

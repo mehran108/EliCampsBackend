@@ -183,6 +183,13 @@ namespace ELI.Data.Repositories.Main
         private const string ProgramIDColumnName = "ProgramID";
         private const string SubProgramIDColumnName = "SubProgramID";
 
+        private const string HomestayNameColumnName = "HomestayName";
+        private const string RoomNameColumnName = "RoomName";
+        private const string ProgramNameColumnName = "ProgramName";
+        private const string SubProgramNameColumnName = "SubProgramName";
+
+
+
 
         public async Task<int> AddStudentAsync(StudentRegistration student)
         {
@@ -407,6 +414,13 @@ namespace ELI.Data.Repositories.Main
                             ChapFamily = dataReader.GetStringValue(StudentRegistrationRepository.ChapFamilyColumnName),
                             ProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.ProgramIDColumnName),
                             SubProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.SubProgramIDColumnName),
+                            AgentName = dataReader.GetStringValue(StudentRegistrationRepository.AgentNameColumnName),
+                            FormatName = dataReader.GetStringValue(StudentRegistrationRepository.FormatNameColumnName),
+                            CampusName = dataReader.GetStringValue(StudentRegistrationRepository.CampusNameColumnName),
+                            HomestayName = dataReader.GetStringValue(StudentRegistrationRepository.HomestayNameColumnName),
+                            RoomName = dataReader.GetStringValue(StudentRegistrationRepository.RoomNameColumnName),
+                            ProgramName = dataReader.GetStringValue(StudentRegistrationRepository.ProgramNameColumnName),
+                            SubProgramName = dataReader.GetStringValue(StudentRegistrationRepository.SubProgramNameColumnName),
                             ProgrameAddins = new List<int>(),
                             StudentTrips = new List<int>()
                         };

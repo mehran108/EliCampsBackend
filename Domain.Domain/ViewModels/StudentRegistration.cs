@@ -71,6 +71,10 @@ namespace ELI.Domain.ViewModels
         public string StudentTripsID { get; set; }
         public string FormatName { get; set; }
         public string AgentName { get; set; }
+        public string HomestayName { get; set; }
+        public string RoomName { get; set; }
+        public string ProgramName { get; set; }
+        public string SubProgramName { get; set; }
         public bool? Active { get; set; }
         public string ChapFamily { get; set; }
         public int? ProgramID { get; set; }

@@ -231,7 +231,13 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.MedicalNotesParameterName, student.MedicalNotes),
                     base.GetParameter(StudentRegistrationRepository.ExtraNotesParameterName, student.ExtraNotes),
                     base.GetParameter(StudentRegistrationRepository.ExtraNotesHTMLParameterName, student.ExtraNotesHTML),
-                    base.GetParameter(StudentRegistrationRepository.StatusParameterName, student.Status)
+                    base.GetParameter(StudentRegistrationRepository.StatusParameterName, student.Status),
+                    base.GetParameter(StudentRegistrationRepository.ProgrameStartDateParameterName, student.ProgrameStartDate),
+                    base.GetParameter(StudentRegistrationRepository.ProgrameEndDateParameterName, student.ProgrameEndDate),
+                    base.GetParameter(StudentRegistrationRepository.CampusParameterName, student.Campus),
+                    base.GetParameter(StudentRegistrationRepository.FormatParameterName, student.Format),
+                    base.GetParameter(StudentRegistrationRepository.MealPlanParameterName, student.MealPlan),
+                    base.GetParameter(StudentRegistrationRepository.AddinsIDParameterName, student.AddinsID)
 
 
     };

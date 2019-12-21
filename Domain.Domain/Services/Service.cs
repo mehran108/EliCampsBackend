@@ -775,6 +775,7 @@ namespace ELI.Domain.Services
         #region Student
         public async Task<int> AddStudentAsync(StudentRegistration student)
         {
+            student.AddinsID = string.Join(",", student.ProgrameAddins.ToArray());
             return await _studentRepository.AddStudentAsync(student);
         }
 

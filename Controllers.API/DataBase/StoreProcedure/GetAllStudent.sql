@@ -92,5 +92,6 @@ BEGIN
 		left join [LookupValue] lv on tbl.[clmReg_Format] = lv.id
 		left join [dbo].[tblCampuses] cam on tbl.[clmReg_Campus] = cam.clmCampuses_ID
 		 where ( tbl.[clmReg_IsActive] = (CASE WHEN @PActive is not null then @PActive else tbl.[clmReg_IsActive] end))
+		 order by tbl.[clmReg_ID] desc;
 END
 GO

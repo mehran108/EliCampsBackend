@@ -40,6 +40,7 @@ BEGIN
       ,[clmHome_PoliceCheck] As HomePoliceCheck,
 	  [clmHome_IsActive] As Active
 	 from tblHomestay
-	 where ( clmHome_IsActive = (CASE WHEN @PActive is not null then @PActive else clmHome_IsActive end));
+	 where ( clmHome_IsActive = (CASE WHEN @PActive is not null then @PActive else clmHome_IsActive end))
+	 order by [clmHome_ID] desc;
 END
 GO

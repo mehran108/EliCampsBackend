@@ -33,6 +33,7 @@ BEGIN
       ,[clmTrips_IDX] As TripLdx,
 	  [clmTrips_IsActive] As Active
 	   from tblTrips
-	    where ( clmTrips_IsActive = (CASE WHEN @PActive is not null then @PActive else clmTrips_IsActive end));
+	    where ( clmTrips_IsActive = (CASE WHEN @PActive is not null then @PActive else clmTrips_IsActive end))
+		order by [clmTrips_ID] desc;
 END
 GO

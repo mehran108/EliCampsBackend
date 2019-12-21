@@ -638,6 +638,7 @@ namespace ELI.Data.Repositories.Main
         private const string HomeRoomsParameterName = "PHomeRooms";
         private const string HomeAgreementParameterName = "PHomeAggrement";
         private const string HomePoliceCheckParameterName = "PHomePoliceCheck";
+        private const string HomeStayLocationURLParameterName = "PHomeStayLocationURL";
 
 
         private const string HomeIDColumnName = "HomeID";
@@ -654,6 +655,7 @@ namespace ELI.Data.Repositories.Main
         private const string HomeRoomsColumnName = "HomeRooms";
         private const string HomeAgreementColumnName = "HomeAggrement";
         private const string HomePoliceCheckColumnName = "HomePoliceCheck";
+        private const string HomeStayLocationURLColumnName = "HomeStayLocationURL";
         public async Task<int> CreateHomeStayAsync(HomeStayViewModel homeStayViewModel)
         {
             var homeIDParameterName = base.GetParameterOut(ListRepository.HomeIDParameterName, SqlDbType.Int, homeStayViewModel.HomeId);
@@ -675,7 +677,8 @@ namespace ELI.Data.Repositories.Main
                 base.GetParameter(ListRepository.HomePreferParameterName, homeStayViewModel.Prefer),
                 base.GetParameter(ListRepository.HomeRoomsParameterName, homeStayViewModel.Rooms),
                 base.GetParameter(ListRepository.HomeAgreementParameterName, homeStayViewModel.Aggrements),
-                base.GetParameter(ListRepository.HomePoliceCheckParameterName, homeStayViewModel.PoliceCheck)
+                base.GetParameter(ListRepository.HomePoliceCheckParameterName, homeStayViewModel.PoliceCheck),
+                base.GetParameter(ListRepository.HomeStayLocationURLParameterName, homeStayViewModel.HomeStayLocationURL)
 
             };
 
@@ -718,6 +721,7 @@ namespace ELI.Data.Repositories.Main
                             Prefer = dataReader.GetStringValue(ListRepository.HomePreferColumnName),
                             Aggrements = dataReader.GetStringValue(ListRepository.HomeAgreementColumnName),
                             PoliceCheck = dataReader.GetStringValue(ListRepository.HomePoliceCheckColumnName),
+                            HomeStayLocationURL = dataReader.GetStringValue(ListRepository.HomeStayLocationURLColumnName),
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
 
                         };
@@ -808,8 +812,9 @@ namespace ELI.Data.Repositories.Main
                         base.GetParameter(ListRepository.HomeRoomsParameterName, homeStayViewModel.Rooms),
                         base.GetParameter(ListRepository.HomeAgreementParameterName, homeStayViewModel.Aggrements),
                         base.GetParameter(ListRepository.HomePoliceCheckParameterName, homeStayViewModel.PoliceCheck),
+                        base.GetParameter(ListRepository.HomeStayLocationURLParameterName, homeStayViewModel.HomeStayLocationURL),
                         base.GetParameter(BaseRepository.ActiveParameterName, homeStayViewModel.Active)
-
+                        
 
                 };
 

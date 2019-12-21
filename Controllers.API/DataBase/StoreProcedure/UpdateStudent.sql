@@ -79,7 +79,9 @@ Alter PROCEDURE [dbo].[UpdateStudent]
 	@PActive  bit,
 	@PChapFamily nvarchar(255),
 	@PProgramID INT,
-	@PSubProgramID INT
+	@PSubProgramID INT,
+	@PStudentDocumentId INT
+
 	
 AS
 BEGIN
@@ -155,7 +157,7 @@ BEGIN
 	[clmReg_Balance] = @PBalance    ,
 	[clmReg_IsActive] = @PActive,
 	[clmReg_ModifiedDate] = GETDATE(),
-
+	[documentId] = @PStudentDocumentId,
 	clmReg_ChapFamily = @PChapFamily,
 	clmReg_ProgramID = @PProgramID,
 	clmReg_SubProgramID = @PSubProgramID

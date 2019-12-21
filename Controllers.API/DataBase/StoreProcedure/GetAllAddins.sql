@@ -30,6 +30,7 @@ BEGIN
       ,[clmAddins_Type] As AddinsType,
 	  clmAddins_IsActive AS Active
 	 from tblAddins
-	  where ( clmAddins_IsActive = (CASE WHEN @PActive is not null then @PActive else clmAddins_IsActive end));
+	  where ( clmAddins_IsActive = (CASE WHEN @PActive is not null then @PActive else clmAddins_IsActive end))
+	  order by [clmAddins_ID] desc;
 END
 GO

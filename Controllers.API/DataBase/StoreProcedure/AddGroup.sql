@@ -42,7 +42,10 @@ BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-
+	if(@PYear = 0 or @PYear is null)
+	Begin
+		set @PYear =  year(GetDate());
+	END
 	Declare @RefNumberCount INT
 
 	set @RefNumberCount = ((Select top 1 clmYear_GroupRef from [tblYears] where  clmYear_Year = @PYear) + 1)

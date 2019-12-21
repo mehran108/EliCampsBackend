@@ -333,7 +333,7 @@ namespace ELI.API.Controllers
                         var resetPassword = _emailSender.GeneratePasswordResetTokenAsync();
                         user.SecurityStamp = resetPassword.SecurityStamp;
                         await _ELIAuthService.UpdateAsync(user);
-                        await _emailSender.SendEmail(resetPassword.SecurityStamp, user.Email, EmailTemplate.ForgetPasswordEmail);
+                       // await _emailSender.SendEmail(resetPassword.SecurityStamp, user.Email, EmailTemplate.ForgetPasswordEmail);
                         return Ok(new { message = "We have emailed your reset password link." });
                     }
                     // If we got this far, something failed, redisplay form
@@ -372,7 +372,7 @@ namespace ELI.API.Controllers
                         }
                         user.SecurityStamp = null;
                         await _ELIAuthService.UpdateAsync(user, model.NewPassword);
-                        await _emailSender.SendEmail(null, user.Email, EmailTemplate.ResetSuccessfully);
+                        //await _emailSender.SendEmail(null, user.Email, EmailTemplate.ResetSuccessfully);
                     }
                     return Ok(new { message = "Password reset successfully!" });
                 }
@@ -430,7 +430,7 @@ namespace ELI.API.Controllers
             {
                 var UserResult = await _ELIAuthService.CreateAsync(user, userVM.Password);
                 var roleEntry = await _ELIAuthService.RoleAddAsync(user.Id, userVM.RoleId);
-                await _emailSender.SendEmail(null, user.Email, EmailTemplate.BulkCodeAccount);
+                //await _emailSender.SendEmail(null, user.Email, EmailTemplate.BulkCodeAccount);
                 UserResult.PasswordHash = null; UserResult.PasswordSalt = null;
                 return UserResult;
             }

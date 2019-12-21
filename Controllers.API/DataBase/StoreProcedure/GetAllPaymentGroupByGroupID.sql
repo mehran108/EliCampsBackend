@@ -33,6 +33,7 @@ BEGIN
 				[ClmPaymentsGrp_IsActive] As Active
 				
 		from [dbo].[tblPaymentsGroups] 
-		where [ClmPaymentsGrp_GroupID] = @PGroupID;
+		where [ClmPaymentsGrp_GroupID] = @PGroupID
+		order by [ClmPaymentsGrp_ID] desc;
 END
 GO

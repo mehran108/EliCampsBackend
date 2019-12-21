@@ -53,18 +53,27 @@ Alter PROCEDURE [dbo].[AddStudent]
 	@PMedicalNotes [ntext],
 	@PExtraNotes [ntext],
 	@PExtraNotesHTML [ntext],
-	@PStatus [nvarchar](50)
+	@PStatus [nvarchar](50),
+	@PProgrameStartDate [date],
+	@PProgrameEndDate [date],
+	@PCampus [int],
+	@PFormat [int],
+	@PMealPlan [nvarchar](255),
+	@PAddinsID [nvarchar](500)
 	
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-	--BEGIN TRANSACTION [Tran]
+	BEGIN TRANSACTION [Tran]
 
- --BEGIN TRY
+ BEGIN TRY
 	Declare @RefNumberCount INT
-
+	if(@PYear = 0 or @PYear is null)
+	Begin
+		set @PYear =  year(GetDate());
+	END
 	set @RefNumberCount = ((Select top 1 clmYear_StudentRef from [tblYears] where  clmYear_Year = @PYear) + 1)
 	
     Insert Into [dbo].[tblRegistration]
@@ -76,7 +85,9 @@ BEGIN
 				 ,[clmReg_DepartureDate], [clmReg_DepartureTerminal], [clmReg_DepartureFlightNumber]
 				 ,[clmReg_DestinationTo], [clmReg_FlightDepartureTime], [clmReg_MedicalInformation]
 				 ,[clmReg_DietaryNeeds], [clmReg_Allergies], [clmRerameStartDatg_Notes]
-				 ,[clmReg_ExtraNotes], [clmReg_ExtraNotesHTML], [clmReg_Status], [clmReg_IsActive], [clmReg_CreateDate])
+				 ,[clmReg_ExtraNotes], [clmReg_ExtraNotesHTML], [clmReg_Status], [clmReg_IsActive], [clmReg_CreateDate]
+				 ,[clmReg_Proge],[clmReg_ProgrameEndDate],[clmReg_Campus]
+				 ,[clmReg_Format],[clmReg_MealPlan])
 		Values	(@PYear,CONCAT(@PYear, '-',format(@RefNumberCount,'00')),@PGroupRef,@PCamps
 				,@PGender, @PFirstName, @PLastName, @PHomeAddress, @PCity, @PState
 				,@PCountry, @PPostCode, @PEmergencyContact, @PEmail, @PPhone
@@ -86,31 +97,33 @@ BEGIN
 				,@PDestinationTo, @PFlightDepartureTime, @PMedicalInformation 
 				,@PDietaryNeeds, @PAllergies, @PMedicalNotes
 				,@PExtraNotes,@PExtraNotesHTML, @PStatus, 1, GETDATE()
+				,@PProgrameStartDate,@PProgrameEndDate,@PCampus
+				,@PFormat,@PMealPlan
 				);
 
 		SET @PID = SCOPE_IDENTITY();
 
-		-- Add Addins data
-		 --if @PAddinsID <> '' 
-		 --Begin
+		 --Add Addins data
+		 if @PAddinsID <> '' 
+		 Begin
  
-			--	INSERT INTO [dbo].[tblAddinsVsStudent]
-			--		   ([clmAdvsSt_AddinsID],[clmAdvsSt_StudentID])
-			--	 select value , 1
-			--				from STRING_SPLIT(@PAddinsID, ',');
-		 --END 
+				INSERT INTO [dbo].[tblAddinsVsStudent]
+					   ([clmAdvsSt_AddinsID],[clmAdvsSt_StudentID])
+				 select value , @PID
+							from STRING_SPLIT(@PAddinsID, ',');
+		 END 
 
 		 update [tblYears] set clmYear_StudentRef = (clmYear_StudentRef + 1)
 			where clmYear_Year = @PYear;
 
-	--COMMIT TRANSACTION [Tran];
+	COMMIT TRANSACTION [Tran];
 
- -- END TRY
+  END TRY
 
- -- BEGIN CATCH
+  BEGIN CATCH
 
- --   ROLLBACK TRANSACTION [Tran];
-	--	throw
- -- END CATCH  
+    ROLLBACK TRANSACTION [Tran];
+		throw
+  END CATCH  
 END
 GO

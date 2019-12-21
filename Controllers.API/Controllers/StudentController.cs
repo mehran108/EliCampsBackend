@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ELI.Data.Repositories.Main;
+using ELI.Data.Repositories.Main.Extensions;
 using ELI.Domain.Helpers;
 using ELI.Domain.Services;
 using ELI.Domain.ViewModels;
@@ -18,10 +20,12 @@ namespace ELI.API.Controllers
     {
         private readonly IHostingEnvironment _appEnvironment;
         private readonly IELIService _ELIService;
-        public StudentController(IELIService eLIService, IHostingEnvironment appEnvironment)
+        private readonly IEmailSender _EmailSender;
+        public StudentController(IELIService eLIService, IHostingEnvironment appEnvironment, IEmailSender emailSender)
         {
             _ELIService = eLIService;
             _appEnvironment = appEnvironment;
+            _EmailSender = emailSender;
         }
 
         [HttpPost("createStudent")]
@@ -70,6 +74,7 @@ namespace ELI.API.Controllers
         {
             try
             {
+               
                 return new ObjectResult(await _ELIService.GetStudentAsync(studentID));
             }
             catch (Exception ex)
@@ -196,5 +201,69 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+
+        [HttpPost("uploadDocuments")]
+       // [Produces(typeof(StudentDocuments))]
+        public async  Task<IActionResult> UploadDocuments([FromForm] StudentDocuments documents)
+        {
+            // List<int> Ids = new List<int>();
+            int documentId = 0;
+            foreach (var formFile in documents.Files)
+            {
+                if (formFile.Length > 0)
+                {
+                   
+                    
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(formFile.FileName);
+                    var SavePath = Path.Combine(Directory.GetCurrentDirectory(), "www/Images", fileName);
+                    documents.FilePath = new List<string>();
+                    using (var stream = new FileStream(SavePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                        documents.FilePath.Add(SavePath);
+                        documents.FileName = fileName;
+                    }
+                    documentId =  await _ELIService.UploadDocuments(documents);
+                 //   Ids.Add(documentId);
+                }
+            }
+
+            return Ok(documentId);
+        }
+
+
+        [HttpPost("UploadFiles")]
+        public async Task<uint> UploadsFile([FromForm] List<IFormFile> documentVM)
+        {
+            //var files = new List<Documents>();
+            //foreach(var file in documentVM)
+            //{
+            //    files.Add(new Documents
+            //    {
+            //        DocumentName = file.FileName,
+            //        DocumentByte = file.OpenReadStream().GetBytess()
+              
+            //    }
+            //    );
+            //}
+            //await _EmailSender.SendRegistrationEmail(files);
+            //Documents document = requestVM.Convert();
+            // var result = await this.DocumentApplication.Add(document);
+            return 1;
+        }
+
+        private static string TrimDocumentName(string name)
+        {
+            string documentName = name;
+
+            if (name.Length > 2)
+            {
+                documentName = documentName.Substring(0, 2);
+            }
+
+            return documentName;
+        }
+      
     }
 }

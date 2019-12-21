@@ -32,4 +32,5 @@ BEGIN
 	 from tblRoomsList
 	 inner join tblCamps tblc on [clmRoom_Campus] = tblc.clmCamps_ID
 	  where ( clmRoom_IsActive = (CASE WHEN @PActive is not null then @PActive else clmRoom_IsActive end))
+	  order by [clmRoom_ID] desc;
 END

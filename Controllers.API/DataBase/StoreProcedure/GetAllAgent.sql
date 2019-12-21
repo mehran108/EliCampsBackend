@@ -25,5 +25,5 @@ BEGIN
       ,[clmAgents_IsActive] As Active
 	 from tblAgents 
 	 where ( clmAgents_IsActive = (CASE WHEN @PActive is not null then @PActive else clmAgents_IsActive end))
-	 ORDER BY [clmAgents_ID];
+	 ORDER BY [clmAgents_ID] desc;
 END

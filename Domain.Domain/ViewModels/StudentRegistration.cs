@@ -12,6 +12,7 @@ namespace ELI.Domain.ViewModels
         public string GroupRef { get; set; }
         public string Camps { get; set; }
         public string Gender { get; set; }
+        public string CampusName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string HomeAddress { get; set; }
@@ -70,10 +71,16 @@ namespace ELI.Domain.ViewModels
         public string StudentTripsID { get; set; }
         public string FormatName { get; set; }
         public string AgentName { get; set; }
+        public string HomestayName { get; set; }
+        public string RoomName { get; set; }
+        public string ProgramName { get; set; }
+        public string SubProgramName { get; set; }
         public bool? Active { get; set; }
         public string ChapFamily { get; set; }
         public int? ProgramID { get; set; }
         public int? SubProgramID { get; set; }
+        public int DocumentId { get; set; }
+        public string DocumentPath { get; set; }
 
 
 

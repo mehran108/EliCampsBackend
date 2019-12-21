@@ -19,6 +19,7 @@ namespace Domain.Domain.ViewModels
         public string Prefer { get; set; }
         public string Rooms { get; set; }
         public string Aggrements { get; set; }
+        public string HomeStayLocationURL { get; set; }
         public string PoliceCheck { get; set; }
         public bool Active { get; set; }
     }

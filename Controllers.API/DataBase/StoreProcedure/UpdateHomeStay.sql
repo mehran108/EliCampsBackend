@@ -32,6 +32,7 @@ Alter PROCEDURE [dbo].UpdateHomeStay
 	@PHomeAggrement nvarchar(50),
 	@PHomePoliceCheck nvarchar(50),
 	@PHomeID INT,
+	@PHomeStayLocationURL nvarchar(500),
 	@PActive bit
 AS
 BEGIN
@@ -53,6 +54,7 @@ BEGIN
 	clmHome_Rooms = @PHomeRooms,
 	clmHome_Agreement = @PHomeAggrement,
 	clmHome_PoliceCheck = @PHomePoliceCheck,
+	clmHome_StayLocationURL = @PHomeStayLocationURL,
 	clmHome_ModifiedDate = GETDATE(),
 	clmHome_IsActive = @PActive
 

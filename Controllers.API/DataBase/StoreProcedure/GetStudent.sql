@@ -21,72 +21,86 @@ Alter PROCEDURE [dbo].[GetStudent]
 	@PID INT
 AS
 BEGIN
-	SELECT  [clmReg_ID] AS ID
-      ,[clmReg_Year] As Year
-      ,[clmReg_Ref] As Reg_Ref
-      ,[clmReg_GrpRef] AS GroupRef
-      ,[clmReg_Camps] AS Camps
-      ,[clmReg_Gender] AS Gender
-      ,[clmReg_FirstName] AS FirstName 
-      ,[clmReg_LastName] As LastName
-      ,[clmReg_HomeAddress] AS HomeAddress
-      ,[clmReg_City] AS City
-      ,[clmReg_State] AS State
-      ,[clmReg_Country] AS Country
-      ,[clmReg_PostCode] AS PostCode
-      ,[clmReg_EmergencyContact] AS EmergencyContact
-      ,[clmReg_Email] AS Email
-      ,[clmReg_Phone] AS Phone
-      ,[clmReg_DOB] AS DOB
-      ,[clmReg_Age] AS Age
-      ,[clmReg_PassportNumber] AS PassportNumber
-      ,[clmReg_AgencyID] AS AgencyID
-      ,[clmReg_ArrivalDate] AS ArrivalDate 
-      ,[clmReg_Terminal] AS Terminal 
-      ,[clmReg_FlightNumber] AS FlightNumber 
-      ,[clmReg_DestinationFrom] AS DestinationFrom
-      ,[clmReg_ArrivalTime] AS ArrivalTime
-      ,[clmReg_DepartureDate] AS DepartureDate
-      ,[clmReg_DepartureTerminal] AS DepartureTerminal 
-      ,[clmReg_DepartureFlightNumber] AS DepartureFlightNumber 
-      ,[clmReg_DestinationTo] AS DestinationTo
-      ,[clmReg_FlightDepartureTime] AS FlightDepartureTime 
-      ,[clmReg_MedicalInformation]AS MedicalInformation 
-      ,[clmReg_DietaryNeeds] AS DietaryNeeds
-      ,[clmReg_Allergies] AS Allergies 
-      ,[clmRerameStartDatg_Notes] AS MedicalNotes
-      ,[clmReg_Proge] AS ProgrameStartDate
-      ,[clmReg_ProgrameEndDate] AS ProgrameEndDate
-      ,[clmReg_Campus] AS Campus
-      ,[clmReg_Format] AS Format
-      ,[clmReg_MealPlan] AS MealPlan
-      ,[clmReg_NumberOfNights] AS NumberOfNights 
-      ,[clmReg_TotalGrossPrice] AS TotalGrossPrice 
-      ,[clmReg_Paid] AS Paid 
-      ,[clmReg_Commision] AS Commision
-      ,[clmReg_NetPrice] AS NetPrice
-      ,[clmReg_Balance] AS Balance
-      ,[clmReg_TotalAddins] AS TotalAddins
-      ,[clmReg_CommissionAddins] AS CommissionAddins
-      ,[clmReg_RoomID] AS RoomID 
-      ,[clmReg_HomestayOrResi] AS HomestayOrResi
-      ,[clmReg_HomestayID] AS HomestayID
-      ,[clmReg_Status] AS Status
-      ,[clmReg_ExtraNotes] AS ExtraNotes 
-      ,[clmReg_ExtraNotesHTML] AS ExtraNotesHTML 
-      ,[clmReg_RoomSearchCampus] AS RoomSearchCampus 
-      ,[clmReg_RoomSearchFrom] AS RoomSearchFrom
-      ,[clmReg_RoomSearchTo] AS RoomSearchTo
-      ,[clmReg_IsActive] AS Active,
-		clmReg_ChapFamily AS  ChapFamily,
-		clmReg_ProgramID AS ProgramID,
-		clmReg_SubProgramID AS SubProgramID,
-		dl.documentPath As documentPath
-  FROM [dbo].[tblRegistration]
-  inner join tblDocuments dl on dl.documentId = tblRegistration.documentId 
-	where [clmReg_ID] = @PID;
-	
-	
+	SELECT  tbl.[clmReg_ID] AS ID
+      ,tbl.[clmReg_Year] As Year
+      ,tbl.[clmReg_Ref] As Reg_Ref
+      ,tbl.[clmReg_GrpRef] AS GroupRef
+      ,tbl.[clmReg_Camps] AS Camps
+      ,tbl.[clmReg_Gender] AS Gender
+      ,tbl.[clmReg_FirstName] AS FirstName 
+      ,tbl.[clmReg_LastName] As LastName
+      ,tbl.[clmReg_HomeAddress] AS HomeAddress
+      ,tbl.[clmReg_City] AS City
+      ,tbl.[clmReg_State] AS State
+      ,tbl.[clmReg_Country] AS Country
+      ,tbl.[clmReg_PostCode] AS PostCode
+      ,tbl.[clmReg_EmergencyContact] AS EmergencyContact
+      ,tbl.[clmReg_Email] AS Email
+      ,tbl.[clmReg_Phone] AS Phone
+      ,tbl.[clmReg_DOB] AS DOB
+      ,tbl.[clmReg_Age] AS Age
+      ,tbl.[clmReg_PassportNumber] AS PassportNumber
+      ,tbl.[clmReg_AgencyID] AS AgencyID
+      ,tbl.[clmReg_ArrivalDate] AS ArrivalDate 
+      ,tbl.[clmReg_Terminal] AS Terminal 
+      ,tbl.[clmReg_FlightNumber] AS FlightNumber 
+      ,tbl.[clmReg_DestinationFrom] AS DestinationFrom
+      ,tbl.[clmReg_ArrivalTime] AS ArrivalTime
+      ,tbl.[clmReg_DepartureDate] AS DepartureDate
+      ,tbl.[clmReg_DepartureTerminal] AS DepartureTerminal 
+      ,tbl.[clmReg_DepartureFlightNumber] AS DepartureFlightNumber 
+      ,tbl.[clmReg_DestinationTo] AS DestinationTo
+      ,tbl.[clmReg_FlightDepartureTime] AS FlightDepartureTime 
+      ,tbl.[clmReg_MedicalInformation]AS MedicalInformation 
+      ,tbl.[clmReg_DietaryNeeds] AS DietaryNeeds
+      ,tbl.[clmReg_Allergies] AS Allergies 
+      ,tbl.[clmRerameStartDatg_Notes] AS MedicalNotes
+      ,tbl.[clmReg_Proge] AS ProgrameStartDate
+      ,tbl.[clmReg_ProgrameEndDate] AS ProgrameEndDate
+      ,tbl.[clmReg_Campus] AS Campus
+      ,tbl.[clmReg_Format] AS Format
+      ,tbl.[clmReg_MealPlan] AS MealPlan
+      ,tbl.[clmReg_NumberOfNights] AS NumberOfNights 
+      ,tbl.[clmReg_TotalGrossPrice] AS TotalGrossPrice 
+      ,tbl.[clmReg_Paid] AS Paid 
+      ,tbl.[clmReg_Commision] AS Commision
+      ,tbl.[clmReg_NetPrice] AS NetPrice
+      ,tbl.[clmReg_Balance] AS Balance
+      ,tbl.[clmReg_TotalAddins] AS TotalAddins
+      ,tbl.[clmReg_CommissionAddins] AS CommissionAddins
+      ,tbl.[clmReg_RoomID] AS RoomID 
+      ,tbl.[clmReg_HomestayOrResi] AS HomestayOrResi
+      ,tbl.[clmReg_HomestayID] AS HomestayID
+      ,tbl.[clmReg_Status] AS Status
+      ,tbl.[clmReg_ExtraNotes] AS ExtraNotes 
+      ,tbl.[clmReg_ExtraNotesHTML] AS ExtraNotesHTML 
+      ,tbl.[clmReg_RoomSearchCampus] AS RoomSearchCampus 
+      ,tbl.[clmReg_RoomSearchFrom] AS RoomSearchFrom
+      ,tbl.[clmReg_RoomSearchTo] AS RoomSearchTo
+      ,tbl.[clmReg_IsActive] AS Active,
+		tbl.clmReg_ChapFamily AS  ChapFamily,
+		tbl.clmReg_ProgramID AS ProgramID,
+		tbl.clmReg_SubProgramID AS SubProgramID,
+		agents.clmAgents_Agent AS AgentName
+		 ,lv.name AS FormatName
+		 ,cam.[clmCampuses_Campus] AS CampusName
+		 ,homestay.clmHome_Name AS HomestayName
+		 ,room.clmRoom_RoomID AS RoomName
+		 ,pro.clmPrograms_Name AS ProgramName
+		 ,subPro.clmSubPrograms_Name AS SubProgramName
+		 ,dl.documentPath As documentPath
+
+
+  FROM [dbo].[tblRegistration] tbl
+	left join tblDocuments dl on dl.documentId = tblRegistration.documentId 
+	left join [tblAgents] agents on tbl.[clmReg_AgencyID] = agents.clmAgents_ID
+	left join [LookupValue] lv on tbl.[clmReg_Format] = lv.id
+	left join [dbo].[tblCampuses] cam on tbl.[clmReg_Campus] = cam.clmCampuses_ID
+	left join tblHomestay homestay on tbl.clmReg_HomestayID = homestay.clmHome_ID
+	left join tblRoomsList room on room.clmRoom_ID  = tbl.clmReg_RoomID
+	left join tblPrograms pro on pro.clmPrograms_ID = tbl.clmReg_ProgramID
+	left join tblSubPrograms subPro on subPro.clmSubPrograms_ID  = tbl.clmReg_SubProgramID
+	where tbl.[clmReg_ID] = @PID;
 
 		Select clmAdvsSt_AddinsID As LinkID , 'AddinsID' AS LinkTypeID from 
 		[dbo].[tblAddinsVsStudent] where clmAdvsSt_StudentID = @PID

@@ -38,3 +38,26 @@ ALTER TABLE [dbo].[tblHomestay] ADD  DEFAULT ((1)) FOR [clmHome_IsActive]
 GO
 
 
+-- Adding column HomeStayLocationURL
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblHomestay]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'clmHome_StayLocationURL'
+   AND Object_ID = Object_ID(N'[dbo].[tblHomestay]')
+   )
+ BEGIN
+     ALTER TABLE tblHomestay
+	 ADD [clmHome_StayLocationURL] [nvarchar](500) NULL
+ END
+
+ END
+
+

@@ -33,6 +33,7 @@ Alter PROCEDURE [dbo].[AddHomestay]
 	@PHomeRooms nvarchar(50),
 	@PHomeAggrement nvarchar(50),
 	@PHomePoliceCheck nvarchar(50),
+	@PHomeStayLocationURL nvarchar(500),
 	@PHomeID INT = NULL OUTPUT
 AS
 BEGIN
@@ -41,8 +42,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     Insert Into [dbo].[tblHomestay]
-				(clmHome_Reference,  clmHome_Name, clmHome_CellNumber, clmHome_Email, clmHome_Address,clmHome_Region,clmHome_Intersection,clmHome_Distance,clmHome_Meals,clmHome_Prefer,clmHome_Rooms,clmHome_Agreement,clmHome_PoliceCheck, clmHome_CreateDate)
-		Values	(@PHomeRefrenance,   @PHomeName,   @PHomeCellNumber,   @PHomeEmail,   @PHomeAddress,  @PHomeRegion,  @PHomeIntersection,  @PHomeDistance, @PHomeMeals,  @PHomePrefer,@PHomeRooms,@PHomeAggrement ,@PHomePoliceCheck,GETDATE());
+				(clmHome_Reference,  clmHome_Name, clmHome_CellNumber, clmHome_Email, clmHome_Address,clmHome_Region,clmHome_Intersection,clmHome_Distance,clmHome_Meals,clmHome_Prefer,clmHome_Rooms,clmHome_Agreement,clmHome_PoliceCheck,clmHome_StayLocationURL, clmHome_CreateDate)
+		Values	(@PHomeRefrenance,   @PHomeName,   @PHomeCellNumber,   @PHomeEmail,   @PHomeAddress,  @PHomeRegion,  @PHomeIntersection,  @PHomeDistance, @PHomeMeals,  @PHomePrefer,@PHomeRooms,@PHomeAggrement ,@PHomePoliceCheck, @PHomeStayLocationURL, GETDATE());
 
 		SET @PHomeID = SCOPE_IDENTITY();
 END

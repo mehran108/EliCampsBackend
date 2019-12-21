@@ -31,6 +31,7 @@ BEGIN
       ,[clmCampuses_Onelineaddress] As CampusOnelineaddress
       ,[clmCampuses_IsActive] As Active
 	 from [tblCampuses] 
-	 where ( clmCampuses_IsActive = (CASE WHEN @PActive is not null then @PActive else clmCampuses_IsActive end));
+	 where ( clmCampuses_IsActive = (CASE WHEN @PActive is not null then @PActive else clmCampuses_IsActive end))
+	 order by [clmCampuses_ID] desc;
 END
 GO

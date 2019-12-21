@@ -30,6 +30,7 @@ BEGIN
 				[ClmPayments_Remarks] As PaymentStudentRemarks,
 				[ClmPayments_IsActive] As  Active
 		from [dbo].[tblPayments] 
-		where [ClmPayments_RegID] = @PID;
+		where [ClmPayments_RegID] = @PID
+		order by [ClmPayments_ID] desc;
 END
 GO

@@ -236,7 +236,7 @@ namespace ELI.API.Controllers
             catch (Exception ex)
             {
                 LogMessage.LogMessageNow(ex.Message);
-                throw;
+                return BadRequest(new { message = ex.Message });
             }
             
         }

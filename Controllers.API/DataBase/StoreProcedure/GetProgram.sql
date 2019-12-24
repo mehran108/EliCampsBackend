@@ -25,7 +25,8 @@ BEGIN
 
     Select [clmPrograms_ID] As ProgramID
       ,[clmPrograms_Name] As ProgramName
-      ,[clmPrograms_IsActive] As Active
+      ,[clmPrograms_IsActive] As Active,
+	  clmPrograms_IsDefault AS IsDefault
 	 from [tblPrograms] where [clmPrograms_ID] = @PProgramID;
 END
 GO

@@ -21,3 +21,25 @@ BEGIN CREATE TABLE  [dbo].[tblPrograms](
 
 END 
 GO
+
+-- Adding column clmPrograms_IsDefault
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblPrograms]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'clmPrograms_IsDefault'
+   AND Object_ID = Object_ID(N'[dbo].[tblPrograms]')
+   )
+ BEGIN
+     ALTER TABLE tblPrograms
+	 ADD [clmPrograms_IsDefault] [bit] NOT NULL default 0
+ END
+
+END

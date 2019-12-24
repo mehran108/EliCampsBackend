@@ -27,4 +27,26 @@ GO
 
 
 
+-- Adding column clmAddins_IsDefault
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblAddins]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'clmAddins_IsDefault'
+   AND Object_ID = Object_ID(N'[dbo].[tblAddins]')
+   )
+ BEGIN
+     ALTER TABLE tblAddins
+	 ADD [clmAddins_IsDefault] [bit] NOT NULL default 0
+ END
+
+END
+
 

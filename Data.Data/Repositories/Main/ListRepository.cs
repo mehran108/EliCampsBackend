@@ -845,12 +845,14 @@ namespace ELI.Data.Repositories.Main
         private const string AddinsTypeParameterName = "PAddinsType";
         private const string AddinsCampsParameterName = "PAddinsCamps";
         private const string AddinsCostParameterName = "PAddinsCost";
+        private const string IsDefaultParameterName = "PIsDefault";
 
         private const string AddinsIdColumnName = "ID";
         private const string AddinsColumnName = "Addins";
         private const string AddinsTypeColumnName = "AddinsType";
         private const string AddinsCampsColumnName = "AddinsCamps";
         private const string AddinsCostColumnName = "AddinsCost";
+        private const string IsDefaultColumnName = "IsDefault";
 
 
         public async Task<int> CreateAddinsAsync(AddinsViewModel addinsViewModel)
@@ -865,7 +867,8 @@ namespace ELI.Data.Repositories.Main
                 base.GetParameter(ListRepository.AddinsParameterName, addinsViewModel.Addins),
                 base.GetParameter(ListRepository.AddinsTypeParameterName, addinsViewModel.AddinsType),
                 base.GetParameter(ListRepository.AddinsCampsParameterName, addinsViewModel.Camps),
-                base.GetParameter(ListRepository.AddinsCostParameterName, addinsViewModel.Cost)
+                base.GetParameter(ListRepository.AddinsCostParameterName, addinsViewModel.Cost),
+                base.GetParameter(ListRepository.IsDefaultParameterName, addinsViewModel.IsDefault)
 
             };
 
@@ -897,7 +900,8 @@ namespace ELI.Data.Repositories.Main
                             Addins = dataReader.GetStringValue(ListRepository.AddinsColumnName),
                             AddinsType = dataReader.GetStringValue(ListRepository.AddinsTypeColumnName),
                             Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName),
-                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
+                            IsDefault = dataReader.GetBooleanValue(ListRepository.IsDefaultColumnName)
                             //Cost = dataReader.GetDecimalValueNullable(ListRepository.AddinsCostColumnName)
                         };
                     }
@@ -928,8 +932,7 @@ namespace ELI.Data.Repositories.Main
             {
                 if (dataReader != null && dataReader.HasRows)
                 {
-                    if (dataReader.Read())
-                    {
+                    
                         while (dataReader.Read())
                         {
                             addinsViewModel = new AddinsViewModel
@@ -939,7 +942,8 @@ namespace ELI.Data.Repositories.Main
                                 Addins = dataReader.GetStringValue(ListRepository.AddinsColumnName),
                                 AddinsType = dataReader.GetStringValue(ListRepository.AddinsTypeColumnName),
                                 Camps = dataReader.GetStringValue(ListRepository.AddinsCampsColumnName),
-                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
+                                IsDefault = dataReader.GetBooleanValue(ListRepository.IsDefaultColumnName)
 
 
                             };
@@ -950,8 +954,7 @@ namespace ELI.Data.Repositories.Main
                         {
                             dataReader.Close();
                         }
-
-                    }
+                        
                 }
             }
 
@@ -967,7 +970,8 @@ namespace ELI.Data.Repositories.Main
                         base.GetParameter(ListRepository.AddinsCampsParameterName, addinsViewModel.Camps),
                         base.GetParameter(ListRepository.AddinsTypeParameterName, addinsViewModel.AddinsType),
                       //  base.GetParameter(ListRepository.AddinsCostParameterName, addinsViewModel.Cost),
-                        base.GetParameter(BaseRepository.ActiveParameterName, addinsViewModel.Active)
+                        base.GetParameter(BaseRepository.ActiveParameterName, addinsViewModel.Active),
+                        base.GetParameter(ListRepository.IsDefaultParameterName, addinsViewModel.IsDefault)
 
                 };
 
@@ -1213,7 +1217,8 @@ namespace ELI.Data.Repositories.Main
                 {
                     programIdParamter,
                     
-                    base.GetParameter(ListRepository.ProgramNameParameterName, programViewModel.ProgramName)
+                    base.GetParameter(ListRepository.ProgramNameParameterName, programViewModel.ProgramName),
+                    base.GetParameter(ListRepository.IsDefaultParameterName, programViewModel.IsDefault)
 
                 };
 
@@ -1230,7 +1235,8 @@ namespace ELI.Data.Repositories.Main
                 {
                     base.GetParameter(ListRepository.ProgramIDParameterName, programViewModel.ID),
                     base.GetParameter(ListRepository.ProgramNameParameterName, programViewModel.ProgramName),
-                    base.GetParameter(BaseRepository.ActiveParameterName, programViewModel.Active)
+                    base.GetParameter(BaseRepository.ActiveParameterName, programViewModel.Active),
+                    base.GetParameter(ListRepository.IsDefaultParameterName, programViewModel.IsDefault)
 
                 };
 
@@ -1271,6 +1277,7 @@ namespace ELI.Data.Repositories.Main
                         {
                             ID = dataReader.GetIntegerValue(ListRepository.ProgramIDColumnName),
                             ProgramName = dataReader.GetStringValue(ListRepository.ProgramNameColumnName),
+                            IsDefault = dataReader.GetBooleanValue(ListRepository.IsDefaultColumnName),
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
                         };
                     }
@@ -1308,7 +1315,8 @@ namespace ELI.Data.Repositories.Main
                         {
                             ID = dataReader.GetIntegerValue(ListRepository.ProgramIDColumnName),
                             ProgramName = dataReader.GetStringValue(ListRepository.ProgramNameColumnName),
-                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
+                            IsDefault = dataReader.GetBooleanValue(ListRepository.IsDefaultColumnName)
                         };
                         result.Data.Add(programVM);
                     }

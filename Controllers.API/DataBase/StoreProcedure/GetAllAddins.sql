@@ -28,7 +28,8 @@ BEGIN
       ,[clmAddins_Addin] As Addins
       ,[clmAddins_Camps] As AddinsCamps
       ,[clmAddins_Type] As AddinsType,
-	  clmAddins_IsActive AS Active
+	  clmAddins_IsActive AS Active,
+	  clmAddins_IsDefault AS IsDefault
 	 from tblAddins
 	  where ( clmAddins_IsActive = (CASE WHEN @PActive is not null then @PActive else clmAddins_IsActive end))
 	  order by [clmAddins_ID] desc;

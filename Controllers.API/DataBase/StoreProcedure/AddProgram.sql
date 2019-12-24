@@ -19,6 +19,7 @@ GO
 Alter PROCEDURE [dbo].[AddProgram] 
 	-- Add the parameters for the stored procedure here
 	@PName nvarchar(255),
+	@PIsDefault bit,
 	@PProgramID INT = NULL OUTPUT
 AS
 BEGIN
@@ -26,10 +27,17 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
+	
     Insert Into [dbo].[tblPrograms]
-				(clmPrograms_Name,  clmPrograms_IsActive,  clmPrograms_CreateDate)
-		Values	(@PName,1,GETDATE());
+				(clmPrograms_Name,  clmPrograms_IsActive,  clmPrograms_CreateDate,clmPrograms_IsDefault)
+		Values	(@PName,1,GETDATE(),@PIsDefault);
 
 		SET @PProgramID = SCOPE_IDENTITY();
+
+	--update IsDefault false if IsDefault true for current record
+		 if @PIsDefault = 1 
+		 Begin
+			update tblPrograms set clmPrograms_IsDefault = 0 where clmPrograms_ID <> @PProgramID;
+		 END 
 END
 GO

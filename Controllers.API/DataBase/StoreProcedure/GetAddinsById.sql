@@ -27,7 +27,8 @@ BEGIN
       ,[clmAddins_Addin] As Addins
       ,[clmAddins_Camps] As AddinsCamps
       ,[clmAddins_Type] As AddinsType,
-	  clmAddins_IsActive AS Active
+	  clmAddins_IsActive AS Active,
+	  clmAddins_IsDefault AS IsDefault
 	 from tblAddins where clmAddins_ID = @PID;
 END
 GO

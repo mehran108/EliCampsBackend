@@ -20,7 +20,8 @@ Alter PROCEDURE [dbo].[UpdateProgram]
 	-- Add the parameters for the stored procedure here
 	@PName nvarchar(255),
 	@PProgramID INT,
-	@PActive bit
+	@PActive bit,
+	@PIsDefault bit
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -30,8 +31,15 @@ BEGIN
     update  [dbo].[tblPrograms]
 	set [clmPrograms_Name] = @PName,
 	[clmPrograms_ModifiedDate] = GETDATE(),
-	[clmPrograms_IsActive] = @PActive
+	[clmPrograms_IsActive] = @PActive,
+	clmPrograms_IsDefault = @PIsDefault
 	where [clmPrograms_ID] = @PProgramID;
+
+		--update IsDefault false if IsDefault true for current record
+		 if @PIsDefault = 1 
+		 Begin
+			update tblPrograms set clmPrograms_IsDefault = 0 where clmPrograms_ID <> @PProgramID;
+		 END 
 
 END
 GO

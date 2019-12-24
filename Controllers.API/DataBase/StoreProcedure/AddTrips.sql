@@ -25,7 +25,7 @@ Alter PROCEDURE [dbo].[AddTrips]
 	@PCamps nvarchar(255),
 	@PTripsDate Datetime,
 	@PLdx nvarchar(255),
-	@PNotes nvarchar(255),
+	@PTripsNotes nvarchar(255),
 	@PID INT = NULL OUTPUT
 AS
 BEGIN
@@ -35,7 +35,7 @@ BEGIN
 
     Insert Into [dbo].[tblTrips]
 				(clmTrips_Year,  clmTrips_Trip, clmTrips_Camps, clmTrips_Date, clmTrips_Notes,clmTrips_IDX, clmTrips_CreateDate)
-		Values	(@PYear,        @PTrip,       @PCamps,       @PTripsDate,       @PNotes,      @PLdx ,     GETDATE());
+		Values	(@PYear,        @PTrip,       @PCamps,       @PTripsDate,       @PTripsNotes,      @PLdx ,     GETDATE());
 
 		SET @PID = SCOPE_IDENTITY();
 END

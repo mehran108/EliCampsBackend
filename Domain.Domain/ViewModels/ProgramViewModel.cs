@@ -9,5 +9,6 @@ namespace ELI.Domain.ViewModels
         public int ID { get; set; }
         public string ProgramName { get; set; }
         public bool? Active { get; set; }
+        public bool IsDefault { get; set; }
     }
 }

@@ -24,7 +24,8 @@ BEGIN
 	
     Select [clmPrograms_ID] As ProgramID
       ,[clmPrograms_Name] As ProgramName
-      ,[clmPrograms_IsActive] As Active
+      ,[clmPrograms_IsActive] As Active,
+	   clmPrograms_IsDefault AS IsDefault
 	 from [tblPrograms]
 	 where ( [clmPrograms_IsActive] = (CASE WHEN @PActive is not null then @PActive else [clmPrograms_IsActive] end)) 
 	 order by [clmPrograms_ID] desc;

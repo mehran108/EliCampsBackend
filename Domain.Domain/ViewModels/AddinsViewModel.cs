@@ -12,5 +12,6 @@ namespace Domain.Domain.ViewModels
         public decimal? Cost { get; set; }
         public string AddinsType { get; set; }
         public bool Active { get; set; }
+        public bool IsDefault { get; set; }
     }
 }

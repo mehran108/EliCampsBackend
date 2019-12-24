@@ -208,28 +208,37 @@ namespace ELI.API.Controllers
         public async  Task<IActionResult> UploadDocuments([FromForm] StudentDocuments documents)
         {
             // List<int> Ids = new List<int>();
-            int documentId = 0;
-            foreach (var formFile in documents.Files)
+            try
             {
-                if (formFile.Length > 0)
+                int documentId = 0;
+                foreach (var formFile in documents.Files)
                 {
-                   
-                    
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(formFile.FileName);
-                    var SavePath = Path.Combine(Directory.GetCurrentDirectory(), "www/Images", fileName);
-                    documents.FilePath = new List<string>();
-                    using (var stream = new FileStream(SavePath, FileMode.Create))
+                    if (formFile.Length > 0)
                     {
-                        await formFile.CopyToAsync(stream);
-                        documents.FilePath.Add(SavePath);
-                        documents.FileName = fileName;
-                    }
-                    documentId =  await _ELIService.UploadDocuments(documents);
-                 //   Ids.Add(documentId);
-                }
-            }
 
-            return Ok(documentId);
+
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(formFile.FileName);
+                        var SavePath = Path.Combine(Directory.GetCurrentDirectory(), "www/Images", fileName);
+                        documents.FilePath = new List<string>();
+                        using (var stream = new FileStream(SavePath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(stream);
+                            documents.FilePath.Add(SavePath);
+                            documents.FileName = fileName;
+                        }
+                        documentId = await _ELIService.UploadDocuments(documents);
+                        //   Ids.Add(documentId);
+                    }
+                }
+
+                return Ok(documentId);
+            }
+            catch (Exception ex)
+            {
+                LogMessage.LogMessageNow(ex.Message);
+                return BadRequest(new { message = ex.Message });
+            }
+            
         }
 
 

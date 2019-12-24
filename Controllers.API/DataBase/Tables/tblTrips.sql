@@ -37,3 +37,6 @@ ALTER TABLE [dbo].[tblTrips] CHECK CONSTRAINT [FK_tblTrips_tblCamps]
 GO
 
 
+ALTER TABLE dbo.tblTrips   
+DROP CONSTRAINT [FK_tblTrips_tblCamps];
+

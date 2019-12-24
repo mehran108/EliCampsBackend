@@ -24,6 +24,7 @@ Alter PROCEDURE [dbo].[AddAddins]
 	@PAddinsType nvarchar(50),
 	@PAddinsCamps nvarchar(255),
 	@PAddinsCost nvarchar(255),
+	@PIsDefault bit,
 	@PID INT = NULL OUTPUT
 AS
 BEGIN
@@ -32,8 +33,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     Insert Into [dbo].[tblAddins]
-				(clmAddins_Addin,  clmAddins_Camps, clmAddins_Cost, clmAddins_Type,clmAddins_CreateDate)
-		Values	(@PAddins,        @PAddinsCamps,       @PAddinsCost,       @PAddinsType, GETDATE());
+				(clmAddins_Addin,  clmAddins_Camps, clmAddins_Cost, clmAddins_Type,clmAddins_CreateDate, clmAddins_IsDefault)
+		Values	(@PAddins,        @PAddinsCamps,       @PAddinsCost,       @PAddinsType, GETDATE(), @PIsDefault);
 
 		SET @PID = SCOPE_IDENTITY();
 END

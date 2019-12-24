@@ -775,14 +775,14 @@ namespace ELI.Domain.Services
         #region Student
         public async Task<int> AddStudentAsync(StudentRegistration student)
         {
-            student.AddinsID = string.Join(",", student.ProgrameAddins.ToArray());
+            student.AddinsID = (student.ProgrameAddins != null) ? string.Join(",", student.ProgrameAddins.ToArray()): "";
             return await _studentRepository.AddStudentAsync(student);
         }
 
         public async Task<bool> UpdateStudentAsync(StudentRegistration student)
         {
-            student.AddinsID = string.Join(",", student.ProgrameAddins.ToArray());
-            student.StudentTripsID = string.Join(",", student.StudentTrips.ToArray());
+            student.AddinsID = (student.ProgrameAddins != null ) ? string.Join(",", student.ProgrameAddins.ToArray()) : "";
+            student.StudentTripsID = (student.StudentTrips !=  null) ? string.Join(",", student.StudentTrips.ToArray()) : "";
             return await _studentRepository.UpdateStudentAsync(student);
         }
 

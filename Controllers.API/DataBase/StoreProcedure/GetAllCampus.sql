@@ -29,8 +29,8 @@ BEGIN
       ,[clmCampuses_AddressOnReports] As  CampusAddressOnReports
       ,[clmCampuses_CompleteName] As CampusCompleteName
       ,[clmCampuses_Onelineaddress] As CampusOnelineaddress
-      ,[clmCampuses_IsActive] As Active
-	 from [tblCampuses] 
+      ,[clmCampuses_IsActive] As Active  
+	 from [tblCampuses]  with (nolock)
 	 where ( clmCampuses_IsActive = (CASE WHEN @PActive is not null then @PActive else clmCampuses_IsActive end))
 	 order by [clmCampuses_ID] desc;
 END

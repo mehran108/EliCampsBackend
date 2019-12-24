@@ -41,6 +41,6 @@ BEGIN
 	  ,[clmRoom_Weekno] As Weekno
 	  ,[clmRoom_Year] As Year,
 	  [clmRoom_IsActive] As Active
-	 from tblRoomsList where clmRoom_ID = @PID;
+	 from tblRoomsList with (nolock) where clmRoom_ID = @PID;
 END
 GO

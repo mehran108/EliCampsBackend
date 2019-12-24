@@ -218,3 +218,28 @@ ADD documentId int;
 ALTER TABLE tblRegistration
 ADD CONSTRAINT FK_tblDocuments_documentId FOREIGN KEY (documentId)
     REFERENCES tblDocuments(documentId);
+
+
+	
+
+-- Adding column  GroupID
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblRegistration]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'GroupID'
+   AND Object_ID = Object_ID(N'[dbo].[tblRegistration]')
+   )
+ BEGIN
+     ALTER TABLE tblRegistration
+	 ADD GroupID [int] NULL
+ END
+
+END

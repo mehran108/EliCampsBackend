@@ -25,8 +25,8 @@ BEGIN
 
 	 Select lv.id As Value,
 		lv.name  
-		from [dbo].[LookupValue] lv
-		inner join  [dbo].[LookupTable] lt on lv.lookupTableId = lt.Id
+		from [dbo].[LookupValue] lv with (nolock)
+		inner join  [dbo].[LookupTable] lt with (nolock) on lv.lookupTableId = lt.Id
 		where lt.Name = @PLookupTable;
 END
 GO

@@ -86,11 +86,14 @@ BEGIN
 	  ,lv.name AS FormatName,
 	  tbl.clmReg_ChapFamily AS  ChapFamily,
 		tbl.clmReg_ProgramID AS ProgramID,
-		tbl.clmReg_SubProgramID AS SubProgramID
-  FROM [dbo].[tblRegistration] tbl
-		left join [tblAgents] agents on tbl.[clmReg_AgencyID] = agents.clmAgents_ID
-		left join [LookupValue] lv on tbl.[clmReg_Format] = lv.id
-		left join [dbo].[tblCampuses] cam on tbl.[clmReg_Campus] = cam.clmCampuses_ID
+		tbl.clmReg_SubProgramID AS SubProgramID,
+		grp.clmGroups_AgencyRef As AgencyRef,
+		tbl.GroupID
+  FROM [dbo].[tblRegistration] tbl with (nolock)
+		left join [tblAgents] agents with (nolock) on tbl.[clmReg_AgencyID] = agents.clmAgents_ID
+		left join [LookupValue] lv with (nolock) on tbl.[clmReg_Format] = lv.id
+		left join [dbo].[tblCampuses] cam with (nolock) on tbl.[clmReg_Campus] = cam.clmCampuses_ID
+		left join tblGroups  grp with (nolock) on grp.clmGroups_ID = tbl.GroupID
 		 where ( tbl.[clmReg_IsActive] = (CASE WHEN @PActive is not null then @PActive else tbl.[clmReg_IsActive] end))
 		 order by tbl.[clmReg_ID] desc;
 END

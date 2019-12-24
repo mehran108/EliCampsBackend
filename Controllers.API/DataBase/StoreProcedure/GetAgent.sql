@@ -34,6 +34,6 @@ BEGIN
       ,[clmAgents_Notes] As AgentNotes
       ,[clmAgents_Other] As AgentOther
       ,[clmAgents_IsActive] As Active
-	 from tblAgents where clmAgents_ID = @PAgentID;
+	 from tblAgents with (nolock) where clmAgents_ID = @PAgentID;
 END
 GO

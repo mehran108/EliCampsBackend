@@ -156,8 +156,7 @@ namespace ELI.Data.Repositories.Main
             {
                 if (dataReader != null && dataReader.HasRows)
                 {
-                    if (dataReader.Read())
-                    {
+                    
                         while (dataReader.Read())
                         {
                             roomsList = new RoomsList
@@ -189,8 +188,7 @@ namespace ELI.Data.Repositories.Main
                         {
                             dataReader.Close();
                         }
-
-                    }
+                        
                 }
             }
 
@@ -524,7 +522,8 @@ namespace ELI.Data.Repositories.Main
                             TripsDate = dataReader.GetDateTimeValue(ListRepository.TripsDateColumnName),
                             Camps = dataReader.GetStringValue(ListRepository.TripCampsColumnName),
                             Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName),
-                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
+                            Notes = dataReader.GetStringValue(ListRepository.NotesColumnName)
                         };
                     }
                 }
@@ -553,8 +552,7 @@ namespace ELI.Data.Repositories.Main
             {
                 if (dataReader != null && dataReader.HasRows)
                 {
-                    if (dataReader.Read())
-                    {
+                    
                         while (dataReader.Read())
                         {
                             tripsViewModel = new TripsViewModel
@@ -566,7 +564,8 @@ namespace ELI.Data.Repositories.Main
                                 TripsDate = dataReader.GetDateTimeValue(ListRepository.TripsDateColumnName),
                                 Camps = dataReader.GetStringValue(ListRepository.TripCampsColumnName),
                                 Year = dataReader.GetIntegerValue(ListRepository.TripYearColumnName),
-                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                                Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
+                                Notes = dataReader.GetStringValue(ListRepository.NotesColumnName)
 
                             };
                             result.Data.Add(tripsViewModel);
@@ -577,7 +576,6 @@ namespace ELI.Data.Repositories.Main
                             dataReader.Close();
                         }
 
-                    }
                 }
             }
 

@@ -79,6 +79,7 @@ namespace ELI.Data.Repositories.Main
         private const string ExtraNotesParameterName = "PExtraNotes";
         private const string ExtraNotesHTMLParameterName = "PExtraNotesHTML";
         private const string StatusParameterName = "PStatus";
+        private const string GroupIDParameterName = "PGroupID";
 
         private const string HomestayOrResiParameterName = "PHomestayOrResi";
         private const string HomestayIDParameterName = "PHomestayID";
@@ -152,6 +153,7 @@ namespace ELI.Data.Repositories.Main
         private const string AddinsIDColumnName = "AddinsID";
         private const string ExtraNotesColumnName = "ExtraNotes";
         private const string ExtraNotesHTMLColumnName = "ExtraNotesHTML";
+        private const string AgencyRefColumnName = "AgencyRef";
 
         private const string StatusColumnName = "Status";
 
@@ -195,6 +197,7 @@ namespace ELI.Data.Repositories.Main
         private const string RoomNameColumnName = "RoomName";
         private const string ProgramNameColumnName = "ProgramName";
         private const string SubProgramNameColumnName = "SubProgramName";
+        private const string GroupIDColumnName = "GroupID";
 
 
 
@@ -245,7 +248,8 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.CampusParameterName, student.Campus),
                     base.GetParameter(StudentRegistrationRepository.FormatParameterName, student.Format),
                     base.GetParameter(StudentRegistrationRepository.MealPlanParameterName, student.MealPlan),
-                    base.GetParameter(StudentRegistrationRepository.AddinsIDParameterName, student.AddinsID)
+                    base.GetParameter(StudentRegistrationRepository.AddinsIDParameterName, student.AddinsID),
+                    base.GetParameter(StudentRegistrationRepository.GroupIDParameterName, student.GroupID)
 
 
     };
@@ -324,7 +328,8 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(BaseRepository.ActiveParameterName, student.Active),
                     base.GetParameter(StudentRegistrationRepository.ChapFamilyParameterName, student.ChapFamily),
                     base.GetParameter(StudentRegistrationRepository.ProgramIDParameterName, student.ProgramID),
-                    base.GetParameter(StudentRegistrationRepository.SubProgramIDParameterName, student.SubProgramID)
+                    base.GetParameter(StudentRegistrationRepository.SubProgramIDParameterName, student.SubProgramID),
+                    base.GetParameter(StudentRegistrationRepository.GroupIDParameterName, student.GroupID)
 
 
 
@@ -415,6 +420,7 @@ namespace ELI.Data.Repositories.Main
                             HomestayID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.HomestayIDColumnName),
                             RoomID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.RoomIDColumnName),
                             RoomSearchCampus = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.RoomSearchCampusColumnName),
+                            GroupID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.GroupIDColumnName),
                             RoomSearchFrom = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.RoomSearchFromColumnName),
                             RoomSearchTo = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.RoomSearchToColumnName),
                             NumberOfNights = dataReader.GetIntegerValue(StudentRegistrationRepository.NumberOfNightsColumnName),
@@ -548,6 +554,7 @@ namespace ELI.Data.Repositories.Main
                             RoomSearchFrom = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.RoomSearchFromColumnName),
                             RoomSearchTo = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.RoomSearchToColumnName),
                             NumberOfNights = dataReader.GetIntegerValue(StudentRegistrationRepository.NumberOfNightsColumnName),
+                            GroupID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.GroupIDColumnName),
                             TotalGrossPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.TotalGrossPriceColumnName),
                             TotalAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.TotalAddinsColumnName),
                             Paid = dataReader.GetDoubleValue(StudentRegistrationRepository.PaidColumnName),
@@ -559,6 +566,7 @@ namespace ELI.Data.Repositories.Main
                             AgentName = dataReader.GetStringValue(StudentRegistrationRepository.AgentNameColumnName),
                             FormatName = dataReader.GetStringValue(StudentRegistrationRepository.FormatNameColumnName),
                             ChapFamily = dataReader.GetStringValue(StudentRegistrationRepository.ChapFamilyColumnName),
+                            AgencyRef = dataReader.GetStringValue(StudentRegistrationRepository.AgencyRefColumnName),
                             ProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.ProgramIDColumnName),
                             SubProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.SubProgramIDColumnName),
                             ProgrameAddins = new List<int>(),

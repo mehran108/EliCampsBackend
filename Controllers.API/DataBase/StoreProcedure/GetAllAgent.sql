@@ -23,7 +23,7 @@ BEGIN
       ,[clmAgents_Notes] As AgentNotes
       ,[clmAgents_Other] As AgentOther
       ,[clmAgents_IsActive] As Active
-	 from tblAgents 
+	 from tblAgents  with (nolock)
 	 where ( clmAgents_IsActive = (CASE WHEN @PActive is not null then @PActive else clmAgents_IsActive end))
 	 ORDER BY [clmAgents_ID] desc;
 END

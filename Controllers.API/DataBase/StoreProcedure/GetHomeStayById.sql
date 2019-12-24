@@ -39,6 +39,6 @@ BEGIN
       ,[clmHome_PoliceCheck] As HomePoliceCheck,
 	  [clmHome_IsActive] As Active,
 	  clmHome_StayLocationURL AS HomeStayLocationURL
-	 from tblHomestay where clmHome_ID = @PHomeID;
+	 from tblHomestay with (nolock) where clmHome_ID = @PHomeID;
 END
 GO

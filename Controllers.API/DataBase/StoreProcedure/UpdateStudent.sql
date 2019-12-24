@@ -80,7 +80,8 @@ Alter PROCEDURE [dbo].[UpdateStudent]
 	@PChapFamily nvarchar(255),
 	@PProgramID INT,
 	@PSubProgramID INT,
-	@PStudentDocumentId INT
+	@PStudentDocumentId INT,
+	@PGroupID [int] 
 
 	
 AS
@@ -160,7 +161,8 @@ BEGIN
 	[documentId] = @PStudentDocumentId,
 	clmReg_ChapFamily = @PChapFamily,
 	clmReg_ProgramID = @PProgramID,
-	clmReg_SubProgramID = @PSubProgramID
+	clmReg_SubProgramID = @PSubProgramID,
+	GroupID = @PGroupID
 
 	where [clmReg_ID] = @PID;
 				

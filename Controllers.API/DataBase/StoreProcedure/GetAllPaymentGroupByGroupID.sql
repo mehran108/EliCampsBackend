@@ -32,7 +32,7 @@ BEGIN
 				[ClmPaymentsGrp_Remarks] As  PaymentGroupRemarks, 
 				[ClmPaymentsGrp_IsActive] As Active
 				
-		from [dbo].[tblPaymentsGroups] 
+		from [dbo].[tblPaymentsGroups]  with (nolock)
 		where [ClmPaymentsGrp_GroupID] = @PGroupID
 		order by [ClmPaymentsGrp_ID] desc;
 END

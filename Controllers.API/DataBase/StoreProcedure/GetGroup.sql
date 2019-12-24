@@ -62,13 +62,13 @@ BEGIN
 				clmGroups_ChapFamily AS  ChapFamily,
 				clmGroups_ProgramID AS ProgramID,
 				clmGroups_SubProgramID AS SubProgramID
-		from [dbo].[tblGroups] 
+		from [dbo].[tblGroups] with (nolock)
 		where clmGroups_ID = @PGroupID;
 
 		Select clmAdvsGrpCam_AddinsID As LinkID , 'AddinsID' AS LinkTypeID from 
-		[dbo].[tblAddinsVsGropCam] where clmAdvsGrpCam_GroupID = @PGroupID
+		[dbo].[tblAddinsVsGropCam] with (nolock) where clmAdvsGrpCam_GroupID = @PGroupID
 		UNION ALL
 		Select clmGpTrips_Trip As LinkID, 'GroupTripID' AS LinkTypeID from
-		[dbo].[tblGroupTrips] where clmGpTrips_GroupID = @PGroupID;
+		[dbo].[tblGroupTrips] with (nolock) where clmGpTrips_GroupID = @PGroupID;
 END
 GO

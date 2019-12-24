@@ -27,6 +27,6 @@ BEGIN
       ,[clmSubPrograms_ProgramID] As ProgramID
       ,[clmSubPrograms_Name] As SubProgramName
 	  ,[clmSubPrograms_IsActive] As Active
-	 from [tblSubPrograms] where [clmSubPrograms_ID] = @PSubProgramID;
+	 from [tblSubPrograms] with (nolock) where [clmSubPrograms_ID] = @PSubProgramID;
 END
 GO

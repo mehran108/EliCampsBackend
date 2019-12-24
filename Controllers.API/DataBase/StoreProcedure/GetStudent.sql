@@ -81,6 +81,7 @@ BEGIN
 		tbl.clmReg_ChapFamily AS  ChapFamily,
 		tbl.clmReg_ProgramID AS ProgramID,
 		tbl.clmReg_SubProgramID AS SubProgramID,
+		tbl.GroupID,
 		agents.clmAgents_Agent AS AgentName
 		 ,lv.name AS FormatName
 		 ,cam.[clmCampuses_Campus] AS CampusName
@@ -91,21 +92,21 @@ BEGIN
 		 ,dl.documentPath As documentPath
 
 
-  FROM [dbo].[tblRegistration] tbl
-	left join tblDocuments dl on dl.documentId = tblRegistration.documentId 
-	left join [tblAgents] agents on tbl.[clmReg_AgencyID] = agents.clmAgents_ID
-	left join [LookupValue] lv on tbl.[clmReg_Format] = lv.id
-	left join [dbo].[tblCampuses] cam on tbl.[clmReg_Campus] = cam.clmCampuses_ID
-	left join tblHomestay homestay on tbl.clmReg_HomestayID = homestay.clmHome_ID
-	left join tblRoomsList room on room.clmRoom_ID  = tbl.clmReg_RoomID
-	left join tblPrograms pro on pro.clmPrograms_ID = tbl.clmReg_ProgramID
-	left join tblSubPrograms subPro on subPro.clmSubPrograms_ID  = tbl.clmReg_SubProgramID
+  FROM [dbo].[tblRegistration] tbl with (nolock)
+	left join tblDocuments dl with (nolock) on dl.documentId = tbl.documentId 
+	left join [tblAgents] agents with (nolock) on tbl.[clmReg_AgencyID] = agents.clmAgents_ID
+	left join [LookupValue] lv with (nolock) on tbl.[clmReg_Format] = lv.id
+	left join [dbo].[tblCampuses] cam with (nolock) on tbl.[clmReg_Campus] = cam.clmCampuses_ID
+	left join tblHomestay homestay with (nolock) on tbl.clmReg_HomestayID = homestay.clmHome_ID
+	left join tblRoomsList room with (nolock) on room.clmRoom_ID  = tbl.clmReg_RoomID
+	left join tblPrograms pro with (nolock) on pro.clmPrograms_ID = tbl.clmReg_ProgramID
+	left join tblSubPrograms subPro with (nolock) on subPro.clmSubPrograms_ID  = tbl.clmReg_SubProgramID
 	where tbl.[clmReg_ID] = @PID;
 
 		Select clmAdvsSt_AddinsID As LinkID , 'AddinsID' AS LinkTypeID from 
-		[dbo].[tblAddinsVsStudent] where clmAdvsSt_StudentID = @PID
+		[dbo].[tblAddinsVsStudent] with (nolock) where clmAdvsSt_StudentID = @PID
 		UNION ALL
 		Select clmStTrips_Trip As LinkID, 'GroupTripID' AS LinkTypeID from
-		[dbo].[tblStudentTrips] where clmStTrips_Student = @PID;
+		[dbo].[tblStudentTrips] with (nolock) where clmStTrips_Student = @PID;
 END
 GO

@@ -1,5 +1,3 @@
-USE [elicampsdb]
-GO
 /****** Object:  StoredProcedure [dbo].[GetAllRooms]    Script Date: 11/19/2019 10:52:42 AM ******/
 SET ANSI_NULLS ON
 GO
@@ -29,8 +27,8 @@ BEGIN
 	  ,[clmRoom_Weekno] As Weekno
 	  ,[clmRoom_Year] As Year,
 	  [clmRoom_IsActive] As Active
-	 from tblRoomsList
-	 inner join tblCamps tblc on [clmRoom_Campus] = tblc.clmCamps_ID
+	  from tblRoomsList with (nolock)
+	  left join tblCamps tblc with (nolock) on [clmRoom_Campus] = tblc.clmCamps_ID
 	  where ( clmRoom_IsActive = (CASE WHEN @PActive is not null then @PActive else clmRoom_IsActive end))
 	  order by [clmRoom_ID] desc;
 END

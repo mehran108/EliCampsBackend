@@ -5,8 +5,13 @@ using System.Text;
 
 namespace ELI.Domain.ViewModels
 {
-    public class DocumentUploadVM
+    public class EmailSendVM
     {
-        public List<IFormFile>  Files { get; set; }
+        public string StudentEmail { get; set; }
+        public string EmailBody { get; set; }
+        public int StudentID { get; set; }
+        public bool IsAgentInvoice { get; set; }
+        public bool IsStudentCertificate { get; set; }
+        public bool IsStudentInvoice { get; set; }
     }
 }

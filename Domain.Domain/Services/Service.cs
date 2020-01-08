@@ -790,6 +790,12 @@ namespace ELI.Domain.Services
         {
             return await _studentRepository.GetStudentAsync(studentID);
         }
+
+        public async Task<StudentPDFDataVM> GetStudentFilesDataAsync(int studentID)
+        {
+            return await _studentRepository.GetStudentFilesDataAsync(studentID);
+        }
+        
         public async Task<bool> ActivateStudentAsync(StudentRegistration student)
         {
             return await _studentRepository.ActivateStudentAsync(student);

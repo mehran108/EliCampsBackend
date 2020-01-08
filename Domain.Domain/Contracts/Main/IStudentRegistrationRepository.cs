@@ -11,6 +11,7 @@ namespace ELI.Domain.Contracts.Main
     {
         Task<int> AddStudentAsync(StudentRegistration student);
         Task<StudentRegistration> GetStudentAsync(int studentID);
+        Task<StudentPDFDataVM> GetStudentFilesDataAsync(int studentID);
         Task<bool> UpdateStudentAsync(StudentRegistration student);
         Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student);
         Task<bool> ActivateStudentAsync(StudentRegistration student);

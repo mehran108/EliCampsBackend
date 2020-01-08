@@ -242,37 +242,22 @@ namespace ELI.API.Controllers
         }
 
 
-        [HttpPost("UploadFiles")]
-        public async Task<uint> UploadsFile([FromForm] List<IFormFile> documentVM)
+        [HttpPost("emailSend")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> EmailSendWithDocument([FromBody] EmailSendVM emailSendVM)
         {
-            //var files = new List<Documents>();
-            //foreach(var file in documentVM)
-            //{
-            //    files.Add(new Documents
-            //    {
-            //        DocumentName = file.FileName,
-            //        DocumentByte = file.OpenReadStream().GetBytess()
-              
-            //    }
-            //    );
-            //}
-            //await _EmailSender.SendRegistrationEmail(files);
-            //Documents document = requestVM.Convert();
-            // var result = await this.DocumentApplication.Add(document);
-            return 1;
-        }
-
-        private static string TrimDocumentName(string name)
-        {
-            string documentName = name;
-
-            if (name.Length > 2)
+            try
             {
-                documentName = documentName.Substring(0, 2);
+                return new ObjectResult(await _EmailSender.SendRegistrationEmailWithDocument(emailSendVM));
             }
-
-            return documentName;
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+           
         }
+        
       
     }
 }

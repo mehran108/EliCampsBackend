@@ -24,6 +24,7 @@ namespace ELI.Data.Repositories.Main
 
         private const string AddStoredProcedureName = "AddStudent";
         private const string GetStoredProcedureName = "GetStudent";
+        private const string GetStudentPDFDataStoredProcedureName = "GetStudentPDFData";
         private const string GetAllStoredProcedureName = "GetAllStudent";
         private const string UpdateStoredProcedureName = "UpdateStudent";
         private const string ActivateStoredProcedureName = "ActivateStudent";
@@ -178,6 +179,9 @@ namespace ELI.Data.Repositories.Main
         private const string AgentNameColumnName = "AgentName";
         private const string FormatNameColumnName = "FormatName";
 
+        private const string AddinNameColumnName = "AddinName";
+        private const string AddinsTypeColumnName = "AddinsType";
+
 
         private const string PaymentStudentIDColumnName = "PaymentStudentID";
         private const string PaymentStudentDateColumnName = "PaymentStudentDate";
@@ -198,6 +202,9 @@ namespace ELI.Data.Repositories.Main
         private const string ProgramNameColumnName = "ProgramName";
         private const string SubProgramNameColumnName = "SubProgramName";
         private const string GroupIDColumnName = "GroupID";
+        private const string AgentAddressColumnName = "AgentAddress";
+        private const string AgentCountryColumnName = "AgentCountry";
+        private const string CampusAddressOnReportsColumnName = "CampusAddressOnReports";
 
 
 
@@ -474,8 +481,77 @@ namespace ELI.Data.Repositories.Main
 
             return studentVM;
         }
+        public async Task<StudentPDFDataVM> GetStudentFilesDataAsync(int studentID)
+        {
+            StudentPDFDataVM studentVM = null;
+           
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, studentID)
+                };
+
+            using (var dataReader = await base.ExecuteReader(parameters, StudentRegistrationRepository.GetStudentPDFDataStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        studentVM = new StudentPDFDataVM
+                        {
+
+                            Reg_Ref = dataReader.GetStringValue(StudentRegistrationRepository.Reg_RefColumnName),
+                            FirstName = dataReader.GetStringValue(StudentRegistrationRepository.FirstNameColumnName),
+                            LastName = dataReader.GetStringValue(StudentRegistrationRepository.LastNameColumnName),
+                            DOB = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.DOBColumnName),
+                            ProgrameStartDate = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.ProgrameStartDateColumnName),
+                            ProgrameEndDate = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.ProgrameEndDateColumnName),
+                            MealPlan = dataReader.GetStringValue(StudentRegistrationRepository.MealPlanColumnName),
+                            TotalGrossPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.TotalGrossPriceColumnName),
+                            Paid = dataReader.GetDoubleValue(StudentRegistrationRepository.PaidColumnName),
+                            Commision = dataReader.GetDoubleValue(StudentRegistrationRepository.CommisionColumnName),
+                            CommissionAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.CommissionAddinsColumnName),
+                            Balance = dataReader.GetDoubleValue(StudentRegistrationRepository.BalanceColumnName),
+                            NetPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.NetPriceColumnName),
+                            AgentName = dataReader.GetStringValue(StudentRegistrationRepository.AgentNameColumnName),
+                            FormatName = dataReader.GetStringValue(StudentRegistrationRepository.FormatNameColumnName),
+                            ProgramName = dataReader.GetStringValue(StudentRegistrationRepository.ProgramNameColumnName),
+                            SubProgramName = dataReader.GetStringValue(StudentRegistrationRepository.SubProgramNameColumnName),
+                            AgentAddress = dataReader.GetStringValue(StudentRegistrationRepository.AgentAddressColumnName),
+                            AgentCountry = dataReader.GetStringValue(StudentRegistrationRepository.AgentCountryColumnName),
+                            CampusAddressOnReports = dataReader.GetStringValue(StudentRegistrationRepository.CampusAddressOnReportsColumnName),
+                            Email = dataReader.GetStringValue(StudentRegistrationRepository.EmailColumnName),
+                            StudentPDFAddinInc = new List<string>(),
+                            StudentPDFAddinAdd = new List<string>()
+
+                        };
+                        if (dataReader.NextResult())
+                        {
+                            while (dataReader.Read())
+                            {
+
+                                if (dataReader.GetStringValue(StudentRegistrationRepository.AddinsTypeColumnName).Equals("Additional services"))
+                                {
+                                    studentVM?.StudentPDFAddinAdd.Add(dataReader.GetStringValue(StudentRegistrationRepository.AddinNameColumnName));
+                                }
+                                else
+                                {
+                                    studentVM?.StudentPDFAddinInc.Add(dataReader.GetStringValue(StudentRegistrationRepository.AddinNameColumnName));
+                                }
+                                
+                            }
+
+                        }
 
 
+                    }
+                }
+            }
+
+            return studentVM;
+        }
+
+
+        
         public async Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student)
         {
             StudentRegistration studentVM = null;

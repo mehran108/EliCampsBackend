@@ -10,7 +10,7 @@ namespace ELI.Domain.Services
     public interface IEmailSender
     {
         ResetPasswordViewModel GeneratePasswordResetTokenAsync();
-        Task SendEmail(string code, string Email, EmailTemplate emailTemplateId);
-        Task<bool> SendRegistrationEmail(List<Documents> document);
+        Task SendEmaill(string code, string Email, EmailTemplate emailTemplateId);
+        Task<bool> SendRegistrationEmailWithDocument(EmailSendVM emailSendVM);
     }
 }

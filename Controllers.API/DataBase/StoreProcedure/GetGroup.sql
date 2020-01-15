@@ -18,7 +18,8 @@ END
 GO
 Alter PROCEDURE [dbo].[GetGroup] 
 	-- Add the parameters for the stored procedure here
-	@PGroupID INT
+	@PGroupID INT,
+	@PIsInvoice bit
 AS
 BEGIN
 	
@@ -69,6 +70,24 @@ BEGIN
 		[dbo].[tblAddinsVsGropCam] with (nolock) where clmAdvsGrpCam_GroupID = @PGroupID
 		UNION ALL
 		Select clmGpTrips_Trip As LinkID, 'GroupTripID' AS LinkTypeID from
-		[dbo].[tblGroupTrips] with (nolock) where clmGpTrips_GroupID = @PGroupID;
+		[dbo].[tblGroupTrips] with (nolock) where clmGpTrips_GroupID = @PGroupID
+		UNION ALL
+		Select 1 As LinkID, 'AddRecord' AS LinkTypeID;
+
+		if @PIsInvoice = 1 
+		 Begin
+			Select Count(clmReg_ID) AS TotalStudents,
+		Sum(clmReg_TotalGrossPrice) AS TotalGrossPrice,
+		Sum(clmReg_Paid) AS Paid,
+		Sum(clmReg_NetPrice) AS NetPrice,
+		Sum(clmReg_Commision) AS Commision,
+		Sum(clmReg_TotalAddins) AS TotalAddins,
+		Sum(clmReg_CommissionAddins) AS CommissionAddins
+		from tblRegistration 
+		where GroupID = @PGroupID;
+		 END 
+
+		
+		
 END
 GO

@@ -53,11 +53,11 @@ namespace ELI.API.Controllers
 
         [HttpGet("getGroup")]
         [Produces(typeof(GroupViewModel))]
-        public async Task<IActionResult> GetGroupAsync(int groupID)
+        public async Task<IActionResult> GetGroupAsync(int groupID, bool IsInvoice)
         {
             try
             {
-                return new ObjectResult(await _ELIService.GetGroupAsync(groupID));
+                return new ObjectResult(await _ELIService.GetGroupAsync(groupID,IsInvoice));
             }
             catch (Exception ex)
             {

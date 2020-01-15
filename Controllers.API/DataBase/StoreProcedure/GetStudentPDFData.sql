@@ -44,7 +44,10 @@ BEGIN
 	,tbl.[clmReg_Paid] AS Paid 
 	,tbl.[clmReg_Balance] AS Balance
 	,tbl.clmReg_NetPrice AS NetPrice
-
+	,tbl.clmReg_ArrivalDate AS ArrivalDate
+	,tbl.clmReg_ArrivalTime AS ArrivalTime
+	,tbl.clmReg_FlightNumber as FlightNumber
+	,tbl.[clmReg_Country] as Country
 
 	from [dbo].[tblRegistration] tbl with (nolock)
 	left join [tblAgents] agents with (nolock) on tbl.[clmReg_AgencyID] = agents.clmAgents_ID

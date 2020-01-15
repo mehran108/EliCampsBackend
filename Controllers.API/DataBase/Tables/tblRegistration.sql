@@ -243,3 +243,25 @@ BEGIN
  END
 
 END
+
+--  Adding column IsGroupLeader in tblRegistration
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblRegistration]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'IsGroupLeader'
+   AND Object_ID = Object_ID(N'[dbo].[tblRegistration]')
+   )
+ BEGIN
+     ALTER TABLE tblRegistration
+	 ADD [IsGroupLeader] [bit] NOT NULL default 0
+ END
+
+END

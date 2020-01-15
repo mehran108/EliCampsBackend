@@ -82,6 +82,7 @@ BEGIN
 		tbl.clmReg_ProgramID AS ProgramID,
 		tbl.clmReg_SubProgramID AS SubProgramID,
 		tbl.GroupID,
+		tbl.IsGroupLeader,
 		agents.clmAgents_Agent AS AgentName
 		 ,lv.name AS FormatName
 		 ,cam.[clmCampuses_Campus] AS CampusName

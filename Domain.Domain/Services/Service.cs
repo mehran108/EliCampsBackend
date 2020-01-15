@@ -561,9 +561,9 @@ namespace ELI.Domain.Services
             return await _groupRepository.AddGroupAsync(group);
         }
 
-        public async Task<GroupViewModel> GetGroupAsync(int groupID)
+        public async Task<GroupViewModel> GetGroupAsync(int groupID, bool IsInvoice)
         {
-            return await _groupRepository.GetGroupAsync(groupID);
+            return await _groupRepository.GetGroupAsync(groupID,IsInvoice);
         }
         public async Task<bool> UpdateGroupAsync(GroupViewModel group)
         {

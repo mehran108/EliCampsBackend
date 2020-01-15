@@ -38,5 +38,10 @@ BEGIN
 				 [ClmPayments_IsActive] =  @PActive, 
 				 [ClmPayments_ModifiedDate] = GETDATE()
 		where [ClmPayments_ID] = @PPaymentStudentID;
+
+		update tblRegistration set clmReg_Paid = (
+		Select Sum(ClmPayments_Amount) from tblPayments
+		where ClmPayments_RegID = @PID and ClmPayments_IsActive = 1)
+		where clmReg_ID = @PID;
 END
 GO

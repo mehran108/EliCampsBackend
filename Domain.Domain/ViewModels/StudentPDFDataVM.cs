@@ -16,10 +16,14 @@ namespace ELI.Domain.ViewModels
         public DateTime? DOB { get; set; }
         public DateTime? ProgrameStartDate { get; set; }
         public DateTime? ProgrameEndDate { get; set; }
+        public DateTime? ArrivalDate { get; set; }
+        public DateTime? ArrivalTime { get; set; }
         public string ProgramName { get; set; }
+        public string FlightNumber { get; set; }
         public string SubProgramName { get; set; }
         public string FormatName { get; set; }
         public string MealPlan { get; set; }
+        public string Country { get; set; }
         public double TotalGrossPrice { get; set; }
         public double CommissionAddins { get; set; }
         public double Commision { get; set; }

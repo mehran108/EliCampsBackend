@@ -38,6 +38,7 @@ namespace ELI.Data.Repositories.Main
 
 
         private const string GroupIdParameterName = "PGroupID";
+        private const string IsInvoiceParameterName = "PIsInvoice";
         private const string YearParameterName = "PYear";
         private const string CampsParameterName = "PCamps";
         private const string RefNumberParameterName = "PRefNumber";
@@ -137,6 +138,9 @@ namespace ELI.Data.Repositories.Main
         private const string ChapFamilyColumnName = "ChapFamily";
         private const string ProgramIDColumnName = "ProgramID";
         private const string SubProgramIDColumnName = "SubProgramID";
+        private const string TotalStudentsColumnName = "TotalStudents";
+        private const string TotalAddinsColumnName = "TotalAddins";
+        private const string CommissionAddinsColumnName = "CommissionAddins";
 
 
         public async Task<int> AddGroupAsync(GroupViewModel group)
@@ -207,14 +211,15 @@ namespace ELI.Data.Repositories.Main
             return returnValue > 0;
         }
 
-        public async Task<GroupViewModel> GetGroupAsync(int groupID)
+        public async Task<GroupViewModel> GetGroupAsync(int groupID, bool IsInvoice)
         {
             GroupViewModel groupVM = null;
             int AddinID;
             int TripID;
             var parameters = new List<DbParameter>
                 {
-                    base.GetParameter(GroupRepository.GroupIdParameterName, groupID)
+                    base.GetParameter(GroupRepository.GroupIdParameterName, groupID),
+                    base.GetParameter(GroupRepository.IsInvoiceParameterName, IsInvoice)
                 };
 
             using (var dataReader = await base.ExecuteReader(parameters, GroupRepository.GetStoredProcedureName, CommandType.StoredProcedure))
@@ -278,7 +283,7 @@ namespace ELI.Data.Repositories.Main
                                     AddinID = dataReader.GetIntegerValue(GroupRepository.LinkIDColumnName);
                                     groupVM?.ProgrameAddins.Add(AddinID);
                                 }
-                                else
+                                else if (dataReader.GetStringValue(GroupRepository.LinkTypeIDColumnName).Equals("GroupTripID"))
                                 {
                                     TripID = dataReader.GetIntegerValue(GroupRepository.LinkIDColumnName);
                                     groupVM?.GroupTrips.Add(TripID);
@@ -286,8 +291,28 @@ namespace ELI.Data.Repositories.Main
 
 
                             }
+                            if (dataReader.NextResult())
+                            {
+                                
+                                if (dataReader.Read())
+                                {
+                                    groupVM.StudentsAgainstGroup = new StudentsAgainstGroup
+                                    {
+                                        TotalStudents = dataReader.GetIntegerValue(GroupRepository.TotalStudentsColumnName),
+                                        TotalGrossPrice = dataReader.GetDoubleValue(GroupRepository.TotalGrossPriceColumnName),
+                                        Paid = dataReader.GetDoubleValue(GroupRepository.PaidColumnName),
+                                        NetPrice = dataReader.GetDoubleValue(GroupRepository.NetPriceColumnName),
+                                        Commision = dataReader.GetDoubleValue(GroupRepository.CommisionColumnName),
+                                        TotalAddins = dataReader.GetDoubleValue(GroupRepository.TotalAddinsColumnName),
+                                        CommissionAddins = dataReader.GetDoubleValue(GroupRepository.CommissionAddinsColumnName),
+                                    };
+
+                                }
+
+                            }
 
                         }
+                        
 
 
 

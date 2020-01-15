@@ -81,7 +81,8 @@ BEGIN
       ,tbl.[clmReg_RoomSearchCampus] AS RoomSearchCampus 
       ,tbl.[clmReg_RoomSearchFrom] AS RoomSearchFrom
       ,tbl.[clmReg_RoomSearchTo] AS RoomSearchTo
-      ,tbl.[clmReg_IsActive] AS Active
+      ,tbl.[clmReg_IsActive] AS Active,
+	  tbl.IsGroupLeader
 	  ,agents.clmAgents_Agent AS AgentName
 	  ,lv.name AS FormatName,
 	  tbl.clmReg_ChapFamily AS  ChapFamily,

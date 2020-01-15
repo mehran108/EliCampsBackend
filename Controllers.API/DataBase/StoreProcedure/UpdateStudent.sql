@@ -81,7 +81,8 @@ Alter PROCEDURE [dbo].[UpdateStudent]
 	@PProgramID INT,
 	@PSubProgramID INT,
 	@PStudentDocumentId INT,
-	@PGroupID [int] 
+	@PGroupID [int] ,
+	@PIsGroupLeader  bit
 
 	
 AS
@@ -162,7 +163,8 @@ BEGIN
 	clmReg_ChapFamily = @PChapFamily,
 	clmReg_ProgramID = @PProgramID,
 	clmReg_SubProgramID = @PSubProgramID,
-	GroupID = @PGroupID
+	GroupID = @PGroupID,
+	IsGroupLeader = @PIsGroupLeader
 
 	where [clmReg_ID] = @PID;
 				

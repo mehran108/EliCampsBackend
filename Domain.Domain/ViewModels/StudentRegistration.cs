@@ -83,6 +83,7 @@ namespace ELI.Domain.ViewModels
         public int? SubProgramID { get; set; }
         public int? DocumentId { get; set; }
         public string DocumentPath { get; set; }
+        public bool IsGroupLeader { get; set; }
 
 
 

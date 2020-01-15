@@ -25,6 +25,11 @@ namespace ELI.Domain.ViewModels
         public string AgentInvoiceTemplate { get; set; }
         public string StudentInvoiceTemplate { get; set; }
         public string StudentCertificateTemplate { get; set; }
+        public string AirportInvoiceTemplate { get; set; }
+        public string LOAInvoiceTemplate { get; set; }
+        public string StudentInvitationTemplate { get; set; }
+        public string LOAGroupInvoiceTemplate { get; set; }
+        public string LOAInvoiceWOPTemplate { get; set; }
         public List<Attachment> emailAttachment { get; set; }
         #endregion
     }

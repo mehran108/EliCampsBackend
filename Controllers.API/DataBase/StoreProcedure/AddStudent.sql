@@ -61,7 +61,8 @@ Alter PROCEDURE [dbo].[AddStudent]
 	@PMealPlan [nvarchar](255),
 	@PAddinsID [nvarchar](500),
 	@PGroupID [int] ,
-	@PIsGroupLeader  bit
+	@PIsGroupLeader  bit,
+	@PProfilePic  [nvarchar](1000)
 	
 AS
 BEGIN
@@ -89,7 +90,7 @@ BEGIN
 				 ,[clmReg_DietaryNeeds], [clmReg_Allergies], [clmRerameStartDatg_Notes]
 				 ,[clmReg_ExtraNotes], [clmReg_ExtraNotesHTML], [clmReg_Status], [clmReg_IsActive], [clmReg_CreateDate]
 				 ,[clmReg_Proge],[clmReg_ProgrameEndDate],[clmReg_Campus]
-				 ,[clmReg_Format],[clmReg_MealPlan],GroupID,IsGroupLeader)
+				 ,[clmReg_Format],[clmReg_MealPlan],GroupID,IsGroupLeader,clmReg_ProfilePic)
 		Values	(@PYear,CONCAT(@PYear, '-',format(@RefNumberCount,'00')),@PGroupRef,@PCamps
 				,@PGender, @PFirstName, @PLastName, @PHomeAddress, @PCity, @PState
 				,@PCountry, @PPostCode, @PEmergencyContact, @PEmail, @PPhone
@@ -100,7 +101,7 @@ BEGIN
 				,@PDietaryNeeds, @PAllergies, @PMedicalNotes
 				,@PExtraNotes,@PExtraNotesHTML, @PStatus, 1, GETDATE()
 				,@PProgrameStartDate,@PProgrameEndDate,@PCampus
-				,@PFormat,@PMealPlan,@PGroupID,@PIsGroupLeader
+				,@PFormat,@PMealPlan,@PGroupID,@PIsGroupLeader, @PProfilePic
 				);
 
 		SET @PID = SCOPE_IDENTITY();

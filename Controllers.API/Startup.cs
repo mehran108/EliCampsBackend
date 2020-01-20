@@ -17,6 +17,8 @@ using ELI.Entity.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace ELI.API
 {
@@ -105,6 +107,13 @@ namespace ELI.API
             app.UseSwaggerUI(s =>
             {
                 s.SwaggerEndpoint("/swagger/v1/swagger.json", "v1 docs");
+            });
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+               FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+               Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+                RequestPath = "/wwwroot"
             });
         }
     }

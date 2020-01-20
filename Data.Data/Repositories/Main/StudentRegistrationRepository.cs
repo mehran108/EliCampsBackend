@@ -28,6 +28,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetAllStoredProcedureName = "GetAllStudent";
         private const string UpdateStoredProcedureName = "UpdateStudent";
         private const string ActivateStoredProcedureName = "ActivateStudent";
+        private const string UpdateStudentProfilePicProcedureName = "UpdateStudentProfilePic";
 
 
         private const string AddPaymentStudentStoredProcedureName = "AddPaymentStudent";
@@ -108,6 +109,8 @@ namespace ELI.Data.Repositories.Main
         private const string ChapFamilyParameterName = "PChapFamily";
         private const string ProgramIDParameterName = "PProgramID";
         private const string SubProgramIDParameterName = "PSubProgramID";
+
+        private const string ProfilePicParameterName = "PProfilePic";
 
 
 
@@ -207,6 +210,7 @@ namespace ELI.Data.Repositories.Main
         private const string AgentAddressColumnName = "AgentAddress";
         private const string AgentCountryColumnName = "AgentCountry";
         private const string CampusAddressOnReportsColumnName = "CampusAddressOnReports";
+        private const string ProfilePicColumnName = "ProfilePic";
 
 
 
@@ -259,7 +263,8 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.MealPlanParameterName, student.MealPlan),
                     base.GetParameter(StudentRegistrationRepository.AddinsIDParameterName, student.AddinsID),
                     base.GetParameter(StudentRegistrationRepository.GroupIDParameterName, student.GroupID),
-                    base.GetParameter(StudentRegistrationRepository.IsGroupLeaderParameterName, student.IsGroupLeader)
+                    base.GetParameter(StudentRegistrationRepository.IsGroupLeaderParameterName, student.IsGroupLeader),
+                    base.GetParameter(StudentRegistrationRepository.ProfilePicParameterName, student.ProfilePic)
 
 
     };
@@ -340,7 +345,8 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.ProgramIDParameterName, student.ProgramID),
                     base.GetParameter(StudentRegistrationRepository.SubProgramIDParameterName, student.SubProgramID),
                     base.GetParameter(StudentRegistrationRepository.GroupIDParameterName, student.GroupID),
-                    base.GetParameter(StudentRegistrationRepository.IsGroupLeaderParameterName, student.IsGroupLeader)
+                    base.GetParameter(StudentRegistrationRepository.IsGroupLeaderParameterName, student.IsGroupLeader),
+                    base.GetParameter(StudentRegistrationRepository.ProfilePicParameterName, student.ProfilePic)
 
 
 
@@ -362,6 +368,21 @@ namespace ELI.Data.Repositories.Main
                 };
 
             var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.ActivateStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<bool> UpdateStudentProfilePicAsync(StudentRegistration student)
+        {
+            var parameters = new List<DbParameter>
+                {
+
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, student.ID),
+                    base.GetParameter(StudentRegistrationRepository.ProfilePicParameterName, student.ProfilePic)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.UpdateStudentProfilePicProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
         }
@@ -455,6 +476,7 @@ namespace ELI.Data.Repositories.Main
                             ProgramName = dataReader.GetStringValue(StudentRegistrationRepository.ProgramNameColumnName),
                             SubProgramName = dataReader.GetStringValue(StudentRegistrationRepository.SubProgramNameColumnName),
                             DocumentPath = dataReader.GetStringValue(StudentRegistrationRepository.DocumentPathColumnName),
+                            ProfilePic = dataReader.GetStringValue(StudentRegistrationRepository.ProfilePicColumnName),
                             ProgrameAddins = new List<int>(),
                             StudentTrips = new List<int>()
                         };

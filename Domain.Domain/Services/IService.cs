@@ -274,6 +274,8 @@ namespace ELI.Domain.Services
         Task<StudentRegistration> GetStudentAsync(int studentID);
         Task<StudentPDFDataVM> GetStudentFilesDataAsync(int studentID);
         Task<bool> ActivateStudentAsync(StudentRegistration student);
+
+        Task<bool> UpdateStudentProfilePicAsync(StudentRegistration student);
         Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student);
 
         #region PaymentsStudent

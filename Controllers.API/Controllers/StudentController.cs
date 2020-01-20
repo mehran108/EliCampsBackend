@@ -99,6 +99,23 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpPut("updateProfilePic")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> UpdateStudentProfilePicAsync([FromBody] StudentRegistration studentVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdateStudentProfilePicAsync(studentVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        
+
         [HttpGet("getAllStudent")]
         [Produces(typeof(List<StudentRegistration>))]
         public async Task<IActionResult> GetAllStudentAsync([FromQuery] StudentRegistration studentVM)

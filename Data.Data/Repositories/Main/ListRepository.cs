@@ -223,7 +223,7 @@ namespace ELI.Data.Repositories.Main
 
             await base.ExecuteNonQuery(parameters, ListRepository.AddRoomsStoredProcedureName, CommandType.StoredProcedure);
 
-         //   roomsViewModel.ID = Convert.ToInt32(agentIdParamter.Value);
+            roomsViewModel.ID = Convert.ToInt32(agentIdParamter.Value);
 
             return roomsViewModel.ID;
         }

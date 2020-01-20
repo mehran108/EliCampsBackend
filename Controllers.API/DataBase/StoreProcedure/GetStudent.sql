@@ -78,6 +78,7 @@ BEGIN
       ,tbl.[clmReg_RoomSearchFrom] AS RoomSearchFrom
       ,tbl.[clmReg_RoomSearchTo] AS RoomSearchTo
       ,tbl.[clmReg_IsActive] AS Active,
+	  tbl.clmReg_ProfilePic AS ProfilePic,
 		tbl.clmReg_ChapFamily AS  ChapFamily,
 		tbl.clmReg_ProgramID AS ProgramID,
 		tbl.clmReg_SubProgramID AS SubProgramID,

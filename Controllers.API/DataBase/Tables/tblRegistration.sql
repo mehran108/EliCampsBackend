@@ -53,7 +53,7 @@ BEGIN CREATE TABLE  [dbo].[tblRegistration](
 	[clmReg_Balance] [money] NULL,
 	[clmReg_TotalAddins] [money] NULL,
 	[clmReg_CommissionAddins] [money] NULL,
-	[clmReg_ProfilePic] [nvarchar](300) NULL,
+	[clmReg_ProfilePic] [nvarchar](1000) NULL,
 	[clmReg_RoomID] [int] NULL,
 	[clmReg_HomestayOrResi] [nvarchar](50) NULL,
 	[clmReg_HomestayID] [int] NULL,

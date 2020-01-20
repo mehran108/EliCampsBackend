@@ -16,6 +16,8 @@ namespace ELI.Domain.Contracts.Main
         Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student);
         Task<bool> ActivateStudentAsync(StudentRegistration student);
 
+        Task<bool> UpdateStudentProfilePicAsync(StudentRegistration student);
+
         #region PaymentsStudent
         Task<int> AddPaymentStudentAsync(PaymentsViewModel paymentStudent);
         Task<bool> UpdatePaymentStudentAsync(PaymentsViewModel paymentStudent);

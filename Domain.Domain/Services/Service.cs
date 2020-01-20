@@ -801,6 +801,13 @@ namespace ELI.Domain.Services
             return await _studentRepository.ActivateStudentAsync(student);
         }
 
+        public async Task<bool> UpdateStudentProfilePicAsync(StudentRegistration student)
+        {
+            return await _studentRepository.UpdateStudentProfilePicAsync(student);
+        }
+
+        
+
         public async Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student)
         {
             return await _studentRepository.GetAllStudentAsync(student);

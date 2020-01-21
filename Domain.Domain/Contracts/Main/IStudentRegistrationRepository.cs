@@ -20,6 +20,7 @@ namespace ELI.Domain.Contracts.Main
         Task<bool> UpdatePaymentStudentAsync(PaymentsViewModel paymentStudent);
         Task<PaymentsViewModel> GetPaymentStudentAsync(int paymentStudentID);
         Task<List<PaymentsViewModel>> GetAllPaymentStudentByStudentIdAsync(int studentID);
+        Task<List<PaymentsViewModel>> GetAllPaymentStudentByGroupIdAsync(int studentID);
         Task<bool> ActivatePaymentStudentAsync(PaymentsViewModel paymentStudent);
         Task<int> UploadDocuments(UploadDocuments uploadDocuments);
 

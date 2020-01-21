@@ -620,6 +620,29 @@ namespace ELI.Domain.Services
             return await _groupRepository.ActivatePaymentGroupAsync(paymentGroup);
         }
         #endregion
+
+        #region PaymentsGroupsLeader
+        public async Task<int> AddPaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
+        {
+            return await _groupRepository.AddPaymentGroupAsync(paymentGroup);
+        }
+        public async Task<bool> UpdatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
+        {
+            return await _groupRepository.UpdatePaymentGroupAsync(paymentGroup);
+        }
+        public async Task<PaymentsGroupsViewModel> GetPaymentGroupLeaderAsync(int paymentGroupID)
+        {
+            return await _groupRepository.GetPaymentGroupAsync(paymentGroupID);
+        }
+        public async Task<List<PaymentsGroupsViewModel>> GetAllPaymentGroupLeaderByGroupIdAsync(int groupID)
+        {
+            return await _groupRepository.GetAllPaymentGroupByGroupIdAsync(groupID);
+        }
+        public async Task<bool> ActivatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
+        {
+            return await _groupRepository.ActivatePaymentGroupAsync(paymentGroup);
+        }
+        #endregion
         #endregion
 
         #region HomeStay
@@ -816,6 +839,10 @@ namespace ELI.Domain.Services
             return await _studentRepository.GetPaymentStudentAsync(paymentStudentID);
         }
         public async Task<List<PaymentsViewModel>> GetAllPaymentStudentByStudentIdAsync(int studentID)
+        {
+            return await _studentRepository.GetAllPaymentStudentByStudentIdAsync(studentID);
+        }
+        public async Task<List<PaymentsViewModel>> GetAllPaymentStudentByGroupIdAsync(int studentID)
         {
             return await _studentRepository.GetAllPaymentStudentByStudentIdAsync(studentID);
         }

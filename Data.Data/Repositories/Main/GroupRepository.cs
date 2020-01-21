@@ -36,6 +36,12 @@ namespace ELI.Data.Repositories.Main
         private const string GetAllPaymentGroupByGroupIDStoredProcedureName = "GetAllPaymentGroupByGroupID";
         private const string ActivatePaymentGroupStoredProcedureName = "ActivatePaymentGroup";
 
+        private const string AddPaymentGroupLeaderStoredProcedureName = "AddPaymentGroupLeader";
+        private const string UpdatePaymentGroupLeaderStoredProcedureName = "UpdatePaymentGroupLeader";
+        private const string GetPaymentGroupLeaderStoredProcedureName = "GetPaymentGroupLeader";
+        private const string GetAllPaymentGroupLeaderByGroupIDStoredProcedureName = "GetAllPaymentGroupLeaderByGroupID";
+        private const string ActivatePaymentGroupLeaderStoredProcedureName = "ActivatePaymentGroupLeader";
+
 
         private const string GroupIdParameterName = "PGroupID";
         private const string YearParameterName = "PYear";
@@ -583,6 +589,130 @@ namespace ELI.Data.Repositories.Main
                 };
 
             var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.ActivatePaymentGroupStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        #endregion
+
+        #region PaymentsGroupsLeader
+        public async Task<int> AddPaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
+        {
+            var paymentGroupIDParamter = base.GetParameterOut(GroupRepository.PaymentGroupIDParameterName, SqlDbType.Int, paymentGroup.ID);
+            var parameters = new List<DbParameter>
+                {
+                    paymentGroupIDParamter,
+
+                    base.GetParameter(GroupRepository.RefNumberParameterName, paymentGroup.RefNumber),
+                    base.GetParameter(GroupRepository.GroupIdParameterName, paymentGroup.GroupID),
+                    base.GetParameter(GroupRepository.PaymentGroupAmountParameterName, paymentGroup.Amount)
+
+                };
+
+            await base.ExecuteNonQuery(parameters, GroupRepository.AddPaymentGroupLeaderStoredProcedureName, CommandType.StoredProcedure);
+
+            paymentGroup.ID = Convert.ToInt32(paymentGroupIDParamter.Value);
+
+            return paymentGroup.ID;
+        }
+
+        public async Task<bool> UpdatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(GroupRepository.PaymentGroupIDParameterName, paymentGroup.ID),
+                    base.GetParameter(GroupRepository.RefNumberParameterName, paymentGroup.RefNumber),
+                    base.GetParameter(GroupRepository.GroupIdParameterName, paymentGroup.GroupID),
+                    base.GetParameter(GroupRepository.PaymentGroupAmountParameterName, paymentGroup.Amount),
+                    base.GetParameter(BaseRepository.ActiveParameterName, paymentGroup.Active)
+
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.UpdatePaymentGroupLeaderStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<PaymentsGroupsViewModel> GetPaymentGroupLeaderAsync(int paymentGroupID)
+        {
+            PaymentsGroupsViewModel paymentGroupVM = null;
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(GroupRepository.PaymentGroupIDParameterName, paymentGroupID)
+                };
+
+            using (var dataReader = await base.ExecuteReader(parameters, GroupRepository.GetPaymentGroupLeaderStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        paymentGroupVM = new PaymentsGroupsViewModel
+                        {
+                            ID = dataReader.GetIntegerValue(GroupRepository.PaymentGroupIDColumnName),
+                            GroupID = dataReader.GetIntegerValue(GroupRepository.GroupIdColumnName),
+                            RefNumber = dataReader.GetStringValue(GroupRepository.RefNumberColumnName),
+                            Amount = dataReader.GetDecimalValue(GroupRepository.PaymentGroupAmountColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                        };
+
+                    }
+                }
+            }
+
+            return paymentGroupVM;
+        }
+
+        public async Task<List<PaymentsGroupsViewModel>> GetAllPaymentGroupLeaderByGroupIdAsync(int groupID)
+        {
+            PaymentsGroupsViewModel paymentGroupVM = null;
+            List<PaymentsGroupsViewModel> paymentGroupVMList = new List<PaymentsGroupsViewModel>();
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(GroupRepository.GroupIdParameterName, groupID)
+                };
+
+
+            using (var dataReader = await base.ExecuteReader(parameters, GroupRepository.GetAllPaymentGroupLeaderByGroupIDStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+
+                    while (dataReader.Read())
+                    {
+                        paymentGroupVM = new PaymentsGroupsViewModel
+                        {
+                            ID = dataReader.GetIntegerValue(GroupRepository.PaymentGroupIDColumnName),
+                            GroupID = dataReader.GetIntegerValue(GroupRepository.GroupIdColumnName),
+                            RefNumber = dataReader.GetStringValue(GroupRepository.RefNumberColumnName),
+                            Amount = dataReader.GetDecimalValue(GroupRepository.PaymentGroupAmountColumnName),
+                            Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName)
+                        };
+                        paymentGroupVMList.Add(paymentGroupVM);
+                    }
+
+                    if (!dataReader.IsClosed)
+                    {
+                        dataReader.Close();
+                    }
+
+                }
+            }
+
+            return paymentGroupVMList;
+        }
+
+        public async Task<bool> ActivatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(GroupRepository.PaymentGroupIDParameterName, paymentGroup.ID),
+                    base.GetParameter(BaseRepository.ActiveParameterName, paymentGroup.Active)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.ActivatePaymentGroupLeaderStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
         }

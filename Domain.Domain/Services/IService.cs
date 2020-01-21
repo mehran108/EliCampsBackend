@@ -188,6 +188,15 @@ namespace ELI.Domain.Services
         Task<bool> ActivatePaymentGroupAsync(PaymentsGroupsViewModel paymentGroup);
 
         #endregion
+
+        #region PaymentsGroupsLeader
+        Task<int> AddPaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup);
+        Task<bool> UpdatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup);
+        Task<PaymentsGroupsViewModel> GetPaymentGroupLeaderAsync(int paymentGroupID);
+        Task<List<PaymentsGroupsViewModel>> GetAllPaymentGroupLeaderByGroupIdAsync(int groupID);
+        Task<bool> ActivatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup);
+
+        #endregion
         #endregion
         #endregion
 
@@ -280,6 +289,7 @@ namespace ELI.Domain.Services
         Task<bool> UpdatePaymentStudentAsync(PaymentsViewModel paymentStudent);
         Task<PaymentsViewModel> GetPaymentStudentAsync(int paymentStudentID);
         Task<List<PaymentsViewModel>> GetAllPaymentStudentByStudentIdAsync(int studentID);
+        Task<List<PaymentsViewModel>> GetAllPaymentStudentByGroupIdAsync(int studentID);
         Task<bool> ActivatePaymentStudentAsync(PaymentsViewModel paymentStudent);
         Task<int> UploadDocuments(StudentDocuments studentDocuments);
 

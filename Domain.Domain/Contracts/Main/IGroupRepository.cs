@@ -26,5 +26,14 @@ namespace ELI.Domain.Contracts.Main
         Task<bool> ActivatePaymentGroupAsync(PaymentsGroupsViewModel paymentGroup);
 
         #endregion
+
+        #region PaymentsGroupsLeader
+        Task<int> AddPaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup);
+        Task<bool> UpdatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup);
+        Task<PaymentsGroupsViewModel> GetPaymentGroupLeaderAsync(int paymentGroupID);
+        Task<List<PaymentsGroupsViewModel>> GetAllPaymentGroupLeaderByGroupIdAsync(int groupID);
+        Task<bool> ActivatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup);
+
+        #endregion
     }
 }

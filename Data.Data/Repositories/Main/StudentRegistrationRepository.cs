@@ -35,6 +35,7 @@ namespace ELI.Data.Repositories.Main
         private const string UpdatePaymentStudentStoredProcedureName = "UpdatePaymentStudent";
         private const string GetPaymentStudentStoredProcedureName = "GetPaymentStudent";
         private const string GetAllPaymentStudentByStudentIDStoredProcedureName = "GetAllPaymentStudentByStudentID";
+        private const string GetAllPaymentStudentByGroupIDStoredProcedureName = "GetAllPaymentStudentByGroupID";
         private const string ActivatePaymentStudentStoredProcedureName = "ActivatePaymentStudent";
         private const string AddDocumentStoredProcedureName = "AddDocuments";
 
@@ -776,6 +777,46 @@ namespace ELI.Data.Repositories.Main
 
 
             using (var dataReader = await base.ExecuteReader(parameters, StudentRegistrationRepository.GetAllPaymentStudentByStudentIDStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+
+                    while (dataReader.Read())
+                    {
+                        paymentStudentVM = new PaymentsViewModel
+                        {
+                            ID = dataReader.GetIntegerValue(StudentRegistrationRepository.PaymentStudentIDColumnName),
+                            StudentRegID = dataReader.GetIntegerValue(StudentRegistrationRepository.IDColumnName),
+                            Date = dataReader.GetDateTimeValue(StudentRegistrationRepository.PaymentStudentDateColumnName),
+                            Amount = dataReader.GetDecimalValue(StudentRegistrationRepository.PaymentStudentAmountColumnName),
+                            Remarks = dataReader.GetStringValue(StudentRegistrationRepository.PaymentStudentRemarksColumnName),
+                            Active = dataReader.GetBooleanValue(StudentRegistrationRepository.ActiveColumnName)
+                        };
+                        paymentStudentVMList.Add(paymentStudentVM);
+                    }
+
+                    if (!dataReader.IsClosed)
+                    {
+                        dataReader.Close();
+                    }
+
+                }
+            }
+
+            return paymentStudentVMList;
+        }
+
+        public async Task<List<PaymentsViewModel>> GetAllPaymentStudentByGroupIdAsync(int studentID)
+        {
+            PaymentsViewModel paymentStudentVM = null;
+            List<PaymentsViewModel> paymentStudentVMList = new List<PaymentsViewModel>();
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, studentID)
+                };
+
+
+            using (var dataReader = await base.ExecuteReader(parameters, StudentRegistrationRepository.GetAllPaymentStudentByGroupIDStoredProcedureName, CommandType.StoredProcedure))
             {
                 if (dataReader != null && dataReader.HasRows)
                 {

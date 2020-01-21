@@ -246,5 +246,91 @@ namespace ELI.API.Controllers
         }
 
 
+        [HttpPost("addPaymentGroupLeader")]
+        public async Task<IActionResult> AddPaymentGroupLeaderAsync([FromBody] PaymentsGroupsViewModel paymentGroupVM)
+        {
+
+            if (paymentGroupVM != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.AddPaymentGroupLeaderAsync(paymentGroupVM));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "payment group cannot be empty" });
+            }
+        }
+
+        [HttpGet("getPaymentGroupLeader")]
+        [Produces(typeof(PaymentsGroupsViewModel))]
+        public async Task<IActionResult> GetPaymentGroupLeaderAsync(int paymentGroupID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetPaymentGroupLeaderAsync(paymentGroupID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpGet("getAllPaymentGroupLeaderByGroupId")]
+        [Produces(typeof(List<PaymentsGroupsViewModel>))]
+        public async Task<IActionResult> GetAllPaymentGroupLeaderByGroupIdAsync(int groupID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetAllPaymentGroupLeaderByGroupIdAsync(groupID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("updatePaymentGroupLeader")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> UpdatePaymentGroupLeaderAsync([FromBody] PaymentsGroupsViewModel paymentGroupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.UpdatePaymentGroupLeaderAsync(paymentGroupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("activatePaymentGroupLeader")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> ActivatePaymentGroupLeaderAsync([FromBody] PaymentsGroupsViewModel paymentGroupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.ActivatePaymentGroupLeaderAsync(paymentGroupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
     }
 }

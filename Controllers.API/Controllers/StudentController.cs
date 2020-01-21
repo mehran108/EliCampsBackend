@@ -202,6 +202,21 @@ namespace ELI.API.Controllers
             }
         }
 
+        [HttpGet("getAllPaymentStudentByGroupId")]
+        [Produces(typeof(List<PaymentsViewModel>))]
+        public async Task<IActionResult> GetAllPaymentStudentByGroupIdAsync([FromQuery] int studentID)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetAllPaymentStudentByGroupIdAsync(studentID));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
 
         [HttpPost("uploadDocuments")]
        // [Produces(typeof(StudentDocuments))]

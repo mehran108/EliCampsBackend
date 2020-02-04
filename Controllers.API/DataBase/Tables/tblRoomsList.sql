@@ -1,5 +1,7 @@
 
 
+
+
 /****** Object:  Table [dbo].[tblRoomsList]    Script Date: 11/16/2019 12:08:40 AM ******/
 SET ANSI_NULLS ON
 GO
@@ -36,5 +38,7 @@ CREATE TABLE [dbo].[tblRoomsList](
 ) ON [PRIMARY]
 
 GO
+
+
 
 

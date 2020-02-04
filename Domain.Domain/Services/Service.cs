@@ -624,23 +624,23 @@ namespace ELI.Domain.Services
         #region PaymentsGroupsLeader
         public async Task<int> AddPaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
         {
-            return await _groupRepository.AddPaymentGroupAsync(paymentGroup);
+            return await _groupRepository.AddPaymentGroupLeaderAsync(paymentGroup);
         }
         public async Task<bool> UpdatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
         {
-            return await _groupRepository.UpdatePaymentGroupAsync(paymentGroup);
+            return await _groupRepository.UpdatePaymentGroupLeaderAsync(paymentGroup);
         }
         public async Task<PaymentsGroupsViewModel> GetPaymentGroupLeaderAsync(int paymentGroupID)
         {
-            return await _groupRepository.GetPaymentGroupAsync(paymentGroupID);
+            return await _groupRepository.GetPaymentGroupLeaderAsync(paymentGroupID);
         }
         public async Task<List<PaymentsGroupsViewModel>> GetAllPaymentGroupLeaderByGroupIdAsync(int groupID)
         {
-            return await _groupRepository.GetAllPaymentGroupByGroupIdAsync(groupID);
+            return await _groupRepository.GetAllPaymentGroupLeaderByGroupIdAsync(groupID);
         }
         public async Task<bool> ActivatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
         {
-            return await _groupRepository.ActivatePaymentGroupAsync(paymentGroup);
+            return await _groupRepository.ActivatePaymentGroupLeaderAsync(paymentGroup);
         }
         #endregion
         #endregion

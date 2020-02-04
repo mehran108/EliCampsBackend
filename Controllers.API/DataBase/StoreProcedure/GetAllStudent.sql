@@ -96,6 +96,7 @@ BEGIN
 		left join [dbo].[tblCampuses] cam with (nolock) on tbl.[clmReg_Campus] = cam.clmCampuses_ID
 		left join tblGroups  grp with (nolock) on grp.clmGroups_ID = tbl.GroupID
 		 where ( tbl.[clmReg_IsActive] = (CASE WHEN @PActive is not null then @PActive else tbl.[clmReg_IsActive] end))
+		 and tbl.clmReg_Year not in (2018,2019)
 		 order by tbl.[clmReg_ID] desc;
 END
 GO

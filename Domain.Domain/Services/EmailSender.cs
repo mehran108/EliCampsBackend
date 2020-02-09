@@ -496,7 +496,7 @@ namespace ELI.Domain.Services
                 <tbody>
                   <tr>
                     <td style=""width: 15%;""><b>Student Name:</b></td>
-                    <td style=""width:25%"">cc</td>
+                    <td style=""width:25%"">{{StudentFullName}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""><b>Agent Name:</b></td>
                     <td style=""width: 35%;"">{{AgentName}}
                     </td>
@@ -3471,7 +3471,7 @@ namespace ELI.Domain.Services
             {
                 var email = new EmailViewModel();
 
-                email.Subject = "Registration confirmation SANTINO COVARRUBIAS GALLEGOS";
+                email.Subject = $"Registration confirmation { studentPDFDataVM.FirstName} {studentPDFDataVM.LastName}";
                 email.Message = emailTemplate;
                 email.Message = email.Message.Replace(EmailSender.StudentFullNameTag, $"{studentPDFDataVM.FirstName} {studentPDFDataVM.LastName}");
                 email.To = emailSendVM.StudentEmail;
@@ -3544,25 +3544,43 @@ namespace ELI.Domain.Services
 
         private bool sendEmail(EmailViewModel message)
         {
-
+            string clientPassword = _configuration.GetSection("Email").GetSection("Password").Value;
+            string FromEmail = _configuration.GetSection("Email").GetSection("EmailID").Value;
+            string EmailHost =  _configuration.GetSection("Email").GetSection("Host").Value;
+            int EmailPort = int.Parse(_configuration.GetSection("Email").GetSection("Port").Value);
+            string EmailCC = _configuration.GetSection("Email").GetSection("EmailCCID").Value;
             AlternateView avHtml = AlternateView.CreateAlternateViewFromString
                 (message.Message, null, MediaTypeNames.Text.Html);
+            //var smtpClient = new SmtpClient
+            //{
+            //    Host = "smtp.gmail.com", // set your SMTP server name here
+            //    Port = 587, // Port 
+            //    EnableSsl = true,
+            //    UseDefaultCredentials = false,
+            //    Credentials = new NetworkCredential("elicampswork@gmail.com", "abcd@1234")
+            //};
             var smtpClient = new SmtpClient
             {
-                Host = "smtp.gmail.com", // set your SMTP server name here
-                Port = 587, // Port 
+                Host = EmailHost, // set your SMTP server name here
+                Port = EmailPort, // Port 
                 EnableSsl = true,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("elicampswork@gmail.com", "abcd@1234")
+                Credentials = new NetworkCredential(FromEmail, clientPassword)
             };
 
 
-            using (var mail = new MailMessage("elicampswork@gmail.com", message.To))
+            //using (var mail = new MailMessage("elicampswork@gmail.com", message.To))
+            using (var mail = new MailMessage(FromEmail, message.To))
             {
                 mail.AlternateViews.Add(avHtml);
                 mail.Subject = message.Subject;
                 mail.IsBodyHtml = true;
-
+                if (!String.IsNullOrEmpty(EmailCC))
+                {
+                    MailAddress emailCC = new MailAddress(EmailCC);
+                    mail.CC.Add(emailCC);
+                }
+               
                 foreach (var att in message.emailAttachment)
                 {
                     mail.Attachments.Add(att);

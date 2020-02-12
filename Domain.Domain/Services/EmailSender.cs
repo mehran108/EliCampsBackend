@@ -268,6 +268,7 @@ namespace ELI.Domain.Services
 
         string AgentInvoiceHTML = @"<!DOCTYPE html>
 <html lang=""en"">
+
 <head>
   <title>Bootstrap Example</title>
   <meta charset=""utf-8"">
@@ -277,134 +278,136 @@ namespace ELI.Domain.Services
   <script src=""https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js""></script>
   <script src=""https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js""></script>
   <style>
-    html,body {
-  margin: 0;
-  color: #3a405b;
-  padding: 0;
-  font-weight: 400;
-  font-size: .875rem;
-  line-height: 1.5;
-  font-family: Roboto,sans-serif;
-  background: #fff;
-  height: 100%;
-  background-image: none !important;
-  background-repeat: no-repeat;
-}
+    html,
+    body {
+      margin: 0;
+      color: #3a405b;
+      padding: 0;
+      font-weight: 400;
+      font-size: .875rem;
+      line-height: 1.5;
+      font-family: Roboto, sans-serif;
+      background: #fff;
+      height: 100%;
+      background-image: none !important;
+      background-repeat: no-repeat;
+    }
+
     .invoice {
       position: relative;
       background-color: #FFF;
       min-height: 680px;
       padding: 15px
     }
-  
+
     .invoice header {
       padding: 10px 0;
       margin-bottom: 20px;
       border-bottom: 1px solid #3989c6
     }
-  
+
     .invoice .company-details {
       text-align: right
     }
-  
+
     .invoice .company-details .name {
       margin-top: 0;
       margin-bottom: 0
     }
-  
+
     .invoice .contacts {
       margin-bottom: 20px
     }
-  
+
     .invoice .invoice-to {
       text-align: left
     }
-  
+
     .invoice .invoice-to .to {
       margin-top: 0;
       margin-bottom: 0
     }
-  
+
     .invoice .invoice-details {
       text-align: right
     }
-  
+
     .invoice .invoice-details .invoice-id {
       margin-top: 0;
       color: #3989c6
     }
-  
+
     .invoice main {
       padding-bottom: 50px
     }
-  
+
     .invoice main .thanks {
       margin-top: -100px;
       font-size: 2em;
       margin-bottom: 50px
     }
-  
+
     .invoice main .notices {
       padding-left: 6px;
       border-left: 6px solid #3989c6
     }
-  
+
     .invoice main .notices .notice {
       font-size: 1.2em
     }
-  
+
     .invoice table {
       width: 100%;
       border-collapse: collapse;
       border-spacing: 0;
     }
-  
+
     .invoice table td,
     .invoice table th {
       padding: 15px;
       background: #eee;
       border-bottom: 1px solid #fff
     }
-  
+
     .invoice table th {
       white-space: nowrap;
       font-weight: 400;
       font-size: 16px
     }
-  
+
     .invoice table td h3 {
       margin: 0;
       font-weight: 400;
       color: #3989c6;
       font-size: 1.2em
     }
-  
+
     .invoice table .qty,
     .invoice table .total,
     .invoice table .unit {
       text-align: right;
       font-size: 1.2em
     }
-  
+
     .invoice table .no {
       color: #fff;
       font-size: 1.6em;
       background: #3989c6
     }
-  
+
     .invoice table .unit {
       background: #ddd
     }
-  
+
     .invoice table .total {
       background: #3989c6;
       color: #fff
     }
-  
+
     .invoice table tbody tr:last-child td {
       border: none
     }
-  
+
     .invoice table tfoot td {
       background: 0 0;
       border-bottom: none;
@@ -414,21 +417,21 @@ namespace ELI.Domain.Services
       font-size: 1.2em;
       border-top: 1px solid #aaa
     }
-  
+
     .invoice table tfoot tr:first-child td {
       border-top: none
     }
-  
+
     .invoice table tfoot tr:last-child td {
       color: #3989c6;
       font-size: 1.4em;
       border-top: 1px solid #3989c6
     }
-  
+
     .invoice table tfoot tr td:first-child {
       border: none
     }
-  
+
     .invoice footer {
       width: 100%;
       text-align: center;
@@ -436,15 +439,16 @@ namespace ELI.Domain.Services
       border-top: 1px solid #aaa;
       padding: 8px 0
     }
-  
+
     .mtable table td,
     .mtable table th {
-      padding: 6px;
+      padding: 4px;
       background: #fff;
       border-bottom: 1px solid #fff
     }
   </style>
 </head>
+
 <body>
   <div id=""invoice"">
     <div class=""invoice overflow-auto"" style=""position: relative;
@@ -487,7 +491,7 @@ namespace ELI.Domain.Services
             </div>
           </div>
           <div class=""row contacts"" style=""margin-bottom: 20px"">
-            <div class=""col-md-12 mtable"" style=""padding: 10px;
+            <div class=""col-md-12 mtable"" style=""
             background: #fff;
             border-bottom: 1px solid #fff"">
               <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -496,9 +500,9 @@ namespace ELI.Domain.Services
                 <tbody>
                   <tr>
                     <td style=""width: 15%;""><b>Student Name:</b></td>
-                    <td style=""width:25%"">{{StudentFullName}}</td>
+                    <td style=""width:30%"">{{StudentFullName}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""><b>Agent Name:</b></td>
-                    <td style=""width: 35%;"">{{AgentName}}
+                    <td style=""width: 25%;"">{{AgentName}}
                     </td>
                   </tr>
                   <tr>
@@ -512,24 +516,17 @@ namespace ELI.Domain.Services
                     <td style=""width: 15%;""><b>Date Of Birth:</b></td>
                     <td style=""width:20%"">{{DOB}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
-                    <td style=""width: 35%;"">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style=""width: 15%;""><b></b></td>
-                    <td style=""width:20%""></td>
-                    <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
                     <td style=""width: 35%;"">{{AgentCountry}}
                     </td>
                   </tr>
                 </tbody>
               </table>
-  
+
             </div>
-  
-  
+
+
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" style=""width: 100%;
@@ -538,7 +535,7 @@ namespace ELI.Domain.Services
               <tr>
                 <td colspan=""3"" style=""background-color: #eee; font-weight: bolder;"">DATES</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td style=""width: 50%;""></td>
                 <td style=""width: 10%;"">Start Date:</td>
                 <td style=""width: 40%;"">{{ProgrameStartDate}}</td>
@@ -547,11 +544,18 @@ namespace ELI.Domain.Services
                 <td style=""width: 50%;""></td>
                 <td style=""width: 10%;"">End Date:</td>
                 <td style=""width: 40%;"">{{ProgrameEndDate}}</td>
+              </tr> -->
+              <tr>
+                <td style=""width: 50%;""></td>
+                <td style=""width: 50%;"" colspan=""2"">
+                  Start Date: {{ProgrameStartDate}}<br>
+                  End Date: {{ProgrameEndDate}}
+                </td>
               </tr>
             </table>
           </div>
-  
-          <div class=""row mtable"" style=""padding: 10px;
+
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -564,10 +568,10 @@ namespace ELI.Domain.Services
                 <td style=""width: 50%;""></td>
                 <td style=""width: 50%;"" colspan=""2"">{{CampusAddressOnReports}}</td>
               </tr>
-  
+
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -580,14 +584,13 @@ namespace ELI.Domain.Services
               <tr>
                 <td style=""width: 50%;""></td>
                 <td style=""width: 50%;"" colspan=""2"">
-                  <p>{{ProgramName}}</p>
-                  <p>{{SubProgramName}}</p>
+                  {{ProgramName}}<br>
+                  {{SubProgramName}}
                 </td>
               </tr>
-  
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -600,10 +603,10 @@ namespace ELI.Domain.Services
                 <td style=""width: 50%;""></td>
                 <td style=""width: 50%;"" colspan=""2"">{{FormatName}}<br>{{MealPlan}}</td>
               </tr>
-  
+
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -618,10 +621,10 @@ namespace ELI.Domain.Services
                   {{Included_Services}}
                 </td>
               </tr>
-  
+
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -637,7 +640,7 @@ namespace ELI.Domain.Services
                   {{Additional_Services}}
                 </td>
               </tr>
-  
+
             </table>
           </div>
           <hr style=""width: 100%; border-width: 2px; border-color: #000;"">
@@ -656,7 +659,7 @@ namespace ELI.Domain.Services
               <br>
               <p>Elvis Mrizi<br> Director </p>
             </div>
-            <div class=""col-4 mtable"" style=""padding: 10px;
+            <div class=""col-4 mtable"" style=""
             background: #fff;
             border-bottom: 1px solid #fff"">
               <table border=""0"" style=""line-height: 0.9;"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -693,9 +696,9 @@ namespace ELI.Domain.Services
             </div>
           </div>
           <hr style=""width: 100%; border-width: 2px; border-color: #000;"">
-  
-          <div class=""row mtable"" style=""padding: 10px; background: #fff; border-bottom: 1px solid #fff"">
-            <div class=""col-6"">
+
+          <div class=""row mtable"" style="" background: #fff; border-bottom: 1px solid #fff"">
+            <div class=""col-6"" style=""line-height: 1;"">
               <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
               border-collapse: collapse;
               border-spacing: 0;"">
@@ -741,17 +744,9 @@ namespace ELI.Domain.Services
             </div>
           </div>
         </main>
-        <footer style="" width: 100%;
-        text-align: center;
-        color: #777;
-        border-top: 1px solid #aaa;
-        padding: 8px 0"">
-        </footer>
       </div>
-  
     </div>
   </div>
-
 </body>
 </html>
 
@@ -829,7 +824,7 @@ namespace ELI.Domain.Services
     }
   
     .invoice .contacts {
-      margin-bottom: 20px
+     // margin-bottom: 20px
     }
   
     .invoice .invoice-to {
@@ -955,7 +950,7 @@ namespace ELI.Domain.Services
   
     .mtable table td,
     .mtable table th {
-      padding: 6px;
+      padding: 4px;
       background: #fff;
       border-bottom: 1px solid #fff
     }
@@ -991,7 +986,7 @@ namespace ELI.Domain.Services
           </div>
         </header>
         <main style=""padding-bottom: 50px"">
-          <div class=""row contacts"" style=""margin-bottom: 20px"">
+          <div class=""row contacts"">
             <div class=""col-md-4  invoice-to"" style="" margin-top: 0;
             margin-bottom: 0"">
               <!-- <div class=""text-gray-light""><b>Invoice Date:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1002,8 +997,8 @@ namespace ELI.Domain.Services
               <h4 class="""">INVOICE</h4>
             </div>
           </div>
-          <div class=""row contacts"" style=""margin-bottom: 20px"">
-            <div class=""col-md-12 mtable"" style=""padding: 10px;
+          <div class=""row contacts"" >
+            <div class=""col-md-12 mtable"" style=""
             background: #fff;
             border-bottom: 1px solid #fff"">
               <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -1046,7 +1041,7 @@ namespace ELI.Domain.Services
   
   
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" style=""width: 100%;
@@ -1057,18 +1052,15 @@ namespace ELI.Domain.Services
               </tr>
               <tr>
                 <td style=""width: 50%;""></td>
-                <td style=""width: 10%;"">Start Date:</td>
-                <td style=""width: 40%;"">{{ProgrameStartDate}}</td>
-              </tr>
-              <tr>
-                <td style=""width: 50%;""></td>
-                <td style=""width: 10%;"">End Date:</td>
-                <td style=""width: 40%;"">{{ProgrameEndDate}}</td>
+                <td style=""width: 50%;"" colspan=""2"">
+                  Start Date: {{ProgrameStartDate}}<br>
+                  End Date: {{ProgrameEndDate}}
+                </td>
               </tr>
             </table>
           </div>
   
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -1084,7 +1076,7 @@ namespace ELI.Domain.Services
   
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -1097,14 +1089,14 @@ namespace ELI.Domain.Services
               <tr>
                 <td style=""width: 50%;""></td>
                 <td style=""width: 50%;"" colspan=""2"">
-                  <p>{{ProgramName}}</p>
-                  <p>{{SubProgramName}}</p>
+                  {{ProgramName}}<br>
+                  {{SubProgramName}}
                 </td>
               </tr>
   
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -1120,7 +1112,7 @@ namespace ELI.Domain.Services
   
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -1138,7 +1130,7 @@ namespace ELI.Domain.Services
   
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -1173,7 +1165,7 @@ namespace ELI.Domain.Services
               <br>
               <p>Elvis Mrizi<br> Director </p>
             </div>
-            <div class=""col-4 mtable"" style=""padding: 10px;
+            <div class=""col-4 mtable"" style=""
             background: #fff;
             border-bottom: 1px solid #fff"">
               <table border=""0"" style=""line-height: 0.9;"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -1207,8 +1199,8 @@ namespace ELI.Domain.Services
           </div>
           <hr style=""width: 100%; border-width: 2px; border-color: #000;"">
   
-          <div class=""row mtable"" style=""padding: 10px; background: #fff; border-bottom: 1px solid #fff"">
-            <div class=""col-6"">
+          <div class=""row mtable"" style="" background: #fff; border-bottom: 1px solid #fff"">
+            <div class=""col-6"" style=""line-height: 1;"">
               <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
               border-collapse: collapse;
               border-spacing: 0;"">
@@ -1254,12 +1246,6 @@ namespace ELI.Domain.Services
             </div>
           </div>
         </main>
-        <footer style="" width: 100%;
-        text-align: center;
-        color: #777;
-        border-top: 1px solid #aaa;
-        padding: 8px 0"">
-        </footer>
       </div>
   
     </div>
@@ -3752,18 +3738,36 @@ namespace ELI.Domain.Services
 
             if (studentVM.StudentPDFAddinAdd.Count > 0)
             {
+                int count = 1;
                 foreach (var addin in studentVM.StudentPDFAddinAdd)
                 {
-                    addinsAdd = $"{addinsAdd} <p>{addin}</p>";
-
+                    if(count > 1)
+                    {
+                        addinsAdd = $"{addinsAdd} <br> {addin}";
+                    }
+                    else
+                    {
+                        addinsAdd = $"{addin}";
+                    }
+                    
+                    count ++;
                 }
             }
             if (studentVM.StudentPDFAddinInc.Count > 0)
             {
+                int count = 1;
                 foreach (var addin in studentVM.StudentPDFAddinInc)
                 {
-                    addinsInc = $"{addinsInc} <p>{addin}</p>";
-
+                    if (count > 1)
+                    {
+                        addinsInc = $"{addinsInc} <br> {addin}";
+                    }
+                    else
+                    {
+                        addinsInc = $"{addin}";
+                    }
+                    
+                    count++;
                 }
             }
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CurrentDateTag, DateTime.Now.ToString("MMMM dd, yyyy"));
@@ -3800,18 +3804,36 @@ namespace ELI.Domain.Services
 
             if (studentVM.StudentPDFAddinAdd.Count > 0)
             {
+                int count = 1;
                 foreach (var addin in studentVM.StudentPDFAddinAdd)
                 {
-                    addinsAdd = $"{addinsAdd} <p>{addin}</p>";
+                    if (count > 1)
+                    {
+                        addinsAdd = $"{addinsAdd} <br> {addin}";
+                    }
+                    else
+                    {
+                        addinsAdd = $"{addin}";
+                    }
 
+                    count++;
                 }
             }
             if (studentVM.StudentPDFAddinInc.Count > 0)
             {
+                int count = 1;
                 foreach (var addin in studentVM.StudentPDFAddinInc)
                 {
-                    addinsInc = $"{addinsInc} <p>{addin}</p>";
+                    if (count > 1)
+                    {
+                        addinsInc = $"{addinsInc} <br> {addin}";
+                    }
+                    else
+                    {
+                        addinsInc = $"{addin}";
+                    }
 
+                    count++;
                 }
             }
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.CurrentDateTag, DateTime.Now.ToString("MMMM dd, yyyy"));

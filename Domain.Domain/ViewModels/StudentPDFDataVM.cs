@@ -27,10 +27,13 @@ namespace ELI.Domain.ViewModels
         public double TotalGrossPrice { get; set; }
         public double CommissionAddins { get; set; }
         public double Commision { get; set; }
+        public double TotalAddins { get; set; }
         public double Paid { get; set; }
         public double Balance { get; set; }
         public string Email { get; set; }
         public double NetPrice { get; set; }
+
+        public string PassportNumber { get; set; }
 
         public List<string> StudentPDFAddinInc { get; set; }
         public List<string> StudentPDFAddinAdd { get; set; }

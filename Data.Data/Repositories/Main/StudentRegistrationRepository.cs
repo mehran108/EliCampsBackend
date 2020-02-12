@@ -542,6 +542,7 @@ namespace ELI.Data.Repositories.Main
                             Commision = dataReader.GetDoubleValue(StudentRegistrationRepository.CommisionColumnName),
                             CommissionAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.CommissionAddinsColumnName),
                             Balance = dataReader.GetDoubleValue(StudentRegistrationRepository.BalanceColumnName),
+                            TotalAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.TotalAddinsColumnName),
                             NetPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.NetPriceColumnName),
                             AgentName = dataReader.GetStringValue(StudentRegistrationRepository.AgentNameColumnName),
                             FormatName = dataReader.GetStringValue(StudentRegistrationRepository.FormatNameColumnName),
@@ -552,6 +553,7 @@ namespace ELI.Data.Repositories.Main
                             CampusAddressOnReports = dataReader.GetStringValue(StudentRegistrationRepository.CampusAddressOnReportsColumnName),
                             Email = dataReader.GetStringValue(StudentRegistrationRepository.EmailColumnName),
                             Country = dataReader.GetStringValue(StudentRegistrationRepository.CountryColumnName),
+                            PassportNumber = dataReader.GetStringValue(StudentRegistrationRepository.PassportNumberColumnName),
                             StudentPDFAddinInc = new List<string>(),
                             StudentPDFAddinAdd = new List<string>()
 

@@ -40,6 +40,7 @@ BEGIN
 	,tbl.[clmReg_MealPlan] AS MealPlan
 	,tbl.[clmReg_TotalGrossPrice] AS TotalGrossPrice 
 	,tbl.[clmReg_CommissionAddins] AS CommissionAddins
+	,tbl.[clmReg_TotalAddins] AS TotalAddins
 	,tbl.[clmReg_Commision] AS Commision
 	,tbl.[clmReg_Paid] AS Paid 
 	,tbl.[clmReg_Balance] AS Balance
@@ -48,6 +49,7 @@ BEGIN
 	,tbl.clmReg_ArrivalTime AS ArrivalTime
 	,tbl.clmReg_FlightNumber as FlightNumber
 	,tbl.[clmReg_Country] as Country
+	,tbl.[clmReg_PassportNumber] as PassportNumber
 
 	from [dbo].[tblRegistration] tbl with (nolock)
 	left join [tblAgents] agents with (nolock) on tbl.[clmReg_AgencyID] = agents.clmAgents_ID

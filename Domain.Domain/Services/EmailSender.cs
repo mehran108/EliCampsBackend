@@ -35,6 +35,7 @@ namespace ELI.Domain.Services
 
         private const string CurrentDateTag = "{{CurrentDate}}";
         private const string StudentFullNameTag = "{{StudentFullName}}";
+        private const string PassportNumberTag = "{{PassportNumber}}";
         private const string AgentNameTag = "{{AgentName}}";
         private const string AgentAddressTag = "{{AgentAddress}}";
         private const string AgentCountryTag = "{{AgentCountry}}";
@@ -59,6 +60,7 @@ namespace ELI.Domain.Services
         private const string ArrivalFlightNumberTag = "{{ArrivalFlightNumber}}";
         private const string ArrivalTimeTag = "{{ArrivalTime}}";
         private const string CountryTag = "{{Country}}";
+        private const string TotalAddinsTag = "{{TotalAddins}}";
 
 
 
@@ -482,9 +484,6 @@ namespace ELI.Domain.Services
           <div class=""row contacts"" style=""margin-bottom: 20px"">
             <div class=""col-md-4  invoice-to"" style="" margin-top: 0;
             margin-bottom: 0"">
-              <div class=""text-gray-light""><b>Invoice Date:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {{CurrentDate}}
-              </div>
             </div>
             <div class=""col-md-8 "">
               <h4 class="""">AGENCY INVOICE</h4>
@@ -498,6 +497,13 @@ namespace ELI.Domain.Services
               border-collapse: collapse;
               border-spacing: 0;"">
                 <tbody>
+				       <tr>
+                    <td style=""width: 15%;""><b>Invoice Date:</b></td>
+                    <td style=""width:30%"">{{CurrentDate}}</td>
+                    <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
+                    <td style=""width: 25%;"">
+                    </td>
+                  </tr>
                   <tr>
                     <td style=""width: 15%;""><b>Student Name:</b></td>
                     <td style=""width:30%"">{{StudentFullName}}</td>
@@ -516,7 +522,14 @@ namespace ELI.Domain.Services
                     <td style=""width: 15%;""><b>Date Of Birth:</b></td>
                     <td style=""width:20%"">{{DOB}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
-                    <td style=""width: 35%;"">{{AgentCountry}}
+                    <td style=""width: 35%;"">
+                    </td>
+                  </tr>
+				   		<tr>
+                    <td style=""width: 15%;""><b>Passport Number:</b></td>
+                    <td style=""width:20%"">{{PassportNumber}}</td>
+                    <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
+                    <td style=""width: 35%;"">
                     </td>
                   </tr>
                 </tbody>
@@ -670,10 +683,7 @@ namespace ELI.Domain.Services
                     <td>Gross Price</td>
                     <td class=""text-right"">${{TotalGrossPrice}}</td>
                   </tr>
-                  <tr>
-                    <td>Additional Services </td>
-                    <td class=""text-right"">${{CommissionAddins}}</td>
-                  </tr>
+				   {{TotalAddins}}
                   <tr>
                     <td>Commission</td>
                     <td class=""text-right"">${{Commision}}</td>
@@ -713,7 +723,7 @@ namespace ELI.Domain.Services
                   </tr>
                   <tr>
                     <td style=""font-weight: bolder;"">Business address:</td>
-                    <td class="""">111 Ridelle Ave. Suite 203 Toronto Ontario M6B1J7 </td>
+                    <td class="""">360 Ridelle Ave. Suite 307, Toronto Ontario M6B 1K1</td>
                   </tr>
                   <tr>
                     <td style=""font-weight: bolder;""> Account Insitution number:</td>
@@ -1010,20 +1020,12 @@ namespace ELI.Domain.Services
               border-spacing: 0;"">
                 <tbody>
                   <tr>
-                    <td style=""width: 15%;""><b>Invoice Date:</b></td>
-                    <td style=""width:25%"">{{CurrentDate}}</td>
-                    <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""><b></b></td>
-                    <td style=""width: 35%;"">
-                    </td>
-                  </tr>
-                  <tr>
                     <td style=""width: 15%;""><b>Student Name:</b></td>
                     <td style=""width:30%"">{{StudentFullName}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""><b></b></td>
                     <td style=""width: 25%;"">
                     </td>
                   </tr>
-
                   <tr>
                     <td style=""width: 15%;""><b>Student Number:</b></td>
                     <td style=""width:25%"">{{Reg_Ref}}</td>
@@ -1037,6 +1039,13 @@ namespace ELI.Domain.Services
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
                     <!-- <td style=""width: 35%;"">Ciudad de México.
                     </td> -->
+                  </tr>
+				  					<tr>
+                    <td style=""width: 15%;""><b>Passport Number:</b></td>
+                    <td style=""width:20%"">{{PassportNumber}}</td>
+                    <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
+                    <td style=""width: 35%;"">
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -1178,12 +1187,9 @@ namespace ELI.Domain.Services
                 <tbody>
                   <tr>
                     <td>Total Package Price </td>
-                    <td class=""text-right"">${{NetPrice}}</td>
+                    <td class=""text-right"">${{TotalGrossPrice}}</td>
                   </tr>
-                  <tr>
-                    <td>Additional Services </td>
-                    <td class=""text-right"">${{CommissionAddins}}</td>
-                  </tr>
+				  {{TotalAddins}}
                   <tr>
                     <td>Paid</td>
                     <td class=""text-right"">${{Paid}} </td>
@@ -1219,7 +1225,7 @@ namespace ELI.Domain.Services
                   </tr>
                   <tr>
                     <td style=""font-weight: bolder;"">Business address:</td>
-                    <td class="""">111 Ridelle Ave. Suite 203 Toronto Ontario M6B1J7 </td>
+                    <td class="""">360 Ridelle Ave. Suite 307, Toronto Ontario M6B 1K1 </td>
                   </tr>
                   <tr>
                     <td style=""font-weight: bolder;""> Account Insitution number:</td>
@@ -1511,6 +1517,15 @@ namespace ELI.Domain.Services
                     border-bottom: 1px solid #fff"">University of Toronto, Victoria Campus, 73 Queen Park's Crescent,Toronto
                     </td>
                   </tr>
+				  		   <tr>
+                    <td style=""width: 15%; padding: 6px;
+                    background: #fff;
+                    border-bottom: 1px solid #fff""><b>Passport Number:</b></td>
+                    <td style=""width: 35%; padding: 6px;
+                    background: #fff;
+                    border-bottom: 1px solid #fff"">{{PassportNumber}}
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -1777,9 +1792,6 @@ namespace ELI.Domain.Services
           <div class=""row"">
             <div class=""col-md-4  invoice-to"" style="" margin-top: 0;
             margin-bottom: 0"">
-              <div class=""text-gray-light""><b>Invoice Date:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {{CurrentDate}}
-              </div>
             </div>
             <div class=""col-md-8 "">
               <h4 class="""">OFFICIAL LETTER OF ACCEPTANCE </h4>
@@ -1814,9 +1826,9 @@ namespace ELI.Domain.Services
                     <!-- <td style=""width: 35%;"">Ciudad de México.
                     </td> -->
                   </tr>
-                  <tr>
-                    <td style=""width: 15%;""><b></b></td>
-                    <td style=""width:20%""></td>
+     					<tr>
+                    <td style=""width: 15%;""><b>Passport Number:</b></td>
+                    <td style=""width:20%"">{{PassportNumber}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
                     <td style=""width: 35%;"">
                     </td>
@@ -1978,10 +1990,7 @@ namespace ELI.Domain.Services
                     <td>Gross Price</td>
                     <td class=""text-right"">${{TotalGrossPrice}}</td>
                   </tr>
-                  <tr>
-                    <td>Additional Services </td>
-                    <td class=""text-right"">${{CommissionAddins}}</td>
-                  </tr>
+				  {{TotalAddins}}
                   <tr>
                     <td>Paid</td>
                     <td class=""text-right"">${{Paid}} </td>
@@ -2017,7 +2026,7 @@ namespace ELI.Domain.Services
                   </tr>
                   <tr>
                     <td style=""font-weight: bolder;"">Business address:</td>
-                    <td class="""">111 Ridelle Ave. Suite 203 Toronto Ontario M6B1J7 </td>
+                    <td class="""">360 Ridelle Ave. Suite 307, Toronto Ontario M6B 1K1 </td>
                   </tr>
                   <tr>
                     <td style=""font-weight: bolder;""> Account Insitution number:</td>
@@ -2269,9 +2278,6 @@ namespace ELI.Domain.Services
           <div class=""row"">
             <div class=""col-md-4  invoice-to"" style="" margin-top: 0;
             margin-bottom: 0"">
-              <div class=""text-gray-light""><b>Invoice Date:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {{CurrentDate}}
-              </div>
             </div>
             <div class=""col-md-8 "">
               <h4 class="""">OFFICIAL LETTER OF ACCEPTANCE </h4>
@@ -2306,9 +2312,9 @@ namespace ELI.Domain.Services
                     <!-- <td style=""width: 35%;"">Ciudad de México.
                     </td> -->
                   </tr>
-                  <tr>
-                    <td style=""width: 15%;""><b></b></td>
-                    <td style=""width:20%""></td>
+        					<tr>
+                    <td style=""width: 15%;""><b>Passport Number:</b></td>
+                    <td style=""width:20%"">{{PassportNumber}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
                     <td style=""width: 35%;"">
                     </td>
@@ -2682,9 +2688,6 @@ namespace ELI.Domain.Services
           <div class=""row"">
             <div class=""col-md-4  invoice-to"" style="" margin-top: 0;
             margin-bottom: 0"">
-              <div class=""text-gray-light""><b>Invoice Date:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {{CurrentDate}}
-              </div>
             </div>
             <div class=""col-md-8 "">
               <h4 class="""">OFFICIAL LETTER OF ACCEPTANCE </h4>
@@ -2719,9 +2722,9 @@ namespace ELI.Domain.Services
                     <!-- <td style=""width: 35%;"">Ciudad de México.
                     </td> -->
                   </tr>
-                  <tr>
-                    <td style=""width: 15%;""><b></b></td>
-                    <td style=""width:20%""></td>
+   					<tr>
+                    <td style=""width: 15%;""><b>Passport Number:</b></td>
+                    <td style=""width:20%"">{{PassportNumber}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
                     <td style=""width: 35%;"">
                     </td>
@@ -2885,10 +2888,7 @@ namespace ELI.Domain.Services
                     <td class=""text-right"">${{TotalGrossPrice}}</td>
                   </tr>
                   <tr>
-                    <td>Additional Services </td>
-                    <td class=""text-right"">${{CommissionAddins}}</td>
-                  </tr>
-                  <tr>
+				  {{TotalAddins}}
                     <td>Paid</td>
                     <td class=""text-right"">${{Paid}} </td>
                   </tr>
@@ -2923,7 +2923,7 @@ namespace ELI.Domain.Services
                   </tr>
                   <tr>
                     <td style=""font-weight: bolder;"">Business address:</td>
-                    <td class="""">111 Ridelle Ave. Suite 203 Toronto Ontario M6B1J7 </td>
+                    <td class="""">360 Ridelle Ave. Suite 307, Toronto Ontario M6B 1K1</td>
                   </tr>
                   <tr>
                     <td style=""font-weight: bolder;""> Account Insitution number:</td>
@@ -3212,6 +3212,13 @@ namespace ELI.Domain.Services
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
                     <!-- <td style=""width: 35%;"">Ciudad de México.
                     </td> -->
+                  </tr>
+				  					<tr>
+                    <td style=""width: 15%;""><b>Passport Number:</b></td>
+                    <td style=""width:20%"">{{PassportNumber}}</td>
+                    <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""></td>
+                    <td style=""width: 35%;"">
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -3711,6 +3718,12 @@ namespace ELI.Domain.Services
             string addinsInc = "";
             string addinsAdd = "";
             studentVM.Commision = ((studentVM.Commision * studentVM.TotalGrossPrice) / 100);
+
+            //studentVM.Balance = (studentVM.TotalGrossPrice + studentVM.CommissionAddins - studentVM.Commision - studentVM.Paid);
+            //if(studentVM.Balance < 0)
+            //{
+            //    studentVM.Balance = 0;
+            //}
             if (studentVM.StudentPDFAddinAdd.Count > 0)
             {
                 int count = 1;
@@ -3745,6 +3758,13 @@ namespace ELI.Domain.Services
                     count++;
                 }
             }
+            string totalAddins = "";
+
+            if (studentVM.TotalAddins > 0)
+            {
+                totalAddins = $"<tr><td> Additional Services </td><td class=\"text-right\">{String.Format("{0:0.00}", studentVM.TotalAddins)}</td></tr>";
+            }
+
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CurrentDateTag, DateTime.Now.ToString("MMMM dd, yyyy"));
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.StudentFullNameTag, $"{studentVM.FirstName} {studentVM.LastName}");
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.AgentNameTag, studentVM.AgentName);
@@ -3759,13 +3779,14 @@ namespace ELI.Domain.Services
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.FormatNameTag, studentVM.FormatName);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.MealPlanTag, studentVM.MealPlan);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.TotalGrossPriceTag, $"{String.Format("{0:0.00}", studentVM.TotalGrossPrice)}");
-            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CommissionAddinsTag, $"{String.Format("{0:0.00}", studentVM.CommissionAddins)}");
+            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.TotalAddinsTag, totalAddins);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CommisionTag, $"{String.Format("{0:0.00}", studentVM.Commision)}");
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PaidTag, $"{String.Format("{0:0.00}", studentVM.Paid)}");
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{String.Format("{0:0.00}", studentVM.Balance)}");
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.Reg_RefTag, studentVM.Reg_Ref);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.AdditionalServices_Tag, addinsAdd);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.IncludedServicesTag, addinsInc);
+            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
 
             
         }
@@ -3775,7 +3796,18 @@ namespace ELI.Domain.Services
         {
             string addinsInc = "";
             string addinsAdd = "";
+            string totalAddins = "";
 
+            if(studentVM.TotalAddins > 0)
+            {
+                totalAddins = $"<tr><td> Additional Services </td><td class=\"text-right\">{String.Format("{0:0.00}", studentVM.TotalAddins)}</td></tr>";
+            }
+
+            studentVM.Balance = (studentVM.TotalGrossPrice + studentVM.TotalAddins - studentVM.Paid);
+            if (studentVM.Balance < 0)
+            {
+                studentVM.Balance = 0;
+            }
             if (studentVM.StudentPDFAddinAdd.Count > 0)
             {
                 int count = 1;
@@ -3821,12 +3853,13 @@ namespace ELI.Domain.Services
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.SubProgramNameTag, studentVM.SubProgramName);
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.FormatNameTag, studentVM.FormatName);
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.MealPlanTag, studentVM.MealPlan);
-            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.NetPriceTag, $"{String.Format("{0:0.00}", studentVM.NetPrice)}");
-            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.CommissionAddinsTag, $"{String.Format("{0:0.00}", studentVM.CommissionAddins)}");
+            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.TotalGrossPriceTag, $"{String.Format("{0:0.00}", studentVM.TotalGrossPrice)}");
+            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.TotalAddinsTag, totalAddins);
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.PaidTag, $"{String.Format("{0:0.00}", studentVM.Paid)}");
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{String.Format("{0:0.00}", studentVM.Balance)}");
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.AdditionalServices_Tag, addinsAdd);
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.IncludedServicesTag, addinsInc);
+            template.StudentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
 
 
 
@@ -3839,14 +3872,24 @@ namespace ELI.Domain.Services
             template.AirportInvoiceTemplate = template.AirportInvoiceTemplate.Replace(EmailSender.ArrivalFlightNumberTag, studentVM.FlightNumber);
             template.AirportInvoiceTemplate = template.AirportInvoiceTemplate.Replace(EmailSender.ArrivalDateTag, $"{studentVM.ArrivalDate?.Date.ToString("MM/dd/yyyy")}");
             template.AirportInvoiceTemplate = template.AirportInvoiceTemplate.Replace(EmailSender.ArrivalTimeTag, $"{studentVM.ArrivalTime?.Date.ToString("HH:mm:ss")}");
-  
+            template.AirportInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
         }
 
         private void LOAInvoiceTemplateRendrer(StudentPDFDataVM studentVM, EmailViewModel template)
         {
             string addinsInc = "";
             string addinsAdd = "";
+            string totalAddins = "";
 
+            if (studentVM.TotalAddins > 0)
+            {
+                totalAddins = $"<tr><td> Additional Services </td><td class=\"text-right\">{String.Format("{0:0.00}", studentVM.TotalAddins)}</td></tr>";
+            }
+            studentVM.Balance = (studentVM.TotalGrossPrice - studentVM.Paid);
+            if (studentVM.Balance < 0)
+            {
+                studentVM.Balance = 0;
+            }
             if (studentVM.StudentPDFAddinAdd.Count > 0)
             {
                 int count = 1;
@@ -3893,12 +3936,13 @@ namespace ELI.Domain.Services
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.SubProgramNameTag, studentVM.SubProgramName);
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.FormatNameTag, studentVM.FormatName);
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.MealPlanTag, studentVM.MealPlan);
-            template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.TotalGrossPriceTag, $"{studentVM.TotalGrossPrice}");
-            template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.CommissionAddinsTag, $"{studentVM.CommissionAddins}");
-            template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.PaidTag, $"{studentVM.Paid}");
-            template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{studentVM.Balance}");
+            template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.TotalGrossPriceTag, $"{String.Format("{0:0.00}", studentVM.TotalGrossPrice)}");
+            template.LOAInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.TotalAddinsTag, totalAddins);
+            template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.PaidTag, $"{String.Format("{0:0.00}", studentVM.Paid)}");
+            template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{String.Format("{0:0.00}", studentVM.Balance)}");
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.AdditionalServices_Tag, addinsAdd);
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.IncludedServicesTag, addinsInc);
+            template.LOAInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
 
 
 
@@ -3913,8 +3957,8 @@ namespace ELI.Domain.Services
             template.StudentInvitationTemplate = template.StudentInvitationTemplate.Replace(EmailSender.ProgrameStartDateTag, $"{studentVM.ProgrameStartDate?.Date.ToString("MMMM dd, yyyy")}");
             template.StudentInvitationTemplate = template.StudentInvitationTemplate.Replace(EmailSender.ProgrameEndDateTag, $"{studentVM.ProgrameEndDate?.ToString("MMMM dd, yyyy")}");
             template.StudentInvitationTemplate = template.StudentInvitationTemplate.Replace(EmailSender.CampusAddressOnReportsTag, studentVM.CampusAddressOnReports);
-           
-            
+            template.StudentInvitationTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
+
         }
 
         private void LOAWOPInvoiceTemplateRendrer(StudentPDFDataVM studentVM, EmailViewModel template)
@@ -3970,8 +4014,7 @@ namespace ELI.Domain.Services
             template.LOAInvoiceWOPTemplate = template.LOAInvoiceWOPTemplate.Replace(EmailSender.MealPlanTag, studentVM.MealPlan);
             template.LOAInvoiceWOPTemplate = template.LOAInvoiceWOPTemplate.Replace(EmailSender.AdditionalServices_Tag, addinsAdd);
             template.LOAInvoiceWOPTemplate = template.LOAInvoiceWOPTemplate.Replace(EmailSender.IncludedServicesTag, addinsInc);
-
-
+            template.LOAInvoiceWOPTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
 
         }
 

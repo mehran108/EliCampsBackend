@@ -6,3 +6,12 @@ E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug
 E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.AssemblyInfo.cs
 E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.dll
 E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.pdb
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\bin\Debug\netcoreapp2.0\Entity.Entity.deps.json
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\bin\Debug\netcoreapp2.0\Entity.Entity.dll
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\bin\Debug\netcoreapp2.0\Entity.Entity.pdb
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.csproj.CoreCompileInputs.cache
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.AssemblyInfoInputs.cache
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.AssemblyInfo.cs
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.dll
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.pdb
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.csprojAssemblyReference.cache

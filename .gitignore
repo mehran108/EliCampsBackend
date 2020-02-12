@@ -3,3 +3,12 @@
 ################################################################################
 
 /.vs/config/applicationhost.config
+/.vs/ELICAMPSAPI/DesignTimeBuild/.dtbcache
+/.vs/ELICAMPSAPI/v15/Server/sqlite3/storage.ide-wal
+/.vs/ELICAMPSAPI/v15/Server/sqlite3/storage.ide-shm
+/.vs/ELICAMPSAPI/v15/Server/sqlite3/storage.ide
+/.vs/ELICAMPSAPI/v15/Server/sqlite3/db.lock
+/.vs/ELICAMPSAPI/v15/.suo
+bin
+obj
+config

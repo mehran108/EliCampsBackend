@@ -12,3 +12,18 @@ E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Data.Data\obj\Debug\net
 E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Data.Data\obj\Debug\netcoreapp2.0\Data.Data.csproj.CopyComplete
 E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Data.Data\obj\Debug\netcoreapp2.0\Data.Data.dll
 E:\Sel learning\Mehran\ELI CAMPS\Source\Elicamps-BackEnd\Data.Data\obj\Debug\netcoreapp2.0\Data.Data.pdb
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\bin\Debug\netcoreapp2.0\Data.Data.deps.json
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\bin\Debug\netcoreapp2.0\Data.Data.dll
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\bin\Debug\netcoreapp2.0\Data.Data.pdb
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\bin\Debug\netcoreapp2.0\Domain.Domain.dll
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\bin\Debug\netcoreapp2.0\Entity.Entity.dll
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\bin\Debug\netcoreapp2.0\Domain.Domain.pdb
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\bin\Debug\netcoreapp2.0\Entity.Entity.pdb
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\obj\Debug\netcoreapp2.0\Data.Data.csprojAssemblyReference.cache
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\obj\Debug\netcoreapp2.0\Data.Data.csproj.CoreCompileInputs.cache
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\obj\Debug\netcoreapp2.0\Data.Data.AssemblyInfoInputs.cache
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\obj\Debug\netcoreapp2.0\Data.Data.AssemblyInfo.cs
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\obj\Debug\netcoreapp2.0\Data.Data.csproj.CopyComplete
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\obj\Debug\netcoreapp2.0\Data.Data.dll
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\obj\Debug\netcoreapp2.0\Data.Data.pdb
+D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Data.Data\bin\Debug\netcoreapp2.0\Select.Html.dep

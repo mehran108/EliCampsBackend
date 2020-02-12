@@ -676,23 +676,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mehran.khan\\.nuget\\packages\\": {},
+    "C:\\Users\\Zulqarnain.Saleem\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Work\\Angular\\Waris\\Elicamps-BackEnd\\Entity.Entity\\Entity.Entity.csproj",
+      "projectUniqueName": "D:\\Data Copy\\Zulqarnain\\Work\\Mehran\\BackendELI\\Entity.Entity\\Entity.Entity.csproj",
       "projectName": "Entity.Entity",
-      "projectPath": "E:\\Work\\Angular\\Waris\\Elicamps-BackEnd\\Entity.Entity\\Entity.Entity.csproj",
-      "packagesPath": "C:\\Users\\mehran.khan\\.nuget\\packages\\",
-      "outputPath": "E:\\Work\\Angular\\Waris\\Elicamps-BackEnd\\Entity.Entity\\obj\\",
+      "projectPath": "D:\\Data Copy\\Zulqarnain\\Work\\Mehran\\BackendELI\\Entity.Entity\\Entity.Entity.csproj",
+      "packagesPath": "C:\\Users\\Zulqarnain.Saleem\\.nuget\\packages\\",
+      "outputPath": "D:\\Data Copy\\Zulqarnain\\Work\\Mehran\\BackendELI\\Entity.Entity\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mehran.khan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Zulqarnain.Saleem\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

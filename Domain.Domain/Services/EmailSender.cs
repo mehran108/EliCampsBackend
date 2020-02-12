@@ -3140,7 +3140,7 @@ namespace ELI.Domain.Services
   
     .mtable table td,
     .mtable table th {
-      padding: 6px;
+      padding: 4px;
       background: #fff;
       border-bottom: 1px solid #fff
     }
@@ -3188,7 +3188,7 @@ namespace ELI.Domain.Services
             </div>
           </div>
           <div class=""row contacts"" style=""margin-bottom: 20px"">
-            <div class=""col-md-12 mtable"" style=""padding: 10px;
+            <div class=""col-md-12 mtable"" style=""
             background: #fff;
             border-bottom: 1px solid #fff"">
               <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;

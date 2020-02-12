@@ -1317,7 +1317,7 @@ namespace ELI.Domain.Services
     }
 
     .invoice .contacts {
-      margin-bottom: 20px
+      /* margin-bottom: 20px */
     }
 
     .invoice .invoice-to {
@@ -1339,7 +1339,7 @@ namespace ELI.Domain.Services
     }
 
     .invoice main {
-      padding-bottom: 50px
+      /* padding-bottom: 50px */
     }
 
     .invoice main .thanks {
@@ -1365,7 +1365,7 @@ namespace ELI.Domain.Services
 
     .invoice table td,
     .invoice table th {
-      padding: 15px;
+      /* padding: 15px; */
       background: #eee;
       border-bottom: 1px solid #fff
     }
@@ -1458,12 +1458,12 @@ namespace ELI.Domain.Services
     padding: 15px"">
       <div class=""container"" style=""min-width: 600px"">
         <main>
-          <div class=""row contacts"" style=""margin-bottom: 20px"">
+          <div class=""row contacts"" style=""margin-bottom: 10px;"">
             <div class=""col-md-12 "">
-              <h4 class=""heading"">AIRPORT SERVICE AND ACCOMMODATION CONFIRMATION</h4>
+              <h4 style=""text-align: center;"" class=""heading"">AIRPORT SERVICE AND ACCOMMODATION CONFIRMATION</h4>
             </div>
           </div>
-          <div class=""row contacts"" style=""margin-bottom: 20px"">
+          <div class=""row contacts"">
             <div class=""col-md-12 mtable"">
               <table style="" padding: 6px;
               background: #fff;
@@ -1512,7 +1512,7 @@ namespace ELI.Domain.Services
                     <td style=""width: 15%; padding: 6px;
                     background: #fff;
                     border-bottom: 1px solid #fff""><b>Accommdation address:</b></td>
-                    <td style=""width: 35%; padding: 6px;
+                    <td style=""width: 25%; padding: 6px;
                     background: #fff;
                     border-bottom: 1px solid #fff"">University of Toronto, Victoria Campus, 73 Queen Park's Crescent,Toronto
                     </td>
@@ -1530,7 +1530,7 @@ namespace ELI.Domain.Services
               </table>
             </div>
           </div>
-          <div class="""">
+          <div class="""" style=""    margin-bottom: 10px;"">
             <p> The staff will pick you up when you exit the baggage claim area. They have your name and your
               information
             </p>
@@ -3859,7 +3859,7 @@ namespace ELI.Domain.Services
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{String.Format("{0:0.00}", studentVM.Balance)}");
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.AdditionalServices_Tag, addinsAdd);
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.IncludedServicesTag, addinsInc);
-            template.StudentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
+            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
 
 
 
@@ -3872,7 +3872,7 @@ namespace ELI.Domain.Services
             template.AirportInvoiceTemplate = template.AirportInvoiceTemplate.Replace(EmailSender.ArrivalFlightNumberTag, studentVM.FlightNumber);
             template.AirportInvoiceTemplate = template.AirportInvoiceTemplate.Replace(EmailSender.ArrivalDateTag, $"{studentVM.ArrivalDate?.Date.ToString("MM/dd/yyyy")}");
             template.AirportInvoiceTemplate = template.AirportInvoiceTemplate.Replace(EmailSender.ArrivalTimeTag, $"{studentVM.ArrivalTime?.Date.ToString("HH:mm:ss")}");
-            template.AirportInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
+            template.AirportInvoiceTemplate = template.AirportInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
         }
 
         private void LOAInvoiceTemplateRendrer(StudentPDFDataVM studentVM, EmailViewModel template)
@@ -3942,7 +3942,7 @@ namespace ELI.Domain.Services
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{String.Format("{0:0.00}", studentVM.Balance)}");
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.AdditionalServices_Tag, addinsAdd);
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.IncludedServicesTag, addinsInc);
-            template.LOAInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
+            template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
 
 
 
@@ -3957,7 +3957,7 @@ namespace ELI.Domain.Services
             template.StudentInvitationTemplate = template.StudentInvitationTemplate.Replace(EmailSender.ProgrameStartDateTag, $"{studentVM.ProgrameStartDate?.Date.ToString("MMMM dd, yyyy")}");
             template.StudentInvitationTemplate = template.StudentInvitationTemplate.Replace(EmailSender.ProgrameEndDateTag, $"{studentVM.ProgrameEndDate?.ToString("MMMM dd, yyyy")}");
             template.StudentInvitationTemplate = template.StudentInvitationTemplate.Replace(EmailSender.CampusAddressOnReportsTag, studentVM.CampusAddressOnReports);
-            template.StudentInvitationTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
+            template.StudentInvitationTemplate = template.StudentInvitationTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
 
         }
 
@@ -4014,7 +4014,7 @@ namespace ELI.Domain.Services
             template.LOAInvoiceWOPTemplate = template.LOAInvoiceWOPTemplate.Replace(EmailSender.MealPlanTag, studentVM.MealPlan);
             template.LOAInvoiceWOPTemplate = template.LOAInvoiceWOPTemplate.Replace(EmailSender.AdditionalServices_Tag, addinsAdd);
             template.LOAInvoiceWOPTemplate = template.LOAInvoiceWOPTemplate.Replace(EmailSender.IncludedServicesTag, addinsInc);
-            template.LOAInvoiceWOPTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
+            template.LOAInvoiceWOPTemplate = template.LOAInvoiceWOPTemplate.Replace(EmailSender.PassportNumberTag, studentVM.PassportNumber);
 
         }
 

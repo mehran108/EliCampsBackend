@@ -779,6 +779,7 @@ namespace ELI.Domain.Services
 
         string StudentInvoiceHTML = @"<!DOCTYPE html>
 <html lang=""en"">
+
 <head>
   <title>Bootstrap Example</title>
   <meta charset=""utf-8"">
@@ -788,134 +789,136 @@ namespace ELI.Domain.Services
   <script src=""https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js""></script>
   <script src=""https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js""></script>
   <style>
-    html,body {
-  margin: 0;
-  color: #3a405b;
-  padding: 0;
-  font-weight: 400;
-  font-size: .875rem;
-  line-height: 1.5;
-  font-family: Roboto,sans-serif;
-  background: #fff;
-  height: 100%;
-  background-image: none !important;
-  background-repeat: no-repeat;
-}
+    html,
+    body {
+      margin: 0;
+      color: #3a405b;
+      padding: 0;
+      font-weight: 400;
+      font-size: .875rem;
+      line-height: 1.5;
+      font-family: Roboto, sans-serif;
+      background: #fff;
+      height: 100%;
+      background-image: none !important;
+      background-repeat: no-repeat;
+    }
+
     .invoice {
       position: relative;
       background-color: #FFF;
       min-height: 680px;
       padding: 15px
     }
-  
+
     .invoice header {
       padding: 10px 0;
       margin-bottom: 20px;
       border-bottom: 1px solid #3989c6
     }
-  
+
     .invoice .company-details {
       text-align: right
     }
-  
+
     .invoice .company-details .name {
       margin-top: 0;
       margin-bottom: 0
     }
-  
+
     .invoice .contacts {
-     // margin-bottom: 20px
+      margin-bottom: 20px
     }
-  
+
     .invoice .invoice-to {
       text-align: left
     }
-  
+
     .invoice .invoice-to .to {
       margin-top: 0;
       margin-bottom: 0
     }
-  
+
     .invoice .invoice-details {
       text-align: right
     }
-  
+
     .invoice .invoice-details .invoice-id {
       margin-top: 0;
       color: #3989c6
     }
-  
+
     .invoice main {
       padding-bottom: 50px
     }
-  
+
     .invoice main .thanks {
       margin-top: -100px;
       font-size: 2em;
       margin-bottom: 50px
     }
-  
+
     .invoice main .notices {
       padding-left: 6px;
       border-left: 6px solid #3989c6
     }
-  
+
     .invoice main .notices .notice {
       font-size: 1.2em
     }
-  
+
     .invoice table {
       width: 100%;
       border-collapse: collapse;
       border-spacing: 0;
     }
-  
+
     .invoice table td,
     .invoice table th {
       padding: 15px;
       background: #eee;
       border-bottom: 1px solid #fff
     }
-  
+
     .invoice table th {
       white-space: nowrap;
       font-weight: 400;
       font-size: 16px
     }
-  
+
     .invoice table td h3 {
       margin: 0;
       font-weight: 400;
       color: #3989c6;
       font-size: 1.2em
     }
-  
+
     .invoice table .qty,
     .invoice table .total,
     .invoice table .unit {
       text-align: right;
       font-size: 1.2em
     }
-  
+
     .invoice table .no {
       color: #fff;
       font-size: 1.6em;
       background: #3989c6
     }
-  
+
     .invoice table .unit {
       background: #ddd
     }
-  
+
     .invoice table .total {
       background: #3989c6;
       color: #fff
     }
-  
+
     .invoice table tbody tr:last-child td {
       border: none
     }
-  
+
     .invoice table tfoot td {
       background: 0 0;
       border-bottom: none;
@@ -925,21 +928,21 @@ namespace ELI.Domain.Services
       font-size: 1.2em;
       border-top: 1px solid #aaa
     }
-  
+
     .invoice table tfoot tr:first-child td {
       border-top: none
     }
-  
+
     .invoice table tfoot tr:last-child td {
       color: #3989c6;
       font-size: 1.4em;
       border-top: 1px solid #3989c6
     }
-  
+
     .invoice table tfoot tr td:first-child {
       border: none
     }
-  
+
     .invoice footer {
       width: 100%;
       text-align: center;
@@ -947,7 +950,7 @@ namespace ELI.Domain.Services
       border-top: 1px solid #aaa;
       padding: 8px 0
     }
-  
+
     .mtable table td,
     .mtable table th {
       padding: 4px;
@@ -956,6 +959,7 @@ namespace ELI.Domain.Services
     }
   </style>
 </head>
+
 <body>
   <div id=""invoice"">
     <div class=""invoice overflow-auto"" style=""position: relative;
@@ -986,7 +990,7 @@ namespace ELI.Domain.Services
           </div>
         </header>
         <main style=""padding-bottom: 50px"">
-          <div class=""row contacts"">
+          <div class=""row"">
             <div class=""col-md-4  invoice-to"" style="" margin-top: 0;
             margin-bottom: 0"">
               <!-- <div class=""text-gray-light""><b>Invoice Date:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -997,7 +1001,7 @@ namespace ELI.Domain.Services
               <h4 class="""">INVOICE</h4>
             </div>
           </div>
-          <div class=""row contacts"" >
+          <div class=""row"">
             <div class=""col-md-12 mtable"" style=""
             background: #fff;
             border-bottom: 1px solid #fff"">
@@ -1012,15 +1016,15 @@ namespace ELI.Domain.Services
                     <td style=""width: 35%;"">
                     </td>
                   </tr>
-				  <tr>
+                  <tr>
                     <td style=""width: 15%;""><b>Student Name:</b></td>
-                    <td style=""width:25%"">{{StudentFullName}}</td>
+                    <td style=""width:30%"">{{StudentFullName}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""><b></b></td>
-                    <td style=""width: 35%;"">
+                    <td style=""width: 25%;"">
                     </td>
                   </tr>
-                  
-				 <tr>
+
+                  <tr>
                     <td style=""width: 15%;""><b>Student Number:</b></td>
                     <td style=""width:25%"">{{Reg_Ref}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""><b></b></td>
@@ -1036,10 +1040,10 @@ namespace ELI.Domain.Services
                   </tr>
                 </tbody>
               </table>
-  
+
             </div>
-  
-  
+
+
           </div>
           <div class=""row mtable"" style=""
           background: #fff;
@@ -1059,7 +1063,7 @@ namespace ELI.Domain.Services
               </tr>
             </table>
           </div>
-  
+
           <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
@@ -1073,7 +1077,7 @@ namespace ELI.Domain.Services
                 <td style=""width: 50%;""></td>
                 <td style=""width: 50%;"" colspan=""2"">{{CampusAddressOnReports}}</td>
               </tr>
-  
+
             </table>
           </div>
           <div class=""row mtable"" style=""
@@ -1093,7 +1097,7 @@ namespace ELI.Domain.Services
                   {{SubProgramName}}
                 </td>
               </tr>
-  
+
             </table>
           </div>
           <div class=""row mtable"" style=""
@@ -1109,7 +1113,7 @@ namespace ELI.Domain.Services
                 <td style=""width: 50%;""></td>
                 <td style=""width: 50%;"" colspan=""2"">{{MealPlan}}<br>{{FormatName}}</td>
               </tr>
-  
+
             </table>
           </div>
           <div class=""row mtable"" style=""
@@ -1127,7 +1131,7 @@ namespace ELI.Domain.Services
                   {{Included_Services}}
                 </td>
               </tr>
-  
+
             </table>
           </div>
           <div class=""row mtable"" style=""
@@ -1146,7 +1150,7 @@ namespace ELI.Domain.Services
                   {{Additional_Services}}
                 </td>
               </tr>
-  
+
             </table>
           </div>
           <hr style=""width: 100%; border-width: 2px; border-color: #000;"">
@@ -1198,7 +1202,7 @@ namespace ELI.Domain.Services
             </div>
           </div>
           <hr style=""width: 100%; border-width: 2px; border-color: #000;"">
-  
+
           <div class=""row mtable"" style="" background: #fff; border-bottom: 1px solid #fff"">
             <div class=""col-6"" style=""line-height: 1;"">
               <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -1247,11 +1251,12 @@ namespace ELI.Domain.Services
           </div>
         </main>
       </div>
-  
+
     </div>
   </div>
 
 </body>
+
 </html>
 
 ";
@@ -1523,7 +1528,7 @@ namespace ELI.Domain.Services
             <p>Should you have any questions, please feel free to contact us anytime. We are more than happy to help.
             </p>
             <div class=""row"">
-              <div class=""col-8"">
+              <div class=""col-7"">
                 <img
                   src=""data:image/png;base64,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""
                   width=""350px"" alt=""signature"">
@@ -1560,7 +1565,7 @@ namespace ELI.Domain.Services
 
 </html>";
 
-        string LOAInvoiceHTML = @"<!DOCTYPE html>
+        string LOAInvoiceHTML = @" <!DOCTYPE html>
 <html lang=""en"">
 <head>
   <title>Bootstrap Example</title>
@@ -1629,7 +1634,7 @@ namespace ELI.Domain.Services
     }
   
     .invoice main {
-      padding-bottom: 50px
+     // padding-bottom: 50px
     }
   
     .invoice main .thanks {
@@ -1768,8 +1773,8 @@ namespace ELI.Domain.Services
             </div>
           </div>
         </header>
-        <main style=""padding-bottom: 50px"">
-          <div class=""row contacts"" style=""margin-bottom: 20px"">
+        <main >
+          <div class=""row"">
             <div class=""col-md-4  invoice-to"" style="" margin-top: 0;
             margin-bottom: 0"">
               <div class=""text-gray-light""><b>Invoice Date:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1780,7 +1785,7 @@ namespace ELI.Domain.Services
               <h4 class="""">OFFICIAL LETTER OF ACCEPTANCE </h4>
             </div>
           </div>
-          <div class=""row contacts"" style=""margin-bottom: 20px"">
+          <div class=""row"">
             <div class=""col-md-12 mtable"" style=""
             background: #fff;
             border-bottom: 1px solid #fff"">
@@ -1790,9 +1795,9 @@ namespace ELI.Domain.Services
                 <tbody>
                   <tr>
                     <td style=""width: 15%;""><b>Student Name:</b></td>
-                    <td style=""width:25%"">{{StudentFullName}}</td>
+                    <td style=""width:30%"">{{StudentFullName}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""><b>Student Number:</b></td>
-                    <td style=""width: 35%;"">{{Reg_Ref}}
+                    <td style=""width: 25%;"">{{Reg_Ref}}
                     </td>
                   </tr>
                   <tr>
@@ -2044,7 +2049,6 @@ namespace ELI.Domain.Services
           </div>
         </main>
       </div>
-  
     </div>
   </div>
 
@@ -2122,7 +2126,7 @@ namespace ELI.Domain.Services
     }
   
     .invoice main {
-      padding-bottom: 50px
+     // padding-bottom: 50px
     }
   
     .invoice main .thanks {
@@ -2261,8 +2265,8 @@ namespace ELI.Domain.Services
             </div>
           </div>
         </header>
-        <main style=""padding-bottom: 50px"">
-          <div class=""row contacts"" style=""margin-bottom: 20px"">
+        <main>
+          <div class=""row"">
             <div class=""col-md-4  invoice-to"" style="" margin-top: 0;
             margin-bottom: 0"">
               <div class=""text-gray-light""><b>Invoice Date:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -2273,7 +2277,7 @@ namespace ELI.Domain.Services
               <h4 class="""">OFFICIAL LETTER OF ACCEPTANCE </h4>
             </div>
           </div>
-          <div class=""row contacts"" style=""margin-bottom: 20px"">
+          <div class=""row"">
             <div class=""col-md-12 mtable"" style=""
             background: #fff;
             border-bottom: 1px solid #fff"">
@@ -2283,9 +2287,9 @@ namespace ELI.Domain.Services
                 <tbody>
                   <tr>
                     <td style=""width: 15%;""><b>Student Name:</b></td>
-                    <td style=""width:25%"">{{StudentFullName}}</td>
+                    <td style=""width:30%"">{{StudentFullName}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""><b>Student Number:</b></td>
-                    <td style=""width: 35%;"">{{Reg_Ref}}
+                    <td style=""width: 25%;"">{{Reg_Ref}}
                     </td>
                   </tr>
                   <tr>
@@ -2459,7 +2463,6 @@ namespace ELI.Domain.Services
           <hr style=""width: 100%; border-width: 2px; border-color: #000;"">
         </main>
       </div>
-  
     </div>
   </div>
 </body>
@@ -2536,7 +2539,7 @@ namespace ELI.Domain.Services
     }
   
     .invoice main {
-      padding-bottom: 50px
+     // padding-bottom: 50px
     }
   
     .invoice main .thanks {
@@ -2675,8 +2678,8 @@ namespace ELI.Domain.Services
             </div>
           </div>
         </header>
-        <main style=""padding-bottom: 50px"">
-          <div class=""row contacts"" style=""margin-bottom: 20px"">
+        <main>
+          <div class=""row"">
             <div class=""col-md-4  invoice-to"" style="" margin-top: 0;
             margin-bottom: 0"">
               <div class=""text-gray-light""><b>Invoice Date:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -2687,7 +2690,7 @@ namespace ELI.Domain.Services
               <h4 class="""">OFFICIAL LETTER OF ACCEPTANCE </h4>
             </div>
           </div>
-          <div class=""row contacts"" style=""margin-bottom: 20px"">
+          <div class=""row"">
             <div class=""col-md-12 mtable"" style=""
             background: #fff;
             border-bottom: 1px solid #fff"">
@@ -2697,9 +2700,9 @@ namespace ELI.Domain.Services
                 <tbody>
                   <tr>
                     <td style=""width: 15%;""><b>Student Name:</b></td>
-                    <td style=""width:25%"">{{StudentFullName}}</td>
+                    <td style=""width:30%"">{{StudentFullName}}</td>
                     <td class=""text-right"" style=""width: 30%; vertical-align: text-top ;""><b>Student Number:</b></td>
-                    <td style=""width: 35%;"">{{Reg_Ref}}
+                    <td style=""width: 25%;"">{{Reg_Ref}}
                     </td>
                   </tr>
                   <tr>
@@ -2951,14 +2954,7 @@ namespace ELI.Domain.Services
             </div>
           </div>
         </main>
-        <footer style="" width: 100%;
-        text-align: center;
-        color: #777;
-        border-top: 1px solid #aaa;
-        padding: 8px 0"">
-        </footer>
       </div>
-  
     </div>
   </div>
 
@@ -3244,12 +3240,6 @@ namespace ELI.Domain.Services
             </div>
           </div>
         </main>
-        <footer style="" width: 100%;
-        text-align: center;
-        color: #777;
-        border-top: 1px solid #aaa;
-        padding: 8px 0"">
-        </footer>
       </div>
   
     </div>
@@ -3720,7 +3710,7 @@ namespace ELI.Domain.Services
         {
             string addinsInc = "";
             string addinsAdd = "";
-
+            studentVM.Commision = ((studentVM.Commision * studentVM.TotalGrossPrice) / 100);
             if (studentVM.StudentPDFAddinAdd.Count > 0)
             {
                 int count = 1;
@@ -3768,17 +3758,16 @@ namespace ELI.Domain.Services
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.SubProgramNameTag, studentVM.SubProgramName);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.FormatNameTag, studentVM.FormatName);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.MealPlanTag, studentVM.MealPlan);
-            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.TotalGrossPriceTag, $"{studentVM.TotalGrossPrice}");
-            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CommissionAddinsTag, $"{studentVM.CommissionAddins}");
-            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CommisionTag, $"{studentVM.Commision}");
-            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PaidTag, $"{studentVM.Paid}");
-            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{studentVM.Balance}");
+            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.TotalGrossPriceTag, $"{String.Format("{0:0.00}", studentVM.TotalGrossPrice)}");
+            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CommissionAddinsTag, $"{String.Format("{0:0.00}", studentVM.CommissionAddins)}");
+            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CommisionTag, $"{String.Format("{0:0.00}", studentVM.Commision)}");
+            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PaidTag, $"{String.Format("{0:0.00}", studentVM.Paid)}");
+            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{String.Format("{0:0.00}", studentVM.Balance)}");
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.Reg_RefTag, studentVM.Reg_Ref);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.AdditionalServices_Tag, addinsAdd);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.IncludedServicesTag, addinsInc);
 
-
-
+            
         }
 
 
@@ -3832,10 +3821,10 @@ namespace ELI.Domain.Services
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.SubProgramNameTag, studentVM.SubProgramName);
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.FormatNameTag, studentVM.FormatName);
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.MealPlanTag, studentVM.MealPlan);
-            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.NetPriceTag, $"{studentVM.NetPrice}");
-            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.CommissionAddinsTag, $"{studentVM.CommissionAddins}");
-            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.PaidTag, $"{studentVM.Paid}");
-            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{studentVM.Balance}");
+            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.NetPriceTag, $"{String.Format("{0:0.00}", studentVM.NetPrice)}");
+            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.CommissionAddinsTag, $"{String.Format("{0:0.00}", studentVM.CommissionAddins)}");
+            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.PaidTag, $"{String.Format("{0:0.00}", studentVM.Paid)}");
+            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{String.Format("{0:0.00}", studentVM.Balance)}");
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.AdditionalServices_Tag, addinsAdd);
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.IncludedServicesTag, addinsInc);
 

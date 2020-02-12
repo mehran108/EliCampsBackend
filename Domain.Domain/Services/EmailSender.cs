@@ -2226,7 +2226,7 @@ namespace ELI.Domain.Services
   
     .mtable table td,
     .mtable table th {
-      padding: 6px;
+      padding: 4px;
       background: #fff;
       border-bottom: 1px solid #fff
     }
@@ -2274,7 +2274,7 @@ namespace ELI.Domain.Services
             </div>
           </div>
           <div class=""row contacts"" style=""margin-bottom: 20px"">
-            <div class=""col-md-12 mtable"" style=""padding: 10px;
+            <div class=""col-md-12 mtable"" style=""
             background: #fff;
             border-bottom: 1px solid #fff"">
               <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -2331,7 +2331,7 @@ namespace ELI.Domain.Services
             <p>Please accept this letter as a formal certification and acceptance of the above mentioned
               student at Eli Camps for studying English as a Second Language as outlined below.</p>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" style=""width: 100%;
@@ -2342,18 +2342,15 @@ namespace ELI.Domain.Services
               </tr>
               <tr>
                 <td style=""width: 50%;""></td>
-                <td style=""width: 10%;"">Start Date:</td>
-                <td style=""width: 40%;"">{{ProgrameStartDate}}</td>
-              </tr>
-              <tr>
-                <td style=""width: 50%;""></td>
-                <td style=""width: 10%;"">End Date:</td>
-                <td style=""width: 40%;"">	{{ProgrameEndDate}}</td>
+                <td style=""width: 50%;"" colspan=""2"">
+                  Start Date: {{ProgrameStartDate}}<br>
+                  End Date: {{ProgrameEndDate}}
+                </td>
               </tr>
             </table>
           </div>
   
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -2369,7 +2366,7 @@ namespace ELI.Domain.Services
   
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -2382,14 +2379,14 @@ namespace ELI.Domain.Services
               <tr>
                 <td style=""width: 50%;""></td>
                 <td style=""width: 50%;"" colspan=""2"">
-                  <p>{{ProgramName}}</p>
-                  <p>{{SubProgramName}}</p>
+                  {{ProgramName}}<br>
+                  {{SubProgramName}}
                 </td>
               </tr>
   
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -2405,7 +2402,7 @@ namespace ELI.Domain.Services
   
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -2423,7 +2420,7 @@ namespace ELI.Domain.Services
   
             </table>
           </div>
-          <div class=""row mtable"" style=""padding: 10px;
+          <div class=""row mtable"" style=""
           background: #fff;
           border-bottom: 1px solid #fff"">
             <table border=""0"" cellspacing=""0"" cellpadding=""0"" style=""width: 100%;
@@ -2465,7 +2462,6 @@ namespace ELI.Domain.Services
   
     </div>
   </div>
-
 </body>
 </html>
 
@@ -3941,18 +3937,36 @@ namespace ELI.Domain.Services
 
             if (studentVM.StudentPDFAddinAdd.Count > 0)
             {
+                int count = 1;
                 foreach (var addin in studentVM.StudentPDFAddinAdd)
                 {
-                    addinsAdd = $"{addinsAdd} <p>{addin}</p>";
+                    if (count > 1)
+                    {
+                        addinsAdd = $"{addinsAdd} <br> {addin}";
+                    }
+                    else
+                    {
+                        addinsAdd = $"{addin}";
+                    }
 
+                    count++;
                 }
             }
             if (studentVM.StudentPDFAddinInc.Count > 0)
             {
+                int count = 1;
                 foreach (var addin in studentVM.StudentPDFAddinInc)
                 {
-                    addinsInc = $"{addinsInc} <p>{addin}</p>";
+                    if (count > 1)
+                    {
+                        addinsInc = $"{addinsInc} <br> {addin}";
+                    }
+                    else
+                    {
+                        addinsInc = $"{addin}";
+                    }
 
+                    count++;
                 }
             }
             template.LOAInvoiceWOPTemplate = template.LOAInvoiceWOPTemplate.Replace(EmailSender.CurrentDateTag, DateTime.Now.ToString("MMMM dd, yyyy"));

@@ -693,7 +693,7 @@ namespace ELI.Domain.Services
                     <td class=""text-right"">${{Paid}} </td>
                   </tr>
                   <tr>
-                    <td style="""">Balance due</td>
+                    <td>Balance due</td>
                     <td class=""text-right"">${{Balance}} </td>
                   </tr>
                 </tbody>
@@ -1196,7 +1196,7 @@ namespace ELI.Domain.Services
                     <td class=""text-right"">${{Paid}} </td>
                   </tr>
                   <tr>
-                    <td style="">Balance due</td>
+                    <td>Balance due</td>
                     <td class=""text-right"">${{Balance}} </td>
                   </tr>
                 </tbody>
@@ -2001,7 +2001,7 @@ namespace ELI.Domain.Services
                     <td class=""text-right"">${{Paid}} </td>
                   </tr>
                   <tr>
-                    <td style="""">Balance due</td>
+                    <td>Balance due</td>
                     <td class=""text-right"">${{Balance}} </td>
                   </tr>
                 </tbody>
@@ -2893,13 +2893,13 @@ namespace ELI.Domain.Services
                     <td>Gross Price</td>
                     <td class=""text-right"">${{TotalGrossPrice}}</td>
                   </tr>
-                  <tr>
 				  {{TotalAddins}}
+                  <tr>
                     <td>Paid</td>
                     <td class=""text-right"">${{Paid}} </td>
                   </tr>
                   <tr>
-                    <td style="""">Balance due</td>
+                    <td>Balance due</td>
                     <td class=""text-right"">${{Balance}} </td>
                   </tr>
                 </tbody>
@@ -3936,7 +3936,7 @@ namespace ELI.Domain.Services
 
                     count++;
                 }
-            }
+            } 
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.CurrentDateTag, DateTime.Now.ToString("MMMM dd, yyyy"));
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.StudentFullNameTag, $"{studentVM.FirstName} {studentVM.LastName}");
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.CountryTag, $"{studentVM.FirstName} {studentVM.Country}");
@@ -3950,7 +3950,7 @@ namespace ELI.Domain.Services
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.FormatNameTag, studentVM.FormatName);
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.MealPlanTag, studentVM.MealPlan);
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.TotalGrossPriceTag, $"{String.Format("{0:0.00}", studentVM.TotalGrossPrice)}");
-            template.LOAInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.TotalAddinsTag, totalAddins);
+            template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.TotalAddinsTag, totalAddins);
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.PaidTag, $"{String.Format("{0:0.00}", studentVM.Paid)}");
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{String.Format("{0:0.00}", studentVM.Balance)}");
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.AdditionalServices_Tag, addinsAdd);

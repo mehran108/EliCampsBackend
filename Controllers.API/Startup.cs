@@ -111,7 +111,7 @@ namespace ELI.API
 
             app.UseStaticFiles(new StaticFileOptions
             {
-               FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+                FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
                 RequestPath = "/wwwroot"
             });

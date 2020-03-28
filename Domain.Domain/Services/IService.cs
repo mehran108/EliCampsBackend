@@ -114,8 +114,6 @@ namespace ELI.Domain.Services
 
         Task<string> AUSFailCase(int invoiceId, string responseCode);
 
-        #region List
-
         #region AgentList
         Task<int> CreateAgentAsync(AgentViewModel agent);
 
@@ -167,7 +165,6 @@ namespace ELI.Domain.Services
 
 
         Task<bool> ActivateTripsAsync(TripsViewModel trips);
-        #endregion
         #endregion
 
         #region group
@@ -297,6 +294,9 @@ namespace ELI.Domain.Services
         Task<int> UploadDocuments(StudentDocuments studentDocuments);
 
         #endregion
+        #endregion
+        #region ReportList
+        Task<AllResponse<PaymentReportVM>> GetPaymentReport(string year);
         #endregion
 
     }

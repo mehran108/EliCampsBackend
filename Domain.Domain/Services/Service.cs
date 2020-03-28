@@ -620,7 +620,6 @@ namespace ELI.Domain.Services
             return await _groupRepository.ActivatePaymentGroupAsync(paymentGroup);
         }
         #endregion
-
         #region PaymentsGroupsLeader
         public async Task<int> AddPaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
         {
@@ -885,6 +884,11 @@ namespace ELI.Domain.Services
         #endregion
 
         #endregion
-
+        #region Reports
+        public async Task<AllResponse<PaymentReportVM>> GetPaymentReport(string year)
+        {
+            return await _reportRepository.GetPaymentReport(year);
+        }
+        #endregion
     }
 }

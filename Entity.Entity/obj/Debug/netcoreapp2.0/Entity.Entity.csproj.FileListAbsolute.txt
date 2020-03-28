@@ -15,3 +15,12 @@ D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\obj\Debug\netcoreap
 D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.dll
 D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.pdb
 D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.csprojAssemblyReference.cache
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Entity.Entity\bin\Debug\netcoreapp2.0\Entity.Entity.deps.json
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Entity.Entity\bin\Debug\netcoreapp2.0\Entity.Entity.dll
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Entity.Entity\bin\Debug\netcoreapp2.0\Entity.Entity.pdb
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.csprojAssemblyReference.cache
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.csproj.CoreCompileInputs.cache
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.AssemblyInfoInputs.cache
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.AssemblyInfo.cs
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.dll
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Entity.Entity\obj\Debug\netcoreapp2.0\Entity.Entity.pdb

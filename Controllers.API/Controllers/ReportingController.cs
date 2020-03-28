@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using ELI.Data.Repositories.Main;
 using ELI.Domain.Helpers;
 using ELI.Domain.Services;
 using ELI.Domain.ViewModels;
@@ -96,6 +97,21 @@ namespace ELI.API.Controllers
                 return new ObjectResult(await _ELIService.CodeListReportAsync(ct));
             }
             catch (AppException ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("GetPaymentReportByYear")]
+        [Produces(typeof(List<PaymentReportVM>))]
+        public async Task<IActionResult> GetAllStudentAsync([FromQuery] string year)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetPaymentReport(year));
+            }
+            catch (Exception ex)
             {
                 new ExceptionHandlingService(ex, null, null).LogException();
                 return BadRequest(new { message = ex.Message });

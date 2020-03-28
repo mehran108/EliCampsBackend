@@ -37,3 +37,23 @@ D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Controllers.API\obj\Debug\netcore
 D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Controllers.API\obj\Debug\netcoreapp2.0\Controller.API.dll
 D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Controllers.API\obj\Debug\netcoreapp2.0\Controller.API.pdb
 D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Controllers.API\bin\Debug\netcoreapp2.0\Select.Html.dep
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Select.Html.dep
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\appsettings.json
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Controller.API.deps.json
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Controller.API.runtimeconfig.json
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Controller.API.runtimeconfig.dev.json
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Controller.API.dll
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Controller.API.pdb
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Data.Data.dll
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Domain.Domain.dll
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Entity.Entity.dll
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Data.Data.pdb
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Domain.Domain.pdb
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\bin\Debug\netcoreapp2.0\Entity.Entity.pdb
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\obj\Debug\netcoreapp2.0\Controller.API.csprojAssemblyReference.cache
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\obj\Debug\netcoreapp2.0\Controller.API.csproj.CoreCompileInputs.cache
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\obj\Debug\netcoreapp2.0\Controller.API.AssemblyInfoInputs.cache
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\obj\Debug\netcoreapp2.0\Controller.API.AssemblyInfo.cs
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\obj\Debug\netcoreapp2.0\Controller.API.csproj.CopyComplete
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\obj\Debug\netcoreapp2.0\Controller.API.dll
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API\obj\Debug\netcoreapp2.0\Controller.API.pdb

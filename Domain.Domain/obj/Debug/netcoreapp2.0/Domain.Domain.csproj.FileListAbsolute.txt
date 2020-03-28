@@ -23,3 +23,16 @@ D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Domain.Domain\obj\Debug\netcoreap
 D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.dll
 D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.pdb
 D:\Data Copy\Zulqarnain\Work\Mehran\BackendELI\Domain.Domain\bin\Debug\netcoreapp2.0\Select.Html.dep
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\bin\Debug\netcoreapp2.0\Select.Html.dep
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\bin\Debug\netcoreapp2.0\Domain.Domain.deps.json
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\bin\Debug\netcoreapp2.0\Domain.Domain.dll
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\bin\Debug\netcoreapp2.0\Domain.Domain.pdb
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\bin\Debug\netcoreapp2.0\Entity.Entity.dll
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\bin\Debug\netcoreapp2.0\Entity.Entity.pdb
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.csprojAssemblyReference.cache
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.csproj.CoreCompileInputs.cache
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.AssemblyInfoInputs.cache
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.AssemblyInfo.cs
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.csproj.CopyComplete
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.dll
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Domain.Domain\obj\Debug\netcoreapp2.0\Domain.Domain.pdb

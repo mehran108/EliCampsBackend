@@ -2,28 +2,54 @@
 using ELI.Domain.Contracts.Main;
 using ELI.Domain.Helpers;
 using ELI.Domain.ViewModels;
-using ELI.Entity.Main;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using System.Data;
+using ELI.Data.Repositories.Main.Extensions;
 
 namespace ELI.Data.Repositories.Main
 {
-    public class ReportRepository : IReportRepository
+    public class ReportRepository : BaseRepository, IReportRepository
     {
         private readonly ELIContext _context;
-        public ReportRepository(ELIContext context)
-        {
-            _context = context;
-        }
         public void Dispose()
         {
-            _context.Dispose();
         }
+
+        public ReportRepository(IConfiguration configuration) : base(configuration) { }
+        private const string GetStoredProcedureName = "GetPaymentReportByYear";
+        private const string YearParameterName = "PYear";
+        private const string IDColumnName = "ID";
+        private const string YearColumnName = "Year";
+        private const string Reg_RefColumnName = "Reg_Ref";
+        private const string FirstNameColumnName = "FirstName";
+        private const string LastNameColumnName = "LastName";
+        private const string CampusNameColumnName = "CampusName";
+        private const string AgentNameColumnName = "AgentName";
+        private const string FormatNameColumnName = "FormatName";
+        private const string AgencyIDColumnName = "AgencyID";
+        private const string CampusColumnName = "Campus";
+        private const string FormatColumnName = "Format";
+        private const string AgencyRefColumnName = "AgencyRef";
+        private const string TotalGrossPriceColumnName = "TotalGrossPrice";
+        private const string TotalGrossPriceCalculatedColumnName = "TotalGrossPriceCalculated";
+        private const string TotalAddinsColumnName = "TotalAddins";
+        private const string PaidColumnName = "Paid";
+        private const string TotalPaidPriceCalculatedColumnName = "TotalPaidPriceCalculated";
+        private const string CommisionColumnName = "Commision";
+        private const string CommissionAddinsColumnName = "CommissionAddins";
+        private const string NetPriceColumnName = "NetPrice";
+        private const string TotalNetPriceCalculatedColumnName = "TotalNetPriceCalculated";
+        private const string BalanceColumnName = "Balance";
+        private const string TotalBalanceCalculatedColumnName = "TotalBalanceCalculated";
+        private const string ProgramNameColumnName = "ProgramName";
+        private const string SubProgramNameColumnName = "SubProgramName";
         public async Task<List<LeadsCountViewModel>> LeadsCountReportAsync(String showkey, CancellationToken ct = default(CancellationToken))
         {
             var show = await _context.Show.SingleOrDefaultAsync(a => a.ShowKey == showkey);
@@ -237,6 +263,63 @@ namespace ELI.Data.Repositories.Main
                                   }
                               ).OrderByDescending(a=>a.Purchased).ToListAsync();
             return keysList;
+        }
+        public async Task<AllResponse<PaymentReportVM>> GetPaymentReport(string year)
+        {
+            PaymentReportVM paymentReportVM = null;
+            var result = new AllResponse<PaymentReportVM>
+            {
+                Data = new List<PaymentReportVM>()
+            };
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(YearParameterName, year)
+                };
+            using (var dataReader = await base.ExecuteReader(parameters, ReportRepository.GetStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        paymentReportVM = new PaymentReportVM
+                        {
+
+                            ID = dataReader.GetIntegerValue(ReportRepository.IDColumnName),
+                            Year = dataReader.GetIntegerValue(ReportRepository.YearColumnName),
+                            Reg_Ref = dataReader.GetStringValue(ReportRepository.Reg_RefColumnName),
+                            FirstName = dataReader.GetStringValue(ReportRepository.FirstNameColumnName),
+                            LastName = dataReader.GetStringValue(ReportRepository.LastNameColumnName),
+                            AgencyID = dataReader.GetUnsignedIntegerValueNullable(ReportRepository.AgencyIDColumnName),
+                            Campus = dataReader.GetUnsignedIntegerValueNullable(ReportRepository.CampusColumnName),
+                            Format = dataReader.GetUnsignedIntegerValueNullable(ReportRepository.FormatColumnName),
+                            AgentName = dataReader.GetStringValue(ReportRepository.AgentNameColumnName),
+                            FormatName = dataReader.GetStringValue(ReportRepository.FormatNameColumnName),
+                            CampusName = dataReader.GetStringValue(ReportRepository.CampusNameColumnName),
+                            ProgramName = dataReader.GetStringValue(ReportRepository.ProgramNameColumnName),
+                            TotalGrossPrice = dataReader.GetDoubleValue(ReportRepository.TotalGrossPriceColumnName),
+                            TotalGrossPriceCalculated = dataReader.GetDoubleValue(ReportRepository.TotalGrossPriceCalculatedColumnName),
+                            TotalAddins = dataReader.GetDoubleValue(ReportRepository.TotalAddinsColumnName),
+                            Paid = dataReader.GetDoubleValue(ReportRepository.PaidColumnName),
+                            TotalPaidPriceCalculated = dataReader.GetDoubleValue(ReportRepository.TotalPaidPriceCalculatedColumnName),
+                            Commision = dataReader.GetDoubleValue(ReportRepository.CommisionColumnName),
+                            CommissionAddins = dataReader.GetDoubleValue(ReportRepository.CommissionAddinsColumnName),
+                            NetPrice = dataReader.GetDoubleValue(ReportRepository.NetPriceColumnName),
+                            TotalNetPriceCalculated = dataReader.GetDoubleValue(ReportRepository.TotalNetPriceCalculatedColumnName),
+                            Balance = dataReader.GetDoubleValue(ReportRepository.BalanceColumnName),
+                            TotalBalanceCalculated = dataReader.GetDoubleValue(ReportRepository.TotalBalanceCalculatedColumnName),
+                        };
+                        result.Data.Add(paymentReportVM);
+                    }
+
+                    if (!dataReader.IsClosed)
+                    {
+                        dataReader.Close();
+                    }
+                }
+                
+            }
+
+            return result;
         }
     }
 }

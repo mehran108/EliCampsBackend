@@ -296,7 +296,7 @@ namespace ELI.Domain.Services
         #endregion
         #endregion
         #region ReportList
-        Task<AllResponse<PaymentReportVM>> GetPaymentReport(string year);
+        Task<PaymentReportAllResponse> GetPaymentReport(string year);
         #endregion
 
     }

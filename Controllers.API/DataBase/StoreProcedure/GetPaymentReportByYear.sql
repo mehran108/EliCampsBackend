@@ -32,38 +32,13 @@ tbl.[clmReg_TotalGrossPrice] as TotalGrossPrice,
 tbl.clmReg_NetPrice AS NetPrice,
 tbl.[clmReg_Commision] AS Commision,
 tbl.[clmReg_Paid] as Paid,
-tbl.[clmReg_Balance] AS Balance,
-Sum(tbl.clmReg_NetPrice) as TotalGrossPriceCalculated,
-Sum(tbl.[clmReg_TotalGrossPrice]) as TotalNetPriceCalculated,
-Sum(tbl.[clmReg_Paid]) as TotalPaidPriceCalculated,
-Sum(tbl.[clmReg_Balance]) as TotalBalanceCalculated
+tbl.[clmReg_Balance] AS Balance
  from [dbo].[tblRegistration] as tbl
  left outer join dbo.tblPayments on tbl.clmReg_ID=dbo.tblPayments.ClmPayments_RegID
  left outer join dbo.tblAgents on  tbl.clmReg_AgencyID = dbo.tblAgents.clmAgents_ID
- left outer join [dbo].[LookupValue] on tbl.clmReg_Format = [dbo].[LookupValue].[lookupTableId]
+ left outer join [dbo].[LookupValue] on tbl.clmReg_Format = [dbo].[LookupValue].[id]
  left outer join [dbo].[tblCampuses] on tbl.clmReg_Campus = [dbo].[tblCampuses].[clmCampuses_ID]
  left outer join [dbo].[tblPrograms] on tbl.[clmReg_ProgramID] = [dbo].[tblPrograms].[clmPrograms_ID]
  where tbl.[clmReg_year] = @PYear
-  group by tbl.clmReg_Ref,
-  [dbo].[tblCampuses].[clmCampuses_Campus],
- clmReg_Format,
-dbo.tblAgents.clmAgents_Agent,
-[dbo].[LookupValue].name,
-[dbo].[tblPrograms].[clmPrograms_Name],
-tbl.[clmReg_TotalGrossPrice],
-tbl.clmReg_NetPrice,
-tbl.[clmReg_Commision],
-tbl.[clmReg_Paid],
-tbl.[clmReg_Balance],
-tbl.[clmReg_ID],
-tbl.[clmReg_ID],
-tbl.[clmReg_Year],
-tbl.[clmReg_FirstName],
-tbl.[clmReg_LastName],
-tbl.[clmReg_AgencyID],
-tbl.clmReg_Campus,
-tbl.[clmReg_TotalAddins],
-tbl.[clmReg_CommissionAddins],
-tbl.[clmReg_Status]
 order by tbl.[clmReg_ID] desc;
 END

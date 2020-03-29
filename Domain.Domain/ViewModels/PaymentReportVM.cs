@@ -32,9 +32,5 @@ namespace ELI.Domain.ViewModels
         public string AgencyRef { get; set; }
         public int? ProgramID { get; set; }
         public int? SubProgramID { get; set; }
-        public double? TotalGrossPriceCalculated { get; set; }
-        public double? TotalNetPriceCalculated { get; set; }
-        public double? TotalPaidPriceCalculated { get; set; }
-        public double? TotalBalanceCalculated { get; set; }
     }
 }

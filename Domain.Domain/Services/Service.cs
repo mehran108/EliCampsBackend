@@ -885,7 +885,7 @@ namespace ELI.Domain.Services
 
         #endregion
         #region Reports
-        public async Task<AllResponse<PaymentReportVM>> GetPaymentReport(string year)
+        public async Task<PaymentReportAllResponse> GetPaymentReport(string year)
         {
             return await _reportRepository.GetPaymentReport(year);
         }

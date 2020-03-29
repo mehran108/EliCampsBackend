@@ -264,13 +264,11 @@ namespace ELI.Data.Repositories.Main
                               ).OrderByDescending(a=>a.Purchased).ToListAsync();
             return keysList;
         }
-        public async Task<AllResponse<PaymentReportVM>> GetPaymentReport(string year)
+        public async Task<PaymentReportAllResponse> GetPaymentReport(string year)
         {
             PaymentReportVM paymentReportVM = null;
-            var result = new AllResponse<PaymentReportVM>
-            {
-                Data = new List<PaymentReportVM>()
-            };
+            var result = new PaymentReportAllResponse();
+            result.Data = new List<PaymentReportVM>();
             var parameters = new List<DbParameter>
                 {
                     base.GetParameter(YearParameterName, year)
@@ -297,16 +295,12 @@ namespace ELI.Data.Repositories.Main
                             CampusName = dataReader.GetStringValue(ReportRepository.CampusNameColumnName),
                             ProgramName = dataReader.GetStringValue(ReportRepository.ProgramNameColumnName),
                             TotalGrossPrice = dataReader.GetDoubleValue(ReportRepository.TotalGrossPriceColumnName),
-                            TotalGrossPriceCalculated = dataReader.GetDoubleValue(ReportRepository.TotalGrossPriceCalculatedColumnName),
                             TotalAddins = dataReader.GetDoubleValue(ReportRepository.TotalAddinsColumnName),
                             Paid = dataReader.GetDoubleValue(ReportRepository.PaidColumnName),
-                            TotalPaidPriceCalculated = dataReader.GetDoubleValue(ReportRepository.TotalPaidPriceCalculatedColumnName),
                             Commision = dataReader.GetDoubleValue(ReportRepository.CommisionColumnName),
                             CommissionAddins = dataReader.GetDoubleValue(ReportRepository.CommissionAddinsColumnName),
                             NetPrice = dataReader.GetDoubleValue(ReportRepository.NetPriceColumnName),
-                            TotalNetPriceCalculated = dataReader.GetDoubleValue(ReportRepository.TotalNetPriceCalculatedColumnName),
                             Balance = dataReader.GetDoubleValue(ReportRepository.BalanceColumnName),
-                            TotalBalanceCalculated = dataReader.GetDoubleValue(ReportRepository.TotalBalanceCalculatedColumnName),
                         };
                         result.Data.Add(paymentReportVM);
                     }
@@ -318,7 +312,10 @@ namespace ELI.Data.Repositories.Main
                 }
                 
             }
-
+            result.TotalBalanceCalculated = result.Data.Sum(x => x.Balance);
+            result.TotalGrossPriceCalculated = result.Data.Sum(x => x.TotalGrossPrice);
+            result.TotalNetPriceCalculated = result.Data.Sum(x => x.NetPrice);
+            result.TotalPaidPriceCalculated = result.Data.Sum(x => x.Paid);
             return result;
         }
     }

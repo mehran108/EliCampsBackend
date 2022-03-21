@@ -25,6 +25,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetAllStoredProcedureName = "GetAllGroup";
         private const string UpdateStoredProcedureName = "UpdateGroup";
         private const string ActivateStoredProcedureName = "ActivateGroup";
+        private const string DeleteStoredProcedureName = "DeleteGroup";
         private const string UpdateGroupPaymentStoredProcedureName = "UpdateGroupPayment";
         private const string GroupProgrameStoredProcedureName = "GroupPrograme";
         private const string GroupTripsStoredProcedureName = "GroupTrips";
@@ -423,6 +424,18 @@ namespace ELI.Data.Repositories.Main
                 };
 
             var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.ActivateStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+        public async Task<bool> DeleteGroup(GroupViewModel group)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(GroupRepository.GroupIdParameterName, group.ID),
+                    base.GetParameter(BaseRepository.DeleteParameterName, group.IsDelete)
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, GroupRepository.DeleteStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
         }

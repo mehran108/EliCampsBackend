@@ -109,6 +109,8 @@ namespace ELI.Domain.Services
         Task<List<FinancialReconciliationReportViewModel>> FinancialReconciliationReportAsync(DateTime year, CancellationToken ct = default(CancellationToken));
         Task<List<CodeListReportViewModel>> CodeListReportAsync(CancellationToken ct = default(CancellationToken));
         Task<List<Leads>> GetLeadsByShowIdAsync(int ShowId, CancellationToken ct = default(CancellationToken));
+        Task<List<InsuranceReportVM>> GetInsuranceReport();
+        Task<bool> UpdateLookupValue(LookupValueViewModel model);
         bool ValidateDeviceIdentifier(string deviceIdentifier);
         Task<string> AUSSuccessCase(int invoiceId, string responseCode);
 
@@ -173,6 +175,7 @@ namespace ELI.Domain.Services
         Task<bool> UpdateGroupAsync(GroupViewModel group);
         Task<AllResponse<GroupViewModel>> GetAllGroupList(AllRequest<GroupViewModel> groups);
         Task<bool> ActivateGroup(GroupViewModel group);
+        Task<bool> DeleteGroup(GroupViewModel group);
         Task<bool> GroupPayment(GroupViewModel group);
         Task<bool> GroupPrograme(GroupViewModel group);
         Task<bool> GroupTrips(GroupViewModel group);
@@ -280,6 +283,7 @@ namespace ELI.Domain.Services
         Task<StudentRegistration> GetStudentAsync(int studentID);
         Task<StudentPDFDataVM> GetStudentFilesDataAsync(int studentID);
         Task<bool> ActivateStudentAsync(StudentRegistration student);
+        Task<bool> DeleteStudent(StudentRegistration student);
 
         Task<bool> UpdateStudentProfilePicAsync(StudentRegistration student);
         Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student);

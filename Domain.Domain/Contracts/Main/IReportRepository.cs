@@ -16,7 +16,6 @@ namespace ELI.Domain.Contracts.Main
         Task<List<FinancialReconciliationReportViewModel>> FinancialReconciliationReportAsync(DateTime year, CancellationToken ct = default(CancellationToken));
         Task<List<CodeListReportViewModel>> CodeListReportAsync(CancellationToken ct = default(CancellationToken));
         Task<PaymentReportAllResponse> GetPaymentReport(string year);
-
-
+        Task<List<InsuranceReportVM>> GetInsuranceReport();
     }
 }

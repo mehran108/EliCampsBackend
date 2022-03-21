@@ -32,6 +32,7 @@ namespace ELI.Domain.ViewModels
         public double Balance { get; set; }
         public string Email { get; set; }
         public double NetPrice { get; set; }
+        public double RegistrationFee { get; set; }
 
         public string PassportNumber { get; set; }
 

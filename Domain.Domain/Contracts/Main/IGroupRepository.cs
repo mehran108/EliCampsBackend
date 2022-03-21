@@ -14,6 +14,7 @@ namespace ELI.Domain.Contracts.Main
         Task<bool> UpdateGroupAsync(GroupViewModel group);
         Task<AllResponse<GroupViewModel>> GetAllGroupList(AllRequest<GroupViewModel> groups);
         Task<bool> ActivateGroup(GroupViewModel group);
+        Task<bool> DeleteGroup(GroupViewModel group);
         Task<bool> GroupPayment(GroupViewModel group);
         Task<bool> GroupPrograme(GroupViewModel group);
         Task<bool> GroupTrips(GroupViewModel group);

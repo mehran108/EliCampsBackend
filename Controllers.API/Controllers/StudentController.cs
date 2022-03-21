@@ -98,6 +98,20 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        [HttpPut("deleteStudent")]
+        [Produces(typeof(bool))]
+        public async Task<IActionResult> DeleteStudent([FromBody] StudentRegistration studentVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.DeleteStudent(studentVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
         [HttpPut("updateProfilePic")]
         [Produces(typeof(bool))]
@@ -289,7 +303,35 @@ namespace ELI.API.Controllers
             }
            
         }
+
+        [HttpPost("documentGetByStudentId")]
+        [Produces(typeof(byte[]))]
+        public async Task<IActionResult> DocumentGet([FromBody] EmailSendVM documentVM)
+        {
+            IActionResult fileContentResult;
+            try
+            {
+                Stream arrayStream = await this._EmailSender.DocumentGet(documentVM);
+                var bytes = new byte[arrayStream.Length];
+                arrayStream.Seek(0, SeekOrigin.Begin);
+                await arrayStream.ReadAsync(bytes, 0, bytes.Length);
+                arrayStream.Dispose();
+                base.HttpContext.Response.ContentType = "application/pdf";
+                fileContentResult = new FileContentResult(bytes, "application/pdf")
+                {
+                    FileDownloadName = "test.pdf"
+                };
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                (new ExceptionHandlingService(exception, null, null)).LogException();
+                fileContentResult = this.BadRequest(new { message = exception.Message });
+            }
+            return fileContentResult;
+        }
         
-      
+   
+    
     }
 }

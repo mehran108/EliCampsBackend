@@ -28,6 +28,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetAllStoredProcedureName = "GetAllStudent";
         private const string UpdateStoredProcedureName = "UpdateStudent";
         private const string ActivateStoredProcedureName = "ActivateStudent";
+        private const string DeleteStoredProcedureName = "DeleteStudent";
         private const string UpdateStudentProfilePicProcedureName = "UpdateStudentProfilePic";
 
 
@@ -99,6 +100,7 @@ namespace ELI.Data.Repositories.Main
         private const string CommissionAddinsParameterName = "PCommissionAddins";
         private const string NetPriceParameterName = "PNetPrice";
         private const string BalanceParameterName = "PBalance";
+        private const string RegistrationFeeParameterName = "PRegFee";
         private const string StudentTripsIDParameterName = "PStudentTripsID";
         private const string StudentDocumentIdParameterName = "PStudentDocumentId";
 
@@ -178,6 +180,7 @@ namespace ELI.Data.Repositories.Main
         private const string CommissionAddinsColumnName = "CommissionAddins";
         private const string NetPriceColumnName = "NetPrice";
         private const string BalanceColumnName = "Balance";
+        private const string RegistrationFeeColumnName = "RegistrationFee";
         private const string StudentTripsIDColumnName = "StudentTripsID";
 
         private const string LinkTypeIDColumnName = "LinkTypeID";
@@ -339,6 +342,7 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.CommissionAddinsParameterName, student.CommissionAddins),
                     base.GetParameter(StudentRegistrationRepository.NetPriceParameterName, student.NetPrice),
                     base.GetParameter(StudentRegistrationRepository.BalanceParameterName, student.Balance),
+                    base.GetParameter(StudentRegistrationRepository.RegistrationFeeParameterName, student.RegistrationFee),
                     base.GetParameter(StudentRegistrationRepository.StudentTripsIDParameterName, student.StudentTripsID),
                     base.GetParameter(StudentRegistrationRepository.StudentDocumentIdParameterName, student.DocumentId),
                     base.GetParameter(BaseRepository.ActiveParameterName, student.Active),
@@ -369,6 +373,20 @@ namespace ELI.Data.Repositories.Main
                 };
 
             var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.ActivateStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+        public async Task<bool> DeleteStudent(StudentRegistration student)
+        {
+            var parameters = new List<DbParameter>
+                {
+
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, student.ID),
+                    base.GetParameter(BaseRepository.DeleteParameterName, student.isDelete)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.DeleteStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
         }
@@ -464,6 +482,7 @@ namespace ELI.Data.Repositories.Main
                             CommissionAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.CommissionAddinsColumnName),
                             NetPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.NetPriceColumnName),
                             Balance = dataReader.GetDoubleValue(StudentRegistrationRepository.BalanceColumnName),
+                            RegistrationFee = dataReader.GetDoubleValueNullable(StudentRegistrationRepository.RegistrationFeeColumnName),
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
                             IsGroupLeader = dataReader.GetBooleanValue(StudentRegistrationRepository.IsGroupLeaderColumnName),
                             ChapFamily = dataReader.GetStringValue(StudentRegistrationRepository.ChapFamilyColumnName),
@@ -544,6 +563,7 @@ namespace ELI.Data.Repositories.Main
                             Balance = dataReader.GetDoubleValue(StudentRegistrationRepository.BalanceColumnName),
                             TotalAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.TotalAddinsColumnName),
                             NetPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.NetPriceColumnName),
+                            RegistrationFee = dataReader.GetDoubleValue(StudentRegistrationRepository.RegistrationFeeColumnName),
                             AgentName = dataReader.GetStringValue(StudentRegistrationRepository.AgentNameColumnName),
                             FormatName = dataReader.GetStringValue(StudentRegistrationRepository.FormatNameColumnName),
                             ProgramName = dataReader.GetStringValue(StudentRegistrationRepository.ProgramNameColumnName),
@@ -671,6 +691,7 @@ namespace ELI.Data.Repositories.Main
                             Commision = dataReader.GetDoubleValue(StudentRegistrationRepository.CommisionColumnName),
                             CommissionAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.CommissionAddinsColumnName),
                             NetPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.NetPriceColumnName),
+                            RegistrationFee = dataReader.GetDoubleValueNullable(StudentRegistrationRepository.RegistrationFeeColumnName),
                             Balance = dataReader.GetDoubleValue(StudentRegistrationRepository.BalanceColumnName),
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
                             AgentName = dataReader.GetStringValue(StudentRegistrationRepository.AgentNameColumnName),

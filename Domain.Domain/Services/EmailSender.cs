@@ -61,6 +61,8 @@ namespace ELI.Domain.Services
         private const string ArrivalTimeTag = "{{ArrivalTime}}";
         private const string CountryTag = "{{Country}}";
         private const string TotalAddinsTag = "{{TotalAddins}}";
+        private const string RegFee = "{{RegFee}}";
+        private const string RegStyle = "{{RegStyle}}";
 
 
 
@@ -673,6 +675,10 @@ namespace ELI.Domain.Services
               border-collapse: collapse;
               border-spacing: 0;"">
                 <tbody>
+               <tr {{RegStyle}}>
+                    <td>Reg.Fee</td>
+                    <td class=""text-right"">${{RegFee}}</td>
+                  </tr>
                   <tr>
                     <td>Gross Price</td>
                     <td class=""text-right"">${{TotalGrossPrice}}</td>
@@ -1174,6 +1180,10 @@ namespace ELI.Domain.Services
               border-collapse: collapse;
               border-spacing: 0;"">
                 <tbody>
+               <tr {{RegStyle}}>
+                    <td>Reg.Fee</td>
+                    <td class=""text-right"">${{RegFee}}</td>
+                  </tr>
                   <tr>
                     <td>Total Package Price </td>
                     <td class=""text-right"">${{TotalGrossPrice}}</td>
@@ -1184,7 +1194,7 @@ namespace ELI.Domain.Services
                     <td class=""text-right"">${{Paid}} </td>
                   </tr>
                   <tr>
-                    <td style="">Balance due</td>
+                    <td>Balance due</td>
                     <td class=""text-right"">${{Balance}} </td>
                   </tr>
                 </tbody>
@@ -1968,6 +1978,10 @@ namespace ELI.Domain.Services
               border-collapse: collapse;
               border-spacing: 0;"">
                 <tbody>
+               <tr {{RegStyle}}>
+                    <td>Reg.Fee</td>
+                    <td class=""text-right"">${{RegFee}}</td>
+                  </tr>
                   <tr>
                     <td>Gross Price</td>
                     <td class=""text-right"">${{TotalGrossPrice}}</td>
@@ -2858,6 +2872,10 @@ namespace ELI.Domain.Services
               border-collapse: collapse;
               border-spacing: 0;"">
                 <tbody>
+               <tr {{RegStyle}}>
+                    <td>Reg.Fee</td>
+                    <td class=""text-right"">${{RegFee}}</td>
+                  </tr>
                   <tr>
                     <td>Gross Price</td>
                     <td class=""text-right"">${{TotalGrossPrice}}</td>
@@ -3748,7 +3766,13 @@ namespace ELI.Domain.Services
             {
                 passportNumber = $"<tr><td style = \"width: 15%;font-size: 11px;\"> Passport Number:</td><td class=\"data\" style=\"width:20%;font-size: 12px;\">{studentVM.PassportNumber}</td><td class=\"text-right\" style=\"width: 30%; vertical-align: text-top ;\"></td><td style = \"width: 35%;\" ></td></tr>";
             }
-
+            var grossPrice = studentVM.TotalGrossPrice - studentVM.Commision;
+            studentVM.Balance = grossPrice + studentVM.RegistrationFee - studentVM.TotalAddins - studentVM.Paid;
+            if (studentVM.RegistrationFee == 0)
+            {
+                template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.RegStyle, "style='display:none'");
+                
+            }
 
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CurrentDateTag, DateTime.Now.ToString("MMMM dd, yyyy"));
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.StudentFullNameTag, $"{studentVM.FirstName} {studentVM.LastName}");
@@ -3764,6 +3788,7 @@ namespace ELI.Domain.Services
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.FormatNameTag, studentVM.FormatName);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.MealPlanTag, studentVM.MealPlan);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.TotalGrossPriceTag, $"{String.Format("{0:0.00}", studentVM.TotalGrossPrice)}");
+            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.RegFee, $"{String.Format("{0:0.00}", studentVM.RegistrationFee)}");
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.TotalAddinsTag, totalAddins);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CommisionTag, $"{String.Format("{0:0.00}", studentVM.Commision)}");
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PaidTag, $"{String.Format("{0:0.00}", studentVM.Paid)}");
@@ -3788,7 +3813,7 @@ namespace ELI.Domain.Services
                 totalAddins = $"<tr><td> Additional Services </td><td class=\"text-right\">{String.Format("{0:0.00}", studentVM.TotalAddins)}</td></tr>";
             }
 
-            studentVM.Balance = (studentVM.TotalGrossPrice + studentVM.TotalAddins - studentVM.Paid);
+            studentVM.Balance = (studentVM.TotalGrossPrice + studentVM.TotalAddins + studentVM.RegistrationFee - studentVM.Paid);
             if (studentVM.Balance < 0)
             {
                 studentVM.Balance = 0;
@@ -3833,6 +3858,11 @@ namespace ELI.Domain.Services
             {
                 passportNumber = $"<tr><td style = \"width: 15%;font-size: 11px;\"> Passport Number:</td><td class=\"data\" style=\"width:20%;font-size: 12px;\">{studentVM.PassportNumber}</td><td class=\"text-right\" style=\"width: 30%; vertical-align: text-top ;\"></td><td style = \"width: 35%;\" ></td></tr>";
             }
+            if (studentVM.RegistrationFee == 0)
+            {
+                template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.RegStyle, "style='display:none'");
+
+            }
 
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.CurrentDateTag, DateTime.Now.ToString("MMMM dd, yyyy"));
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.StudentFullNameTag, $"{studentVM.FirstName} {studentVM.LastName}");
@@ -3845,6 +3875,7 @@ namespace ELI.Domain.Services
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.SubProgramNameTag, studentVM.SubProgramName);
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.FormatNameTag, studentVM.FormatName);
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.MealPlanTag, studentVM.MealPlan);
+            template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.RegFee, $"{String.Format("{0:0.00}", studentVM.RegistrationFee)}");
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.TotalGrossPriceTag, $"{String.Format("{0:0.00}", studentVM.TotalGrossPrice)}");
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.TotalAddinsTag, totalAddins);
             template.StudentInvoiceTemplate = template.StudentInvoiceTemplate.Replace(EmailSender.PaidTag, $"{String.Format("{0:0.00}", studentVM.Paid)}");
@@ -3883,7 +3914,7 @@ namespace ELI.Domain.Services
             {
                 totalAddins = $"<tr><td> Additional Services </td><td class=\"text-right\">{String.Format("{0:0.00}", studentVM.TotalAddins)}</td></tr>";
             }
-            studentVM.Balance = (studentVM.TotalGrossPrice - studentVM.Paid);
+            studentVM.Balance = (studentVM.TotalGrossPrice + studentVM.RegistrationFee - studentVM.Paid);
             if (studentVM.Balance < 0)
             {
                 studentVM.Balance = 0;
@@ -3929,7 +3960,11 @@ namespace ELI.Domain.Services
                 passportNumber = $"<tr><td style = \"width: 15%;font-size: 11px;\"> Passport Number:</td><td class=\"data\" style=\"width:20%;font-size: 12px;\">{studentVM.PassportNumber}</td><td class=\"text-right\" style=\"width: 30%; vertical-align: text-top ;\"></td><td style = \"width: 35%;\" ></td></tr>";
             }
 
+            if (studentVM.RegistrationFee == 0)
+            {
+                template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.RegStyle, "style='display:none'");
 
+            }
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.CurrentDateTag, DateTime.Now.ToString("MMMM dd, yyyy"));
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.StudentFullNameTag, $"{studentVM.FirstName} {studentVM.LastName}");
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.CountryTag, $"{studentVM.Country}");
@@ -3942,6 +3977,7 @@ namespace ELI.Domain.Services
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.SubProgramNameTag, studentVM.SubProgramName);
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.FormatNameTag, studentVM.FormatName);
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.MealPlanTag, studentVM.MealPlan);
+            template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.RegFee, $"{String.Format("{0:0.00}", studentVM.RegistrationFee)}");
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.TotalGrossPriceTag, $"{String.Format("{0:0.00}", studentVM.TotalGrossPrice)}");
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.TotalAddinsTag, totalAddins);
             template.LOAInvoiceTemplate = template.LOAInvoiceTemplate.Replace(EmailSender.PaidTag, $"{String.Format("{0:0.00}", studentVM.Paid)}");
@@ -4073,6 +4109,95 @@ namespace ELI.Domain.Services
             System.Net.Mail.Attachment att = new System.Net.Mail.Attachment(pdfStream, ct);
             template.emailAttachment.Add(att);
 
+        }
+        public async Task<MemoryStream> DocumentGet(EmailSendVM emailSendVM)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            StudentPDFDataVM studentFilesDataAsync = await this._ELIService.GetStudentFilesDataAsync(emailSendVM.StudentID);
+            studentFilesDataAsync.RegistrationFee = emailSendVM.RegistrationFee;
+            if (studentFilesDataAsync != null)
+            {
+                EmailViewModel emailViewModel = new EmailViewModel()
+                {
+                    Subject = "",
+                    Message = ""
+                };
+                emailViewModel.Message = "";
+                emailViewModel.To = "";
+                memoryStream = this.GetPdf(emailSendVM, emailViewModel, studentFilesDataAsync);
+            }
+            return memoryStream;
+        }
+        private MemoryStream GetPdf(EmailSendVM emailSendVM, EmailViewModel email, StudentPDFDataVM studentPDFDataVM)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            if (emailSendVM.IsAgentInvoice)
+            {
+                email.AgentInvoiceTemplate = this.AgentInvoiceHTML;
+                this.AgentInvoiceTemplateRendrer(studentPDFDataVM, email);
+                memoryStream = this.PDFCreatorForClient(email, string.Concat("Eli Agent Invoice-", studentPDFDataVM.Reg_Ref, ".pdf"), email.AgentInvoiceTemplate, false);
+            }
+            else if (emailSendVM.IsStudentCertificate)
+            {
+                email.StudentCertificateTemplate = this.StudentCertificateHTML;
+                email.StudentCertificateTemplate = email.StudentCertificateTemplate.Replace("{{StudentFullName}}", string.Concat(studentPDFDataVM.FirstName, " ", studentPDFDataVM.LastName));
+                memoryStream = this.PDFCreatorForClient(email, string.Concat("Eli Student Certificate-", studentPDFDataVM.Reg_Ref, ".pdf"), email.StudentCertificateTemplate, true);
+            }
+            else if (emailSendVM.IsStudentInvoice)
+            {
+                email.StudentInvoiceTemplate = this.StudentInvoiceHTML;
+                this.StudentInvoiceTemplateRendrer(studentPDFDataVM, email);
+                memoryStream = this.PDFCreatorForClient(email, string.Concat("Eli Student Invoice-", studentPDFDataVM.Reg_Ref, ".pdf"), email.StudentInvoiceTemplate, false);
+            }
+            else if (emailSendVM.IsAirportInvoice)
+            {
+                email.AirportInvoiceTemplate = this.AirportInvoiceHTML;
+                this.AirportInvoiceTemplateRendrer(studentPDFDataVM, email);
+                memoryStream = this.PDFCreatorForClient(email, string.Concat("Eli Student Airport Doc-", studentPDFDataVM.Reg_Ref, ".pdf"), email.AirportInvoiceTemplate, true);
+            }
+            else if (emailSendVM.IsLoaInvoice)
+            {
+                email.LOAInvoiceTemplate = this.LOAInvoiceHTML;
+                this.LOAInvoiceTemplateRendrer(studentPDFDataVM, email);
+                memoryStream = this.PDFCreatorForClient(email, string.Concat("Eli Student LOA With Price-", studentPDFDataVM.Reg_Ref, ".pdf"), email.LOAInvoiceTemplate, false);
+            }
+            else if (emailSendVM.IsLoaInvoiceWithNoPrice)
+            {
+                email.LOAInvoiceWOPTemplate = this.LOAInvoiceWOPHTML;
+                this.LOAWOPInvoiceTemplateRendrer(studentPDFDataVM, email);
+                memoryStream = this.PDFCreatorForClient(email, string.Concat("Eli Student LOA No Price-", studentPDFDataVM.Reg_Ref, ".pdf"), email.LOAInvoiceWOPTemplate, false);
+            }
+            else if (emailSendVM.IsLoaGroupInvoice)
+            {
+                email.LOAInvoiceTemplate = this.LOAGroupInvoiceHTML;
+                this.LOAInvoiceTemplateRendrer(studentPDFDataVM, email);
+                memoryStream = this.PDFCreatorForClient(email, string.Concat("Eli LOA - Group-", studentPDFDataVM.Reg_Ref, ".pdf"), email.LOAInvoiceTemplate, false);
+            }
+            else if (emailSendVM.IsStudentInvitation)
+            {
+                email.StudentInvitationTemplate = this.StudentInvitationHTML;
+                this.StudentInvitationTemplateRendrer(studentPDFDataVM, email);
+                memoryStream = this.PDFCreatorForClient(email, string.Concat("Eli Student Invitation-", studentPDFDataVM.Reg_Ref, ".pdf"), email.StudentInvitationTemplate, false);
+            }
+            return memoryStream;
+        }
+        private MemoryStream PDFCreatorForClient(EmailViewModel template, string filename, string htmlContent, bool isLandscape = false)
+        {
+            HtmlToPdf htmlToPdf = new HtmlToPdf();
+            htmlToPdf.Options.PdfPageSize = PdfPageSize.A4;
+            htmlToPdf.Options.MarginLeft = 10;
+            htmlToPdf.Options.MarginRight = 10;
+            htmlToPdf.Options.MarginTop = 15;
+            htmlToPdf.Options.MarginBottom = 15;
+            if (isLandscape)
+            {
+                htmlToPdf.Options.PdfPageOrientation = PdfPageOrientation.Landscape;
+            }
+            PdfDocument pdfDocument = htmlToPdf.ConvertHtmlString(htmlContent);
+            MemoryStream memoryStream = new MemoryStream();
+            pdfDocument.Save(memoryStream);
+            memoryStream.Position = ((long)0);
+            return memoryStream;
         }
     }
 }

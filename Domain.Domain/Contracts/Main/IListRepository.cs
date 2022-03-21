@@ -103,5 +103,7 @@ namespace ELI.Domain.Contracts.Main
 
         Task<bool> ActivateSubProgramAsync(SubProgramViewModel subProgramViewModel);
         #endregion
+        Task<bool> UpdateLookupValue(LookupValueViewModel model);
+
     }
 }

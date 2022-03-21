@@ -117,5 +117,22 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        [HttpGet("GetInsuranceReport")]
+        [Produces(typeof(List<InsuranceReportVM>))]
+        public async Task<IActionResult> GetInsuranceReportAsync([FromQuery] string year)
+        {
+            IActionResult objectResult;
+            try
+            {
+                objectResult = new ObjectResult(await this._ELIService.GetInsuranceReport());
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                (new ExceptionHandlingService(exception, null, null)).LogException();
+                objectResult = this.BadRequest(new { message = exception.Message });
+            }
+            return objectResult;
+        }
     }
 }

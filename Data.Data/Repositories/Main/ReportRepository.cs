@@ -50,6 +50,7 @@ namespace ELI.Data.Repositories.Main
         private const string TotalBalanceCalculatedColumnName = "TotalBalanceCalculated";
         private const string ProgramNameColumnName = "ProgramName";
         private const string SubProgramNameColumnName = "SubProgramName";
+        private const string GetInsuranceReportProdedureName = "GetInsuranceReport";
         public async Task<List<LeadsCountViewModel>> LeadsCountReportAsync(String showkey, CancellationToken ct = default(CancellationToken))
         {
             var show = await _context.Show.SingleOrDefaultAsync(a => a.ShowKey == showkey);
@@ -318,6 +319,141 @@ namespace ELI.Data.Repositories.Main
             result.TotalPaidPriceCalculated = result.Data.Sum(x => x.Paid);
             return result;
         }
+        public async Task<List<InsuranceReportVM>> GetInsuranceReport()
+        {
+            InsuranceReportVM insuranceReportVM = null;
+            List<InsuranceReportVM> list = new List<InsuranceReportVM>();
+            List<DbParameter> list1 = new List<DbParameter>();
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter("PActive", null)
+                };
+            DbDataReader dbDataReader = await base.ExecuteReader(parameters, ReportRepository.GetInsuranceReportProdedureName, CommandType.StoredProcedure);
+            try
+            {
+                if (dbDataReader != null && dbDataReader.HasRows)
+                {
+                    while (dbDataReader.Read())
+                    {
+                        InsuranceReportVM insuranceReportVM1 = new InsuranceReportVM()
+                        {
+                            ID = dbDataReader.GetIntegerValue("ID"),
+                            Year = dbDataReader.GetIntegerValue("Year"),
+                            Reg_Ref = dbDataReader.GetStringValue("Reg_Ref"),
+                            GroupRef = dbDataReader.GetStringValue("GroupRef"),
+                            Camps = dbDataReader.GetStringValue("Camps"),
+                            Gender = dbDataReader.GetStringValue("Gender"),
+                            FirstName = dbDataReader.GetStringValue("FirstName"),
+                            LastName = dbDataReader.GetStringValue("LastName"),
+                            CampusName = dbDataReader.GetStringValue("CampusName"),
+                            HomeAddress = dbDataReader.GetStringValue("HomeAddress"),
+                            City = dbDataReader.GetStringValue("City"),
+                            State = dbDataReader.GetStringValue("State"),
+                            Country = dbDataReader.GetStringValue("Country"),
+                            PostCode = dbDataReader.GetStringValue("PostCode"),
+                            EmergencyContact = dbDataReader.GetStringValue("EmergencyContact"),
+                            Email = dbDataReader.GetStringValue("Email"),
+                            Phone = dbDataReader.GetStringValue("Phone"),
+                            DOB = dbDataReader.GetDateTimeValueNullable("DOB"),
+                            Age = dbDataReader.GetUnsignedIntegerValueNullable("Age"),
+                            PassportNumber = dbDataReader.GetStringValue("PassportNumber"),
+                            AgencyID = dbDataReader.GetUnsignedIntegerValueNullable("AgencyID"),
+                            ArrivalDate = dbDataReader.GetDateTimeValueNullable("ArrivalDate"),
+                            Terminal = dbDataReader.GetStringValue("Terminal"),
+                            FlightNumber = dbDataReader.GetStringValue("FlightNumber"),
+                            DestinationFrom = dbDataReader.GetStringValue("DestinationFrom"),
+                            ArrivalTime = dbDataReader.GetDateTimeValueNullable("ArrivalTime"),
+                            DepartureDate = dbDataReader.GetDateTimeValueNullable("DepartureDate"),
+                            DepartureTerminal = dbDataReader.GetStringValue("DepartureTerminal"),
+                            DepartureFlightNumber = dbDataReader.GetStringValue("DepartureFlightNumber"),
+                            DestinationTo = dbDataReader.GetStringValue("DestinationTo"),
+                            FlightDepartureTime = dbDataReader.GetDateTimeValueNullable("FlightDepartureTime"),
+                            MedicalInformation = dbDataReader.GetStringValue("MedicalInformation"),
+                            DietaryNeeds = dbDataReader.GetStringValue("DietaryNeeds"),
+                            Allergies = dbDataReader.GetStringValue("Allergies"),
+                            MedicalNotes = dbDataReader.GetStringValue("MedicalNotes"),
+                            ProgrameStartDate = dbDataReader.GetDateTimeValueNullable("ProgrameStartDate"),
+                            ProgrameEndDate = dbDataReader.GetDateTimeValueNullable("ProgrameEndDate"),
+                            Campus = dbDataReader.GetUnsignedIntegerValueNullable("Campus"),
+                            Format = dbDataReader.GetUnsignedIntegerValueNullable("Format"),
+                            MealPlan = dbDataReader.GetStringValue("MealPlan"),
+                            ExtraNotes = dbDataReader.GetStringValue("ExtraNotes"),
+                            ExtraNotesHTML = dbDataReader.GetStringValue("ExtraNotesHTML"),
+                            Status = dbDataReader.GetStringValue("Status"),
+                            HomestayOrResi = dbDataReader.GetStringValue("HomestayOrResi"),
+                            HomestayID = dbDataReader.GetUnsignedIntegerValueNullable("HomestayID"),
+                            RoomID = dbDataReader.GetUnsignedIntegerValueNullable("RoomID"),
+                            RoomSearchCampus = dbDataReader.GetUnsignedIntegerValueNullable("RoomSearchCampus"),
+                            RoomSearchFrom = dbDataReader.GetDateTimeValueNullable("RoomSearchFrom"),
+                            RoomSearchTo = dbDataReader.GetDateTimeValueNullable("RoomSearchTo"),
+                            NumberOfNights = dbDataReader.GetIntegerValue("NumberOfNights"),
+                            GroupID = dbDataReader.GetUnsignedIntegerValueNullable("GroupID"),
+                            TotalGrossPrice = dbDataReader.GetDoubleValue("TotalGrossPrice"),
+                            TotalAddins = dbDataReader.GetDoubleValue("TotalAddins"),
+                            Paid = dbDataReader.GetDoubleValue("Paid"),
+                            Commision = dbDataReader.GetDoubleValue("Commision"),
+                            CommissionAddins = dbDataReader.GetDoubleValue("CommissionAddins"),
+                            NetPrice = dbDataReader.GetDoubleValue("NetPrice"),
+                            Balance = dbDataReader.GetDoubleValue("Balance"),
+                            Active = new bool?(dbDataReader.GetBooleanValue("Active")),
+                            AgentName = dbDataReader.GetStringValue("AgentName"),
+                            FormatName = dbDataReader.GetStringValue("FormatName"),
+                            ChapFamily = dbDataReader.GetStringValue("ChapFamily"),
+                            AgencyRef = dbDataReader.GetStringValue("AgencyRef"),
+                            ProgramID = dbDataReader.GetUnsignedIntegerValueNullable("ProgramID"),
+                            SubProgramID = dbDataReader.GetUnsignedIntegerValueNullable("SubProgramID"),
+                            ProgramName = dbDataReader.GetStringValue("ProgramName"),
+                            SubProgramName = dbDataReader.GetStringValue("SubProgramName"),
+                            IsGroupLeader = dbDataReader.GetBooleanValue("IsGroupLeader"),
+                            ProgrameAddins = new List<int>(),
+                            StudentTrips = new List<int>()
+                        };
+                        insuranceReportVM = insuranceReportVM1;
+                        list.Add(insuranceReportVM);
+                    }
+                    if (dbDataReader.NextResult())
+                    {
+                        while (dbDataReader.Read())
+                        {
+                           var studantId = dbDataReader.GetIntegerValue("clmAdvsSt_StudentID");
+                            if (!dbDataReader.GetStringValue("LinkTypeID").Equals("AddinsID"))
+                            {
+                                int integerValue = dbDataReader.GetIntegerValue("LinkID");
+                                insuranceReportVM = list.FirstOrDefault(c =>c.ID == studantId);
+                                if (insuranceReportVM == null)
+                                {
+                                    continue;
+                                }
+                                insuranceReportVM.StudentTrips.Add(integerValue);
+                            }
+                            else
+                            {
+                                int num = dbDataReader.GetIntegerValue("LinkID");
+                                insuranceReportVM = list.FirstOrDefault(c => c.ID == studantId);
+                                if (insuranceReportVM == null)
+                                {
+                                    continue;
+                                }
+                                insuranceReportVM.ProgrameAddins.Add(num);
+                            }
+                        }
+                    }
+                    if (!dbDataReader.IsClosed)
+                    {
+                        dbDataReader.Close();
+                    }
+                }
+            }
+            finally
+            {
+                if (dbDataReader != null)
+                {
+                    dbDataReader.Dispose();
+                }
+            }
+            return list;
+        }
+
     }
 }
 

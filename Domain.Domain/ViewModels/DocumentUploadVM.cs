@@ -17,5 +17,6 @@ namespace ELI.Domain.ViewModels
         public bool IsLoaGroupInvoice { get; set; }
         public bool IsLoaInvoiceWithNoPrice { get; set; }
         public bool IsStudentInvitation { get; set; }
+        public double RegistrationFee { get; set; }
     }
 }

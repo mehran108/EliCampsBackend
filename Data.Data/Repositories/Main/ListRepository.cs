@@ -54,6 +54,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetCampusStoredProcedureName = "GetCampus";
         private const string GetAllCampusStoredProcedureName = "GetAllCampus";
         private const string ActivateCampusStoredProcedureName = "ActivateCampus";
+        private const string UpdateLookupValueStoredProcedureName = "UpdateLookupValue";
 
         #region  RoomList
         private const string RIdParameterName = "PID";
@@ -289,6 +290,7 @@ namespace ELI.Data.Repositories.Main
 
         private const string ValueColumnName = "Value";
         private const string NameColumnName = "Name";
+        private const string DescriptionColumnName = "Description";
 
 
         private const string AgentIdParameterName = "PAgentID";
@@ -1019,7 +1021,9 @@ namespace ELI.Data.Repositories.Main
                             {
 
                                 Value = dataReader.GetIntegerValue(ListRepository.ValueColumnName),
-                                Name = dataReader.GetStringValue(ListRepository.NameColumnName)
+                                Name = dataReader.GetStringValue(ListRepository.NameColumnName),
+                                Description = dataReader.GetStringValue(ListRepository.DescriptionColumnName),
+
 
                             };
                             list.Add(lookupValue);
@@ -1045,6 +1049,10 @@ namespace ELI.Data.Repositories.Main
         private const string CampusAddressOnReportsParameterName = "PCampusAddressOnReports";
         private const string CampusCompleteNameParameterName = "PCampusCompleteName";
         private const string CampusOnelineaddressParameterName = "PCampusOnelineaddress";
+
+
+        private const string LookupNameParameterName = "PName";
+        private const string LookupValueParameterName = "PValue";
 
 
         private const string CampusIDColumnName = "CampusID";
@@ -1095,6 +1103,19 @@ namespace ELI.Data.Repositories.Main
             var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateCampusStoredProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
+        }    
+        public async Task<bool> UpdateLookupValue(LookupValueViewModel model)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.LookupNameParameterName, model.Name),
+                    base.GetParameter(ListRepository.LookupValueParameterName, model.Value)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateLookupValueStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0 ? true: false;
         }
 
         public async Task<bool> ActivateCampusAsync(CampuseViewModel campusViewModel)

@@ -113,6 +113,21 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        
+        [HttpPut("deleteGroup")]
+        [Produces(typeof(GroupViewModel))]
+        public async Task<IActionResult> DeleteGroup([FromBody] GroupViewModel groupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.DeleteGroup(groupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
         [HttpPut("groupPayment")]
         [Produces(typeof(bool))]

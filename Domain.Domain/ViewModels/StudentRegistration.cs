@@ -84,9 +84,8 @@ namespace ELI.Domain.ViewModels
         public int? DocumentId { get; set; }
         public string DocumentPath { get; set; }
         public bool IsGroupLeader { get; set; }
-
-
-
+        public double? RegistrationFee { get; set; }
+        public bool? isDelete { get; set; }
 
     }
 }

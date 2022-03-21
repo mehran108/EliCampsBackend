@@ -596,6 +596,10 @@ namespace ELI.Domain.Services
         public async Task<bool> ActivateGroup(GroupViewModel group)
         {
             return await _groupRepository.ActivateGroup(group);
+        } 
+        public async Task<bool> DeleteGroup(GroupViewModel group)
+        {
+            return await _groupRepository.DeleteGroup(group);
         }
 
         #region PaymentsGroups
@@ -822,6 +826,10 @@ namespace ELI.Domain.Services
         {
             return await _studentRepository.ActivateStudentAsync(student);
         }
+        public async Task<bool> DeleteStudent(StudentRegistration student)
+        {
+            return await _studentRepository.DeleteStudent(student);
+        }
 
         public async Task<bool> UpdateStudentProfilePicAsync(StudentRegistration student)
         {
@@ -888,6 +896,14 @@ namespace ELI.Domain.Services
         public async Task<PaymentReportAllResponse> GetPaymentReport(string year)
         {
             return await _reportRepository.GetPaymentReport(year);
+        }
+        public async Task<List<InsuranceReportVM>> GetInsuranceReport()
+        {
+            return await this._reportRepository.GetInsuranceReport();
+        }    
+        public async Task<bool> UpdateLookupValue(LookupValueViewModel model)
+        {
+            return await this._listRepository.UpdateLookupValue(model);
         }
         #endregion
     }

@@ -473,8 +473,6 @@ namespace ELI.Domain.Services
             return await _listRepository.CreateAgentAsync(agent);
         }
 
-        
-
         public async Task<AgentViewModel> GetAgentAsync(int agentID)
         {
             return await _listRepository.GetAgentAsync(agentID);
@@ -904,6 +902,14 @@ namespace ELI.Domain.Services
         public async Task<bool> UpdateLookupValue(LookupValueViewModel model)
         {
             return await this._listRepository.UpdateLookupValue(model);
+        }
+        public async Task<int> CreateLookupValueAsync(LookupValueViewModel model)
+        {
+            return await _listRepository.CreateLookupValueAsync(model);
+        } 
+        public async Task<int> DeleteLookupValue(LookupValueViewModel model)
+        {
+            return await _listRepository.DeleteLookupValue(model);
         }
         #endregion
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using ELI.Data.Repositories.Main;
@@ -330,8 +331,69 @@ namespace ELI.API.Controllers
             }
             return fileContentResult;
         }
-        
+        [HttpPost("downloadCertificateZipped")]
+        [Produces(typeof(byte[]))]
+        public async Task<IActionResult> DownloadCertificateZipped([FromBody] EmailSendVM documentVM)
+        {
+            var certificates = new List<InMemoryFile>();
+            IActionResult fileContentResult;
+            try
+            {
+                documentVM.StudentNames.ForEach(async student =>
+                {
+                    Stream arrayStream = await this._EmailSender.GetCertificate(student);
+                    var bytes = new byte[arrayStream.Length];
+                    arrayStream.Seek(0, SeekOrigin.Begin);
+                    await arrayStream.ReadAsync(bytes, 0, bytes.Length);
+                    arrayStream.Dispose();
+                    base.HttpContext.Response.ContentType = "application/zip";
+                    fileContentResult = new FileContentResult(bytes, "application/pdf")
+                    {
+                        FileDownloadName = "test.pdf"
+                    };
+                    InMemoryFile file = new InMemoryFile();
+                    file.FileName = student;
+                    file.Content = bytes;
+                    certificates.Add(file);
+                });
    
-    
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                (new ExceptionHandlingService(exception, null, null)).LogException();
+                fileContentResult = this.BadRequest(new { message = exception.Message });
+            }
+            var archive = GetZipArchive(certificates);
+            fileContentResult = new FileContentResult(archive, "application/zip");
+            return fileContentResult;
+        }
+        public static byte[] GetZipArchive(List<InMemoryFile> files)
+        {
+            byte[] archiveFile;
+            using (var archiveStream = new MemoryStream())
+            {
+                using (var archive = new ZipArchive(archiveStream, ZipArchiveMode.Create, true))
+                {
+                    foreach (var file in files)
+                    {
+                        var zipArchiveEntry = archive.CreateEntry(file.FileName + ".pdf", CompressionLevel.Fastest);
+                        using (var zipStream = zipArchiveEntry.Open())
+                            zipStream.Write(file.Content, 0, file.Content.Length);
+                    }
+                }
+
+                archiveFile = archiveStream.ToArray();
+            }
+
+            return archiveFile;
+        }
+
+
     }
+}
+public class InMemoryFile
+{
+    public string FileName { get; set; }
+    public byte[] Content { get; set; }
 }

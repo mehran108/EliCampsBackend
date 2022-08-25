@@ -12,5 +12,6 @@ namespace ELI.Domain.Services
         Task SendEmaill(string code, string Email, EmailTemplate emailTemplateId);
         Task<bool> SendRegistrationEmailWithDocument(EmailSendVM emailSendVM);
         Task<MemoryStream> DocumentGet(EmailSendVM emailSendVM);
+        Task<MemoryStream> GetCertificate(string studentName);
     }
 }

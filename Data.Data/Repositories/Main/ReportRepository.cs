@@ -51,6 +51,9 @@ namespace ELI.Data.Repositories.Main
         private const string ProgramNameColumnName = "ProgramName";
         private const string SubProgramNameColumnName = "SubProgramName";
         private const string GetInsuranceReportProdedureName = "GetInsuranceReport";
+        private const string ArrivalDateColumnName = "ArrivalDate";
+        private const string RegistrationFeeColumnName = "RegistrationFee";
+
         public async Task<List<LeadsCountViewModel>> LeadsCountReportAsync(String showkey, CancellationToken ct = default(CancellationToken))
         {
             var show = await _context.Show.SingleOrDefaultAsync(a => a.ShowKey == showkey);
@@ -286,6 +289,7 @@ namespace ELI.Data.Repositories.Main
                             ID = dataReader.GetIntegerValue(ReportRepository.IDColumnName),
                             Year = dataReader.GetIntegerValue(ReportRepository.YearColumnName),
                             Reg_Ref = dataReader.GetStringValue(ReportRepository.Reg_RefColumnName),
+                            AgencyRef= dataReader.GetStringValue(ReportRepository.AgencyRefColumnName),
                             FirstName = dataReader.GetStringValue(ReportRepository.FirstNameColumnName),
                             LastName = dataReader.GetStringValue(ReportRepository.LastNameColumnName),
                             AgencyID = dataReader.GetUnsignedIntegerValueNullable(ReportRepository.AgencyIDColumnName),
@@ -302,6 +306,10 @@ namespace ELI.Data.Repositories.Main
                             CommissionAddins = dataReader.GetDoubleValue(ReportRepository.CommissionAddinsColumnName),
                             NetPrice = dataReader.GetDoubleValue(ReportRepository.NetPriceColumnName),
                             Balance = dataReader.GetDoubleValue(ReportRepository.BalanceColumnName),
+                            RegistrationFee = dataReader.GetDoubleValueNullable(ReportRepository.RegistrationFeeColumnName),
+                            ArrivalDate = dataReader.GetDateTimeValueNullable(ReportRepository.ArrivalDateColumnName),
+                            DepartureDate = dataReader.GetDateTimeValueNullable("DepartureDate"),
+                            StatusId = dataReader.GetUnsignedIntegerValueNullable("StatusId"),
                         };
                         result.Data.Add(paymentReportVM);
                     }
@@ -405,6 +413,7 @@ namespace ELI.Data.Repositories.Main
                             ProgramName = dbDataReader.GetStringValue("ProgramName"),
                             SubProgramName = dbDataReader.GetStringValue("SubProgramName"),
                             IsGroupLeader = dbDataReader.GetBooleanValue("IsGroupLeader"),
+                            StatusId = dbDataReader.GetUnsignedIntegerValueNullable("StatusId"),
                             ProgrameAddins = new List<int>(),
                             StudentTrips = new List<int>()
                         };

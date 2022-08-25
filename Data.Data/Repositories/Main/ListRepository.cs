@@ -20,6 +20,7 @@ namespace ELI.Data.Repositories.Main
         public void Dispose()
         {
         }
+        private const string AddLookupValueStoredProcedureName = "AddLookupValue";
         private const string AddStoredProcedureName = "AddAgents";
         private const string GetStoredProcedureName = "GetAgent";
         private const string GetAllAgentProcedureName = "GetAllAgent";
@@ -55,6 +56,7 @@ namespace ELI.Data.Repositories.Main
         private const string GetAllCampusStoredProcedureName = "GetAllCampus";
         private const string ActivateCampusStoredProcedureName = "ActivateCampus";
         private const string UpdateLookupValueStoredProcedureName = "UpdateLookupValue";
+        private const string DeleteLookupValueStoredProcedureName = "DeleteLookupValue";
 
         #region  RoomList
         private const string RIdParameterName = "PID";
@@ -166,6 +168,7 @@ namespace ELI.Data.Repositories.Main
                                 ID = dataReader.GetIntegerValue(ListRepository.RIdColumnName),
                                 RoomID = dataReader.GetStringValue(ListRepository.RoomListRoomIdColumnName),
                                 Campus = dataReader.GetStringValue(ListRepository.RoomCampusColumnName),
+                                CampusID = dataReader.GetIntegerValueNullable(ListRepository.CampusIDColumnName),
                                 Building = dataReader.GetStringValue(ListRepository.RoomBuildingColumnName),
                                 RoomType = dataReader.GetStringValue(ListRepository.RoomTypeColumnName),
                                 Floor = dataReader.GetStringValue(ListRepository.FloorColumnName),
@@ -291,8 +294,16 @@ namespace ELI.Data.Repositories.Main
         private const string ValueColumnName = "Value";
         private const string NameColumnName = "Name";
         private const string DescriptionColumnName = "Description";
+        private const string LookupTableIdColumnName = "LookupTableId";
+        private const string IdColumnName = "Id";
+
+        private const string ValueParameterName = "PValue";
+        private const string NameParameterName = "PName";
+        private const string DescriptionParameterName = "PDescription";
+        private const string LookupTableIdParameterName = "PLookupTableId";
 
 
+        private const string IDParameterName = "PID";
         private const string AgentIdParameterName = "PAgentID";
         private const string RoomIdParameterName = "PRoomID";
         private const string AgentAgentParameterName = "PAgentAgent";
@@ -997,49 +1008,6 @@ namespace ELI.Data.Repositories.Main
         #endregion
 
 
-        public async Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable)
-        {
-            LookupValueViewModel lookupValue = null;
-            List<LookupValueViewModel> list = new List<LookupValueViewModel>();
-
-
-
-            var parameters = new List<DbParameter>
-            {
-
-                base.GetParameter(ListRepository.LookupTableParameterName, lookupTable)
-            };
-
-            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetLookupValueListStoredProcedureName, CommandType.StoredProcedure))
-            {
-                if (dataReader != null && dataReader.HasRows)
-                {
-                    
-                        while (dataReader.Read())
-                        {
-                            lookupValue = new LookupValueViewModel
-                            {
-
-                                Value = dataReader.GetIntegerValue(ListRepository.ValueColumnName),
-                                Name = dataReader.GetStringValue(ListRepository.NameColumnName),
-                                Description = dataReader.GetStringValue(ListRepository.DescriptionColumnName),
-
-
-                            };
-                            list.Add(lookupValue);
-                        }
-
-                        if (!dataReader.IsClosed)
-                        {
-                            dataReader.Close();
-                        }
-
-                }
-            }
-
-            return list;
-        }
-
         #region Campus
 
 
@@ -1104,19 +1072,6 @@ namespace ELI.Data.Repositories.Main
 
             return returnValue > 0;
         }    
-        public async Task<bool> UpdateLookupValue(LookupValueViewModel model)
-        {
-            var parameters = new List<DbParameter>
-                {
-                    base.GetParameter(ListRepository.LookupNameParameterName, model.Name),
-                    base.GetParameter(ListRepository.LookupValueParameterName, model.Value)
-
-                };
-
-            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateLookupValueStoredProcedureName, CommandType.StoredProcedure);
-
-            return returnValue > 0 ? true: false;
-        }
 
         public async Task<bool> ActivateCampusAsync(CampuseViewModel campusViewModel)
         {
@@ -1501,5 +1456,97 @@ namespace ELI.Data.Repositories.Main
 
         #endregion
 
+        #region LookupValue
+
+        public async Task<int> CreateLookupValueAsync(LookupValueViewModel lookup)
+        {
+            var statusIdParamter = base.GetParameterOut(ListRepository.IDParameterName, SqlDbType.Int, lookup.ID);
+            var parameters = new List<DbParameter>
+                {
+                    statusIdParamter,
+                    base.GetParameter(ListRepository.DescriptionParameterName,lookup.Description),
+                    base.GetParameter(ListRepository.NameParameterName, lookup.Name),
+                    base.GetParameter(ListRepository.LookupTableIdParameterName, lookup.LookupTableId)
+
+                };
+            await base.ExecuteNonQuery(parameters, ListRepository.AddLookupValueStoredProcedureName, CommandType.StoredProcedure);
+
+            lookup.ID = Convert.ToInt32(statusIdParamter.Value);
+
+            return lookup.ID;
+        }
+        public async Task<int> DeleteLookupValue(LookupValueViewModel lookup)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.IDParameterName,lookup.ID)
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.DeleteLookupValueStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0 ? 1 : 0;
+        }
+        
+        public async Task<bool> UpdateLookupValue(LookupValueViewModel lookup)
+        {
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(ListRepository.IDParameterName,lookup.ID),
+                    base.GetParameter(ListRepository.DescriptionParameterName,lookup.Description),
+                    base.GetParameter(ListRepository.NameParameterName, lookup.Name),
+                    base.GetParameter(ListRepository.LookupTableIdParameterName, lookup.LookupTableId)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, ListRepository.UpdateLookupValueStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0 ? true : false;
+        }
+
+        public async Task<List<LookupValueViewModel>> GetListBaseonLookupTable(string lookupTable)
+        {
+            LookupValueViewModel lookupValue = null;
+            List<LookupValueViewModel> list = new List<LookupValueViewModel>();
+
+
+
+            var parameters = new List<DbParameter>
+            {
+
+                base.GetParameter(ListRepository.LookupTableParameterName, lookupTable)
+            };
+
+            using (var dataReader = await base.ExecuteReader(parameters, ListRepository.GetLookupValueListStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+
+                    while (dataReader.Read())
+                    {
+                        lookupValue = new LookupValueViewModel
+                        {
+                            ID = dataReader.GetIntegerValue(ListRepository.IdColumnName),
+                            Value = dataReader.GetIntegerValue(ListRepository.ValueColumnName),
+                            Name = dataReader.GetStringValue(ListRepository.NameColumnName),
+                            Description = dataReader.GetStringValue(ListRepository.DescriptionColumnName),
+                            LookupTableId = dataReader.GetIntegerValue(ListRepository.LookupTableIdColumnName)
+
+
+                        };
+                        list.Add(lookupValue);
+                    }
+
+                    if (!dataReader.IsClosed)
+                    {
+                        dataReader.Close();
+                    }
+
+                }
+            }
+
+            return list;
+        }
+
+        #endregion
     }
 }

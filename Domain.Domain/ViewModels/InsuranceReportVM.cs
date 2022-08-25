@@ -467,5 +467,10 @@ namespace ELI.Domain.ViewModels
             get;
             set;
         }
+        public int? StatusId
+        {
+            get;
+            set;
+        }
     }
 }

@@ -31,6 +31,10 @@ namespace ELI.Domain.ViewModels
         public string ChapFamily { get; set; }
         public string AgencyRef { get; set; }
         public int? ProgramID { get; set; }
+        public int? StatusId { get; set; }
         public int? SubProgramID { get; set; }
+        public DateTime? ArrivalDate { get; set; }
+        public DateTime? DepartureDate { get; set; }
+        public double? RegistrationFee { get; set; }
     }
 }

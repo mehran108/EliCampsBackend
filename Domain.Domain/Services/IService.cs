@@ -118,6 +118,8 @@ namespace ELI.Domain.Services
 
         #region AgentList
         Task<int> CreateAgentAsync(AgentViewModel agent);
+        Task<int> CreateLookupValueAsync(LookupValueViewModel model);
+        Task<int> DeleteLookupValue(LookupValueViewModel model);
 
         Task<AgentViewModel> GetAgentAsync(int agentID);
 

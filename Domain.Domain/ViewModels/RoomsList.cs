@@ -20,6 +20,7 @@ namespace Domain.Domain.ViewModels
         public DateTime AvailableFrom { get; set; }
         public DateTime AvailableTo { get; set; }
         public int ImportedOne { get; set; }
+        public int? CampusID { get; set; }
         public string Weekno { get; set; }
         public int Year { get; set; }
         public bool Active { get; set; }

@@ -33,7 +33,10 @@ namespace ELI.Domain.ViewModels
         public string Email { get; set; }
         public double NetPrice { get; set; }
         public double RegistrationFee { get; set; }
-
+        public string Address { get; set; }
+        public string EmailBody { get; set; }
+        public string Subject { get; set; }
+        public double? TotalPayment { get; set; }
         public string PassportNumber { get; set; }
 
         public List<string> StudentPDFAddinInc { get; set; }

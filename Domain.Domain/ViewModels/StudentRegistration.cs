@@ -51,7 +51,6 @@ namespace ELI.Domain.ViewModels
         public string AddinsID { get; set; }
         public string ExtraNotes { get; set; }
         public string ExtraNotesHTML { get; set; }
-        public string Status { get; set; }
 
         public string HomestayOrResi { get; set; }
         public int? HomestayID { get; set; }
@@ -77,6 +76,7 @@ namespace ELI.Domain.ViewModels
         public string ProgramName { get; set; }
         public string SubProgramName { get; set; }
         public bool? Active { get; set; }
+        public int? StatusId { get; set; }
         public string ChapFamily { get; set; }
         public string AgencyRef { get; set; }
         public int? ProgramID { get; set; }

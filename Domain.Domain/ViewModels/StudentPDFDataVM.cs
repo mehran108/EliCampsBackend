@@ -41,9 +41,46 @@ namespace ELI.Domain.ViewModels
 
         public List<string> StudentPDFAddinInc { get; set; }
         public List<string> StudentPDFAddinAdd { get; set; }
+        public StudentPDFDataVM Clone()
+        {
+            StudentPDFDataVM newObj = new StudentPDFDataVM();
+            newObj.FirstName = this.FirstName;
+            newObj.LastName = this.LastName;
+            newObj.AgentName = this.AgentName;
+            newObj.AgentAddress = this.AgentAddress;
+            newObj.AgentCountry = this.AgentCountry;
+            newObj.Reg_Ref = this.Reg_Ref;
+            newObj.CampusAddressOnReports = this.CampusAddressOnReports;
+            newObj.DOB = this.DOB;
+            newObj.ProgrameStartDate = this.ProgrameStartDate;
+            newObj.ProgrameEndDate = this.ProgrameEndDate;
+            newObj.ArrivalDate = this.ArrivalDate;
+            newObj.ArrivalTime = this.ArrivalTime;
+            newObj.ProgramName = this.ProgramName;
+            newObj.FlightNumber = this.FlightNumber;
+            newObj.SubProgramName = this.SubProgramName;
+            newObj.FormatName = this.FormatName;
+            newObj.MealPlan = this.MealPlan;
+            newObj.Country = this.Country;
+            newObj.TotalGrossPrice = this.TotalGrossPrice;
+            newObj.CommissionAddins = this.CommissionAddins;
+            newObj.Commision = this.Commision;
+            newObj.TotalAddins = this.TotalAddins;
+            newObj.Paid = this.Paid;
+            newObj.Balance = this.Balance;
+            newObj.Email = this.Email;
+            newObj.NetPrice = this.NetPrice;
+            newObj.RegistrationFee = this.RegistrationFee;
+            newObj.Address = this.Address;
+            newObj.EmailBody = this.EmailBody;
+            newObj.Subject = this.Subject;
+            newObj.TotalPayment = this.TotalPayment;
+            newObj.PassportNumber = this.PassportNumber;
+            newObj.StudentPDFAddinInc = this.StudentPDFAddinInc;
+            newObj.StudentPDFAddinAdd = this.StudentPDFAddinAdd;
+            return newObj;
+        }
 
-}
-
-   
+    }
 
 }

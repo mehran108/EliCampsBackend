@@ -39,7 +39,7 @@ BEGIN
       ,[clmHome_Agreement] As HomeAggrement
       ,[clmHome_PoliceCheck] As HomePoliceCheck,
 	  [clmHome_IsActive] As Active
-	 from tblHomestay
+	 from tblHomestay with (nolock)
 	 where ( clmHome_IsActive = (CASE WHEN @PActive is not null then @PActive else clmHome_IsActive end))
 	 order by [clmHome_ID] desc;
 END

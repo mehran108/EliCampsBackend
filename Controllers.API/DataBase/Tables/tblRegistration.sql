@@ -53,7 +53,7 @@ BEGIN CREATE TABLE  [dbo].[tblRegistration](
 	[clmReg_Balance] [money] NULL,
 	[clmReg_TotalAddins] [money] NULL,
 	[clmReg_CommissionAddins] [money] NULL,
-	[clmReg_ProfilePic] [nvarchar](300) NULL,
+	[clmReg_ProfilePic] [nvarchar](1000) NULL,
 	[clmReg_RoomID] [int] NULL,
 	[clmReg_HomestayOrResi] [nvarchar](50) NULL,
 	[clmReg_HomestayID] [int] NULL,
@@ -218,3 +218,50 @@ ADD documentId int;
 ALTER TABLE tblRegistration
 ADD CONSTRAINT FK_tblDocuments_documentId FOREIGN KEY (documentId)
     REFERENCES tblDocuments(documentId);
+
+
+	
+
+-- Adding column  GroupID
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblRegistration]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'GroupID'
+   AND Object_ID = Object_ID(N'[dbo].[tblRegistration]')
+   )
+ BEGIN
+     ALTER TABLE tblRegistration
+	 ADD GroupID [int] NULL
+ END
+
+END
+
+--  Adding column IsGroupLeader in tblRegistration
+
+IF EXISTS (
+ SELECT   * 
+ FROM     sys.objects 
+ WHERE    object_id = OBJECT_ID(N'[dbo].[tblRegistration]')
+)
+BEGIN
+
+    IF NOT EXISTS(
+   SELECT *
+   FROM sys.columns 
+   WHERE Name = N'IsGroupLeader'
+   AND Object_ID = Object_ID(N'[dbo].[tblRegistration]')
+   )
+ BEGIN
+     ALTER TABLE tblRegistration
+	 ADD [IsGroupLeader] [bit] NOT NULL default 0
+ END
+
+END

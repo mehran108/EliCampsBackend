@@ -30,8 +30,8 @@ BEGIN
 				[ClmPayments_Amount] As  PaymentStudentAmount, 
 				[ClmPayments_Remarks] As PaymentStudentRemarks,
 				[ClmPayments_IsActive] As  Active
-				
-		from [dbo].[tblPayments] 
+				 
+		from [dbo].[tblPayments]  with (nolock)
 		where [ClmPayments_ID] = @PPaymentStudentID;
 END
 GO

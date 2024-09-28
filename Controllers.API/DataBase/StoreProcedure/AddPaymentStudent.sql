@@ -11,12 +11,12 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UpdatePaymentStudent]') AND type in (N'P', N'PC'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AddPaymentStudent]') AND type in (N'P', N'PC'))
 BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[UpdatePaymentStudent] AS' 
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[AddPaymentStudent] AS' 
 END
 GO
-Alter PROCEDURE [dbo].[UpdatePaymentStudent] 
+Alter PROCEDURE [dbo].[AddPaymentStudent] 
 	-- Add the parameters for the stored procedure here
 	@PPaymentStudentID INT = NULL OUTPUT,
 	@PID INT,
@@ -36,5 +36,10 @@ BEGIN
 		1,GETDATE());
 
 		SET @PPaymentStudentID = SCOPE_IDENTITY();
+
+		update tblRegistration set clmReg_Paid = (
+		Select Sum(ClmPayments_Amount) from tblPayments
+		where ClmPayments_RegID = @PID and ClmPayments_IsActive = 1)
+		where clmReg_ID = @PID;
 END
 GO

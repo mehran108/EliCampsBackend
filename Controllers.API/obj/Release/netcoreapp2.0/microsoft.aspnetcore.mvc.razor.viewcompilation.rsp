@@ -1,5 +1,5 @@
-E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.API
+E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API
 --output-path=obj\Release\netcoreapp2.0\
---application-name=InfoTracker.API
---content-root=E:\InfoSalons\Source\ITA\InfoSaloon_API_DEV\InfoTracker.API
+--application-name=Controller.API
+--content-root=E:\Work\Angular\Waris\Backend\EliCampsBackend\Controllers.API
 --file=

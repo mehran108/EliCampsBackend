@@ -29,10 +29,10 @@ BEGIN
       ,[clmTrips_Trip] As TripName
       ,[clmTrips_Camps] As  Camps
       ,[clmTrips_Date] As TripDate
-      ,[clmTrips_Notes] As TripNotes
+      ,[clmTrips_Notes] As Notes
       ,[clmTrips_IDX] As TripLdx,
 	  [clmTrips_IsActive] As Active
-	   from tblTrips
+	   from tblTrips with (nolock)
 	    where ( clmTrips_IsActive = (CASE WHEN @PActive is not null then @PActive else clmTrips_IsActive end))
 		order by [clmTrips_ID] desc;
 END

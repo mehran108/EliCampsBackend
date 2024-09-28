@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using ELI.Data.Repositories.Main;
 using ELI.Domain.Helpers;
 using ELI.Domain.Services;
 using ELI.Domain.ViewModels;
@@ -100,6 +101,38 @@ namespace ELI.API.Controllers
                 new ExceptionHandlingService(ex, null, null).LogException();
                 return BadRequest(new { message = ex.Message });
             }
+        }
+
+        [HttpGet("GetPaymentReportByYear")]
+        [Produces(typeof(List<PaymentReportVM>))]
+        public async Task<IActionResult> GetAllStudentAsync([FromQuery] string year)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.GetPaymentReport(year));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+        [HttpGet("GetInsuranceReport")]
+        [Produces(typeof(List<InsuranceReportVM>))]
+        public async Task<IActionResult> GetInsuranceReportAsync([FromQuery] string year)
+        {
+            IActionResult objectResult;
+            try
+            {
+                objectResult = new ObjectResult(await this._ELIService.GetInsuranceReport());
+            }
+            catch (Exception exception1)
+            {
+                Exception exception = exception1;
+                (new ExceptionHandlingService(exception, null, null)).LogException();
+                objectResult = this.BadRequest(new { message = exception.Message });
+            }
+            return objectResult;
         }
     }
 }

@@ -50,9 +50,12 @@ namespace ELI.Domain.ViewModels
         public bool ApplyToAllStudent { get; set; }
 
         public bool? Active { get; set; }
+        public bool? IsDelete { get; set; }
+        public bool IsInvoice { get; set; }
 
         public string ChapFamily { get; set; }
         public int? ProgramId { get; set; }
         public int? SubProgramId { get; set; }
+        public StudentsAgainstGroup StudentsAgainstGroup { get; set; }
     }
 }

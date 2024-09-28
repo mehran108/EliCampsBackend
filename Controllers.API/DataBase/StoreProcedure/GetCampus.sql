@@ -30,6 +30,6 @@ BEGIN
       ,[clmCampuses_CompleteName] As CampusCompleteName
       ,[clmCampuses_Onelineaddress] As CampusOnelineaddress
       ,[clmCampuses_IsActive] As Active
-	 from [tblCampuses] where [clmCampuses_ID] = @PCampusID;
+	 from [tblCampuses] with (nolock) where [clmCampuses_ID] = @PCampusID;
 END
 GO

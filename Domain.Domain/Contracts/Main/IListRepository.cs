@@ -12,6 +12,8 @@ namespace ELI.Domain.Contracts.Main
     {
         #region AgentList
         Task<int> CreateAgentAsync(AgentViewModel agent);
+        Task<int> CreateLookupValueAsync(LookupValueViewModel lookup);
+        Task<int> DeleteLookupValue(LookupValueViewModel lookup);
         Task<AgentViewModel> GetAgentAsync(int agentID);
         Task<bool> UpdateAgentAsync(AgentViewModel AgentViewModel);
         Task<AllResponse<AgentViewModel>> GetAllAgent(AgentRequestVm agent);
@@ -103,5 +105,7 @@ namespace ELI.Domain.Contracts.Main
 
         Task<bool> ActivateSubProgramAsync(SubProgramViewModel subProgramViewModel);
         #endregion
+        Task<bool> UpdateLookupValue(LookupValueViewModel model);
+
     }
 }

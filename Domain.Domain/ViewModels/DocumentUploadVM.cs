@@ -5,8 +5,22 @@ using System.Text;
 
 namespace ELI.Domain.ViewModels
 {
-    public class DocumentUploadVM
+    public class EmailSendVM
     {
-        public List<IFormFile>  Files { get; set; }
+        public string StudentEmail { get; set; }
+        public int StudentID { get; set; }
+        public bool IsAgentInvoice { get; set; }
+        public bool IsStudentCertificate { get; set; }
+        public bool IsStudentInvoice { get; set; }
+        public bool IsAirportInvoice { get; set; }
+        public bool IsLoaInvoice { get; set; }
+        public bool IsLoaGroupInvoice { get; set; }
+        public bool IsLoaInvoiceWithNoPrice { get; set; }
+        public bool IsStudentInvitation { get; set; }
+        public double RegistrationFee { get; set; }
+        public string Address { get; set; }
+        public string EmailBody { get; set; }
+        public string Subject { get; set; }
+        public List<string> StudentNames { get;set; }
     }
 }

@@ -473,8 +473,6 @@ namespace ELI.Domain.Services
             return await _listRepository.CreateAgentAsync(agent);
         }
 
-        
-
         public async Task<AgentViewModel> GetAgentAsync(int agentID)
         {
             return await _listRepository.GetAgentAsync(agentID);
@@ -561,9 +559,9 @@ namespace ELI.Domain.Services
             return await _groupRepository.AddGroupAsync(group);
         }
 
-        public async Task<GroupViewModel> GetGroupAsync(int groupID)
+        public async Task<GroupViewModel> GetGroupAsync(int groupID, bool IsInvoice)
         {
-            return await _groupRepository.GetGroupAsync(groupID);
+            return await _groupRepository.GetGroupAsync(groupID,IsInvoice);
         }
         public async Task<bool> UpdateGroupAsync(GroupViewModel group)
         {
@@ -596,6 +594,10 @@ namespace ELI.Domain.Services
         public async Task<bool> ActivateGroup(GroupViewModel group)
         {
             return await _groupRepository.ActivateGroup(group);
+        } 
+        public async Task<bool> DeleteGroup(GroupViewModel group)
+        {
+            return await _groupRepository.DeleteGroup(group);
         }
 
         #region PaymentsGroups
@@ -620,27 +622,26 @@ namespace ELI.Domain.Services
             return await _groupRepository.ActivatePaymentGroupAsync(paymentGroup);
         }
         #endregion
-
         #region PaymentsGroupsLeader
         public async Task<int> AddPaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
         {
-            return await _groupRepository.AddPaymentGroupAsync(paymentGroup);
+            return await _groupRepository.AddPaymentGroupLeaderAsync(paymentGroup);
         }
         public async Task<bool> UpdatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
         {
-            return await _groupRepository.UpdatePaymentGroupAsync(paymentGroup);
+            return await _groupRepository.UpdatePaymentGroupLeaderAsync(paymentGroup);
         }
         public async Task<PaymentsGroupsViewModel> GetPaymentGroupLeaderAsync(int paymentGroupID)
         {
-            return await _groupRepository.GetPaymentGroupAsync(paymentGroupID);
+            return await _groupRepository.GetPaymentGroupLeaderAsync(paymentGroupID);
         }
         public async Task<List<PaymentsGroupsViewModel>> GetAllPaymentGroupLeaderByGroupIdAsync(int groupID)
         {
-            return await _groupRepository.GetAllPaymentGroupByGroupIdAsync(groupID);
+            return await _groupRepository.GetAllPaymentGroupLeaderByGroupIdAsync(groupID);
         }
         public async Task<bool> ActivatePaymentGroupLeaderAsync(PaymentsGroupsViewModel paymentGroup)
         {
-            return await _groupRepository.ActivatePaymentGroupAsync(paymentGroup);
+            return await _groupRepository.ActivatePaymentGroupLeaderAsync(paymentGroup);
         }
         #endregion
         #endregion
@@ -813,10 +814,27 @@ namespace ELI.Domain.Services
         {
             return await _studentRepository.GetStudentAsync(studentID);
         }
+
+        public async Task<StudentPDFDataVM> GetStudentFilesDataAsync(int studentID)
+        {
+            return await _studentRepository.GetStudentFilesDataAsync(studentID);
+        }
+        
         public async Task<bool> ActivateStudentAsync(StudentRegistration student)
         {
             return await _studentRepository.ActivateStudentAsync(student);
         }
+        public async Task<bool> DeleteStudent(StudentRegistration student)
+        {
+            return await _studentRepository.DeleteStudent(student);
+        }
+
+        public async Task<bool> UpdateStudentProfilePicAsync(StudentRegistration student)
+        {
+            return await _studentRepository.UpdateStudentProfilePicAsync(student);
+        }
+
+        
 
         public async Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student)
         {
@@ -872,6 +890,27 @@ namespace ELI.Domain.Services
         #endregion
 
         #endregion
-
+        #region Reports
+        public async Task<PaymentReportAllResponse> GetPaymentReport(string year)
+        {
+            return await _reportRepository.GetPaymentReport(year);
+        }
+        public async Task<List<InsuranceReportVM>> GetInsuranceReport()
+        {
+            return await this._reportRepository.GetInsuranceReport();
+        }    
+        public async Task<bool> UpdateLookupValue(LookupValueViewModel model)
+        {
+            return await this._listRepository.UpdateLookupValue(model);
+        }
+        public async Task<int> CreateLookupValueAsync(LookupValueViewModel model)
+        {
+            return await _listRepository.CreateLookupValueAsync(model);
+        } 
+        public async Task<int> DeleteLookupValue(LookupValueViewModel model)
+        {
+            return await _listRepository.DeleteLookupValue(model);
+        }
+        #endregion
     }
 }

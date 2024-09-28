@@ -28,9 +28,9 @@ BEGIN
       ,[clmTrips_Trip] As TripName
       ,[clmTrips_Camps] As  Camps
       ,[clmTrips_Date] As TripDate
-      ,[clmTrips_Notes] As TripNotes
+      ,[clmTrips_Notes] As Notes
       ,[clmTrips_IDX] As TripLdx,
 	  [clmTrips_IsActive] As Active
-	 from tblTrips where clmTrips_ID = @PID;
+	 from tblTrips with (nolock) where clmTrips_ID = @PID;
 END
 GO

@@ -73,6 +73,7 @@ BEGIN
 		left join [LookupValue] lv with (nolock) on tbl.clmGroups_Format = lv.id
 		 where ( tbl.clmGroups_Active = (CASE WHEN @PActive is not null then @PActive else tbl.clmGroups_Active end))
 		 and ( tbl.clmGroups_Year = (CASE WHEN (@PYear is not null and @PYear <> 0) then @PYear else tbl.clmGroups_Year end))
+		 and tbl.clmGroups_Year not in (2019)
 		 order by tbl.clmGroups_ID desc;
 END
 GO

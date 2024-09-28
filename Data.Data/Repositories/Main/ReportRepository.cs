@@ -2,28 +2,58 @@
 using ELI.Domain.Contracts.Main;
 using ELI.Domain.Helpers;
 using ELI.Domain.ViewModels;
-using ELI.Entity.Main;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using System.Data;
+using ELI.Data.Repositories.Main.Extensions;
 
 namespace ELI.Data.Repositories.Main
 {
-    public class ReportRepository : IReportRepository
+    public class ReportRepository : BaseRepository, IReportRepository
     {
         private readonly ELIContext _context;
-        public ReportRepository(ELIContext context)
-        {
-            _context = context;
-        }
         public void Dispose()
         {
-            _context.Dispose();
         }
+
+        public ReportRepository(IConfiguration configuration) : base(configuration) { }
+        private const string GetStoredProcedureName = "GetPaymentReportByYear";
+        private const string YearParameterName = "PYear";
+        private const string IDColumnName = "ID";
+        private const string YearColumnName = "Year";
+        private const string Reg_RefColumnName = "Reg_Ref";
+        private const string FirstNameColumnName = "FirstName";
+        private const string LastNameColumnName = "LastName";
+        private const string CampusNameColumnName = "CampusName";
+        private const string AgentNameColumnName = "AgentName";
+        private const string FormatNameColumnName = "FormatName";
+        private const string AgencyIDColumnName = "AgencyID";
+        private const string CampusColumnName = "Campus";
+        private const string FormatColumnName = "Format";
+        private const string AgencyRefColumnName = "AgencyRef";
+        private const string TotalGrossPriceColumnName = "TotalGrossPrice";
+        private const string TotalGrossPriceCalculatedColumnName = "TotalGrossPriceCalculated";
+        private const string TotalAddinsColumnName = "TotalAddins";
+        private const string PaidColumnName = "Paid";
+        private const string TotalPaidPriceCalculatedColumnName = "TotalPaidPriceCalculated";
+        private const string CommisionColumnName = "Commision";
+        private const string CommissionAddinsColumnName = "CommissionAddins";
+        private const string NetPriceColumnName = "NetPrice";
+        private const string TotalNetPriceCalculatedColumnName = "TotalNetPriceCalculated";
+        private const string BalanceColumnName = "Balance";
+        private const string TotalBalanceCalculatedColumnName = "TotalBalanceCalculated";
+        private const string ProgramNameColumnName = "ProgramName";
+        private const string SubProgramNameColumnName = "SubProgramName";
+        private const string GetInsuranceReportProdedureName = "GetInsuranceReport";
+        private const string ArrivalDateColumnName = "ArrivalDate";
+        private const string RegistrationFeeColumnName = "RegistrationFee";
+
         public async Task<List<LeadsCountViewModel>> LeadsCountReportAsync(String showkey, CancellationToken ct = default(CancellationToken))
         {
             var show = await _context.Show.SingleOrDefaultAsync(a => a.ShowKey == showkey);
@@ -238,6 +268,201 @@ namespace ELI.Data.Repositories.Main
                               ).OrderByDescending(a=>a.Purchased).ToListAsync();
             return keysList;
         }
+        public async Task<PaymentReportAllResponse> GetPaymentReport(string year)
+        {
+            PaymentReportVM paymentReportVM = null;
+            var result = new PaymentReportAllResponse();
+            result.Data = new List<PaymentReportVM>();
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(YearParameterName, year)
+                };
+            using (var dataReader = await base.ExecuteReader(parameters, ReportRepository.GetStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        paymentReportVM = new PaymentReportVM
+                        {
+
+                            ID = dataReader.GetIntegerValue(ReportRepository.IDColumnName),
+                            Year = dataReader.GetIntegerValue(ReportRepository.YearColumnName),
+                            Reg_Ref = dataReader.GetStringValue(ReportRepository.Reg_RefColumnName),
+                            AgencyRef= dataReader.GetStringValue(ReportRepository.AgencyRefColumnName),
+                            FirstName = dataReader.GetStringValue(ReportRepository.FirstNameColumnName),
+                            LastName = dataReader.GetStringValue(ReportRepository.LastNameColumnName),
+                            AgencyID = dataReader.GetUnsignedIntegerValueNullable(ReportRepository.AgencyIDColumnName),
+                            Campus = dataReader.GetUnsignedIntegerValueNullable(ReportRepository.CampusColumnName),
+                            Format = dataReader.GetUnsignedIntegerValueNullable(ReportRepository.FormatColumnName),
+                            AgentName = dataReader.GetStringValue(ReportRepository.AgentNameColumnName),
+                            FormatName = dataReader.GetStringValue(ReportRepository.FormatNameColumnName),
+                            CampusName = dataReader.GetStringValue(ReportRepository.CampusNameColumnName),
+                            ProgramName = dataReader.GetStringValue(ReportRepository.ProgramNameColumnName),
+                            TotalGrossPrice = dataReader.GetDoubleValue(ReportRepository.TotalGrossPriceColumnName),
+                            TotalAddins = dataReader.GetDoubleValue(ReportRepository.TotalAddinsColumnName),
+                            Paid = dataReader.GetDoubleValue(ReportRepository.PaidColumnName),
+                            Commision = dataReader.GetDoubleValue(ReportRepository.CommisionColumnName),
+                            CommissionAddins = dataReader.GetDoubleValue(ReportRepository.CommissionAddinsColumnName),
+                            NetPrice = dataReader.GetDoubleValue(ReportRepository.NetPriceColumnName),
+                            Balance = dataReader.GetDoubleValue(ReportRepository.BalanceColumnName),
+                            RegistrationFee = dataReader.GetDoubleValueNullable(ReportRepository.RegistrationFeeColumnName),
+                            ArrivalDate = dataReader.GetDateTimeValueNullable(ReportRepository.ArrivalDateColumnName),
+                            DepartureDate = dataReader.GetDateTimeValueNullable("DepartureDate"),
+                            StatusId = dataReader.GetUnsignedIntegerValueNullable("StatusId"),
+                        };
+                        result.Data.Add(paymentReportVM);
+                    }
+
+                    if (!dataReader.IsClosed)
+                    {
+                        dataReader.Close();
+                    }
+                }
+                
+            }
+            result.TotalBalanceCalculated = result.Data.Sum(x => x.Balance);
+            result.TotalGrossPriceCalculated = result.Data.Sum(x => x.TotalGrossPrice);
+            result.TotalNetPriceCalculated = result.Data.Sum(x => x.NetPrice);
+            result.TotalPaidPriceCalculated = result.Data.Sum(x => x.Paid);
+            return result;
+        }
+        public async Task<List<InsuranceReportVM>> GetInsuranceReport()
+        {
+            InsuranceReportVM insuranceReportVM = null;
+            List<InsuranceReportVM> list = new List<InsuranceReportVM>();
+            List<DbParameter> list1 = new List<DbParameter>();
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter("PActive", null)
+                };
+            DbDataReader dbDataReader = await base.ExecuteReader(parameters, ReportRepository.GetInsuranceReportProdedureName, CommandType.StoredProcedure);
+            try
+            {
+                if (dbDataReader != null && dbDataReader.HasRows)
+                {
+                    while (dbDataReader.Read())
+                    {
+                        InsuranceReportVM insuranceReportVM1 = new InsuranceReportVM()
+                        {
+                            ID = dbDataReader.GetIntegerValue("ID"),
+                            Year = dbDataReader.GetIntegerValue("Year"),
+                            Reg_Ref = dbDataReader.GetStringValue("Reg_Ref"),
+                            GroupRef = dbDataReader.GetStringValue("GroupRef"),
+                            Camps = dbDataReader.GetStringValue("Camps"),
+                            Gender = dbDataReader.GetStringValue("Gender"),
+                            FirstName = dbDataReader.GetStringValue("FirstName"),
+                            LastName = dbDataReader.GetStringValue("LastName"),
+                            CampusName = dbDataReader.GetStringValue("CampusName"),
+                            HomeAddress = dbDataReader.GetStringValue("HomeAddress"),
+                            City = dbDataReader.GetStringValue("City"),
+                            State = dbDataReader.GetStringValue("State"),
+                            Country = dbDataReader.GetStringValue("Country"),
+                            PostCode = dbDataReader.GetStringValue("PostCode"),
+                            EmergencyContact = dbDataReader.GetStringValue("EmergencyContact"),
+                            Email = dbDataReader.GetStringValue("Email"),
+                            Phone = dbDataReader.GetStringValue("Phone"),
+                            DOB = dbDataReader.GetDateTimeValueNullable("DOB"),
+                            Age = dbDataReader.GetUnsignedIntegerValueNullable("Age"),
+                            PassportNumber = dbDataReader.GetStringValue("PassportNumber"),
+                            AgencyID = dbDataReader.GetUnsignedIntegerValueNullable("AgencyID"),
+                            ArrivalDate = dbDataReader.GetDateTimeValueNullable("ArrivalDate"),
+                            Terminal = dbDataReader.GetStringValue("Terminal"),
+                            FlightNumber = dbDataReader.GetStringValue("FlightNumber"),
+                            DestinationFrom = dbDataReader.GetStringValue("DestinationFrom"),
+                            ArrivalTime = dbDataReader.GetDateTimeValueNullable("ArrivalTime"),
+                            DepartureDate = dbDataReader.GetDateTimeValueNullable("DepartureDate"),
+                            DepartureTerminal = dbDataReader.GetStringValue("DepartureTerminal"),
+                            DepartureFlightNumber = dbDataReader.GetStringValue("DepartureFlightNumber"),
+                            DestinationTo = dbDataReader.GetStringValue("DestinationTo"),
+                            FlightDepartureTime = dbDataReader.GetDateTimeValueNullable("FlightDepartureTime"),
+                            MedicalInformation = dbDataReader.GetStringValue("MedicalInformation"),
+                            DietaryNeeds = dbDataReader.GetStringValue("DietaryNeeds"),
+                            Allergies = dbDataReader.GetStringValue("Allergies"),
+                            MedicalNotes = dbDataReader.GetStringValue("MedicalNotes"),
+                            ProgrameStartDate = dbDataReader.GetDateTimeValueNullable("ProgrameStartDate"),
+                            ProgrameEndDate = dbDataReader.GetDateTimeValueNullable("ProgrameEndDate"),
+                            Campus = dbDataReader.GetUnsignedIntegerValueNullable("Campus"),
+                            Format = dbDataReader.GetUnsignedIntegerValueNullable("Format"),
+                            MealPlan = dbDataReader.GetStringValue("MealPlan"),
+                            ExtraNotes = dbDataReader.GetStringValue("ExtraNotes"),
+                            ExtraNotesHTML = dbDataReader.GetStringValue("ExtraNotesHTML"),
+                            Status = dbDataReader.GetStringValue("Status"),
+                            HomestayOrResi = dbDataReader.GetStringValue("HomestayOrResi"),
+                            HomestayID = dbDataReader.GetUnsignedIntegerValueNullable("HomestayID"),
+                            RoomID = dbDataReader.GetUnsignedIntegerValueNullable("RoomID"),
+                            RoomSearchCampus = dbDataReader.GetUnsignedIntegerValueNullable("RoomSearchCampus"),
+                            RoomSearchFrom = dbDataReader.GetDateTimeValueNullable("RoomSearchFrom"),
+                            RoomSearchTo = dbDataReader.GetDateTimeValueNullable("RoomSearchTo"),
+                            NumberOfNights = dbDataReader.GetIntegerValue("NumberOfNights"),
+                            GroupID = dbDataReader.GetUnsignedIntegerValueNullable("GroupID"),
+                            TotalGrossPrice = dbDataReader.GetDoubleValue("TotalGrossPrice"),
+                            TotalAddins = dbDataReader.GetDoubleValue("TotalAddins"),
+                            Paid = dbDataReader.GetDoubleValue("Paid"),
+                            Commision = dbDataReader.GetDoubleValue("Commision"),
+                            CommissionAddins = dbDataReader.GetDoubleValue("CommissionAddins"),
+                            NetPrice = dbDataReader.GetDoubleValue("NetPrice"),
+                            Balance = dbDataReader.GetDoubleValue("Balance"),
+                            Active = new bool?(dbDataReader.GetBooleanValue("Active")),
+                            AgentName = dbDataReader.GetStringValue("AgentName"),
+                            FormatName = dbDataReader.GetStringValue("FormatName"),
+                            ChapFamily = dbDataReader.GetStringValue("ChapFamily"),
+                            AgencyRef = dbDataReader.GetStringValue("AgencyRef"),
+                            ProgramID = dbDataReader.GetUnsignedIntegerValueNullable("ProgramID"),
+                            SubProgramID = dbDataReader.GetUnsignedIntegerValueNullable("SubProgramID"),
+                            ProgramName = dbDataReader.GetStringValue("ProgramName"),
+                            SubProgramName = dbDataReader.GetStringValue("SubProgramName"),
+                            IsGroupLeader = dbDataReader.GetBooleanValue("IsGroupLeader"),
+                            StatusId = dbDataReader.GetUnsignedIntegerValueNullable("StatusId"),
+                            ProgrameAddins = new List<int>(),
+                            StudentTrips = new List<int>()
+                        };
+                        insuranceReportVM = insuranceReportVM1;
+                        list.Add(insuranceReportVM);
+                    }
+                    if (dbDataReader.NextResult())
+                    {
+                        while (dbDataReader.Read())
+                        {
+                           var studantId = dbDataReader.GetIntegerValue("clmAdvsSt_StudentID");
+                            if (!dbDataReader.GetStringValue("LinkTypeID").Equals("AddinsID"))
+                            {
+                                int integerValue = dbDataReader.GetIntegerValue("LinkID");
+                                insuranceReportVM = list.FirstOrDefault(c =>c.ID == studantId);
+                                if (insuranceReportVM == null)
+                                {
+                                    continue;
+                                }
+                                insuranceReportVM.StudentTrips.Add(integerValue);
+                            }
+                            else
+                            {
+                                int num = dbDataReader.GetIntegerValue("LinkID");
+                                insuranceReportVM = list.FirstOrDefault(c => c.ID == studantId);
+                                if (insuranceReportVM == null)
+                                {
+                                    continue;
+                                }
+                                insuranceReportVM.ProgrameAddins.Add(num);
+                            }
+                        }
+                    }
+                    if (!dbDataReader.IsClosed)
+                    {
+                        dbDataReader.Close();
+                    }
+                }
+            }
+            finally
+            {
+                if (dbDataReader != null)
+                {
+                    dbDataReader.Dispose();
+                }
+            }
+            return list;
+        }
+
     }
 }
 

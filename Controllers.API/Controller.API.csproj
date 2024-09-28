@@ -6,7 +6,7 @@
     <SccLocalPath>SAK</SccLocalPath>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="wwwroot\**" />
@@ -23,7 +23,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
     <PackageReference Include="SendGrid" Version="9.9.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
-    <PackageReference Include="System.Drawing.Common" Version="4.5.1">
+    <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="17.4.0.43" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0">
       <IncludeAssets></IncludeAssets>
     </PackageReference>
   </ItemGroup>

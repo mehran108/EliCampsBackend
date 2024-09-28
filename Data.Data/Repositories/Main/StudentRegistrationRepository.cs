@@ -24,9 +24,12 @@ namespace ELI.Data.Repositories.Main
 
         private const string AddStoredProcedureName = "AddStudent";
         private const string GetStoredProcedureName = "GetStudent";
+        private const string GetStudentPDFDataStoredProcedureName = "GetStudentPDFData";
         private const string GetAllStoredProcedureName = "GetAllStudent";
         private const string UpdateStoredProcedureName = "UpdateStudent";
         private const string ActivateStoredProcedureName = "ActivateStudent";
+        private const string DeleteStoredProcedureName = "DeleteStudent";
+        private const string UpdateStudentProfilePicProcedureName = "UpdateStudentProfilePic";
 
 
         private const string AddPaymentStudentStoredProcedureName = "AddPaymentStudent";
@@ -79,7 +82,9 @@ namespace ELI.Data.Repositories.Main
         private const string AddinsIDParameterName = "PAddinsID";
         private const string ExtraNotesParameterName = "PExtraNotes";
         private const string ExtraNotesHTMLParameterName = "PExtraNotesHTML";
-        private const string StatusParameterName = "PStatus";
+        private const string StatusParameterName = "PStatusID";
+        private const string GroupIDParameterName = "PGroupID";
+        private const string IsGroupLeaderParameterName = "PIsGroupLeader";
 
         private const string HomestayOrResiParameterName = "PHomestayOrResi";
         private const string HomestayIDParameterName = "PHomestayID";
@@ -95,6 +100,7 @@ namespace ELI.Data.Repositories.Main
         private const string CommissionAddinsParameterName = "PCommissionAddins";
         private const string NetPriceParameterName = "PNetPrice";
         private const string BalanceParameterName = "PBalance";
+        private const string RegistrationFeeParameterName = "PRegFee";
         private const string StudentTripsIDParameterName = "PStudentTripsID";
         private const string StudentDocumentIdParameterName = "PStudentDocumentId";
 
@@ -106,6 +112,9 @@ namespace ELI.Data.Repositories.Main
         private const string ChapFamilyParameterName = "PChapFamily";
         private const string ProgramIDParameterName = "PProgramID";
         private const string SubProgramIDParameterName = "PSubProgramID";
+
+        private const string ProfilePicParameterName = "PProfilePic";
+        private const string StatusIdParameterName = "PStatusId";
 
 
 
@@ -153,6 +162,8 @@ namespace ELI.Data.Repositories.Main
         private const string AddinsIDColumnName = "AddinsID";
         private const string ExtraNotesColumnName = "ExtraNotes";
         private const string ExtraNotesHTMLColumnName = "ExtraNotesHTML";
+        private const string AgencyRefColumnName = "AgencyRef";
+        private const string IsGroupLeaderColumnName = "IsGroupLeader";
 
         private const string StatusColumnName = "Status";
 
@@ -167,15 +178,20 @@ namespace ELI.Data.Repositories.Main
         private const string TotalAddinsColumnName = "TotalAddins";
         private const string PaidColumnName = "Paid";
         private const string CommisionColumnName = "Commision";
+        private const string TotalPaymentColumnName = "TotalPayment";
         private const string CommissionAddinsColumnName = "CommissionAddins";
         private const string NetPriceColumnName = "NetPrice";
         private const string BalanceColumnName = "Balance";
+        private const string RegistrationFeeColumnName = "RegistrationFee";
         private const string StudentTripsIDColumnName = "StudentTripsID";
 
         private const string LinkTypeIDColumnName = "LinkTypeID";
         private const string LinkIDColumnName = "LinkID";
         private const string AgentNameColumnName = "AgentName";
         private const string FormatNameColumnName = "FormatName";
+
+        private const string AddinNameColumnName = "AddinName";
+        private const string AddinsTypeColumnName = "AddinsType";
 
 
         private const string PaymentStudentIDColumnName = "PaymentStudentID";
@@ -186,6 +202,7 @@ namespace ELI.Data.Repositories.Main
         private const string ChapFamilyColumnName = "ChapFamily";
         private const string ProgramIDColumnName = "ProgramID";
         private const string SubProgramIDColumnName = "SubProgramID";
+        private const string StatusIDColumnName = "StatusId";
         private const string DocumentPathColumnName = "documentPath";
         private const string DocumentIdParameterName = "PDocumentId";
         private const string DocumentNameParameterName = "PDocumentName";
@@ -196,6 +213,11 @@ namespace ELI.Data.Repositories.Main
         private const string RoomNameColumnName = "RoomName";
         private const string ProgramNameColumnName = "ProgramName";
         private const string SubProgramNameColumnName = "SubProgramName";
+        private const string GroupIDColumnName = "GroupID";
+        private const string AgentAddressColumnName = "AgentAddress";
+        private const string AgentCountryColumnName = "AgentCountry";
+        private const string CampusAddressOnReportsColumnName = "CampusAddressOnReports";
+        private const string ProfilePicColumnName = "ProfilePic";
 
 
 
@@ -240,13 +262,17 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.MedicalNotesParameterName, student.MedicalNotes),
                     base.GetParameter(StudentRegistrationRepository.ExtraNotesParameterName, student.ExtraNotes),
                     base.GetParameter(StudentRegistrationRepository.ExtraNotesHTMLParameterName, student.ExtraNotesHTML),
-                    base.GetParameter(StudentRegistrationRepository.StatusParameterName, student.Status),
                     base.GetParameter(StudentRegistrationRepository.ProgrameStartDateParameterName, student.ProgrameStartDate),
                     base.GetParameter(StudentRegistrationRepository.ProgrameEndDateParameterName, student.ProgrameEndDate),
                     base.GetParameter(StudentRegistrationRepository.CampusParameterName, student.Campus),
                     base.GetParameter(StudentRegistrationRepository.FormatParameterName, student.Format),
                     base.GetParameter(StudentRegistrationRepository.MealPlanParameterName, student.MealPlan),
-                    base.GetParameter(StudentRegistrationRepository.AddinsIDParameterName, student.AddinsID)
+                    base.GetParameter(StudentRegistrationRepository.AddinsIDParameterName, student.AddinsID),
+                    base.GetParameter(StudentRegistrationRepository.GroupIDParameterName, student.GroupID),
+                    base.GetParameter(StudentRegistrationRepository.IsGroupLeaderParameterName, student.IsGroupLeader),
+                    base.GetParameter(StudentRegistrationRepository.ProfilePicParameterName, student.ProfilePic),
+                    base.GetParameter(StudentRegistrationRepository.StatusParameterName, student.StatusId),
+
 
 
     };
@@ -305,7 +331,6 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.AddinsIDParameterName, student.AddinsID),
                     base.GetParameter(StudentRegistrationRepository.ExtraNotesParameterName, student.ExtraNotes),
                     base.GetParameter(StudentRegistrationRepository.ExtraNotesHTMLParameterName, student.ExtraNotesHTML),
-                    base.GetParameter(StudentRegistrationRepository.StatusParameterName, student.Status),
                     base.GetParameter(StudentRegistrationRepository.HomestayOrResiParameterName, student.HomestayOrResi),
                     base.GetParameter(StudentRegistrationRepository.HomestayIDParameterName, student.HomestayID),
                     base.GetParameter(StudentRegistrationRepository.RoomIDParameterName, student.RoomID),
@@ -320,15 +345,17 @@ namespace ELI.Data.Repositories.Main
                     base.GetParameter(StudentRegistrationRepository.CommissionAddinsParameterName, student.CommissionAddins),
                     base.GetParameter(StudentRegistrationRepository.NetPriceParameterName, student.NetPrice),
                     base.GetParameter(StudentRegistrationRepository.BalanceParameterName, student.Balance),
+                    base.GetParameter(StudentRegistrationRepository.RegistrationFeeParameterName, student.RegistrationFee),
                     base.GetParameter(StudentRegistrationRepository.StudentTripsIDParameterName, student.StudentTripsID),
                     base.GetParameter(StudentRegistrationRepository.StudentDocumentIdParameterName, student.DocumentId),
                     base.GetParameter(BaseRepository.ActiveParameterName, student.Active),
                     base.GetParameter(StudentRegistrationRepository.ChapFamilyParameterName, student.ChapFamily),
                     base.GetParameter(StudentRegistrationRepository.ProgramIDParameterName, student.ProgramID),
-                    base.GetParameter(StudentRegistrationRepository.SubProgramIDParameterName, student.SubProgramID)
-
-
-
+                    base.GetParameter(StudentRegistrationRepository.SubProgramIDParameterName, student.SubProgramID),
+                    base.GetParameter(StudentRegistrationRepository.GroupIDParameterName, student.GroupID),
+                    base.GetParameter(StudentRegistrationRepository.IsGroupLeaderParameterName, student.IsGroupLeader),
+                    base.GetParameter(StudentRegistrationRepository.ProfilePicParameterName, student.ProfilePic),
+                    base.GetParameter(StudentRegistrationRepository.StatusIdParameterName, student.StatusId)
     };
 
             var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.UpdateStoredProcedureName, CommandType.StoredProcedure);
@@ -347,6 +374,35 @@ namespace ELI.Data.Repositories.Main
                 };
 
             var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.ActivateStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+        public async Task<bool> DeleteStudent(StudentRegistration student)
+        {
+            var parameters = new List<DbParameter>
+                {
+
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, student.ID),
+                    base.GetParameter(BaseRepository.DeleteParameterName, student.isDelete)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.DeleteStoredProcedureName, CommandType.StoredProcedure);
+
+            return returnValue > 0;
+        }
+
+        public async Task<bool> UpdateStudentProfilePicAsync(StudentRegistration student)
+        {
+            var parameters = new List<DbParameter>
+                {
+
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, student.ID),
+                    base.GetParameter(StudentRegistrationRepository.ProfilePicParameterName, student.ProfilePic)
+
+                };
+
+            var returnValue = await base.ExecuteNonQuery(parameters, StudentRegistrationRepository.UpdateStudentProfilePicProcedureName, CommandType.StoredProcedure);
 
             return returnValue > 0;
         }
@@ -411,11 +467,11 @@ namespace ELI.Data.Repositories.Main
                             MealPlan = dataReader.GetStringValue(StudentRegistrationRepository.MealPlanColumnName),
                             ExtraNotes = dataReader.GetStringValue(StudentRegistrationRepository.ExtraNotesColumnName),
                             ExtraNotesHTML = dataReader.GetStringValue(StudentRegistrationRepository.ExtraNotesHTMLColumnName),
-                            Status = dataReader.GetStringValue(StudentRegistrationRepository.StatusColumnName),
                             HomestayOrResi = dataReader.GetStringValue(StudentRegistrationRepository.HomestayOrResiColumnName),
                             HomestayID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.HomestayIDColumnName),
                             RoomID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.RoomIDColumnName),
                             RoomSearchCampus = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.RoomSearchCampusColumnName),
+                            GroupID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.GroupIDColumnName),
                             RoomSearchFrom = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.RoomSearchFromColumnName),
                             RoomSearchTo = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.RoomSearchToColumnName),
                             NumberOfNights = dataReader.GetIntegerValue(StudentRegistrationRepository.NumberOfNightsColumnName),
@@ -426,10 +482,13 @@ namespace ELI.Data.Repositories.Main
                             CommissionAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.CommissionAddinsColumnName),
                             NetPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.NetPriceColumnName),
                             Balance = dataReader.GetDoubleValue(StudentRegistrationRepository.BalanceColumnName),
+                            RegistrationFee = dataReader.GetDoubleValueNullable(StudentRegistrationRepository.RegistrationFeeColumnName),
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
+                            IsGroupLeader = dataReader.GetBooleanValue(StudentRegistrationRepository.IsGroupLeaderColumnName),
                             ChapFamily = dataReader.GetStringValue(StudentRegistrationRepository.ChapFamilyColumnName),
                             ProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.ProgramIDColumnName),
                             SubProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.SubProgramIDColumnName),
+                            StatusId = dataReader.GetIntegerValueNullable(StudentRegistrationRepository.StatusIDColumnName),
                             AgentName = dataReader.GetStringValue(StudentRegistrationRepository.AgentNameColumnName),
                             FormatName = dataReader.GetStringValue(StudentRegistrationRepository.FormatNameColumnName),
                             CampusName = dataReader.GetStringValue(StudentRegistrationRepository.CampusNameColumnName),
@@ -438,6 +497,7 @@ namespace ELI.Data.Repositories.Main
                             ProgramName = dataReader.GetStringValue(StudentRegistrationRepository.ProgramNameColumnName),
                             SubProgramName = dataReader.GetStringValue(StudentRegistrationRepository.SubProgramNameColumnName),
                             DocumentPath = dataReader.GetStringValue(StudentRegistrationRepository.DocumentPathColumnName),
+                            ProfilePic = dataReader.GetStringValue(StudentRegistrationRepository.ProfilePicColumnName),
                             ProgrameAddins = new List<int>(),
                             StudentTrips = new List<int>()
                         };
@@ -469,8 +529,85 @@ namespace ELI.Data.Repositories.Main
 
             return studentVM;
         }
+        public async Task<StudentPDFDataVM> GetStudentFilesDataAsync(int studentID)
+        {
+            StudentPDFDataVM studentVM = null;
+           
+            var parameters = new List<DbParameter>
+                {
+                    base.GetParameter(StudentRegistrationRepository.IDParameterName, studentID)
+                };
+
+            using (var dataReader = await base.ExecuteReader(parameters, StudentRegistrationRepository.GetStudentPDFDataStoredProcedureName, CommandType.StoredProcedure))
+            {
+                if (dataReader != null && dataReader.HasRows)
+                {
+                    if (dataReader.Read())
+                    {
+                        studentVM = new StudentPDFDataVM
+                        {
+
+                            Reg_Ref = dataReader.GetStringValue(StudentRegistrationRepository.Reg_RefColumnName),
+                            FirstName = dataReader.GetStringValue(StudentRegistrationRepository.FirstNameColumnName),
+                            LastName = dataReader.GetStringValue(StudentRegistrationRepository.LastNameColumnName),
+                            DOB = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.DOBColumnName),
+                            ProgrameStartDate = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.ProgrameStartDateColumnName),
+                            ProgrameEndDate = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.ProgrameEndDateColumnName),
+                            ArrivalDate = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.ArrivalDateColumnName),
+                            ArrivalTime = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.ArrivalTimeColumnName),
+                            FlightNumber = dataReader.GetStringValue(StudentRegistrationRepository.FlightNumberColumnName),
+                            MealPlan = dataReader.GetStringValue(StudentRegistrationRepository.MealPlanColumnName),
+                            TotalGrossPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.TotalGrossPriceColumnName),
+                            Paid = dataReader.GetDoubleValue(StudentRegistrationRepository.PaidColumnName),
+                            Commision = dataReader.GetDoubleValue(StudentRegistrationRepository.CommisionColumnName),
+                            TotalPayment = dataReader.GetDoubleValueNullable(StudentRegistrationRepository.TotalPaymentColumnName),
+                            CommissionAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.CommissionAddinsColumnName),
+                            Balance = dataReader.GetDoubleValue(StudentRegistrationRepository.BalanceColumnName),
+                            TotalAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.TotalAddinsColumnName),
+                            NetPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.NetPriceColumnName),
+                            RegistrationFee = dataReader.GetDoubleValue(StudentRegistrationRepository.RegistrationFeeColumnName),
+                            AgentName = dataReader.GetStringValue(StudentRegistrationRepository.AgentNameColumnName),
+                            FormatName = dataReader.GetStringValue(StudentRegistrationRepository.FormatNameColumnName),
+                            ProgramName = dataReader.GetStringValue(StudentRegistrationRepository.ProgramNameColumnName),
+                            SubProgramName = dataReader.GetStringValue(StudentRegistrationRepository.SubProgramNameColumnName),
+                            AgentAddress = dataReader.GetStringValue(StudentRegistrationRepository.AgentAddressColumnName),
+                            AgentCountry = dataReader.GetStringValue(StudentRegistrationRepository.AgentCountryColumnName),
+                            CampusAddressOnReports = dataReader.GetStringValue(StudentRegistrationRepository.CampusAddressOnReportsColumnName),
+                            Email = dataReader.GetStringValue(StudentRegistrationRepository.EmailColumnName),
+                            Country = dataReader.GetStringValue(StudentRegistrationRepository.CountryColumnName),
+                            PassportNumber = dataReader.GetStringValue(StudentRegistrationRepository.PassportNumberColumnName),
+                            StudentPDFAddinInc = new List<string>(),
+                            StudentPDFAddinAdd = new List<string>()
+
+                        };
+                        if (dataReader.NextResult())
+                        {
+                            while (dataReader.Read())
+                            {
+
+                                if (dataReader.GetStringValue(StudentRegistrationRepository.AddinsTypeColumnName).Equals("Additional services"))
+                                {
+                                    studentVM?.StudentPDFAddinAdd.Add(dataReader.GetStringValue(StudentRegistrationRepository.AddinNameColumnName));
+                                }
+                                else
+                                {
+                                    studentVM?.StudentPDFAddinInc.Add(dataReader.GetStringValue(StudentRegistrationRepository.AddinNameColumnName));
+                                }
+                                
+                            }
+
+                        }
 
 
+                    }
+                }
+            }
+
+            return studentVM;
+        }
+
+
+        
         public async Task<AllResponse<StudentRegistration>> GetAllStudentAsync(AllRequest<StudentRegistration> student)
         {
             StudentRegistration studentVM = null;
@@ -541,7 +678,6 @@ namespace ELI.Data.Repositories.Main
                             MealPlan = dataReader.GetStringValue(StudentRegistrationRepository.MealPlanColumnName),
                             ExtraNotes = dataReader.GetStringValue(StudentRegistrationRepository.ExtraNotesColumnName),
                             ExtraNotesHTML = dataReader.GetStringValue(StudentRegistrationRepository.ExtraNotesHTMLColumnName),
-                            Status = dataReader.GetStringValue(StudentRegistrationRepository.StatusColumnName),
                             HomestayOrResi = dataReader.GetStringValue(StudentRegistrationRepository.HomestayOrResiColumnName),
                             HomestayID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.HomestayIDColumnName),
                             RoomID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.RoomIDColumnName),
@@ -549,19 +685,24 @@ namespace ELI.Data.Repositories.Main
                             RoomSearchFrom = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.RoomSearchFromColumnName),
                             RoomSearchTo = dataReader.GetDateTimeValueNullable(StudentRegistrationRepository.RoomSearchToColumnName),
                             NumberOfNights = dataReader.GetIntegerValue(StudentRegistrationRepository.NumberOfNightsColumnName),
+                            GroupID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.GroupIDColumnName),
                             TotalGrossPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.TotalGrossPriceColumnName),
                             TotalAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.TotalAddinsColumnName),
                             Paid = dataReader.GetDoubleValue(StudentRegistrationRepository.PaidColumnName),
                             Commision = dataReader.GetDoubleValue(StudentRegistrationRepository.CommisionColumnName),
                             CommissionAddins = dataReader.GetDoubleValue(StudentRegistrationRepository.CommissionAddinsColumnName),
                             NetPrice = dataReader.GetDoubleValue(StudentRegistrationRepository.NetPriceColumnName),
+                            RegistrationFee = dataReader.GetDoubleValueNullable(StudentRegistrationRepository.RegistrationFeeColumnName),
                             Balance = dataReader.GetDoubleValue(StudentRegistrationRepository.BalanceColumnName),
                             Active = dataReader.GetBooleanValue(BaseRepository.ActiveColumnName),
                             AgentName = dataReader.GetStringValue(StudentRegistrationRepository.AgentNameColumnName),
                             FormatName = dataReader.GetStringValue(StudentRegistrationRepository.FormatNameColumnName),
                             ChapFamily = dataReader.GetStringValue(StudentRegistrationRepository.ChapFamilyColumnName),
+                            AgencyRef = dataReader.GetStringValue(StudentRegistrationRepository.AgencyRefColumnName),
                             ProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.ProgramIDColumnName),
                             SubProgramID = dataReader.GetUnsignedIntegerValueNullable(StudentRegistrationRepository.SubProgramIDColumnName),
+                            IsGroupLeader = dataReader.GetBooleanValue(StudentRegistrationRepository.IsGroupLeaderColumnName),
+                            StatusId = dataReader.GetIntegerValueNullable(StudentRegistrationRepository.StatusIDColumnName),
                             ProgrameAddins = new List<int>(),
                             StudentTrips = new List<int>()
                         };

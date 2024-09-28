@@ -682,11 +682,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Work\\Angular\\Waris\\Elicamps-BackEnd\\Entity.Entity\\Entity.Entity.csproj",
+      "projectUniqueName": "E:\\Work\\Angular\\Waris\\Backend\\EliCampsBackend\\Entity.Entity\\Entity.Entity.csproj",
       "projectName": "Entity.Entity",
-      "projectPath": "E:\\Work\\Angular\\Waris\\Elicamps-BackEnd\\Entity.Entity\\Entity.Entity.csproj",
+      "projectPath": "E:\\Work\\Angular\\Waris\\Backend\\EliCampsBackend\\Entity.Entity\\Entity.Entity.csproj",
       "packagesPath": "C:\\Users\\mehran.khan\\.nuget\\packages\\",
-      "outputPath": "E:\\Work\\Angular\\Waris\\Elicamps-BackEnd\\Entity.Entity\\obj\\",
+      "outputPath": "E:\\Work\\Angular\\Waris\\Backend\\EliCampsBackend\\Entity.Entity\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -30,6 +30,7 @@ namespace ELI.Data.Repositories.Main
         protected const string SortAscendingParameterName = "PSortAscending";
         protected const string FilterColumnIdParameterName = "PFilterColumnId";
         protected const string ActiveParameterName = "PActive";
+        protected const string DeleteParameterName = "PIsDelete";
         protected const string ActiveForCustomerParameterName = "PActiveForCustomer";
         protected const string NotificationCodeParamaterName = "PNotificationCode";
         protected const string OffsetParameterName = "POffset";

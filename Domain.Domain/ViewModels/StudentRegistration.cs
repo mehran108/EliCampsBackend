@@ -27,6 +27,7 @@ namespace ELI.Domain.ViewModels
         public int? Age { get; set; }
         public string PassportNumber { get; set; }
         public int? AgencyID { get; set; }
+        public int? GroupID { get; set; }
         public DateTime? ArrivalDate { get; set; }
         public string Terminal { get; set; }
         public string FlightNumber { get; set; }
@@ -50,7 +51,6 @@ namespace ELI.Domain.ViewModels
         public string AddinsID { get; set; }
         public string ExtraNotes { get; set; }
         public string ExtraNotesHTML { get; set; }
-        public string Status { get; set; }
 
         public string HomestayOrResi { get; set; }
         public int? HomestayID { get; set; }
@@ -76,14 +76,16 @@ namespace ELI.Domain.ViewModels
         public string ProgramName { get; set; }
         public string SubProgramName { get; set; }
         public bool? Active { get; set; }
+        public int? StatusId { get; set; }
         public string ChapFamily { get; set; }
+        public string AgencyRef { get; set; }
         public int? ProgramID { get; set; }
         public int? SubProgramID { get; set; }
-        public int DocumentId { get; set; }
+        public int? DocumentId { get; set; }
         public string DocumentPath { get; set; }
-
-
-
+        public bool IsGroupLeader { get; set; }
+        public double? RegistrationFee { get; set; }
+        public bool? isDelete { get; set; }
 
     }
 }

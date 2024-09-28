@@ -37,5 +37,10 @@ BEGIN
 		1,GETDATE());
 
 		SET @PPaymentGroupID = SCOPE_IDENTITY();
+
+		update tblGroups set clmGroups_Paid = (
+		Select Sum(ClmPaymentsGrp_Amount) from tblPaymentsGroups
+		where ClmPaymentsGrp_GroupID = @PGroupID and ClmPaymentsGrp_IsActive = 1)
+		where clmGroups_ID = @PGroupID;
 END
 GO

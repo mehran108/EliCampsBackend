@@ -53,11 +53,11 @@ namespace ELI.API.Controllers
 
         [HttpGet("getGroup")]
         [Produces(typeof(GroupViewModel))]
-        public async Task<IActionResult> GetGroupAsync(int groupID)
+        public async Task<IActionResult> GetGroupAsync(int groupID, bool IsInvoice)
         {
             try
             {
-                return new ObjectResult(await _ELIService.GetGroupAsync(groupID));
+                return new ObjectResult(await _ELIService.GetGroupAsync(groupID,IsInvoice));
             }
             catch (Exception ex)
             {
@@ -106,6 +106,21 @@ namespace ELI.API.Controllers
             try
             {
                 return new ObjectResult(await _ELIService.ActivateGroup(groupVM));
+            }
+            catch (Exception ex)
+            {
+                new ExceptionHandlingService(ex, null, null).LogException();
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+        
+        [HttpPut("deleteGroup")]
+        [Produces(typeof(GroupViewModel))]
+        public async Task<IActionResult> DeleteGroup([FromBody] GroupViewModel groupVM)
+        {
+            try
+            {
+                return new ObjectResult(await _ELIService.DeleteGroup(groupVM));
             }
             catch (Exception ex)
             {

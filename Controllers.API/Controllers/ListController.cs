@@ -51,7 +51,53 @@ namespace ELI.API.Controllers
                 return BadRequest(new { message = "Agent model cannot be empty" });
             }
         }
+        [HttpPost("createLookupValue")]
+        public async Task<IActionResult> createLookupValue([FromBody] LookupValueViewModel lookupValueModel)
+        {
 
+            if (lookupValueModel != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.CreateLookupValueAsync(lookupValueModel));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Agent model cannot be empty" });
+            }
+        }
+        [HttpPost("DeleteLookupValue")]
+        public async Task<IActionResult> DeleteLookupValue([FromBody] LookupValueViewModel lookupValueModel)
+        {
+
+            if (lookupValueModel != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.DeleteLookupValue(lookupValueModel));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Agent model cannot be empty" });
+            }
+        }
+        
         [HttpGet("getAgent")]
         [Produces(typeof(AgentViewModel))]
         public async Task<IActionResult> GetAgent(int agentID)
@@ -304,6 +350,31 @@ namespace ELI.API.Controllers
             }
         }
 
+
+        [HttpPost("UpdateLookupValue")]
+
+        public async Task<IActionResult> UpdateLookupValue([FromBody] LookupValueViewModel model)
+        {
+
+            if (model != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.UpdateLookupValue(model));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Trip model cannot be empty" });
+            }
+        }
         [HttpPost("CreateHomeStay")]
      
         public async Task<IActionResult> CreateHomeStay([FromBody] HomeStayViewModel homeStayViewModel)

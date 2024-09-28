@@ -31,5 +31,18 @@ BEGIN
 				 ClmPaymentsGrp_IsActive = @PActive,
 				 ClmPaymentsGrp_ModifiedDate = GETDATE()
 		where ClmPaymentsGrp_ID = @PPaymentGroupID;
+
+		DECLARE @PGroupID int = (Select top 1 ClmPaymentsGrp_GroupID from tblPaymentsGroups where ClmPaymentsGrp_ID = @PPaymentGroupID )
+
+
+		 
+		 if @PGroupID <> 0 and @PGroupID is not null
+		 Begin
+			update tblGroups set clmGroups_Paid = (
+			Select Sum(ClmPaymentsGrp_Amount) from tblPaymentsGroups
+			where ClmPaymentsGrp_GroupID = @PGroupID and ClmPaymentsGrp_IsActive = 1)
+			where clmGroups_ID = @PGroupID;
+		 END 
+		
 END
 GO

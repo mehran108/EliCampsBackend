@@ -31,8 +31,8 @@ BEGIN
 				[ClmPaymentsGrp_Amount] As PaymentGroupAmount,
 				[ClmPaymentsGrp_Remarks] As  PaymentGroupRemarks, 
 				[ClmPaymentsGrp_IsActive] As Active
-				
-		from [dbo].[tblPaymentsGroups] 
+				 
+		from [dbo].[tblPaymentsGroups]  with (nolock)
 		where [ClmPaymentsGrp_ID] = @PPaymentGroupID;
 END
 GO

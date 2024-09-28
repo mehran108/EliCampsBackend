@@ -690,6 +690,7 @@ namespace ELI.Domain.Services
                     <td>Commission</td>
                     <td class=""text-right"">${{Commision}}</td>
                   </tr>
+                  {{CommissionAddins}}
                   <tr>
                     <td>Paid</td>
                     <td class=""text-right"">${{Paid}} </td>
@@ -3456,7 +3457,8 @@ namespace ELI.Domain.Services
             if (emailSendVM.IsAgentInvoice)
             {
                 email.AgentInvoiceTemplate = AgentInvoiceHTML;
-                AgentInvoiceTemplateRendrer(studentPDFDataVM, email);
+                var agencyData = studentPDFDataVM.Clone();
+                AgentInvoiceTemplateRendrer(agencyData, email);
                 PDFCreator(email, "AgentInvoice.pdf", email.AgentInvoiceTemplate);
             }
             if (emailSendVM.IsStudentCertificate)
@@ -3469,37 +3471,43 @@ namespace ELI.Domain.Services
             if (emailSendVM.IsStudentInvoice)
             {
                 email.StudentInvoiceTemplate = StudentInvoiceHTML;
-                StudentInvoiceTemplateRendrer(studentPDFDataVM, email);
+                var studentInvoiceData = studentPDFDataVM.Clone();
+                StudentInvoiceTemplateRendrer(studentInvoiceData, email);
                 PDFCreator(email, "Invoice.pdf", email.StudentInvoiceTemplate);
             }
             if (emailSendVM.IsAirportInvoice)
             {
                 email.AirportInvoiceTemplate = AirportInvoiceHTML;
-                AirportInvoiceTemplateRendrer(studentPDFDataVM, email);
+                var studentAirportData = studentPDFDataVM.Clone();
+                AirportInvoiceTemplateRendrer(studentAirportData, email);
                 PDFCreator(email, "AirportDoc.pdf", email.AirportInvoiceTemplate, true);
             }
             if (emailSendVM.IsLoaInvoice)
             {
                 email.LOAInvoiceTemplate = LOAInvoiceHTML;
-                LOAInvoiceTemplateRendrer(studentPDFDataVM, email);
+                var studentLoaData = studentPDFDataVM.Clone();
+                LOAInvoiceTemplateRendrer(studentLoaData, email);
                 PDFCreator(email, "LOAWithPrice.pdf", email.LOAInvoiceTemplate);
             }
             if (emailSendVM.IsLoaInvoiceWithNoPrice)
             {
                 email.LOAInvoiceWOPTemplate = LOAInvoiceWOPHTML;
-                LOAWOPInvoiceTemplateRendrer(studentPDFDataVM, email);
+                var studentLoaWithPriceData = studentPDFDataVM.Clone();
+                LOAWOPInvoiceTemplateRendrer(studentLoaWithPriceData, email);
                 PDFCreator(email, "LOANoPrice.pdf", email.LOAInvoiceWOPTemplate);
             }
             if (emailSendVM.IsLoaGroupInvoice)
             {
                 email.LOAInvoiceTemplate = LOAGroupInvoiceHTML;
-                LOAInvoiceTemplateRendrer(studentPDFDataVM, email);
+                var groupLoaPriceData = studentPDFDataVM.Clone();
+                LOAInvoiceTemplateRendrer(groupLoaPriceData, email);
                 PDFCreator(email, "LOAGroup.pdf", email.LOAInvoiceTemplate);
             }
             if (emailSendVM.IsStudentInvitation)
             {
                 email.StudentInvitationTemplate = StudentInvitationHTML;
-                StudentInvitationTemplateRendrer(studentPDFDataVM, email);
+                var studentInvitationData = studentPDFDataVM.Clone();
+                StudentInvitationTemplateRendrer(studentInvitationData, email);
                 PDFCreator(email, "StudentInvitation.pdf", email.StudentInvitationTemplate);
             }
 
@@ -3720,7 +3728,7 @@ namespace ELI.Domain.Services
             string addinsInc = "";
             string addinsAdd = "";
             
-            studentVM.Commision = ((studentVM.Commision * studentVM.TotalGrossPrice) / 100);
+            studentVM.Commision = ((studentVM.Commision * studentVM.TotalGrossPrice) / 100) + studentVM.CommissionAddins;
 
             //studentVM.Balance = (studentVM.TotalGrossPrice + studentVM.CommissionAddins - studentVM.Commision - studentVM.Paid);
             //if(studentVM.Balance < 0)
@@ -3762,10 +3770,14 @@ namespace ELI.Domain.Services
                 }
             }
             string totalAddins = "";
-
+            string commissionAddins = "";
             if (studentVM.TotalAddins > 0)
             {
-                totalAddins = $"<tr><td> Additional Services </td><td class=\"text-right\">{String.Format("{0:0.00}", studentVM.TotalAddins)}</td></tr>";
+                totalAddins = $"<tr><td> Additional Services </td><td class=\"text-right\">${String.Format("{0:0.00}", studentVM.TotalAddins)}</td></tr>";
+            }
+            if (studentVM.CommissionAddins > 0)
+            {
+                commissionAddins = $"<tr><td> Commission Addins </td><td class=\"text-right\">${String.Format("{0:0.00}", studentVM.CommissionAddins)}</td></tr>";
             }
 
             string passportNumber = "";
@@ -3797,6 +3809,7 @@ namespace ELI.Domain.Services
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.TotalGrossPriceTag, $"{String.Format("{0:0.00}", studentVM.TotalGrossPrice)}");
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.RegFee, $"{String.Format("{0:0.00}", studentVM.RegistrationFee)}");
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.TotalAddinsTag, totalAddins);
+            template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CommissionAddinsTag, commissionAddins);
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.CommisionTag, $"{String.Format("{0:0.00}", studentVM.Commision)}");
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.PaidTag, $"{String.Format("{0:0.00}", studentVM.Paid)}");
             template.AgentInvoiceTemplate = template.AgentInvoiceTemplate.Replace(EmailSender.BalanceTag, $"{String.Format("{0:0.00}", studentVM.Balance)}");
@@ -3817,7 +3830,7 @@ namespace ELI.Domain.Services
 
             if(studentVM.TotalAddins > 0)
             {
-                totalAddins = $"<tr><td> Additional Services </td><td class=\"text-right\">{String.Format("{0:0.00}", studentVM.TotalAddins)}</td></tr>";
+                totalAddins = $"<tr><td> Additional Services </td><td class=\"text-right\">${String.Format("{0:0.00}", studentVM.TotalAddins)}</td></tr>";
             }
             studentVM.Commision = ((studentVM.Commision * studentVM.TotalGrossPrice) / 100);
             var calculatedCommission = (studentVM.TotalGrossPrice + studentVM.TotalAddins) - studentVM.Commision;
@@ -3826,7 +3839,7 @@ namespace ELI.Domain.Services
             {
                 studentVM.Paid += studentVM.Commision;
             }
-            studentVM.Balance = (studentVM.TotalGrossPrice + studentVM.RegistrationFee - studentVM.Paid);
+            studentVM.Balance = (studentVM.TotalGrossPrice + studentVM.TotalAddins + studentVM.RegistrationFee - studentVM.Paid);
             if (studentVM.Balance < 0)
             {
                 studentVM.Balance = 0;
@@ -3930,7 +3943,7 @@ namespace ELI.Domain.Services
 
             if (studentVM.TotalAddins > 0)
             {
-                totalAddins = $"<tr><td> Additional Services </td><td class=\"text-right\">{String.Format("{0:0.00}", studentVM.TotalAddins)}</td></tr>";
+                totalAddins = $"<tr><td> Additional Services </td><td class=\"text-right\">${String.Format("{0:0.00}", studentVM.TotalAddins)}</td></tr>";
             }
             studentVM.Commision = ((studentVM.Commision * studentVM.TotalGrossPrice) / 100);
 

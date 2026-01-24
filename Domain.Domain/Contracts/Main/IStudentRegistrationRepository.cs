@@ -10,6 +10,7 @@ namespace ELI.Domain.Contracts.Main
     public interface IStudentRegistrationRepository : IDisposable
     {
         Task<int> AddStudentAsync(StudentRegistration student);
+        Task<int> AddStudentRegistration(StudentRegistration student);
         Task<StudentRegistration> GetStudentAsync(int studentID);
         Task<StudentPDFDataVM> GetStudentFilesDataAsync(int studentID);
         Task<bool> UpdateStudentAsync(StudentRegistration student);

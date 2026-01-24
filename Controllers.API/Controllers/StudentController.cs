@@ -53,6 +53,31 @@ namespace ELI.API.Controllers
             }
         }
 
+
+        [HttpPost("createStudentRegistration")]
+        public async Task<IActionResult> createStudentRegistration([FromBody] StudentRegistration studentVM)
+        {
+
+            if (studentVM != null)
+            {
+                try
+                {
+                    var showResult = new ObjectResult(await _ELIService.AddStudentRegistration(studentVM));
+                    return showResult;
+
+                }
+                catch (AppException ex)
+                {
+                    new ExceptionHandlingService(ex, null, null).LogException();
+                    return BadRequest(new { message = ex.Message });
+                }
+            }
+            else
+            {
+                return BadRequest(new { message = "Student model cannot be empty" });
+            }
+        }
+
         [HttpPut("updateStudent")]
         [Produces(typeof(bool))]
         public async Task<IActionResult> UpdateStudentAsync([FromBody] StudentRegistration studentVM)

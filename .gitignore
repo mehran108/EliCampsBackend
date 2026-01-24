@@ -12,3 +12,7 @@
 bin
 obj
 config
+/Controllers.API/bin/*
+/Controllers.API/obj/*
+
+/Controllers.API/Properties/PublishProfiles

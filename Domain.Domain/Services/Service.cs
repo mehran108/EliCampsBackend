@@ -801,6 +801,11 @@ namespace ELI.Domain.Services
         {
             student.AddinsID = (student.ProgrameAddins != null) ? string.Join(",", student.ProgrameAddins.ToArray()): "";
             return await _studentRepository.AddStudentAsync(student);
+        } 
+        public async Task<int> AddStudentRegistration(StudentRegistration student)
+        {
+            student.AddinsID = (student.ProgrameAddins != null) ? string.Join(",", student.ProgrameAddins.ToArray()): "";
+            return await _studentRepository.AddStudentRegistration(student);
         }
 
         public async Task<bool> UpdateStudentAsync(StudentRegistration student)

@@ -75,6 +75,7 @@ namespace ELI.Domain.ViewModels
         public string RoomName { get; set; }
         public string ProgramName { get; set; }
         public string SubProgramName { get; set; }
+        public string ProgramCity { get; set; }
         public bool? Active { get; set; }
         public int? StatusId { get; set; }
         public string ChapFamily { get; set; }
@@ -86,6 +87,18 @@ namespace ELI.Domain.ViewModels
         public bool IsGroupLeader { get; set; }
         public double? RegistrationFee { get; set; }
         public bool? isDelete { get; set; }
+        public string AgentEmail { get; set; }
+        public string AgentPhone { get; set; }
+        public string AgentFax { get; set; }
+        public string AgentAddress { get; set; }
+        public string AgentCity { get; set; }
+        public string AgentState { get; set; }
+        public string AgentCountry { get; set; }
+        public string AgentPostalCode { get; set; }
+        public bool? IsMedication { get; set; }
+        public bool? IsDietryNeeds { get; set; }
+        public bool? IsAllergic { get; set; }
+        public bool? IsMedicalCondition { get; set; }
 
     }
 }
